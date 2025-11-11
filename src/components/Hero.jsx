@@ -1,8 +1,10 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const Hero = () => {
+  const { t } = useTranslation()
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -52,40 +54,39 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-elegant font-bold text-white mb-6"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-elegant font-bold text-white mb-4 sm:mb-6 px-4"
           >
-            La Vacanza Bianca
+            {t('hero.title')}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl md:text-2xl lg:text-3xl text-premium-lightGold mb-4 font-light"
+            className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-premium-lightGold mb-3 sm:mb-4 font-light px-4"
           >
-            Премиальные горнолыжные туры в Италию
+            {t('hero.subtitle')}
           </motion.p>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-lg md:text-xl text-white/90 mb-12 max-w-3xl mx-auto"
+            className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mb-8 sm:mb-12 max-w-3xl mx-auto px-4"
           >
-            Индивидуальное сопровождение на склонах Альп. От встречи в аэропорту
-            до каждого поворота на трассе.
+            {t('hero.description')}
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4"
           >
             <motion.button
               onClick={scrollToContact}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-premium-gold text-premium-navy rounded-full font-semibold text-lg hover:bg-premium-lightGold transition-colors shadow-lg"
+              className="px-6 py-3 sm:px-8 sm:py-4 bg-premium-gold text-premium-navy rounded-full font-semibold text-base sm:text-lg hover:bg-premium-lightGold transition-colors shadow-lg"
             >
-              Начать путешествие
+              {t('hero.startJourney')}
             </motion.button>
             <motion.button
               onClick={() => {
@@ -96,9 +97,9 @@ const Hero = () => {
               }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-transparent border-2 border-premium-gold text-premium-gold rounded-full font-semibold text-lg hover:bg-premium-gold/10 transition-colors"
+              className="px-6 py-3 sm:px-8 sm:py-4 bg-transparent border-2 border-premium-gold text-premium-gold rounded-full font-semibold text-base sm:text-lg hover:bg-premium-gold/10 transition-colors"
             >
-              Наши программы
+              {t('hero.ourPrograms')}
             </motion.button>
           </motion.div>
         </motion.div>

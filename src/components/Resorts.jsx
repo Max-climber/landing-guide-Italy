@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const Resorts = () => {
+  const { t } = useTranslation()
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -10,114 +12,65 @@ const Resorts = () => {
 
   const [selectedResort, setSelectedResort] = useState(null)
 
+  const getResortData = (key) => ({
+    name: t(`resorts.resorts.${key}.name`),
+    nameEn: t(`resorts.resorts.${key}.nameEn`),
+    region: t(`resorts.resorts.${key}.region`),
+    description: t(`resorts.resorts.${key}.description`),
+    trails: t(`resorts.resorts.${key}.trails`),
+    elevation: t(`resorts.resorts.${key}.elevation`),
+    difficulty: t(`resorts.resorts.${key}.difficulty`),
+    airportDistance: t(`resorts.resorts.${key}.airportDistance`),
+    airportFrom: t(`resorts.resorts.${key}.airportFrom`),
+    highlights: t(`resorts.resorts.${key}.highlights`, { returnObjects: true }),
+  })
+
   const resorts = [
     {
       id: 1,
-      name: 'Курмайор',
-      nameEn: 'Courmayeur',
-      region: 'Валле-д\'Аоста',
-      description:
-        'Расположен у подножия Монблана. Известен шикарными видами и сочетанием итальянского и французского стиля отдыха.',
-      trails: '~100 км',
-      elevation: 'до 2755 м',
-      level: 'Все уровни',
+      ...getResortData('pianiDiBobbio'),
       image:
-        'https://images.unsplash.com/photo-1551524164-6cf77f5e7b8e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-      highlights: [
-        'Великолепные виды на Монблан',
-        'Высококачественный сервис',
-        'Разнообразные трассы',
-      ],
+        'https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      discount: 25,
+      isFeatured: true,
     },
     {
       id: 2,
-      name: 'Ливиньо',
-      nameEn: 'Livigno',
-      region: 'Ломбардия',
-      description:
-        'Находится рядом со швейцарской границей. Известен зоной duty-free и демократичными ценами.',
-      trails: '115 км',
-      elevation: '1800–2900 м',
-      level: 'Все уровни',
+      ...getResortData('madesimo'),
       image:
-        'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-      highlights: [
-        'Зона duty-free',
-        'Демократичные цены',
-        'Отличные условия для сноуборда',
-      ],
+        'https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      isFeatured: true,
     },
     {
       id: 3,
-      name: 'Валь-Гардена',
-      nameEn: 'Val Gardena',
-      region: 'Трентино-Альто Адидже',
-      description:
-        'Часть системы Dolomiti Superski. Известен разнообразием трасс и живописными пейзажами.',
-      trails: '175 км',
-      elevation: 'до 2518 м',
-      level: 'Все уровни',
+      ...getResortData('bivio'),
       image:
-        'https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-      highlights: [
-        'Часть Dolomiti Superski',
-        'Живописные пейзажи',
-        'Разнообразие трасс',
-      ],
+        'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      isFeatured: true,
     },
     {
       id: 4,
-      name: 'Альта Бадия',
-      nameEn: 'Alta Badia',
-      region: 'Трентино-Альто Адидже',
-      description:
-        'Известен множеством пологих склонов в окружении хвойного леса. Идеален для семейного отдыха.',
-      trails: '130 км',
-      elevation: 'до 2778 м',
-      level: 'Средний уровень',
+      ...getResortData('sanktMoritz'),
       image:
-        'https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-      highlights: [
-        'Пологие склоны',
-        'Семейный отдых',
-        'Хвойные леса',
-      ],
+        'https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
     },
     {
       id: 5,
-      name: 'Червиния',
-      nameEn: 'Cervinia',
-      region: 'Валле-д\'Аоста',
-      description:
-        'Расположен у подножия Маттерхорна. Известен длинными трассами и возможностью катания на леднике.',
-      trails: '150 км',
-      elevation: 'до 3480 м',
-      level: 'Все уровни',
+      ...getResortData('valmalenco'),
       image:
-        'https://images.unsplash.com/photo-1551524164-6cf77f5e7b8e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-      highlights: [
-        'Вид на Маттерхорн',
-        'Катание на леднике',
-        'Длинные трассы',
-      ],
+        'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
     },
     {
       id: 6,
-      name: 'Мадонна ди Кампильо',
-      nameEn: 'Madonna di Campiglio',
-      region: 'Трентино',
-      description:
-        'Один из самых престижных курортов Италии. Элегантная атмосфера и отличная инфраструктура.',
-      trails: '150 км',
-      elevation: 'до 2500 м',
-      level: 'Все уровни',
+      ...getResortData('aprica'),
       image:
-        'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-      highlights: [
-        'Престижный курорт',
-        'Элегантная атмосфера',
-        'Отличная инфраструктура',
-      ],
+        'https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    },
+    {
+      id: 7,
+      ...getResortData('livigno'),
+      image:
+        'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
     },
   ]
 
@@ -134,16 +87,16 @@ const Resorts = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-elegant font-bold text-premium-navy mb-6">
-            Лучшие горнолыжные курорты Италии
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-elegant font-bold text-premium-navy mb-4 sm:mb-6 px-4">
+            {t('resorts.title')}
           </h2>
-          <div className="w-24 h-1 bg-premium-gold mx-auto mb-8" />
-          <p className="text-xl text-premium-darkGray max-w-3xl mx-auto">
-            Мы работаем на самых престижных курортах Альп
+          <div className="w-24 h-1 bg-premium-gold mx-auto mb-6 sm:mb-8" />
+          <p className="text-base sm:text-lg md:text-xl text-premium-darkGray max-w-3xl mx-auto px-4">
+            {t('resorts.subtitle')}
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {resorts.map((resort, index) => (
             <motion.div
               key={resort.id}
@@ -151,46 +104,134 @@ const Resorts = () => {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ y: -10 }}
-              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow cursor-pointer"
-              onClick={() => setSelectedResort(selectedResort === resort.id ? null : resort.id)}
+              className={`bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all relative ${
+                resort.discount ? 'ring-4 ring-premium-gold ring-opacity-50' : ''
+              } ${resort.isFeatured ? 'border-2 border-premium-gold' : ''}`}
             >
-              <div className="relative h-64 overflow-hidden">
+                {/* Discount Badge */}
+              {resort.discount && (
+                <div className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 bg-premium-gold text-premium-navy px-3 py-1.5 sm:px-4 sm:py-2 rounded-full font-bold text-sm sm:text-lg shadow-lg">
+                  {t('resorts.discount', { value: resort.discount })}
+                </div>
+              )}
+
+              {/* Featured Badge */}
+              {resort.isFeatured && !resort.discount && (
+                <div className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 bg-premium-navy text-premium-gold px-3 py-1.5 sm:px-4 sm:py-2 rounded-full font-bold text-xs sm:text-sm shadow-lg">
+                  {t('resorts.recommended')}
+                </div>
+              )}
+
+              <div className="relative h-64 sm:h-72 overflow-hidden">
                 <img
                   src={resort.image}
                   alt={resort.name}
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-premium-navy/80 to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4">
-                  <h3 className="text-2xl font-elegant font-bold text-white mb-1">
+                <div className="absolute inset-0 bg-gradient-to-t from-premium-navy/90 via-premium-navy/50 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
+                  <h3 className="text-2xl sm:text-3xl font-elegant font-bold text-white mb-1">
                     {resort.name}
                   </h3>
-                  <p className="text-premium-lightGold text-sm">{resort.nameEn}</p>
+                  <p className="text-premium-lightGold text-sm sm:text-base mb-2 sm:mb-3">{resort.nameEn}</p>
+                  <p className="text-white/90 text-xs sm:text-sm font-medium">{resort.region}</p>
                 </div>
               </div>
-              <div className="p-6">
-                <p className="text-premium-gold font-semibold mb-2">{resort.region}</p>
-                <p className="text-premium-darkGray mb-4 line-clamp-2">
+
+              <div className="p-4 sm:p-6">
+                <p className="text-premium-darkGray mb-6 leading-relaxed line-clamp-3">
                   {resort.description}
                 </p>
-                <div className="flex flex-wrap gap-4 text-sm text-premium-darkGray mb-4">
-                  <span>📏 {resort.trails}</span>
-                  <span>⛰️ {resort.elevation}</span>
-                  <span>🎿 {resort.level}</span>
+
+                {/* Stats Grid */}
+                <div className="grid grid-cols-2 gap-2 sm:gap-4 mb-4 sm:mb-6">
+                  <div className="bg-premium-gray/30 rounded-lg p-2 sm:p-3">
+                    <div className="flex items-center gap-1 sm:gap-2 mb-1">
+                      <span className="text-xl sm:text-2xl">📏</span>
+                      <span className="text-xs text-premium-darkGray font-medium">{t('resorts.trails')}</span>
+                    </div>
+                    <p className="text-premium-navy font-bold text-sm sm:text-base">{resort.trails}</p>
+                  </div>
+                  <div className="bg-premium-gray/30 rounded-lg p-2 sm:p-3">
+                    <div className="flex items-center gap-1 sm:gap-2 mb-1">
+                      <span className="text-xl sm:text-2xl">⛰️</span>
+                      <span className="text-xs text-premium-darkGray font-medium">{t('resorts.elevation')}</span>
+                    </div>
+                    <p className="text-premium-navy font-bold text-sm sm:text-base">{resort.elevation}</p>
+                  </div>
+                  <div className="bg-premium-gray/30 rounded-lg p-2 sm:p-3">
+                    <div className="flex items-center gap-1 sm:gap-2 mb-1">
+                      <span className="text-xl sm:text-2xl">🎿</span>
+                      <span className="text-xs text-premium-darkGray font-medium">{t('resorts.level')}</span>
+                    </div>
+                    <p className="text-premium-navy font-bold text-xs sm:text-sm">{resort.difficulty}</p>
+                  </div>
+                  <div className="bg-premium-gray/30 rounded-lg p-2 sm:p-3">
+                    <div className="flex items-center gap-1 sm:gap-2 mb-1">
+                      <span className="text-xl sm:text-2xl">✈️</span>
+                      <span className="text-xs text-premium-darkGray font-medium">{t('resorts.airport')}</span>
+                    </div>
+                    <p className="text-premium-navy font-bold text-xs sm:text-sm">{resort.airportFrom}</p>
+                  </div>
                 </div>
+
+                {/* Airport Distance */}
+                <div className="mb-4 sm:mb-6 p-2 sm:p-3 bg-premium-gold/10 rounded-lg border border-premium-gold/20">
+                  <p className="text-xs sm:text-sm text-premium-darkGray font-medium">
+                    <span className="text-premium-gold font-semibold">📍 {t('resorts.distance')}</span>{' '}
+                    {resort.airportDistance}
+                  </p>
+                </div>
+
+                {/* Toggle Button */}
+                <motion.button
+                  onClick={() => setSelectedResort(selectedResort === resort.id ? null : resort.id)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-3 bg-premium-navy text-white rounded-lg font-semibold text-sm sm:text-base hover:bg-premium-navy/90 transition-colors"
+                >
+                  <span>{selectedResort === resort.id ? t('resorts.hideFeatures') : t('resorts.showFeatures')}</span>
+                  <motion.svg
+                    className="w-4 h-4 sm:w-5 sm:h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    animate={{ rotate: selectedResort === resort.id ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </motion.svg>
+                </motion.button>
+
+                {/* Expanded Details */}
                 {selectedResort === resort.id && (
                   <motion.div
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
-                    className="mt-4 pt-4 border-t border-premium-gray"
+                    transition={{ duration: 0.3 }}
+                    className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t-2 border-premium-gray"
                   >
-                    <p className="font-semibold text-premium-navy mb-2">Особенности:</p>
-                    <ul className="space-y-1">
+                    <h4 className="text-lg sm:text-xl font-elegant font-bold text-premium-navy mb-3 sm:mb-4">
+                      {t('resorts.features')}
+                    </h4>
+                    <ul className="space-y-2 sm:space-y-3">
                       {resort.highlights.map((highlight, idx) => (
-                        <li key={idx} className="text-sm text-premium-darkGray">
-                          • {highlight}
-                        </li>
+                        <motion.li
+                          key={idx}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: idx * 0.1 }}
+                          className="flex items-start gap-2 sm:gap-3"
+                        >
+                          <span className="text-premium-gold text-lg sm:text-xl mt-0.5">✓</span>
+                          <span className="text-sm sm:text-base text-premium-darkGray leading-relaxed">{highlight}</span>
+                        </motion.li>
                       ))}
                     </ul>
                   </motion.div>

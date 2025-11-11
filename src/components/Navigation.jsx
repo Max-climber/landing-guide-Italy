@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
+import LanguageSwitcher from './LanguageSwitcher'
 
 const Navigation = ({ scrollY }) => {
+  const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
@@ -10,10 +13,10 @@ const Navigation = ({ scrollY }) => {
   }, [scrollY])
 
   const navItems = [
-    { name: 'О нас', href: '#about' },
-    { name: 'Программы', href: '#programs' },
-    { name: 'Курорты', href: '#resorts' },
-    { name: 'Контакты', href: '#contact' },
+    { name: t('nav.about'), href: '#about' },
+    { name: t('nav.programs'), href: '#programs' },
+    { name: t('nav.resorts'), href: '#resorts' },
+    { name: t('nav.contact'), href: '#contact' },
   ]
 
   const scrollToSection = (href) => {
@@ -40,22 +43,23 @@ const Navigation = ({ scrollY }) => {
             whileHover={{ scale: 1.05 }}
             className="flex items-center space-x-2"
           >
-            <span className="text-2xl font-elegant font-bold text-premium-gold">
+            <span className="text-lg sm:text-xl md:text-2xl font-elegant font-bold text-premium-gold">
               La Vacanza Bianca
             </span>
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-4">
             {navItems.map((item) => (
               <button
-                key={item.name}
+                key={item.href}
                 onClick={() => scrollToSection(item.href)}
                 className="text-white hover:text-premium-gold transition-colors duration-300 font-medium"
               >
                 {item.name}
               </button>
             ))}
+            <LanguageSwitcher />
             <motion.a
               href="#contact"
               onClick={() => scrollToSection('#contact')}
@@ -63,7 +67,7 @@ const Navigation = ({ scrollY }) => {
               whileTap={{ scale: 0.95 }}
               className="px-6 py-2 bg-premium-gold text-premium-navy rounded-full font-semibold hover:bg-premium-lightGold transition-colors"
             >
-              Связаться
+              {t('nav.connect')}
             </motion.a>
           </div>
 
@@ -96,17 +100,20 @@ const Navigation = ({ scrollY }) => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden pb-4"
+            className="md:hidden pb-4 space-y-2"
           >
             {navItems.map((item) => (
               <button
-                key={item.name}
+                key={item.href}
                 onClick={() => scrollToSection(item.href)}
                 className="block w-full text-left py-2 text-white hover:text-premium-gold transition-colors"
               >
                 {item.name}
               </button>
             ))}
+            <div className="pt-2 border-t border-white/20">
+              <LanguageSwitcher />
+            </div>
           </motion.div>
         )}
       </div>

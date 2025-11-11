@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const Programs = () => {
+  const { t } = useTranslation()
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -13,87 +15,84 @@ const Programs = () => {
   const programs = [
     {
       id: 1,
-      title: 'Для опытных',
-      subtitle: 'Для горнолыжников, которые и сами всё умеют',
-      description:
-        'Если вы уже не раз бывали в Итальянских Альпах, то наверняка знаете, как самостоятельно выбрать лучшие горнолыжные курорты.',
+      title: t('programs.experienced.title'),
+      subtitle: t('programs.experienced.subtitle'),
+      description: t('programs.experienced.description'),
       features: [
-        'Консультация онлайн или офлайн по вариантам проведения горнолыжного отдыха в Италии и Швейцарии',
-        'Встреча в аэропорту и трансфер до первого отеля',
-        'Трансфер из последнего отеля в аэропорт',
+        t('programs.experienced.features.consultation'),
+        t('programs.experienced.features.airportPickup'),
+        t('programs.experienced.features.airportDropoff'),
       ],
       pricing: {
         transfer: [
           {
-            time: 'с 7:00 до 21:00 в рабочие дни',
-            price: '1 евро/км + стоимость платных дорог',
+            time: t('programs.experienced.pricing.workingDays'),
+            price: t('programs.experienced.pricing.price1'),
           },
           {
-            time: 'Остальное время',
-            price: '1,5 евро/км + стоимость платных дорог',
+            time: t('programs.experienced.pricing.otherTime'),
+            price: t('programs.experienced.pricing.price2'),
           },
         ],
-        consultation: 'Обсуждение планов поездки, выбор билетов, подбор горнолыжных курортов и т.д. - бесплатно',
+        consultation: t('programs.experienced.pricing.consultation'),
       },
       color: 'from-blue-600 to-blue-800',
     },
     {
       id: 2,
-      title: 'Удобное путешествие',
-      subtitle: 'Для горнолыжников, которые хотят путешествовать с комфортом',
-      description:
-        'Вы катаетесь на горных лыжах или сноуборде, побывали на разных курортах и хотели бы провести новый незабываемый спортивный отпуск в Италии?',
+      title: t('programs.comfortable.title'),
+      subtitle: t('programs.comfortable.subtitle'),
+      description: t('programs.comfortable.description'),
       features: [
-        'Помощь с выбором вариантов маршрута приезда в Италию и с выбором билетов',
-        'Составление плана всей поездки',
-        'Бронирование отелей',
-        'Трансфер от отелей до подъемников и обратно',
-        'Помощь с арендой инвентаря',
-        'Помощь с покупкой ски-пассов',
+        t('programs.comfortable.features.tickets'),
+        t('programs.comfortable.features.planning'),
+        t('programs.comfortable.features.hotels'),
+        t('programs.comfortable.features.transfers'),
+        t('programs.comfortable.features.rental'),
+        t('programs.comfortable.features.skipass'),
       ],
       pricing: {
         transfer: [
           {
-            time: 'с 7:00 до 21:00 в рабочие дни',
-            price: '0,7 евро/км + стоимость платных дорог',
+            time: t('programs.comfortable.pricing.workingDays'),
+            price: t('programs.comfortable.pricing.price1'),
           },
           {
-            time: 'Остальное время',
-            price: '1 евро/км + стоимость платных дорог',
+            time: t('programs.comfortable.pricing.otherTime'),
+            price: t('programs.comfortable.pricing.price2'),
           },
         ],
-        consultation: 'Обсуждение планов поездки, выбор билетов, подбор горнолыжных курортов и т.д. - бесплатно',
-        planning: '200 евро/услуга',
-        hotelTransfer: '200 евро/день',
+        consultation: t('programs.comfortable.pricing.consultation'),
+        planning: t('programs.comfortable.pricing.planningPrice'),
+        hotelTransfer: t('programs.comfortable.pricing.hotelTransferPrice'),
       },
       color: 'from-purple-600 to-purple-800',
     },
     {
       id: 3,
-      title: 'Суперкомфорт',
-      subtitle: 'Для тех, кто первый раз',
-      description:
-        'Вы новичок в горных лыжах или в паре один опытный лыжник, а другой только начинает? Мы покажем, расскажем, объясним всё.',
+      title: t('programs.superComfort.title'),
+      subtitle: t('programs.superComfort.subtitle'),
+      description: t('programs.superComfort.description'),
       features: [
-        'Полный день сопровождения клиентов на склонах',
-        'Индивидуальное сопровождение одного человека на склонах, полный день',
-        'Сопровождение клиентов в день отдыха – поездки по магазинам, экскурсиям, хайкинг и т.д.',
+        t('programs.superComfort.features.fullDay'),
+        t('programs.superComfort.features.individual'),
+        t('programs.superComfort.features.restDay'),
       ],
       pricing: {
         transfer: [
           {
-            time: 'с 7:00 до 21:00 в рабочие дни',
-            price: '0,7 евро/км + стоимость платных дорог',
+            time: t('programs.superComfort.pricing.workingDays'),
+            price: t('programs.superComfort.pricing.price1'),
           },
           {
-            time: 'Остальное время',
-            price: '1 евро/км + стоимость платных дорог',
+            time: t('programs.superComfort.pricing.otherTime'),
+            price: t('programs.superComfort.pricing.price2'),
           },
         ],
-        consultation: 'Обсуждение планов поездки, выбор билетов, подбор горнолыжных курортов и т.д. - бесплатно',
-        planning: '200 евро/услуга',
-        hotelTransfer: '400 евро/день',
-        individualSlope: 'Индивидуальное сопровождение на склонах (одновременно – только один человек)',
+        consultation: t('programs.superComfort.pricing.consultation'),
+        planning: t('programs.superComfort.pricing.planningPrice'),
+        hotelTransfer: t('programs.superComfort.pricing.hotelTransferPrice'),
+        individualSlope: t('programs.superComfort.pricing.individualSlope'),
       },
       color: 'from-amber-600 to-amber-800',
     },
@@ -112,24 +111,24 @@ const Programs = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-elegant font-bold mb-6">
-            Наши программы
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-elegant font-bold mb-4 sm:mb-6 px-4">
+            {t('programs.title')}
           </h2>
-          <div className="w-24 h-1 bg-premium-gold mx-auto mb-8" />
-          <p className="text-xl text-white/80 max-w-3xl mx-auto">
-            Выберите программу, которая подходит именно вам
+          <div className="w-24 h-1 bg-premium-gold mx-auto mb-6 sm:mb-8" />
+          <p className="text-base sm:text-lg md:text-xl text-white/80 max-w-3xl mx-auto px-4">
+            {t('programs.subtitle')}
           </p>
         </motion.div>
 
         {/* Program Tabs */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-8 sm:mb-12">
           {programs.map((program, index) => (
             <motion.button
               key={program.id}
               onClick={() => setActiveProgram(index)}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className={`px-6 py-3 rounded-full font-semibold transition-all ${
+              className={`px-4 py-2 sm:px-6 sm:py-3 rounded-full font-semibold text-sm sm:text-base transition-all ${
                 activeProgram === index
                   ? 'bg-premium-gold text-premium-navy'
                   : 'bg-white/10 text-white hover:bg-white/20'
@@ -142,47 +141,42 @@ const Programs = () => {
 
         {/* Active Program Details */}
         {programs.map((program, index) => (
-          <motion.div
-            key={program.id}
-            initial={{ opacity: 0, y: 50 }}
-            animate={
-              inView && activeProgram === index
-                ? { opacity: 1, y: 0 }
-                : { opacity: 0, y: 50, display: 'none' }
-            }
-            transition={{ duration: 0.5 }}
-            className={`${
-              activeProgram === index ? 'block' : 'hidden'
-            } bg-white/10 backdrop-blur-md rounded-2xl p-8 md:p-12`}
+          activeProgram === index && (
+            <motion.div
+              key={program.id}
+              initial={{ opacity: 0, y: 50 }}
+              animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+              transition={{ duration: 0.5 }}
+            className="bg-white/10 backdrop-blur-md rounded-2xl p-4 sm:p-6 md:p-8 lg:p-12"
           >
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
               <div>
-                <h3 className="text-3xl md:text-4xl font-elegant font-bold mb-4 text-premium-gold">
+                <h3 className="text-2xl sm:text-3xl md:text-4xl font-elegant font-bold mb-3 sm:mb-4 text-premium-gold">
                   {program.title}
                 </h3>
-                <p className="text-xl text-white/90 mb-6">{program.subtitle}</p>
-                <p className="text-lg text-white/80 mb-8 leading-relaxed">
+                <p className="text-lg sm:text-xl text-white/90 mb-4 sm:mb-6">{program.subtitle}</p>
+                <p className="text-base sm:text-lg text-white/80 mb-6 sm:mb-8 leading-relaxed">
                   {program.description}
                 </p>
 
-                <div className="space-y-4">
-                  <h4 className="text-xl font-semibold text-premium-gold">
-                    Что входит:
+                <div className="space-y-3 sm:space-y-4">
+                  <h4 className="text-lg sm:text-xl font-semibold text-premium-gold">
+                    {t('programs.whatIncluded')}
                   </h4>
-                  <ul className="space-y-3">
+                  <ul className="space-y-2 sm:space-y-3">
                     {program.features.map((feature, idx) => (
                       <li key={idx} className="flex items-start">
-                        <span className="text-premium-gold mr-3 mt-1">✓</span>
-                        <span className="text-white/90">{feature}</span>
+                        <span className="text-premium-gold mr-2 sm:mr-3 mt-1 text-sm sm:text-base">✓</span>
+                        <span className="text-sm sm:text-base text-white/90">{feature}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
               </div>
 
-              <div className="bg-white/5 rounded-xl p-6">
-                <h4 className="text-2xl font-semibold mb-6 text-premium-gold">
-                  Стоимость
+              <div className="bg-white/5 rounded-xl p-4 sm:p-6">
+                <h4 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-premium-gold">
+                  {t('programs.cost')}
                 </h4>
                 <div className="space-y-6">
                   {program.pricing.consultation && (
@@ -195,7 +189,7 @@ const Programs = () => {
                   {program.pricing.transfer && (
                     <div>
                       <p className="font-semibold text-white mb-3">
-                        Трансфер из аэропорта/в аэропорт:
+                        {t(`programs.${activeProgram === 0 ? 'experienced' : activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.transfer`)}:
                       </p>
                       <div className="space-y-2">
                         {program.pricing.transfer.map((item, idx) => (
@@ -217,7 +211,7 @@ const Programs = () => {
                   {program.pricing.planning && (
                     <div>
                       <p className="text-white/80">
-                        Составление плана всей поездки:{' '}
+                        {t(`programs.${activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.planning`)}{' '}
                         <span className="text-premium-gold font-semibold">
                           {program.pricing.planning}
                         </span>
@@ -227,7 +221,7 @@ const Programs = () => {
                   {program.pricing.hotelTransfer && (
                     <div>
                       <p className="text-white/80">
-                        Трансфер от отеля до парковки у подъемников:{' '}
+                        {t(`programs.${activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.hotelTransfer`)}{' '}
                         <span className="text-premium-gold font-semibold">
                           {program.pricing.hotelTransfer}
                         </span>
@@ -244,7 +238,8 @@ const Programs = () => {
                 </div>
               </div>
             </div>
-          </motion.div>
+            </motion.div>
+          )
         ))}
       </div>
     </section>

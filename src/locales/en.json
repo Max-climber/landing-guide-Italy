@@ -1,0 +1,302 @@
+{
+  "nav": {
+    "about": "About",
+    "programs": "Programs",
+    "resorts": "Resorts",
+    "contact": "Contact",
+    "connect": "Contact Us"
+  },
+  "hero": {
+    "title": "La Vacanza Bianca",
+    "subtitle": "Premium Ski Tours in Italy and Switzerland",
+    "description": "Personalized guidance on the Alpine slopes. From airport pickup to every turn on the trail. Italy is our priority, but Swiss resorts are also available.",
+    "startJourney": "Start Your Journey",
+    "ourPrograms": "Our Programs"
+  },
+  "about": {
+    "title": "About Us",
+    "paragraph1": "Being passionate enthusiasts of sports like alpine skiing, rock climbing, hiking, and kayaking, after some consideration, we chose, believe it or not, <bold>{{country}}</bold>!",
+    "italy": "Italy",
+    "paragraph2": "We've traveled extensively, especially with alpine skiing. The Urals, Apatity, the Caucasus, Armenia, Georgia, Finland – wonderful places for those who understand. But <bold>{{alps}}</bold>... The Alps are where you need to go and return to.",
+    "alps": "the Alps",
+    "paragraph3": "This is where the incredible beauty of snow-capped peaks is accompanied by impeccable service at ski resorts. This is where vacation is truly a <bold>{{vacation}}</bold>.",
+    "vacation": "Vacation",
+    "whyUs": "Why Us?",
+    "whyUsText1": "And, having enjoyed all of this, we decided that making La Vacanza Bianca for our clients that wonderful time when you don't have to worry about anything except the very fact of arriving in Italy or Switzerland – that's a great idea.",
+    "whyUsText2": "You don't rack your brains about how to rent a car at the airport without a 'proper' credit card. How to book a hotel without it. How to drive 4 hours on snow-covered serpentines after a long and difficult flight. How and where to park the car so you don't have to walk half an hour to the lift.",
+    "whyUsText3": "So now we'll take care of all of this. And you just fly to Milan, Bergamo, or Zurich and truly enjoy yourself!"
+  },
+  "programs": {
+    "title": "Our Programs",
+    "subtitle": "Choose the program that suits you best",
+    "experienced": {
+      "title": "For Experienced",
+      "subtitle": "For skiers who know how to do everything themselves",
+        "description": "If you've been to the Italian or Swiss Alps more than once, you probably know how to independently choose the best ski resorts.",
+      "features": {
+        "consultation": "Online or offline consultation on options for ski holidays in Italy and Switzerland (Italy is priority)",
+        "airportPickup": "Airport pickup and transfer to the first hotel",
+        "airportDropoff": "Transfer from the last hotel to the airport"
+      },
+      "pricing": {
+        "consultation": "Discussion of trip plans, ticket selection, ski resort selection, etc. - free",
+        "transfer": "Airport transfer:",
+        "workingDays": "7:00 AM to 9:00 PM on weekdays",
+        "otherTime": "Other times",
+        "price1": "€1/km + toll road costs",
+        "price2": "€1.5/km + toll road costs"
+      }
+    },
+    "comfortable": {
+      "title": "Comfortable Travel",
+      "subtitle": "For skiers who want to travel in comfort",
+        "description": "Do you ski or snowboard, have been to different resorts, and would like to spend a new unforgettable sports vacation in Italy or Switzerland?",
+      "features": {
+        "tickets": "Help with choosing travel routes to Italy or Switzerland and ticket selection",
+        "planning": "Creating a complete trip plan",
+        "hotels": "Hotel bookings",
+        "transfers": "Transfers from hotels to lifts and back",
+        "rental": "Help with equipment rental",
+        "skipass": "Help with ski pass purchases"
+      },
+      "pricing": {
+        "consultation": "Discussion of trip plans, ticket selection, ski resort selection, etc. - free",
+        "transfer": "Airport transfer:",
+        "workingDays": "7:00 AM to 9:00 PM on weekdays",
+        "otherTime": "Other times",
+        "price1": "€0.7/km + toll road costs",
+        "price2": "€1/km + toll road costs",
+        "planning": "Creating a complete trip plan:",
+        "planningPrice": "€200/service",
+        "hotelTransfer": "Transfer from hotel to lift parking:",
+        "hotelTransferPrice": "€200/day"
+      }
+    },
+    "superComfort": {
+      "title": "Super Comfort",
+      "subtitle": "For first-timers",
+      "description": "Are you a beginner in alpine skiing, or in a couple where one is an experienced skier and the other is just starting? We'll show, tell, explain everything.",
+      "features": {
+        "fullDay": "Full day of client guidance on the slopes",
+        "individual": "Individual guidance for one person on the slopes, full day",
+        "restDay": "Client guidance on rest days – shopping trips, excursions, hiking, etc."
+      },
+      "pricing": {
+        "consultation": "Discussion of trip plans, ticket selection, ski resort selection, etc. - free",
+        "transfer": "Airport transfer:",
+        "workingDays": "7:00 AM to 9:00 PM on weekdays",
+        "otherTime": "Other times",
+        "price1": "€0.7/km + toll road costs",
+        "price2": "€1/km + toll road costs",
+        "planning": "Creating a complete trip plan:",
+        "planningPrice": "€200/service",
+        "hotelTransfer": "Transfer from hotel to lift parking:",
+        "hotelTransferPrice": "€400/day",
+        "individualSlope": "Individual guidance on the slopes (only one person at a time)"
+      }
+    },
+    "whatIncluded": "What's Included:",
+    "cost": "Pricing"
+  },
+  "resorts": {
+    "title": "Best Ski Resorts in Italy and Switzerland",
+    "subtitle": "We work at the most prestigious Alpine resorts. Italy is our priority, but Swiss resorts are also available",
+    "trails": "Trails",
+    "elevation": "Elevation",
+    "level": "Level",
+    "airport": "Airport",
+    "distance": "Distance:",
+    "showFeatures": "Show Features",
+    "hideFeatures": "Hide Features",
+    "features": "Resort Features:",
+    "discount": "-{{value}}%",
+    "recommended": "⭐ Recommended",
+    "resorts": {
+      "pianiDiBobbio": {
+        "name": "Piani di Bobbio",
+        "nameEn": "Piani di Bobbio",
+        "region": "Lombardy",
+        "description": "Perfect resort for family vacations with excellent infrastructure. Close to Milan, making it convenient for those who want to combine skiing with city trips.",
+        "trails": "50+ km",
+        "elevation": "1200–1950 m",
+        "difficulty": "Beginner, Intermediate",
+        "airportDistance": "90 km from Milan Malpensa Airport",
+        "airportFrom": "Milan Malpensa",
+        "highlights": [
+          "Excellent school for beginners",
+          "Family atmosphere",
+          "Convenient location near Milan",
+          "Varied trails for all levels",
+          "Modern infrastructure"
+        ]
+      },
+      "madesimo": {
+        "name": "Madesimo",
+        "nameEn": "Madesimo",
+        "region": "Lombardy",
+        "description": "Picturesque resort in Valchiavenna valley, known for its long trails and excellent skiing conditions. Ideal for experienced skiers.",
+        "trails": "37 km",
+        "elevation": "1550–3000 m",
+        "difficulty": "Intermediate, Advanced",
+        "airportDistance": "120 km from Milan Malpensa Airport",
+        "airportFrom": "Milan Malpensa",
+        "highlights": [
+          "Long trails for experienced skiers",
+          "High-altitude skiing up to 3000 m",
+          "Picturesque Alpine views",
+          "Excellent freeride conditions",
+          "Traditional Italian atmosphere"
+        ]
+      },
+      "bivio": {
+        "name": "Bivio",
+        "nameEn": "Bivio",
+        "region": "Graubünden, Switzerland",
+        "description": "Family-friendly resort at Julier Pass, lovingly called 'the pearl of Julier'. Perfect place for a relaxed and family-friendly snow sports experience with direct access to lifts.",
+        "trails": "30+ km",
+        "elevation": "1769–2500 m",
+        "difficulty": "Beginner, Intermediate",
+        "airportDistance": "150 km from Zurich Airport",
+        "airportFrom": "Zurich",
+        "highlights": [
+          "Family atmosphere",
+          "Central village location",
+          "Direct access to lifts",
+          "Ski school for children from 3 years",
+          "Variety of winter activities"
+        ]
+      },
+      "sanktMoritz": {
+        "name": "Sankt Moritz",
+        "nameEn": "Sankt Moritz",
+        "region": "Engadin, Switzerland",
+        "description": "One of the world's most prestigious and elegant resorts. Birthplace of winter tourism with luxury hotels, fine dining, and excellent skiing conditions.",
+        "trails": "350+ km",
+        "elevation": "1800–3300 m",
+        "difficulty": "Beginner, Intermediate, Advanced",
+        "airportDistance": "200 km from Zurich Airport",
+        "airportFrom": "Zurich",
+        "highlights": [
+          "World-class prestigious resort",
+          "Luxury infrastructure",
+          "Huge ski area",
+          "Elegant atmosphere",
+          "Olympic history"
+        ]
+      },
+      "valmalenco": {
+        "name": "Valmalenco",
+        "nameEn": "Valmalenco",
+        "region": "Lombardy",
+        "description": "Picturesque valley with excellent skiing conditions. Ideal for those seeking an authentic Italian experience without tourist crowds.",
+        "trails": "40+ km",
+        "elevation": "1200–2700 m",
+        "difficulty": "Beginner, Intermediate, Advanced",
+        "airportDistance": "130 km from Milan Malpensa Airport",
+        "airportFrom": "Milan Malpensa",
+        "highlights": [
+          "Authentic atmosphere",
+          "Fewer tourists",
+          "Varied trails",
+          "Excellent freeride conditions",
+          "Traditional Italian culture"
+        ]
+      },
+      "aprica": {
+        "name": "Aprica",
+        "nameEn": "Aprica",
+        "region": "Lombardy",
+        "description": "Cozy family resort with excellent infrastructure for beginner and intermediate skiers. Ideal for family vacations.",
+        "trails": "50+ km",
+        "elevation": "1180–2300 m",
+        "difficulty": "Beginner, Intermediate",
+        "airportDistance": "140 km from Milan Malpensa Airport",
+        "airportFrom": "Milan Malpensa",
+        "highlights": [
+          "Family resort",
+          "Excellent conditions for beginners",
+          "Cozy atmosphere",
+          "Varied trails",
+          "Good infrastructure"
+        ]
+      },
+      "livigno": {
+        "name": "Livigno",
+        "nameEn": "Livigno",
+        "region": "Lombardy",
+        "description": "Located near the Swiss border. Known for its duty-free zone and affordable prices. The farthest accessible resort, but one of Italy's highest-altitude resorts.",
+        "trails": "115 km",
+        "elevation": "1816–2900 m",
+        "difficulty": "Beginner, Intermediate, Advanced",
+        "airportDistance": "200+ km from Milan Malpensa Airport",
+        "airportFrom": "Milan Malpensa",
+        "highlights": [
+          "Duty-free zone",
+          "Affordable prices",
+          "Excellent snowboarding conditions",
+          "High-altitude skiing",
+          "Long skiing season",
+          "Farthest resort"
+        ]
+      }
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Start planning your unforgettable ski vacation",
+    "sendRequest": "Send Request",
+    "quickContact": "Quick Contact",
+    "conditions": "Terms & Conditions",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "phone": "Phone",
+      "phonePlaceholder": "+1 (555) 123-4567",
+      "program": "Program of Interest",
+      "selectProgram": "Select program",
+      "message": "Message",
+      "messagePlaceholder": "Tell us about your plans...",
+      "submit": "Send Request"
+    },
+    "conditionsSections": {
+      "planning": {
+        "title": "📅 Trip Planning",
+        "startPlanning": "Start of planning – minimum 5 days before trip start",
+        "firstConsultation": "First consultation – within 40 minutes",
+        "prepayment": "Prepayment for program = payment for trip planning service – €200"
+      },
+      "hotels": {
+        "title": "🏨 Hotel Booking",
+        "selection": "Selection and booking assistance – minimum 3 days before trip start",
+        "booking": "Hotel booking – with client's pre-transferred amount in rubles or euros"
+      },
+      "transfers": {
+        "title": "🚗 Transfers",
+        "airportPickup": "Airport pickup – at short-term parking for arrivals",
+        "betweenResorts": "Travel between resorts – at airport transfer price"
+      },
+      "service": {
+        "title": "⛷️ Guidance",
+        "maxDays": "Maximum number of guidance days – 7 days",
+        "maxHours": "Maximum number of hours on slopes per day – 6 hours",
+        "safety": "Company reserves the right to refuse individual guidance at any time for safety reasons"
+      },
+      "payment": {
+        "title": "💳 Payment",
+        "dailyPayment": "Payment for each day – at the end of that day",
+        "rublesPayment": "When paying in rubles – cost at exchange rate on payment day + 5%"
+      }
+    }
+  },
+  "footer": {
+    "description": "Premium ski tours in Italy and Switzerland with personalized guidance.",
+    "quickLinks": "Quick Links",
+    "contacts": "Contacts",
+    "email": "Email:",
+    "phone": "Phone:",
+    "rights": "All rights reserved."
+  }
+}
+
