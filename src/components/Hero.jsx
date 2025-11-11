@@ -18,13 +18,6 @@ const Hero = () => {
 
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%'])
 
-  const scrollToContact = () => {
-    const element = document.querySelector('#contact')
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
-
   return (
     <section
       ref={containerRef}

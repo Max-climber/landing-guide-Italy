@@ -22,26 +22,36 @@ const Contact = () => {
   const [phoneTouched, setPhoneTouched] = useState(false)
 
   const validatePhone = (phone) => {
-    // Удаляем все нецифровые символы для проверки
-    const digitsOnly = phone.replace(/\D/g, '')
-    
-    if (!phone) {
+    if (!phone || !phone.trim()) {
       return 'Телефон обязателен для заполнения'
     }
     
-    // Проверяем различные форматы: +7, 7, 8, или без префикса
-    if (digitsOnly.length < 10) {
-      return 'Телефон должен содержать минимум 10 цифр'
+    // Удаляем все нецифровые символы для проверки
+    const digitsOnly = phone.replace(/\D/g, '')
+    
+    // Минимальная длина международного номера (с кодом страны) - 7 цифр
+    // Максимальная длина по E.164 стандарту - 15 цифр
+    if (digitsOnly.length < 7) {
+      return 'Телефон должен содержать минимум 7 цифр'
     }
     
     if (digitsOnly.length > 15) {
-      return 'Телефон слишком длинный'
+      return 'Телефон слишком длинный (максимум 15 цифр)'
     }
     
-    // Проверка на российский формат
+    // Проверка на российский формат (если начинается с 7 или 8)
     if (digitsOnly.startsWith('7') || digitsOnly.startsWith('8')) {
       if (digitsOnly.length !== 11) {
         return 'Российский номер должен содержать 11 цифр (включая код страны)'
+      }
+    }
+    
+    // Проверка на международный формат (начинается с кода страны 1-9, но не 7 или 8)
+    // Если номер начинается с других цифр, проверяем общую длину
+    if (!digitsOnly.startsWith('7') && !digitsOnly.startsWith('8')) {
+      // Для международных номеров минимальная длина обычно 8-15 цифр
+      if (digitsOnly.length < 8) {
+        return 'Международный номер должен содержать минимум 8 цифр'
       }
     }
     
@@ -49,37 +59,56 @@ const Contact = () => {
   }
 
   const formatPhone = (value) => {
-    // Удаляем все нецифровые символы
+    // Удаляем все нецифровые символы для определения типа номера
     const digitsOnly = value.replace(/\D/g, '')
     
-    // Если начинается с 8, заменяем на 7
-    let formatted = digitsOnly.startsWith('8') ? '7' + digitsOnly.slice(1) : digitsOnly
-    
-    // Форматируем как +7 (XXX) XXX-XX-XX
-    if (formatted.startsWith('7') && formatted.length > 1) {
-      const code = formatted.slice(1, 4)
-      const part1 = formatted.slice(4, 7)
-      const part2 = formatted.slice(7, 9)
-      const part3 = formatted.slice(9, 11)
-      
-      if (part3) {
-        return `+7 (${code}) ${part1}-${part2}-${part3}`
-      } else if (part2) {
-        return `+7 (${code}) ${part1}-${part2}`
-      } else if (part1) {
-        return `+7 (${code}) ${part1}`
-      } else if (code) {
-        return `+7 (${code}`
-      }
-      return '+7 '
+    if (!digitsOnly) {
+      return value
     }
     
+    // Определяем, является ли номер российским
+    const isRussian = digitsOnly.startsWith('7') || digitsOnly.startsWith('8')
+    
+    // Для российских номеров - форматируем как +7 (XXX) XXX-XX-XX
+    if (isRussian) {
+      // Если начинается с 8, заменяем на 7
+      let formatted = digitsOnly.startsWith('8') ? '7' + digitsOnly.slice(1) : digitsOnly
+      
+      if (formatted.length > 1 && formatted.length <= 11) {
+        const code = formatted.slice(1, 4)
+        const part1 = formatted.slice(4, 7)
+        const part2 = formatted.slice(7, 9)
+        const part3 = formatted.slice(9, 11)
+        
+        if (part3) {
+          return `+7 (${code}) ${part1}-${part2}-${part3}`
+        } else if (part2) {
+          return `+7 (${code}) ${part1}-${part2}`
+        } else if (part1) {
+          return `+7 (${code}) ${part1}`
+        } else if (code) {
+          return `+7 (${code}`
+        }
+        return '+7 '
+      }
+    }
+    
+    // Для международных номеров - не форматируем автоматически
+    // Пользователь может вводить в любом формате: +39 123 456 7890, +1 234 567 8900, и т.д.
+    // Просто возвращаем значение как есть, чтобы не мешать пользователю
     return value
   }
 
   const handlePhoneChange = (e) => {
     const value = e.target.value
-    const formatted = formatPhone(value)
+    
+    // Определяем тип номера по цифрам
+    const digitsOnly = value.replace(/\D/g, '')
+    const isRussian = digitsOnly.startsWith('7') || digitsOnly.startsWith('8')
+    
+    // Форматируем только российские номера
+    // Для международных номеров оставляем как есть, чтобы пользователь мог вводить в любом формате
+    const formatted = isRussian ? formatPhone(value) : value
     
     setFormData({
       ...formData,
@@ -199,7 +228,7 @@ Email: ${formData.email}
                       ? 'border-red-400 focus:border-red-400'
                       : 'border-white/20 focus:border-premium-gold'
                   }`}
-                  placeholder="+7 (999) 123-45-67"
+                  placeholder="+7 (999) 123-45-67 или +39 123 456 7890"
                 />
                 {phoneTouched && phoneError && (
                   <p className="mt-1 text-xs text-red-400 flex items-center gap-1">
@@ -219,7 +248,7 @@ Email: ${formData.email}
                 )}
                 {!phoneTouched && (
                   <p className="mt-1 text-xs text-white/60">
-                    Формат: +7 (999) 123-45-67 или 8 (999) 123-45-67
+                    Формат: +7 (999) 123-45-67, +39 123 456 7890, или 8 (999) 123-45-67
                   </p>
                 )}
               </div>
