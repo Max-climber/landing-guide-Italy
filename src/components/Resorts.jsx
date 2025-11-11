@@ -11,6 +11,16 @@ const Resorts = () => {
   })
 
   const [selectedResort, setSelectedResort] = useState(null)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   const getResortData = (key) => ({
     name: t(`resorts.resorts.${key}.name`),
@@ -113,7 +123,9 @@ const Resorts = () => {
               whileHover={{ y: -10 }}
               className={`bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all relative ${
                 resort.discount ? 'ring-4 ring-premium-gold ring-opacity-50' : ''
-              } ${resort.isFeatured ? 'border-2 border-premium-gold' : ''}`}
+              } ${resort.isFeatured ? 'border-2 border-premium-gold' : ''} ${
+                index === resorts.length - 1 && resorts.length % 3 === 1 ? 'lg:col-start-2' : ''
+              }`}
             >
                 {/* Discount Badge */}
               {resort.discount && (
@@ -230,8 +242,8 @@ const Resorts = () => {
                   </motion.svg>
                 </motion.button>
 
-                {/* Expanded Details */}
-                {selectedResort === resort.id && (
+                {/* Expanded Details - на мобилке показываем только если открыта */}
+                {(selectedResort === resort.id || !isMobile) && (
                   <motion.div
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}

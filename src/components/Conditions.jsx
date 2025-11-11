@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 const Conditions = () => {
@@ -8,6 +9,17 @@ const Conditions = () => {
     triggerOnce: true,
     threshold: 0.1,
   })
+  const [selectedCondition, setSelectedCondition] = useState(null)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   const conditions = [
     {
@@ -196,7 +208,42 @@ const Conditions = () => {
                   </h3>
                 </div>
 
-                <div className="space-y-3">
+                {/* Mobile Toggle Button */}
+                {isMobile && (
+                  <motion.button
+                    onClick={() => setSelectedCondition(selectedCondition === condition.key ? null : condition.key)}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-white/10 text-white rounded-lg font-semibold text-sm hover:bg-white/20 transition-colors mt-4"
+                  >
+                    <span>{selectedCondition === condition.key ? 'Скрыть детали' : 'Показать детали'}</span>
+                    <motion.svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      animate={{ rotate: selectedCondition === condition.key ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </motion.svg>
+                  </motion.button>
+                )}
+
+                {/* Content - показываем всегда на десктопе, на мобилке только если открыта */}
+                {(selectedCondition === condition.key || !isMobile) && (
+                  <motion.div
+                    initial={isMobile ? { opacity: 0, height: 0 } : { opacity: 1, height: 'auto' }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="space-y-3"
+                  >
                   {condition.key === 'planning' && (
                     <>
                       <div className="flex items-start gap-3">
@@ -345,7 +392,8 @@ const Conditions = () => {
                       </div>
                     </>
                   )}
-                </div>
+                  </motion.div>
+                )}
               </div>
             </motion.div>
           ))}
