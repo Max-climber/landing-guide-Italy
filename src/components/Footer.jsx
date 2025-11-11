@@ -56,8 +56,8 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-3 sm:mb-4 text-base sm:text-lg">{t('footer.contacts')}</h4>
             <ul className="space-y-2 text-sm sm:text-base text-white/80">
-              <li>{t('footer.email')} info@lavacanzabianca.com</li>
-              <li>{t('footer.phone')} +7 (900) 000-00-00</li>
+              <li>{t('footer.email')} dmitryiz975@gmail.com</li>
+              <li>{t('footer.phone')} +7 (962) 726-46-33</li>
               <li className="flex space-x-4 mt-4">
                 <a
                   href="https://wa.me/79627264633"
