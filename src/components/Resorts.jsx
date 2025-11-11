@@ -33,6 +33,7 @@ const Resorts = () => {
         'https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
       discount: 25,
       isFeatured: true,
+      url: 'https://pianidibobbio.com/it/',
     },
     {
       id: 2,
@@ -40,6 +41,7 @@ const Resorts = () => {
       image:
         'https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
       isFeatured: true,
+      url: 'https://www.skiareavalchiavenna.it/',
     },
     {
       id: 3,
@@ -47,30 +49,35 @@ const Resorts = () => {
       image:
         'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
       isFeatured: true,
+      url: 'https://www.schneesportbivio.ch/',
     },
     {
       id: 4,
       ...getResortData('sanktMoritz'),
       image:
         'https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      url: 'https://www.engadin.ch/de',
     },
     {
       id: 5,
       ...getResortData('valmalenco'),
       image:
         'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      url: 'https://www.sondrioevalmalenco.it/it/ski-area-valmalenco',
     },
     {
       id: 6,
       ...getResortData('aprica'),
       image:
         'https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      url: 'https://www.apricaonline.com/it/montagna-inverno/sci',
     },
     {
       id: 7,
       ...getResortData('livigno'),
       image:
         'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      url: 'https://www.livigno.eu/sciare-livigno',
     },
   ]
 
@@ -139,9 +146,24 @@ const Resorts = () => {
               </div>
 
               <div className="p-4 sm:p-6">
-                <p className="text-premium-darkGray mb-6 leading-relaxed line-clamp-3">
+                <p className="text-premium-darkGray mb-4 sm:mb-6 leading-relaxed line-clamp-3">
                   {resort.description}
                 </p>
+                
+                {/* Resort Link */}
+                {resort.url && (
+                  <a
+                    href={resort.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm sm:text-base text-premium-gold hover:text-premium-navy font-semibold mb-4 sm:mb-6 transition-colors"
+                  >
+                    <span>{t('resorts.learnMore')}</span>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                )}
 
                 {/* Stats Grid */}
                 <div className="grid grid-cols-2 gap-2 sm:gap-4 mb-4 sm:mb-6">

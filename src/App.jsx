@@ -4,6 +4,7 @@ import Hero from './components/Hero'
 import About from './components/About'
 import Programs from './components/Programs'
 import Resorts from './components/Resorts'
+import Conditions from './components/Conditions'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 
@@ -23,6 +24,7 @@ function App() {
       <About />
       <Programs />
       <Resorts />
+      <Conditions />
       <Contact />
       <Footer />
     </div>

@@ -18,8 +18,95 @@ const Contact = () => {
     message: '',
   })
 
+  const [phoneError, setPhoneError] = useState('')
+  const [phoneTouched, setPhoneTouched] = useState(false)
+
+  const validatePhone = (phone) => {
+    // Удаляем все нецифровые символы для проверки
+    const digitsOnly = phone.replace(/\D/g, '')
+    
+    if (!phone) {
+      return 'Телефон обязателен для заполнения'
+    }
+    
+    // Проверяем различные форматы: +7, 7, 8, или без префикса
+    if (digitsOnly.length < 10) {
+      return 'Телефон должен содержать минимум 10 цифр'
+    }
+    
+    if (digitsOnly.length > 15) {
+      return 'Телефон слишком длинный'
+    }
+    
+    // Проверка на российский формат
+    if (digitsOnly.startsWith('7') || digitsOnly.startsWith('8')) {
+      if (digitsOnly.length !== 11) {
+        return 'Российский номер должен содержать 11 цифр (включая код страны)'
+      }
+    }
+    
+    return ''
+  }
+
+  const formatPhone = (value) => {
+    // Удаляем все нецифровые символы
+    const digitsOnly = value.replace(/\D/g, '')
+    
+    // Если начинается с 8, заменяем на 7
+    let formatted = digitsOnly.startsWith('8') ? '7' + digitsOnly.slice(1) : digitsOnly
+    
+    // Форматируем как +7 (XXX) XXX-XX-XX
+    if (formatted.startsWith('7') && formatted.length > 1) {
+      const code = formatted.slice(1, 4)
+      const part1 = formatted.slice(4, 7)
+      const part2 = formatted.slice(7, 9)
+      const part3 = formatted.slice(9, 11)
+      
+      if (part3) {
+        return `+7 (${code}) ${part1}-${part2}-${part3}`
+      } else if (part2) {
+        return `+7 (${code}) ${part1}-${part2}`
+      } else if (part1) {
+        return `+7 (${code}) ${part1}`
+      } else if (code) {
+        return `+7 (${code}`
+      }
+      return '+7 '
+    }
+    
+    return value
+  }
+
+  const handlePhoneChange = (e) => {
+    const value = e.target.value
+    const formatted = formatPhone(value)
+    
+    setFormData({
+      ...formData,
+      phone: formatted,
+    })
+    
+    if (phoneTouched) {
+      setPhoneError(validatePhone(formatted))
+    }
+  }
+
+  const handlePhoneBlur = () => {
+    setPhoneTouched(true)
+    setPhoneError(validatePhone(formData.phone))
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
+    
+    // Валидация перед отправкой
+    const error = validatePhone(formData.phone)
+    if (error) {
+      setPhoneTouched(true)
+      setPhoneError(error)
+      return
+    }
+    
     // Здесь можно добавить отправку формы
     const whatsappMessage = `Здравствуйте! Меня зовут ${formData.name}. 
 Email: ${formData.email}
@@ -27,7 +114,7 @@ Email: ${formData.email}
 Интересующая программа: ${formData.program}
 Сообщение: ${formData.message}`
 
-    const whatsappUrl = `https://wa.me/79000000000?text=${encodeURIComponent(whatsappMessage)}`
+    const whatsappUrl = `https://wa.me/79627264633?text=${encodeURIComponent(whatsappMessage)}`
     window.open(whatsappUrl, '_blank')
   }
 
@@ -97,16 +184,44 @@ Email: ${formData.email}
                 />
               </div>
               <div>
-                <label className="block text-white/90 mb-2 text-sm sm:text-base">{t('contact.form.phone')} *</label>
+                <label className="block text-white/90 mb-2 text-sm sm:text-base">
+                  {t('contact.form.phone')} *
+                </label>
                 <input
                   type="tel"
                   name="phone"
                   value={formData.phone}
-                  onChange={handleChange}
+                  onChange={handlePhoneChange}
+                  onBlur={handlePhoneBlur}
                   required
-                  className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-white/10 border border-white/20 rounded-lg text-white text-sm sm:text-base placeholder-white/50 focus:outline-none focus:border-premium-gold transition-colors"
-                  placeholder={t('contact.form.phonePlaceholder')}
+                  className={`w-full px-3 py-2 sm:px-4 sm:py-3 bg-white/10 border rounded-lg text-white text-sm sm:text-base placeholder-white/50 focus:outline-none transition-colors ${
+                    phoneError && phoneTouched
+                      ? 'border-red-400 focus:border-red-400'
+                      : 'border-white/20 focus:border-premium-gold'
+                  }`}
+                  placeholder="+7 (999) 123-45-67"
                 />
+                {phoneTouched && phoneError && (
+                  <p className="mt-1 text-xs text-red-400 flex items-center gap-1">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                    </svg>
+                    {phoneError}
+                  </p>
+                )}
+                {!phoneError && phoneTouched && formData.phone && (
+                  <p className="mt-1 text-xs text-green-400 flex items-center gap-1">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    Телефон введен корректно
+                  </p>
+                )}
+                {!phoneTouched && (
+                  <p className="mt-1 text-xs text-white/60">
+                    Формат: +7 (999) 123-45-67 или 8 (999) 123-45-67
+                  </p>
+                )}
               </div>
               <div>
                 <label className="block text-white/90 mb-2 text-sm sm:text-base">
@@ -160,7 +275,7 @@ Email: ${formData.email}
               </h3>
               <div className="space-y-3 sm:space-y-4">
                 <motion.a
-                  href="https://wa.me/79000000000"
+                  href="https://wa.me/79627264633"
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.05 }}
@@ -176,7 +291,7 @@ Email: ${formData.email}
                   <span className="text-white font-semibold text-sm sm:text-base">WhatsApp</span>
                 </motion.a>
                 <motion.a
-                  href="tel:+79000000000"
+                  href="tel:+79627264633"
                   whileHover={{ scale: 1.05 }}
                   className="flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 bg-white/10 rounded-lg hover:bg-white/20 transition-colors"
                 >
@@ -193,10 +308,10 @@ Email: ${formData.email}
                       d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                     />
                   </svg>
-                  <span className="text-white font-semibold text-sm sm:text-base">+7 (900) 000-00-00</span>
+                  <span className="text-white font-semibold text-sm sm:text-base">+7 (962) 726-46-33</span>
                 </motion.a>
                 <motion.a
-                  href="mailto:info@lavacanzabianca.com"
+                  href="mailto:dmitryiz975@gmail.com"
                   whileHover={{ scale: 1.05 }}
                   className="flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 bg-white/10 rounded-lg hover:bg-white/20 transition-colors"
                 >
@@ -214,135 +329,9 @@ Email: ${formData.email}
                     />
                   </svg>
                   <span className="text-white font-semibold text-xs sm:text-sm md:text-base break-all">
-                    info@lavacanzabianca.com
+                    dmitryiz975@gmail.com
                   </span>
                 </motion.a>
-              </div>
-            </div>
-
-            {/* Conditions */}
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 sm:p-6 md:p-8">
-              <h3 className="text-xl sm:text-2xl font-elegant font-bold mb-4 sm:mb-6 text-premium-gold">
-                {t('contact.conditions')}
-              </h3>
-              
-              <div className="space-y-4 sm:space-y-6">
-                {/* Planning Section */}
-                <div className="border-l-4 border-premium-gold pl-3 sm:pl-4">
-                  <h4 className="text-base sm:text-lg font-semibold text-premium-gold mb-2 sm:mb-3">
-                    {t('contact.conditionsSections.planning.title')}
-                  </h4>
-                  <div className="space-y-2 text-white/90">
-                    <div className="flex items-start gap-2 sm:gap-3">
-                      <span className="text-premium-gold mt-1 text-sm">•</span>
-                      <p className="text-xs sm:text-sm leading-relaxed">
-                        <span className="font-semibold">{t('contact.conditionsSections.planning.startPlanning').split('–')[0]}</span> – {t('contact.conditionsSections.planning.startPlanning').split('–')[1]}
-                      </p>
-                    </div>
-                    <div className="flex items-start gap-2 sm:gap-3">
-                      <span className="text-premium-gold mt-1 text-sm">•</span>
-                      <p className="text-xs sm:text-sm leading-relaxed">
-                        <span className="font-semibold">{t('contact.conditionsSections.planning.firstConsultation').split('–')[0]}</span> – {t('contact.conditionsSections.planning.firstConsultation').split('–')[1]}
-                      </p>
-                    </div>
-                    <div className="flex items-start gap-2 sm:gap-3">
-                      <span className="text-premium-gold mt-1 text-sm">•</span>
-                      <p className="text-xs sm:text-sm leading-relaxed">
-                        <span className="font-semibold">{t('contact.conditionsSections.planning.prepayment').split('–')[0]}</span> – <span className="text-premium-gold font-bold">{t('contact.conditionsSections.planning.prepayment').split('–')[1]}</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Hotels Section */}
-                <div className="border-l-4 border-premium-gold pl-3 sm:pl-4">
-                  <h4 className="text-base sm:text-lg font-semibold text-premium-gold mb-2 sm:mb-3">
-                    {t('contact.conditionsSections.hotels.title')}
-                  </h4>
-                  <div className="space-y-2 text-white/90">
-                    <div className="flex items-start gap-2 sm:gap-3">
-                      <span className="text-premium-gold mt-1 text-sm">•</span>
-                      <p className="text-xs sm:text-sm leading-relaxed">
-                        <span className="font-semibold">{t('contact.conditionsSections.hotels.selection').split('–')[0]}</span> – {t('contact.conditionsSections.hotels.selection').split('–')[1]}
-                      </p>
-                    </div>
-                    <div className="flex items-start gap-2 sm:gap-3">
-                      <span className="text-premium-gold mt-1 text-sm">•</span>
-                      <p className="text-xs sm:text-sm leading-relaxed">
-                        <span className="font-semibold">{t('contact.conditionsSections.hotels.booking').split('–')[0]}</span> – {t('contact.conditionsSections.hotels.booking').split('–')[1]}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Transfer Section */}
-                <div className="border-l-4 border-premium-gold pl-3 sm:pl-4">
-                  <h4 className="text-base sm:text-lg font-semibold text-premium-gold mb-2 sm:mb-3">
-                    {t('contact.conditionsSections.transfers.title')}
-                  </h4>
-                  <div className="space-y-2 text-white/90">
-                    <div className="flex items-start gap-2 sm:gap-3">
-                      <span className="text-premium-gold mt-1 text-sm">•</span>
-                      <p className="text-xs sm:text-sm leading-relaxed">
-                        <span className="font-semibold">{t('contact.conditionsSections.transfers.airportPickup').split('–')[0]}</span> – {t('contact.conditionsSections.transfers.airportPickup').split('–')[1]}
-                      </p>
-                    </div>
-                    <div className="flex items-start gap-2 sm:gap-3">
-                      <span className="text-premium-gold mt-1 text-sm">•</span>
-                      <p className="text-xs sm:text-sm leading-relaxed">
-                        <span className="font-semibold">{t('contact.conditionsSections.transfers.betweenResorts').split('–')[0]}</span> – {t('contact.conditionsSections.transfers.betweenResorts').split('–')[1]}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Service Section */}
-                <div className="border-l-4 border-premium-gold pl-3 sm:pl-4">
-                  <h4 className="text-base sm:text-lg font-semibold text-premium-gold mb-2 sm:mb-3">
-                    {t('contact.conditionsSections.service.title')}
-                  </h4>
-                  <div className="space-y-2 text-white/90">
-                    <div className="flex items-start gap-2 sm:gap-3">
-                      <span className="text-premium-gold mt-1 text-sm">•</span>
-                      <p className="text-xs sm:text-sm leading-relaxed">
-                        <span className="font-semibold">{t('contact.conditionsSections.service.maxDays').split('–')[0]}</span> – <span className="text-premium-gold font-bold">{t('contact.conditionsSections.service.maxDays').split('–')[1]}</span>
-                      </p>
-                    </div>
-                    <div className="flex items-start gap-2 sm:gap-3">
-                      <span className="text-premium-gold mt-1 text-sm">•</span>
-                      <p className="text-xs sm:text-sm leading-relaxed">
-                        <span className="font-semibold">{t('contact.conditionsSections.service.maxHours').split('–')[0]}</span> – <span className="text-premium-gold font-bold">{t('contact.conditionsSections.service.maxHours').split('–')[1]}</span>
-                      </p>
-                    </div>
-                    <div className="flex items-start gap-2 sm:gap-3">
-                      <span className="text-premium-gold mt-1 text-sm">•</span>
-                      <p className="text-xs sm:text-sm leading-relaxed">
-                        {t('contact.conditionsSections.service.safety')}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Payment Section */}
-                <div className="border-l-4 border-premium-gold pl-3 sm:pl-4">
-                  <h4 className="text-base sm:text-lg font-semibold text-premium-gold mb-2 sm:mb-3">
-                    {t('contact.conditionsSections.payment.title')}
-                  </h4>
-                  <div className="space-y-2 text-white/90">
-                    <div className="flex items-start gap-2 sm:gap-3">
-                      <span className="text-premium-gold mt-1 text-sm">•</span>
-                      <p className="text-xs sm:text-sm leading-relaxed">
-                        <span className="font-semibold">{t('contact.conditionsSections.payment.dailyPayment').split('–')[0]}</span> – {t('contact.conditionsSections.payment.dailyPayment').split('–')[1]}
-                      </p>
-                    </div>
-                    <div className="flex items-start gap-2 sm:gap-3">
-                      <span className="text-premium-gold mt-1 text-sm">•</span>
-                      <p className="text-xs sm:text-sm leading-relaxed">
-                        <span className="font-semibold">{t('contact.conditionsSections.payment.rublesPayment').split('+')[0]}</span> <span className="text-premium-gold font-bold">+ {t('contact.conditionsSections.payment.rublesPayment').split('+')[1]}</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </motion.div>

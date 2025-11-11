@@ -81,14 +81,6 @@ const Hero = () => {
             className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4"
           >
             <motion.button
-              onClick={scrollToContact}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-6 py-3 sm:px-8 sm:py-4 bg-premium-gold text-premium-navy rounded-full font-semibold text-base sm:text-lg hover:bg-premium-lightGold transition-colors shadow-lg"
-            >
-              {t('hero.startJourney')}
-            </motion.button>
-            <motion.button
               onClick={() => {
                 const element = document.querySelector('#programs')
                 if (element) {
@@ -97,9 +89,22 @@ const Hero = () => {
               }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-6 py-3 sm:px-8 sm:py-4 bg-transparent border-2 border-premium-gold text-premium-gold rounded-full font-semibold text-base sm:text-lg hover:bg-premium-gold/10 transition-colors"
+              className="px-6 py-3 sm:px-8 sm:py-4 bg-premium-gold text-premium-navy rounded-full font-semibold text-base sm:text-lg hover:bg-premium-lightGold transition-colors shadow-lg"
             >
               {t('hero.ourPrograms')}
+            </motion.button>
+            <motion.button
+              onClick={() => {
+                const element = document.querySelector('#resorts')
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' })
+                }
+              }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-6 py-3 sm:px-8 sm:py-4 bg-transparent border-2 border-premium-gold text-premium-gold rounded-full font-semibold text-base sm:text-lg hover:bg-premium-gold/10 transition-colors"
+            >
+              {t('hero.bestResorts')}
             </motion.button>
           </motion.div>
         </motion.div>

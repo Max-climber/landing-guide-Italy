@@ -8,10 +8,11 @@
   },
   "hero": {
     "title": "La Vacanza Bianca",
-    "subtitle": "Premium Ski Tours in Italy and Switzerland",
-    "description": "Personalized guidance on the Alpine slopes. From airport pickup to every turn on the trail. Italy is our priority, but Swiss resorts are also available.",
+    "subtitle": "Premium Ski Tours in Italy",
+    "description": "Personalized guidance on the Alpine slopes. From airport pickup to every turn on the trail.",
     "startJourney": "Start Your Journey",
-    "ourPrograms": "Our Programs"
+    "ourPrograms": "Our Programs",
+    "bestResorts": "Best Resorts"
   },
   "about": {
     "title": "About Us",
@@ -22,9 +23,9 @@
     "paragraph3": "This is where the incredible beauty of snow-capped peaks is accompanied by impeccable service at ski resorts. This is where vacation is truly a <bold>{{vacation}}</bold>.",
     "vacation": "Vacation",
     "whyUs": "Why Us?",
-    "whyUsText1": "And, having enjoyed all of this, we decided that making La Vacanza Bianca for our clients that wonderful time when you don't have to worry about anything except the very fact of arriving in Italy or Switzerland – that's a great idea.",
+    "whyUsText1": "And, having enjoyed all of this, we decided that making La Vacanza Bianca for our clients that wonderful time when you don't have to worry about anything except the very fact of arriving in Italy – that's a great idea.",
     "whyUsText2": "You don't rack your brains about how to rent a car at the airport without a 'proper' credit card. How to book a hotel without it. How to drive 4 hours on snow-covered serpentines after a long and difficult flight. How and where to park the car so you don't have to walk half an hour to the lift.",
-    "whyUsText3": "So now we'll take care of all of this. And you just fly to Milan, Bergamo, or Zurich and truly enjoy yourself!"
+    "whyUsText3": "So now we'll take care of all of this. And you just fly to Milan or Bergamo and truly enjoy yourself!"
   },
   "programs": {
     "title": "Our Programs",
@@ -34,7 +35,7 @@
       "subtitle": "For skiers who know how to do everything themselves",
         "description": "If you've been to the Italian or Swiss Alps more than once, you probably know how to independently choose the best ski resorts.",
       "features": {
-        "consultation": "Online or offline consultation on options for ski holidays in Italy and Switzerland (Italy is priority)",
+        "consultation": "Online or offline consultation on options for ski holidays in Italy",
         "airportPickup": "Airport pickup and transfer to the first hotel",
         "airportDropoff": "Transfer from the last hotel to the airport"
       },
@@ -50,9 +51,9 @@
     "comfortable": {
       "title": "Comfortable Travel",
       "subtitle": "For skiers who want to travel in comfort",
-        "description": "Do you ski or snowboard, have been to different resorts, and would like to spend a new unforgettable sports vacation in Italy or Switzerland?",
+        "description": "Do you ski or snowboard, have been to different resorts, and would like to spend a new unforgettable sports vacation in Italy?",
       "features": {
-        "tickets": "Help with choosing travel routes to Italy or Switzerland and ticket selection",
+        "tickets": "Help with choosing travel routes to Italy and ticket selection",
         "planning": "Creating a complete trip plan",
         "hotels": "Hotel bookings",
         "transfers": "Transfers from hotels to lifts and back",
@@ -99,8 +100,8 @@
     "cost": "Pricing"
   },
   "resorts": {
-    "title": "Best Ski Resorts in Italy and Switzerland",
-    "subtitle": "We work at the most prestigious Alpine resorts. Italy is our priority, but Swiss resorts are also available",
+    "title": "Best Ski Resorts in Italy",
+    "subtitle": "We work at the most prestigious Alpine resorts",
     "trails": "Trails",
     "elevation": "Elevation",
     "level": "Level",
@@ -109,6 +110,7 @@
     "showFeatures": "Show Features",
     "hideFeatures": "Hide Features",
     "features": "Resort Features:",
+    "learnMore": "Learn more about the resort",
     "discount": "-{{value}}%",
     "recommended": "⭐ Recommended",
     "resorts": {
@@ -156,8 +158,8 @@
         "trails": "30+ km",
         "elevation": "1769–2500 m",
         "difficulty": "Beginner, Intermediate",
-        "airportDistance": "150 km from Zurich Airport",
-        "airportFrom": "Zurich",
+        "airportDistance": "180 km from Milan Malpensa Airport",
+        "airportFrom": "Milan Malpensa",
         "highlights": [
           "Family atmosphere",
           "Central village location",
@@ -174,8 +176,8 @@
         "trails": "350+ km",
         "elevation": "1800–3300 m",
         "difficulty": "Beginner, Intermediate, Advanced",
-        "airportDistance": "200 km from Zurich Airport",
-        "airportFrom": "Zurich",
+        "airportDistance": "220 km from Milan Malpensa Airport",
+        "airportFrom": "Milan Malpensa",
         "highlights": [
           "World-class prestigious resort",
           "Luxury infrastructure",
@@ -291,7 +293,7 @@
     }
   },
   "footer": {
-    "description": "Premium ski tours in Italy and Switzerland with personalized guidance.",
+    "description": "Premium ski tours in Italy with personalized guidance.",
     "quickLinks": "Quick Links",
     "contacts": "Contacts",
     "email": "Email:",
