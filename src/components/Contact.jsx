@@ -281,7 +281,7 @@ ${formData.message ? `Сообщение:\n${formData.message}` : ''}
                 )}
                 {!emailTouched && (
                   <p className="mt-1 text-xs text-white/60">
-                    Пример: your@email.com
+                    Пример: skilover@email.com
                   </p>
                 )}
               </div>

@@ -119,27 +119,45 @@ const Conditions = () => {
               <div className="relative z-10">
                 <div className="flex items-center gap-4 mb-4">
                   {condition.key === 'transfers' ? (
-                    <div className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center bg-black rounded-lg p-2">
-                      <svg className="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        {/* Престижный седан - силуэт */}
-                        <rect x="20" y="35" width="60" height="50" rx="3" fill="#1a1a1a" stroke="#D4AF37" strokeWidth="1.5"/>
-                        {/* Капот */}
-                        <path d="M20 35 L30 25 L50 25 L60 30 L60 35 Z" fill="#000000" stroke="#D4AF37" strokeWidth="1.5"/>
-                        {/* Багажник */}
-                        <path d="M80 35 L80 30 L70 25 L60 30 L60 35 Z" fill="#000000" stroke="#D4AF37" strokeWidth="1.5"/>
-                        {/* Окна */}
-                        <rect x="30" y="40" width="15" height="12" rx="1" fill="#0a0a0a" stroke="#D4AF37" strokeWidth="0.8"/>
-                        <rect x="55" y="40" width="15" height="12" rx="1" fill="#0a0a0a" stroke="#D4AF37" strokeWidth="0.8"/>
-                        {/* Колеса - премиум */}
-                        <circle cx="32" cy="78" r="9" fill="#1a1a1a" stroke="#D4AF37" strokeWidth="2"/>
-                        <circle cx="32" cy="78" r="6" fill="#000000"/>
-                        <circle cx="32" cy="78" r="3" fill="#D4AF37"/>
-                        <circle cx="68" cy="78" r="9" fill="#1a1a1a" stroke="#D4AF37" strokeWidth="2"/>
-                        <circle cx="68" cy="78" r="6" fill="#000000"/>
-                        <circle cx="68" cy="78" r="3" fill="#D4AF37"/>
-                        {/* Эмблема на капоте (звезда/логотип) */}
-                        <circle cx="40" cy="28" r="3" fill="#D4AF37"/>
-                        <path d="M40 25 L40 31 M37 28 L43 28" stroke="#D4AF37" strokeWidth="1.5" strokeLinecap="round"/>
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center">
+                      <svg className="w-full h-full" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        {/* Кузов - элегантный черный седан */}
+                        <path d="M15 45 L25 30 L35 25 L85 25 L95 30 L105 45 L105 60 L15 60 Z" fill="#0a0a0a" stroke="#1a1a1a" strokeWidth="1"/>
+                        {/* Капот с изгибом */}
+                        <path d="M25 30 Q30 28 35 25 L85 25 Q90 28 95 30" stroke="#000000" strokeWidth="1.5" fill="none"/>
+                        {/* Лобовое стекло */}
+                        <path d="M30 30 L40 28 L80 28 L90 30 L90 40 L30 40 Z" fill="#050505" stroke="#1a1a1a" strokeWidth="0.5"/>
+                        {/* Боковое стекло */}
+                        <path d="M40 28 L75 28 L85 30 L85 40 L40 40 Z" fill="#080808" stroke="#1a1a1a" strokeWidth="0.5"/>
+                        {/* Заднее стекло */}
+                        <path d="M90 30 L100 32 L100 40 L90 40 Z" fill="#050505" stroke="#1a1a1a" strokeWidth="0.5"/>
+                        {/* Крыша */}
+                        <path d="M30 30 L90 30" stroke="#1a1a1a" strokeWidth="1"/>
+                        {/* Дверная линия */}
+                        <path d="M50 30 L50 60 M70 30 L70 60" stroke="#1a1a1a" strokeWidth="0.8"/>
+                        {/* Колеса - премиум диски */}
+                        <circle cx="35" cy="65" r="8" fill="#000000" stroke="#1a1a1a" strokeWidth="1.5"/>
+                        <circle cx="35" cy="65" r="5.5" fill="#0a0a0a"/>
+                        <circle cx="35" cy="65" r="3.5" fill="#1a1a1a"/>
+                        <circle cx="35" cy="65" r="1.5" fill="#D4AF37"/>
+                        <circle cx="85" cy="65" r="8" fill="#000000" stroke="#1a1a1a" strokeWidth="1.5"/>
+                        <circle cx="85" cy="65" r="5.5" fill="#0a0a0a"/>
+                        <circle cx="85" cy="65" r="3.5" fill="#1a1a1a"/>
+                        <circle cx="85" cy="65" r="1.5" fill="#D4AF37"/>
+                        {/* Решетка радиатора */}
+                        <rect x="40" y="28" width="40" height="4" fill="#0a0a0a" stroke="#1a1a1a" strokeWidth="0.5"/>
+                        <line x1="45" y1="28" x2="45" y2="32" stroke="#1a1a1a" strokeWidth="0.5"/>
+                        <line x1="50" y1="28" x2="50" y2="32" stroke="#1a1a1a" strokeWidth="0.5"/>
+                        <line x1="55" y1="28" x2="55" y2="32" stroke="#1a1a1a" strokeWidth="0.5"/>
+                        <line x1="60" y1="28" x2="60" y2="32" stroke="#1a1a1a" strokeWidth="0.5"/>
+                        <line x1="65" y1="28" x2="65" y2="32" stroke="#1a1a1a" strokeWidth="0.5"/>
+                        <line x1="70" y1="28" x2="70" y2="32" stroke="#1a1a1a" strokeWidth="0.5"/>
+                        <line x1="75" y1="28" x2="75" y2="32" stroke="#1a1a1a" strokeWidth="0.5"/>
+                        {/* Фары */}
+                        <ellipse cx="30" cy="32" rx="3" ry="2" fill="#1a1a1a" stroke="#D4AF37" strokeWidth="0.8"/>
+                        <ellipse cx="90" cy="32" rx="3" ry="2" fill="#1a1a1a" stroke="#D4AF37" strokeWidth="0.8"/>
+                        {/* Блеск на кузове */}
+                        <path d="M25 35 Q50 30 75 35" stroke="#1a1a1a" strokeWidth="0.5" fill="none" opacity="0.3"/>
                       </svg>
                     </div>
                   ) : (
