@@ -146,7 +146,7 @@ const Resorts = () => {
               </div>
 
               <div className="p-4 sm:p-6">
-                <p className="text-premium-darkGray mb-4 sm:mb-6 leading-relaxed line-clamp-3">
+                <p className="text-premium-darkGray mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
                   {resort.description}
                 </p>
                 

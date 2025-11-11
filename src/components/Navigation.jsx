@@ -100,20 +100,29 @@ const Navigation = ({ scrollY }) => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden pb-4 space-y-2"
+            className="md:hidden bg-premium-navy/98 backdrop-blur-md border-t border-white/10 pb-4 space-y-1"
           >
             {navItems.map((item) => (
               <button
                 key={item.href}
                 onClick={() => scrollToSection(item.href)}
-                className="block w-full text-left py-2 text-white hover:text-premium-gold transition-colors"
+                className="block w-full text-left py-3 px-4 text-white hover:text-premium-gold hover:bg-white/5 transition-colors rounded-lg mx-2"
               >
                 {item.name}
               </button>
             ))}
-            <div className="pt-2 border-t border-white/20">
-              <LanguageSwitcher />
+            <div className="pt-3 mt-2 border-t border-white/20 mx-2">
+              <div className="px-4 py-2">
+                <LanguageSwitcher />
+              </div>
             </div>
+            <motion.a
+              href="#contact"
+              onClick={() => scrollToSection('#contact')}
+              className="block mx-2 mt-2 px-4 py-3 bg-premium-gold text-premium-navy rounded-lg font-semibold text-center hover:bg-premium-lightGold transition-colors"
+            >
+              {t('nav.connect')}
+            </motion.a>
           </motion.div>
         )}
       </div>
