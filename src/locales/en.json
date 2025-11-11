@@ -246,6 +246,9 @@
   "contact": {
     "title": "Contact Us",
     "subtitle": "Start planning your unforgettable ski vacation",
+    "conditionsSubtitle": "Transparent terms of cooperation for your comfort",
+    "showDetails": "Show Details",
+    "hideDetails": "Hide Details",
     "sendRequest": "Send Request",
     "quickContact": "Quick Contact",
     "conditions": "Terms & Conditions",

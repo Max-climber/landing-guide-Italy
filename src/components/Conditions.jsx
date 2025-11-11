@@ -216,7 +216,7 @@ const Conditions = () => {
                     whileTap={{ scale: 0.95 }}
                     className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-white/10 text-white rounded-lg font-semibold text-sm hover:bg-white/20 transition-colors mt-4"
                   >
-                    <span>{selectedCondition === condition.key ? 'Скрыть детали' : 'Показать детали'}</span>
+                    <span>{selectedCondition === condition.key ? t('contact.hideDetails') : t('contact.showDetails')}</span>
                     <motion.svg
                       className="w-5 h-5"
                       fill="none"
