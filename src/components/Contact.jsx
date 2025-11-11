@@ -178,15 +178,15 @@ const Contact = () => {
       return
     }
     
-    // Формируем сообщение для WhatsApp
+    // Формируем сообщение для WhatsApp (без эмодзи для корректной кодировки)
     const whatsappMessage = `Здравствуйте! Меня зовут ${formData.name}.
 
-📧 Email: ${formData.email}
-📱 Телефон: ${formData.phone}
-${formData.program ? `📋 Интересующая программа: ${formData.program}` : ''}
-${formData.message ? `💬 Сообщение:\n${formData.message}` : ''}
+Email: ${formData.email}
+Телефон: ${formData.phone}
+${formData.program ? `Интересующая программа: ${formData.program}` : ''}
+${formData.message ? `Сообщение:\n${formData.message}` : ''}
 
-Готов(а) обсудить детали моего горнолыжного тура в Италию! 🎿`
+Готов(а) обсудить детали моего горнолыжного тура в Италию!`
 
     const whatsappUrl = `https://wa.me/79627264633?text=${encodeURIComponent(whatsappMessage)}`
     window.open(whatsappUrl, '_blank')
