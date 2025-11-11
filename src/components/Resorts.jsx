@@ -141,136 +141,252 @@ const Resorts = () => {
                 </div>
               )}
 
-              <div className="relative h-64 sm:h-72 overflow-hidden">
-                <img
-                  src={resort.image}
-                  alt={resort.name}
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-premium-navy/90 via-premium-navy/50 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
-                  <h3 className="text-2xl sm:text-3xl font-elegant font-bold text-white mb-1">
-                    {resort.name}
-                  </h3>
-                  <p className="text-premium-lightGold text-sm sm:text-base mb-2 sm:mb-3">{resort.nameEn}</p>
-                  <p className="text-white/90 text-xs sm:text-sm font-medium">{resort.region}</p>
-                </div>
-              </div>
-
-              <div className="p-4 sm:p-6">
-                <p className="text-premium-darkGray mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
-                  {resort.description}
-                </p>
-                
-                {/* Resort Link */}
-                {resort.url && (
-                  <a
-                    href={resort.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm sm:text-base text-premium-gold hover:text-premium-navy font-semibold mb-4 sm:mb-6 transition-colors"
-                  >
-                    <span>{t('resorts.learnMore')}</span>
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </a>
-                )}
-
-                {/* Stats Grid */}
-                <div className="grid grid-cols-2 gap-2 sm:gap-4 mb-4 sm:mb-6">
-                  <div className="bg-premium-gray/30 rounded-lg p-2 sm:p-3">
-                    <div className="flex items-center gap-1 sm:gap-2 mb-1">
-                      <span className="text-xl sm:text-2xl">📏</span>
-                      <span className="text-xs text-premium-darkGray font-medium">{t('resorts.trails')}</span>
-                    </div>
-                    <p className="text-premium-navy font-bold text-sm sm:text-base">{resort.trails}</p>
-                  </div>
-                  <div className="bg-premium-gray/30 rounded-lg p-2 sm:p-3">
-                    <div className="flex items-center gap-1 sm:gap-2 mb-1">
-                      <span className="text-xl sm:text-2xl">⛰️</span>
-                      <span className="text-xs text-premium-darkGray font-medium">{t('resorts.elevation')}</span>
-                    </div>
-                    <p className="text-premium-navy font-bold text-sm sm:text-base">{resort.elevation}</p>
-                  </div>
-                  <div className="bg-premium-gray/30 rounded-lg p-2 sm:p-3">
-                    <div className="flex items-center gap-1 sm:gap-2 mb-1">
-                      <span className="text-xl sm:text-2xl">🎿</span>
-                      <span className="text-xs text-premium-darkGray font-medium">{t('resorts.level')}</span>
-                    </div>
-                    <p className="text-premium-navy font-bold text-xs sm:text-sm">{resort.difficulty}</p>
-                  </div>
-                  <div className="bg-premium-gray/30 rounded-lg p-2 sm:p-3">
-                    <div className="flex items-center gap-1 sm:gap-2 mb-1">
-                      <span className="text-xl sm:text-2xl">✈️</span>
-                      <span className="text-xs text-premium-darkGray font-medium">{t('resorts.airport')}</span>
-                    </div>
-                    <p className="text-premium-navy font-bold text-xs sm:text-sm">{resort.airportFrom}</p>
-                  </div>
-                </div>
-
-                {/* Airport Distance */}
-                <div className="mb-4 sm:mb-6 p-2 sm:p-3 bg-premium-gold/10 rounded-lg border border-premium-gold/20">
-                  <p className="text-xs sm:text-sm text-premium-darkGray font-medium">
-                    <span className="text-premium-gold font-semibold">📍 {t('resorts.distance')}</span>{' '}
-                    {resort.airportDistance}
-                  </p>
-                </div>
-
-                {/* Toggle Button */}
-                <motion.button
-                  onClick={() => setSelectedResort(selectedResort === resort.id ? null : resort.id)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-full flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-3 bg-premium-navy text-white rounded-lg font-semibold text-sm sm:text-base hover:bg-premium-navy/90 transition-colors"
-                >
-                  <span>{selectedResort === resort.id ? t('resorts.hideFeatures') : t('resorts.showFeatures')}</span>
-                  <motion.svg
-                    className="w-4 h-4 sm:w-5 sm:h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    animate={{ rotate: selectedResort === resort.id ? 180 : 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 9l-7 7-7-7"
+              {/* На мобилке показываем только заголовок и кнопку, на десктопе - все */}
+              {isMobile ? (
+                <>
+                  <div className="relative h-32 overflow-hidden">
+                    <img
+                      src={resort.image}
+                      alt={resort.name}
+                      className="w-full h-full object-cover"
                     />
-                  </motion.svg>
-                </motion.button>
+                    <div className="absolute inset-0 bg-gradient-to-t from-premium-navy/90 via-premium-navy/50 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-3">
+                      <h3 className="text-lg font-elegant font-bold text-white mb-0.5">
+                        {resort.name}
+                      </h3>
+                      <p className="text-premium-lightGold text-xs mb-1">{resort.nameEn}</p>
+                      <p className="text-white/90 text-xs font-medium">{resort.region}</p>
+                    </div>
+                  </div>
+                  <div className="p-3">
+                    <motion.button
+                      onClick={() => setSelectedResort(selectedResort === resort.id ? null : resort.id)}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-premium-navy text-white rounded-lg font-semibold text-sm hover:bg-premium-navy/90 transition-colors"
+                    >
+                      <span>{selectedResort === resort.id ? t('resorts.hideFeatures') : t('resorts.showFeatures')}</span>
+                      <motion.svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        animate={{ rotate: selectedResort === resort.id ? 180 : 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </motion.svg>
+                    </motion.button>
+                    {selectedResort === resort.id && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="mt-3 pt-3 border-t-2 border-premium-gray"
+                      >
+                        <p className="text-premium-darkGray mb-3 leading-relaxed text-xs">
+                          {resort.description}
+                        </p>
+                        {resort.url && (
+                          <a
+                            href={resort.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 text-xs text-premium-gold hover:text-premium-navy font-semibold mb-3 transition-colors"
+                          >
+                            <span>{t('resorts.learnMore')}</span>
+                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            </svg>
+                          </a>
+                        )}
+                        <div className="grid grid-cols-2 gap-2 mb-3">
+                          <div className="bg-premium-gray/30 rounded-lg p-2">
+                            <div className="flex items-center gap-1 mb-1">
+                              <span className="text-lg">📏</span>
+                              <span className="text-xs text-premium-darkGray font-medium">{t('resorts.trails')}</span>
+                            </div>
+                            <p className="text-premium-navy font-bold text-xs">{resort.trails}</p>
+                          </div>
+                          <div className="bg-premium-gray/30 rounded-lg p-2">
+                            <div className="flex items-center gap-1 mb-1">
+                              <span className="text-lg">⛰️</span>
+                              <span className="text-xs text-premium-darkGray font-medium">{t('resorts.elevation')}</span>
+                            </div>
+                            <p className="text-premium-navy font-bold text-xs">{resort.elevation}</p>
+                          </div>
+                          <div className="bg-premium-gray/30 rounded-lg p-2">
+                            <div className="flex items-center gap-1 mb-1">
+                              <span className="text-lg">🎿</span>
+                              <span className="text-xs text-premium-darkGray font-medium">{t('resorts.level')}</span>
+                            </div>
+                            <p className="text-premium-navy font-bold text-xs">{resort.difficulty}</p>
+                          </div>
+                          <div className="bg-premium-gray/30 rounded-lg p-2">
+                            <div className="flex items-center gap-1 mb-1">
+                              <span className="text-lg">✈️</span>
+                              <span className="text-xs text-premium-darkGray font-medium">{t('resorts.airport')}</span>
+                            </div>
+                            <p className="text-premium-navy font-bold text-xs">{resort.airportFrom}</p>
+                          </div>
+                        </div>
+                        <div className="mb-3 p-2 bg-premium-gold/10 rounded-lg border border-premium-gold/20">
+                          <p className="text-xs text-premium-darkGray font-medium">
+                            <span className="text-premium-gold font-semibold">📍 {t('resorts.distance')}</span>{' '}
+                            {resort.airportDistance}
+                          </p>
+                        </div>
+                        <h4 className="text-base font-elegant font-bold text-premium-navy mb-2">
+                          {t('resorts.features')}
+                        </h4>
+                        <ul className="space-y-1.5">
+                          {resort.highlights.map((highlight, idx) => (
+                            <li key={idx} className="flex items-start gap-2">
+                              <span className="text-premium-gold text-sm mt-0.5">✓</span>
+                              <span className="text-xs text-premium-darkGray leading-relaxed">{highlight}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </motion.div>
+                    )}
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="relative h-64 sm:h-72 overflow-hidden">
+                    <img
+                      src={resort.image}
+                      alt={resort.name}
+                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-premium-navy/90 via-premium-navy/50 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
+                      <h3 className="text-2xl sm:text-3xl font-elegant font-bold text-white mb-1">
+                        {resort.name}
+                      </h3>
+                      <p className="text-premium-lightGold text-sm sm:text-base mb-2 sm:mb-3">{resort.nameEn}</p>
+                      <p className="text-white/90 text-xs sm:text-sm font-medium">{resort.region}</p>
+                    </div>
+                  </div>
 
-                {/* Expanded Details - на мобилке показываем только если открыта */}
-                {(selectedResort === resort.id || !isMobile) && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t-2 border-premium-gray"
-                  >
-                    <h4 className="text-lg sm:text-xl font-elegant font-bold text-premium-navy mb-3 sm:mb-4">
-                      {t('resorts.features')}
-                    </h4>
-                    <ul className="space-y-2 sm:space-y-3">
-                      {resort.highlights.map((highlight, idx) => (
-                        <motion.li
-                          key={idx}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: idx * 0.1 }}
-                          className="flex items-start gap-2 sm:gap-3"
-                        >
-                          <span className="text-premium-gold text-lg sm:text-xl mt-0.5">✓</span>
-                          <span className="text-sm sm:text-base text-premium-darkGray leading-relaxed">{highlight}</span>
-                        </motion.li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                )}
-              </div>
+                  <div className="p-4 sm:p-6">
+                    <p className="text-premium-darkGray mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
+                      {resort.description}
+                    </p>
+                    
+                    {resort.url && (
+                      <a
+                        href={resort.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-sm sm:text-base text-premium-gold hover:text-premium-navy font-semibold mb-4 sm:mb-6 transition-colors"
+                      >
+                        <span>{t('resorts.learnMore')}</span>
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </a>
+                    )}
+
+                    <div className="grid grid-cols-2 gap-2 sm:gap-4 mb-4 sm:mb-6">
+                      <div className="bg-premium-gray/30 rounded-lg p-2 sm:p-3">
+                        <div className="flex items-center gap-1 sm:gap-2 mb-1">
+                          <span className="text-xl sm:text-2xl">📏</span>
+                          <span className="text-xs text-premium-darkGray font-medium">{t('resorts.trails')}</span>
+                        </div>
+                        <p className="text-premium-navy font-bold text-sm sm:text-base">{resort.trails}</p>
+                      </div>
+                      <div className="bg-premium-gray/30 rounded-lg p-2 sm:p-3">
+                        <div className="flex items-center gap-1 sm:gap-2 mb-1">
+                          <span className="text-xl sm:text-2xl">⛰️</span>
+                          <span className="text-xs text-premium-darkGray font-medium">{t('resorts.elevation')}</span>
+                        </div>
+                        <p className="text-premium-navy font-bold text-sm sm:text-base">{resort.elevation}</p>
+                      </div>
+                      <div className="bg-premium-gray/30 rounded-lg p-2 sm:p-3">
+                        <div className="flex items-center gap-1 sm:gap-2 mb-1">
+                          <span className="text-xl sm:text-2xl">🎿</span>
+                          <span className="text-xs text-premium-darkGray font-medium">{t('resorts.level')}</span>
+                        </div>
+                        <p className="text-premium-navy font-bold text-xs sm:text-sm">{resort.difficulty}</p>
+                      </div>
+                      <div className="bg-premium-gray/30 rounded-lg p-2 sm:p-3">
+                        <div className="flex items-center gap-1 sm:gap-2 mb-1">
+                          <span className="text-xl sm:text-2xl">✈️</span>
+                          <span className="text-xs text-premium-darkGray font-medium">{t('resorts.airport')}</span>
+                        </div>
+                        <p className="text-premium-navy font-bold text-xs sm:text-sm">{resort.airportFrom}</p>
+                      </div>
+                    </div>
+
+                    <div className="mb-4 sm:mb-6 p-2 sm:p-3 bg-premium-gold/10 rounded-lg border border-premium-gold/20">
+                      <p className="text-xs sm:text-sm text-premium-darkGray font-medium">
+                        <span className="text-premium-gold font-semibold">📍 {t('resorts.distance')}</span>{' '}
+                        {resort.airportDistance}
+                      </p>
+                    </div>
+
+                    <motion.button
+                      onClick={() => setSelectedResort(selectedResort === resort.id ? null : resort.id)}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="w-full flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-3 bg-premium-navy text-white rounded-lg font-semibold text-sm sm:text-base hover:bg-premium-navy/90 transition-colors"
+                    >
+                      <span>{selectedResort === resort.id ? t('resorts.hideFeatures') : t('resorts.showFeatures')}</span>
+                      <motion.svg
+                        className="w-4 h-4 sm:w-5 sm:h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        animate={{ rotate: selectedResort === resort.id ? 180 : 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </motion.svg>
+                    </motion.button>
+
+                    {selectedResort === resort.id && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t-2 border-premium-gray"
+                      >
+                        <h4 className="text-lg sm:text-xl font-elegant font-bold text-premium-navy mb-3 sm:mb-4">
+                          {t('resorts.features')}
+                        </h4>
+                        <ul className="space-y-2 sm:space-y-3">
+                          {resort.highlights.map((highlight, idx) => (
+                            <motion.li
+                              key={idx}
+                              initial={{ opacity: 0, x: -20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: idx * 0.1 }}
+                              className="flex items-start gap-2 sm:gap-3"
+                            >
+                              <span className="text-premium-gold text-lg sm:text-xl mt-0.5">✓</span>
+                              <span className="text-sm sm:text-base text-premium-darkGray leading-relaxed">{highlight}</span>
+                            </motion.li>
+                          ))}
+                        </ul>
+                      </motion.div>
+                    )}
+                  </div>
+                </>
+              )}
             </motion.div>
           ))}
         </div>
