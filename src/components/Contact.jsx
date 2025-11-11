@@ -20,6 +20,8 @@ const Contact = () => {
 
   const [phoneError, setPhoneError] = useState('')
   const [phoneTouched, setPhoneTouched] = useState(false)
+  const [emailError, setEmailError] = useState('')
+  const [emailTouched, setEmailTouched] = useState(false)
 
   const validatePhone = (phone) => {
     if (!phone || !phone.trim()) {
@@ -125,23 +127,66 @@ const Contact = () => {
     setPhoneError(validatePhone(formData.phone))
   }
 
+  const validateEmail = (email) => {
+    if (!email || !email.trim()) {
+      return 'Email обязателен для заполнения'
+    }
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      return 'Введите корректный email адрес'
+    }
+    
+    return ''
+  }
+
+  const handleEmailChange = (e) => {
+    const value = e.target.value
+    setFormData({
+      ...formData,
+      email: value,
+    })
+    
+    if (emailTouched) {
+      setEmailError(validateEmail(value))
+    }
+  }
+
+  const handleEmailBlur = () => {
+    setEmailTouched(true)
+    setEmailError(validateEmail(formData.email))
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
     
     // Валидация перед отправкой
-    const error = validatePhone(formData.phone)
-    if (error) {
+    const phoneError = validatePhone(formData.phone)
+    const emailError = validateEmail(formData.email)
+    
+    if (phoneError) {
       setPhoneTouched(true)
-      setPhoneError(error)
+      setPhoneError(phoneError)
+    }
+    
+    if (emailError) {
+      setEmailTouched(true)
+      setEmailError(emailError)
+    }
+    
+    if (phoneError || emailError) {
       return
     }
     
-    // Здесь можно добавить отправку формы
-    const whatsappMessage = `Здравствуйте! Меня зовут ${formData.name}. 
-Email: ${formData.email}
-Телефон: ${formData.phone}
-Интересующая программа: ${formData.program}
-Сообщение: ${formData.message}`
+    // Формируем сообщение для WhatsApp
+    const whatsappMessage = `Здравствуйте! Меня зовут ${formData.name}.
+
+📧 Email: ${formData.email}
+📱 Телефон: ${formData.phone}
+${formData.program ? `📋 Интересующая программа: ${formData.program}` : ''}
+${formData.message ? `💬 Сообщение:\n${formData.message}` : ''}
+
+Готов(а) обсудить детали моего горнолыжного тура в Италию! 🎿`
 
     const whatsappUrl = `https://wa.me/79627264633?text=${encodeURIComponent(whatsappMessage)}`
     window.open(whatsappUrl, '_blank')
@@ -201,16 +246,44 @@ Email: ${formData.email}
                 />
               </div>
               <div>
-                <label className="block text-white/90 mb-2 text-sm sm:text-base">{t('contact.form.email')} *</label>
+                <label className="block text-white/90 mb-2 text-sm sm:text-base">
+                  {t('contact.form.email')} *
+                </label>
                 <input
                   type="email"
                   name="email"
                   value={formData.email}
-                  onChange={handleChange}
+                  onChange={handleEmailChange}
+                  onBlur={handleEmailBlur}
                   required
-                  className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-white/10 border border-white/20 rounded-lg text-white text-sm sm:text-base placeholder-white/50 focus:outline-none focus:border-premium-gold transition-colors"
+                  className={`w-full px-3 py-2 sm:px-4 sm:py-3 bg-white/10 border rounded-lg text-white text-sm sm:text-base placeholder-white/50 focus:outline-none transition-colors ${
+                    emailError && emailTouched
+                      ? 'border-red-400 focus:border-red-400'
+                      : 'border-white/20 focus:border-premium-gold'
+                  }`}
                   placeholder={t('contact.form.emailPlaceholder')}
                 />
+                {emailTouched && emailError && (
+                  <p className="mt-1 text-xs text-red-400 flex items-center gap-1">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                    </svg>
+                    {emailError}
+                  </p>
+                )}
+                {!emailError && emailTouched && formData.email && (
+                  <p className="mt-1 text-xs text-green-400 flex items-center gap-1">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    Email введен корректно
+                  </p>
+                )}
+                {!emailTouched && (
+                  <p className="mt-1 text-xs text-white/60">
+                    Пример: your@email.com
+                  </p>
+                )}
               </div>
               <div>
                 <label className="block text-white/90 mb-2 text-sm sm:text-base">

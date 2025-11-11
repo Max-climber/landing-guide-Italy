@@ -118,9 +118,35 @@ const Conditions = () => {
 
               <div className="relative z-10">
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="text-4xl sm:text-5xl">{condition.icon}</div>
+                  {condition.key === 'transfers' ? (
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center bg-black rounded-lg p-2">
+                      <svg className="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        {/* Престижный седан - силуэт */}
+                        <rect x="20" y="35" width="60" height="50" rx="3" fill="#1a1a1a" stroke="#D4AF37" strokeWidth="1.5"/>
+                        {/* Капот */}
+                        <path d="M20 35 L30 25 L50 25 L60 30 L60 35 Z" fill="#000000" stroke="#D4AF37" strokeWidth="1.5"/>
+                        {/* Багажник */}
+                        <path d="M80 35 L80 30 L70 25 L60 30 L60 35 Z" fill="#000000" stroke="#D4AF37" strokeWidth="1.5"/>
+                        {/* Окна */}
+                        <rect x="30" y="40" width="15" height="12" rx="1" fill="#0a0a0a" stroke="#D4AF37" strokeWidth="0.8"/>
+                        <rect x="55" y="40" width="15" height="12" rx="1" fill="#0a0a0a" stroke="#D4AF37" strokeWidth="0.8"/>
+                        {/* Колеса - премиум */}
+                        <circle cx="32" cy="78" r="9" fill="#1a1a1a" stroke="#D4AF37" strokeWidth="2"/>
+                        <circle cx="32" cy="78" r="6" fill="#000000"/>
+                        <circle cx="32" cy="78" r="3" fill="#D4AF37"/>
+                        <circle cx="68" cy="78" r="9" fill="#1a1a1a" stroke="#D4AF37" strokeWidth="2"/>
+                        <circle cx="68" cy="78" r="6" fill="#000000"/>
+                        <circle cx="68" cy="78" r="3" fill="#D4AF37"/>
+                        {/* Эмблема на капоте (звезда/логотип) */}
+                        <circle cx="40" cy="28" r="3" fill="#D4AF37"/>
+                        <path d="M40 25 L40 31 M37 28 L43 28" stroke="#D4AF37" strokeWidth="1.5" strokeLinecap="round"/>
+                      </svg>
+                    </div>
+                  ) : (
+                    <div className="text-4xl sm:text-5xl">{condition.icon}</div>
+                  )}
                   <h3 className="text-xl sm:text-2xl font-elegant font-bold text-white">
-                    {t(`contact.conditionsSections.${condition.key}.title`)}
+                    {t(`contact.conditionsSections.${condition.key}.title`).replace(/📅|🏨|🚗|⛷️|💳/g, '').trim()}
                   </h3>
                 </div>
 

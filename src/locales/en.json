@@ -275,7 +275,7 @@
         "booking": "Hotel booking – with client's pre-transferred amount in rubles or euros"
       },
       "transfers": {
-        "title": "🚗 Transfers",
+        "title": "🚗 Transfer",
         "airportPickup": "Airport pickup – at short-term parking for arrivals",
         "betweenResorts": "Travel between resorts – at airport transfer price"
       },
