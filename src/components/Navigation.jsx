@@ -34,18 +34,18 @@ const Navigation = ({ scrollY }) => {
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-premium-navy backdrop-blur-md shadow-lg"
     >
       <div className="container-max px-4 md:px-8 lg:px-16">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16 sm:h-18 md:h-20">
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="flex items-center space-x-2"
+            className="flex items-center space-x-2 flex-shrink-0 min-w-0"
           >
-            <span className="text-lg sm:text-xl md:text-2xl font-elegant font-bold text-premium-gold">
+            <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-elegant font-bold text-premium-gold whitespace-nowrap overflow-hidden text-ellipsis">
               La Vacanza Bianca
             </span>
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-3 lg:space-x-4 flex-shrink-0">
             {navItems.map((item) => (
               <button
                 key={item.href}

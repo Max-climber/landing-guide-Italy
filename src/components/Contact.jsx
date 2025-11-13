@@ -23,37 +23,89 @@ const Contact = () => {
   const [emailError, setEmailError] = useState('')
   const [emailTouched, setEmailTouched] = useState(false)
 
+  // Список валидных кодов стран (первые 1-3 цифры после +)
+  const validCountryCodes = [
+    '1', '7', '20', '27', '30', '31', '32', '33', '34', '36', '39', '40', '41', '43', '44', '45', '46', '47', '48', '49',
+    '51', '52', '53', '54', '55', '56', '57', '58', '60', '61', '62', '63', '64', '65', '66', '81', '82', '84', '86', '90', '91', '92', '93', '94', '95', '98', '212', '213', '216', '218',
+    '220', '221', '222', '223', '224', '225', '226', '227', '228', '229', '230', '231', '232', '233', '234', '235', '236', '237', '238', '239',
+    '240', '241', '242', '243', '244', '245', '246', '248', '249', '250', '251', '252', '253', '254', '255', '256', '257', '258', '260', '261',
+    '262', '263', '264', '265', '266', '267', '268', '269', '290', '291', '297', '298', '299', '350', '351', '352', '353', '354', '355', '356',
+    '357', '358', '359', '370', '371', '372', '373', '374', '375', '376', '377', '378', '380', '381', '382', '383', '385', '386', '387', '389',
+    '420', '421', '423', '500', '501', '502', '503', '504', '505', '506', '507', '508', '509', '590', '591', '592', '593', '594', '595', '596',
+    '597', '598', '599', '670', '672', '673', '674', '675', '676', '677', '678', '679', '680', '681', '682', '683', '685', '686', '687', '688',
+    '689', '690', '691', '692', '850', '852', '853', '855', '856', '880', '886', '960', '961', '962', '963', '964', '965', '966', '967', '968',
+    '970', '971', '972', '973', '974', '975', '976', '977', '992', '993', '994', '995', '996', '998'
+  ]
+
   const validatePhone = (phone) => {
     if (!phone || !phone.trim()) {
       return 'Телефон обязателен для заполнения'
     }
     
-    // Удаляем все нецифровые символы для проверки
-    const digitsOnly = phone.replace(/\D/g, '')
+    // Удаляем все пробелы и дефисы для проверки
+    let cleanPhone = phone.trim().replace(/[\s-()]/g, '')
     
-    // Минимальная длина международного номера (с кодом страны) - 7 цифр
-    // Максимальная длина по E.164 стандарту - 15 цифр
-    if (digitsOnly.length < 7) {
-      return 'Телефон должен содержать минимум 7 цифр'
-    }
-    
-    if (digitsOnly.length > 15) {
-      return 'Телефон слишком длинный (максимум 15 цифр)'
-    }
-    
-    // Проверка на российский формат (если начинается с 7 или 8)
-    if (digitsOnly.startsWith('7') || digitsOnly.startsWith('8')) {
-      if (digitsOnly.length !== 11) {
-        return 'Российский номер должен содержать 11 цифр (включая код страны)'
+    // Автоматически добавляем + если его нет и номер начинается с цифры
+    if (!cleanPhone.startsWith('+')) {
+      // Если начинается с 8 (российский формат), заменяем на +7
+      if (cleanPhone.startsWith('8')) {
+        cleanPhone = '+7' + cleanPhone.slice(1)
+      } else if (/^\d/.test(cleanPhone)) {
+        // Если начинается с цифры, добавляем +
+        cleanPhone = '+' + cleanPhone
+      } else {
+        return 'Телефон должен начинаться с + или цифры'
       }
     }
     
-    // Проверка на международный формат (начинается с кода страны 1-9, но не 7 или 8)
-    // Если номер начинается с других цифр, проверяем общую длину
-    if (!digitsOnly.startsWith('7') && !digitsOnly.startsWith('8')) {
-      // Для международных номеров минимальная длина обычно 8-15 цифр
-      if (digitsOnly.length < 8) {
-        return 'Международный номер должен содержать минимум 8 цифр'
+    // Проверяем формат E.164: +[код страны][номер]
+    const e164Regex = /^\+[1-9]\d{6,14}$/
+    if (!e164Regex.test(cleanPhone)) {
+      return 'Неверный формат телефона. Используйте формат: +7 (999) 123-45-67 или +39 123 456 7890'
+    }
+    
+    // Извлекаем код страны (первые 1-3 цифры после +)
+    const digitsOnly = cleanPhone.slice(1)
+    let countryCode = ''
+    
+    // Проверяем коды стран разной длины
+    for (let i = 1; i <= 3 && i <= digitsOnly.length; i++) {
+      const code = digitsOnly.slice(0, i)
+      if (validCountryCodes.includes(code)) {
+        countryCode = code
+        break
+      }
+    }
+    
+    if (!countryCode) {
+      return 'Неверный код страны. Проверьте правильность ввода'
+    }
+    
+    // Проверяем длину номера после кода страны
+    const numberPart = digitsOnly.slice(countryCode.length)
+    if (numberPart.length < 6) {
+      return 'Номер слишком короткий. Минимум 6 цифр после кода страны'
+    }
+    
+    if (numberPart.length > 12) {
+      return 'Номер слишком длинный. Максимум 12 цифр после кода страны'
+    }
+    
+    // Специфичные проверки для популярных стран
+    if (countryCode === '7') {
+      // Россия: +7 + 10 цифр = 11 цифр всего
+      if (digitsOnly.length !== 11) {
+        return 'Российский номер должен содержать 11 цифр: +7 (XXX) XXX-XX-XX'
+      }
+    } else if (countryCode === '1') {
+      // США/Канада: +1 + 10 цифр = 11 цифр всего
+      if (digitsOnly.length !== 11) {
+        return 'Номер США/Канады должен содержать 11 цифр: +1 (XXX) XXX-XXXX'
+      }
+    } else if (countryCode === '39') {
+      // Италия: +39 + 9-10 цифр = 10-11 цифр всего
+      if (digitsOnly.length < 10 || digitsOnly.length > 11) {
+        return 'Итальянский номер должен содержать 10-11 цифр: +39 XXX XXX XXXX'
       }
     }
     
@@ -61,56 +113,46 @@ const Contact = () => {
   }
 
   const formatPhone = (value) => {
-    // Удаляем все нецифровые символы для определения типа номера
-    const digitsOnly = value.replace(/\D/g, '')
+    if (!value) return ''
     
-    if (!digitsOnly) {
-      return value
-    }
+    // Удаляем все кроме цифр и +
+    let clean = value.replace(/[^\d+]/g, '')
     
-    // Определяем, является ли номер российским
-    const isRussian = digitsOnly.startsWith('7') || digitsOnly.startsWith('8')
-    
-    // Для российских номеров - форматируем как +7 (XXX) XXX-XX-XX
-    if (isRussian) {
-      // Если начинается с 8, заменяем на 7
-      let formatted = digitsOnly.startsWith('8') ? '7' + digitsOnly.slice(1) : digitsOnly
-      
-      if (formatted.length > 1 && formatted.length <= 11) {
-        const code = formatted.slice(1, 4)
-        const part1 = formatted.slice(4, 7)
-        const part2 = formatted.slice(7, 9)
-        const part3 = formatted.slice(9, 11)
-        
-        if (part3) {
-          return `+7 (${code}) ${part1}-${part2}-${part3}`
-        } else if (part2) {
-          return `+7 (${code}) ${part1}-${part2}`
-        } else if (part1) {
-          return `+7 (${code}) ${part1}`
-        } else if (code) {
-          return `+7 (${code}`
-        }
-        return '+7 '
+    // Автоматически добавляем + если его нет
+    if (!clean.startsWith('+')) {
+      // Если начинается с 8 (российский), заменяем на +7
+      if (clean.startsWith('8')) {
+        clean = '+7' + clean.slice(1)
+      } else if (clean.length > 0) {
+        // Иначе добавляем +
+        clean = '+' + clean
       }
     }
     
-    // Для международных номеров - не форматируем автоматически
-    // Пользователь может вводить в любом формате: +39 123 456 7890, +1 234 567 8900, и т.д.
-    // Просто возвращаем значение как есть, чтобы не мешать пользователю
-    return value
+    // Если начинается с +8, заменяем на +7
+    if (clean.startsWith('+8')) {
+      clean = '+7' + clean.slice(2)
+    }
+    
+    // Для российских номеров форматируем: +7 (XXX) XXX-XX-XX
+    if (clean.startsWith('+7')) {
+      const digits = clean.slice(2).replace(/\D/g, '')
+      if (digits.length === 0) return '+7'
+      if (digits.length <= 3) return `+7 (${digits}`
+      if (digits.length <= 6) return `+7 (${digits.slice(0, 3)}) ${digits.slice(3)}`
+      if (digits.length <= 8) return `+7 (${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`
+      return `+7 (${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6, 8)}-${digits.slice(8, 10)}`
+    }
+    
+    // Для других международных номеров оставляем как есть (пользователь сам форматирует)
+    return clean
   }
 
   const handlePhoneChange = (e) => {
     const value = e.target.value
     
-    // Определяем тип номера по цифрам
-    const digitsOnly = value.replace(/\D/g, '')
-    const isRussian = digitsOnly.startsWith('7') || digitsOnly.startsWith('8')
-    
-    // Форматируем только российские номера
-    // Для международных номеров оставляем как есть, чтобы пользователь мог вводить в любом формате
-    const formatted = isRussian ? formatPhone(value) : value
+    // Форматируем телефон с автоподстановкой +
+    const formatted = formatPhone(value)
     
     setFormData({
       ...formData,
@@ -127,14 +169,102 @@ const Contact = () => {
     setPhoneError(validatePhone(formData.phone))
   }
 
+  // Список валидных TLD (топ-уровневых доменов)
+  const validTLDs = [
+    // Общие TLD
+    'com', 'org', 'net', 'edu', 'gov', 'mil', 'int',
+    // Страновые TLD
+    'ru', 'us', 'uk', 'de', 'fr', 'it', 'es', 'nl', 'be', 'ch', 'at', 'pl', 'cz', 'se', 'no', 'dk', 'fi', 'ie', 'pt', 'gr',
+    'jp', 'cn', 'kr', 'in', 'au', 'ca', 'mx', 'br', 'ar', 'cl', 'co', 'pe', 'za', 'ae', 'sa', 'il', 'tr', 'eg',
+    // Новые gTLD
+    'io', 'ai', 'co', 'app', 'dev', 'tech', 'online', 'site', 'website', 'store', 'shop', 'blog', 'info', 'biz', 'name',
+    'xyz', 'top', 'win', 'vip', 'pro', 'me', 'tv', 'cc', 'ws', 'mobi', 'asia', 'tel', 'jobs', 'travel', 'museum'
+  ]
+
   const validateEmail = (email) => {
     if (!email || !email.trim()) {
       return 'Email обязателен для заполнения'
     }
     
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(email)) {
+    const trimmedEmail = email.trim().toLowerCase()
+    
+    // Базовая проверка формата
+    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+    if (!emailRegex.test(trimmedEmail)) {
       return 'Введите корректный email адрес'
+    }
+    
+    // Проверка на двойные точки и специальные символы
+    if (trimmedEmail.includes('..')) {
+      return 'Email не может содержать двойные точки'
+    }
+    
+    if (trimmedEmail.startsWith('.') || trimmedEmail.startsWith('@')) {
+      return 'Email не может начинаться с точки или @'
+    }
+    
+    // Разделяем на локальную часть и домен
+    const parts = trimmedEmail.split('@')
+    if (parts.length !== 2) {
+      return 'Email должен содержать один символ @'
+    }
+    
+    const [localPart, domain] = parts
+    
+    // Проверка локальной части
+    if (localPart.length === 0 || localPart.length > 64) {
+      return 'Локальная часть email слишком короткая или длинная'
+    }
+    
+    if (localPart.endsWith('.') || localPart.startsWith('.')) {
+      return 'Локальная часть не может начинаться или заканчиваться точкой'
+    }
+    
+    // Проверка домена
+    if (domain.length === 0 || domain.length > 255) {
+      return 'Домен слишком короткий или длинный'
+    }
+    
+    // Проверка на наличие точки в домене (должен быть TLD)
+    if (!domain.includes('.')) {
+      return 'Email должен содержать домен верхнего уровня (например, .com, .ru)'
+    }
+    
+    // Извлекаем TLD (последняя часть после последней точки)
+    const domainParts = domain.split('.')
+    const tld = domainParts[domainParts.length - 1].toLowerCase()
+    
+    // Проверка TLD
+    if (tld.length < 2 || tld.length > 63) {
+      return 'Домен верхнего уровня должен содержать от 2 до 63 символов'
+    }
+    
+    // Проверка на валидный TLD (только буквы и цифры)
+    if (!/^[a-z0-9]+$/.test(tld)) {
+      return 'Домен верхнего уровня содержит недопустимые символы'
+    }
+    
+    // Проверка на известные TLD (опционально, можно закомментировать для более строгой проверки)
+    // Раскомментируйте следующую строку для проверки только известных TLD:
+    // if (!validTLDs.includes(tld)) {
+    //   return 'Используйте валидный домен верхнего уровня (например, .com, .ru, .org)'
+    // }
+    
+    // Проверка каждой части домена
+    for (let i = 0; i < domainParts.length; i++) {
+      const part = domainParts[i]
+      if (part.length === 0) {
+        return 'Домен не может содержать пустые части'
+      }
+      if (part.length > 63) {
+        return 'Каждая часть домена не может быть длиннее 63 символов'
+      }
+      if (part.startsWith('-') || part.endsWith('-')) {
+        return 'Части домена не могут начинаться или заканчиваться дефисом'
+      }
+      if (!/^[a-z0-9-]+$/.test(part)) {
+        return 'Домен содержит недопустимые символы'
+      }
     }
     
     return ''
@@ -337,7 +467,11 @@ ${formData.message ? `Сообщение: ${formData.message}` : ''}
                   name="program"
                   value={formData.program}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-white/10 border border-white/20 rounded-lg text-white text-sm sm:text-base focus:outline-none focus:border-premium-gold transition-colors [&>option]:bg-premium-navy [&>option]:text-white"
+                  className="w-full px-3 py-2 sm:px-4 sm:py-3 pr-10 bg-white/10 border border-white/20 rounded-lg text-white text-sm sm:text-base focus:outline-none focus:border-premium-gold transition-colors [&>option]:bg-premium-navy [&>option]:text-white appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpath%20fill%3D%22%23D4AF37%22%20d%3D%22M6%209L1%204h10z%22%2F%3E%3C%2Fsvg%3E')] bg-no-repeat bg-[length:12px] bg-[right_12px_center]"
+                  style={{
+                    backgroundPosition: 'right 12px center',
+                    paddingRight: '2.5rem',
+                  }}
                 >
                   <option value="" className="bg-premium-navy text-white">{t('contact.form.selectProgram')}</option>
                   <option value={t('programs.experienced.title')} className="bg-premium-navy text-white">{t('programs.experienced.title')}</option>
