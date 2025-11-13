@@ -463,21 +463,24 @@ ${formData.message ? `Сообщение: ${formData.message}` : ''}
                 <label className="block text-white/90 mb-2 text-sm sm:text-base">
                   {t('contact.form.program')}
                 </label>
-                <select
-                  name="program"
-                  value={formData.program}
-                  onChange={handleChange}
-                  className="w-full px-3 py-2 sm:px-4 sm:py-3 pr-10 bg-white/10 border border-white/20 rounded-lg text-white text-sm sm:text-base focus:outline-none focus:border-premium-gold transition-colors [&>option]:bg-premium-navy [&>option]:text-white appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpath%20fill%3D%22%23D4AF37%22%20d%3D%22M6%209L1%204h10z%22%2F%3E%3C%2Fsvg%3E')] bg-no-repeat bg-[length:12px] bg-[right_12px_center]"
-                  style={{
-                    backgroundPosition: 'right 12px center',
-                    paddingRight: '2.5rem',
-                  }}
-                >
-                  <option value="" className="bg-premium-navy text-white">{t('contact.form.selectProgram')}</option>
-                  <option value={t('programs.experienced.title')} className="bg-premium-navy text-white">{t('programs.experienced.title')}</option>
-                  <option value={t('programs.comfortable.title')} className="bg-premium-navy text-white">{t('programs.comfortable.title')}</option>
-                  <option value={t('programs.superComfort.title')} className="bg-premium-navy text-white">{t('programs.superComfort.title')}</option>
-                </select>
+                <div className="relative">
+                  <select
+                    name="program"
+                    value={formData.program}
+                    onChange={handleChange}
+                    className="w-full px-3 py-2 sm:px-4 sm:py-3 pr-10 sm:pr-12 bg-white/10 border border-white/20 rounded-lg text-white text-sm sm:text-base focus:outline-none focus:border-premium-gold transition-colors [&>option]:bg-premium-navy [&>option]:text-white appearance-none"
+                  >
+                    <option value="" className="bg-premium-navy text-white">{t('contact.form.selectProgram')}</option>
+                    <option value={t('programs.experienced.title')} className="bg-premium-navy text-white">{t('programs.experienced.title')}</option>
+                    <option value={t('programs.comfortable.title')} className="bg-premium-navy text-white">{t('programs.comfortable.title')}</option>
+                    <option value={t('programs.superComfort.title')} className="bg-premium-navy text-white">{t('programs.superComfort.title')}</option>
+                  </select>
+                  <div className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                    <svg className="w-4 h-4 sm:w-5 sm:h-5 text-premium-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                </div>
               </div>
               <div>
                 <label className="block text-white/90 mb-2 text-sm sm:text-base">{t('contact.form.message')}</label>
