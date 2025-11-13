@@ -45,8 +45,8 @@ const NewYearGift = ({ onClick }) => {
       {/* Вибрирующая анимация */}
       <motion.div
         animate={{
-          rotate: [0, -5, 5, -5, 5, 0],
-          y: [0, -10, 10, -10, 10, 0],
+          rotate: [0, -3, 3, -3, 3, 0],
+          y: [0, -8, 8, -8, 8, 0],
         }}
         transition={{
           duration: 2,
@@ -55,96 +55,134 @@ const NewYearGift = ({ onClick }) => {
         }}
         className="relative"
       >
-        {/* Елочка/Подарок */}
+        {/* Подарочная коробка */}
         <div className="relative w-20 h-20 sm:w-28 sm:h-28">
-          {/* Елочка SVG */}
           <svg
-            viewBox="0 0 100 100"
+            viewBox="0 0 120 120"
             className="w-full h-full drop-shadow-2xl"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            {/* Сияющие звездочки вокруг */}
-            <motion.circle
-              cx="20"
-              cy="20"
-              r="3"
-              fill="#D4AF37"
+            {/* Сияющие частицы вокруг */}
+            {[...Array(8)].map((_, i) => (
+              <motion.circle
+                key={i}
+                cx={20 + i * 12}
+                cy={15 + (i % 3) * 8}
+                r="2.5"
+                fill="#D4AF37"
+                animate={{
+                  opacity: [0.2, 1, 0.2],
+                  scale: [1, 1.8, 1],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  delay: i * 0.3,
+                }}
+              />
+            ))}
+
+            {/* Основа коробки - нижняя часть */}
+            <motion.path
+              d="M30 70 L90 70 L85 100 L35 100 Z"
+              fill="url(#boxGradient1)"
               animate={{
-                opacity: [0.3, 1, 0.3],
-                scale: [1, 1.5, 1],
+                opacity: [0.9, 1, 0.9],
               }}
               transition={{
-                duration: 1.5,
+                duration: 2,
                 repeat: Infinity,
-                delay: 0,
+                ease: 'easeInOut',
               }}
             />
-            <motion.circle
-              cx="80"
-              cy="30"
-              r="2.5"
-              fill="#D4AF37"
+            
+            {/* Верхняя часть коробки */}
+            <motion.path
+              d="M25 50 L95 50 L90 70 L30 70 Z"
+              fill="url(#boxGradient2)"
               animate={{
-                opacity: [0.3, 1, 0.3],
-                scale: [1, 1.5, 1],
+                opacity: [0.95, 1, 0.95],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: 'easeInOut',
+                delay: 0.3,
+              }}
+            />
+            
+            {/* Лента горизонтальная */}
+            <motion.rect
+              x="20"
+              y="58"
+              width="80"
+              height="8"
+              fill="url(#ribbonGradient)"
+              animate={{
+                opacity: [0.8, 1, 0.8],
               }}
               transition={{
                 duration: 1.5,
                 repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+            />
+            
+            {/* Лента вертикальная */}
+            <motion.rect
+              x="56"
+              y="45"
+              width="8"
+              height="30"
+              fill="url(#ribbonGradient)"
+              animate={{
+                opacity: [0.8, 1, 0.8],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: 'easeInOut',
                 delay: 0.5,
               }}
             />
-            <motion.circle
-              cx="15"
-              cy="70"
-              r="2"
-              fill="#D4AF37"
+            
+            {/* Бант - левая часть */}
+            <motion.path
+              d="M45 50 L50 58 L45 66 L40 58 Z"
+              fill="url(#bowGradient)"
               animate={{
-                opacity: [0.3, 1, 0.3],
-                scale: [1, 1.5, 1],
+                scale: [1, 1.1, 1],
               }}
               transition={{
-                duration: 1.5,
+                duration: 2,
                 repeat: Infinity,
-                delay: 1,
+                ease: 'easeInOut',
               }}
             />
-
-            {/* Елочка */}
-            <path
-              d="M50 10 L60 35 L50 30 L40 35 Z"
-              fill="#2D5016"
-              stroke="#1A3A0A"
-              strokeWidth="1"
-            />
-            <path
-              d="M50 25 L65 50 L50 45 L35 50 Z"
-              fill="#2D5016"
-              stroke="#1A3A0A"
-              strokeWidth="1"
-            />
-            <path
-              d="M50 40 L70 70 L50 65 L30 70 Z"
-              fill="#2D5016"
-              stroke="#1A3A0A"
-              strokeWidth="1"
-            />
             
-            {/* Ствол */}
-            <rect x="47" y="70" width="6" height="15" fill="#8B4513" />
-            
-            {/* Украшения на елочке */}
-            <circle cx="45" cy="30" r="2" fill="#D4AF37" />
-            <circle cx="55" cy="45" r="2" fill="#FF6B6B" />
-            <circle cx="40" cy="55" r="2" fill="#4ECDC4" />
-            <circle cx="60" cy="60" r="2" fill="#D4AF37" />
-            <circle cx="50" cy="50" r="2" fill="#FF6B6B" />
-            
-            {/* Звезда на верхушке */}
+            {/* Бант - правая часть */}
             <motion.path
-              d="M50 10 L52 5 L50 8 L48 5 Z"
-              fill="#D4AF37"
+              d="M75 50 L80 58 L75 66 L70 58 Z"
+              fill="url(#bowGradient)"
+              animate={{
+                scale: [1, 1.1, 1],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: 'easeInOut',
+                delay: 0.5,
+              }}
+            />
+            
+            {/* Центральная часть банта */}
+            <motion.rect
+              x="56"
+              y="55"
+              width="8"
+              height="8"
+              fill="url(#bowCenterGradient)"
               animate={{
                 rotate: [0, 360],
                 scale: [1, 1.2, 1],
@@ -155,16 +193,76 @@ const NewYearGift = ({ onClick }) => {
                 ease: 'linear',
               }}
             />
+            
+            {/* Блестки на коробке */}
+            <motion.circle
+              cx="40"
+              cy="60"
+              r="1.5"
+              fill="#F4E4BC"
+              animate={{
+                opacity: [0.3, 1, 0.3],
+                scale: [1, 1.5, 1],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                delay: 0,
+              }}
+            />
+            <motion.circle
+              cx="80"
+              cy="65"
+              r="1.5"
+              fill="#F4E4BC"
+              animate={{
+                opacity: [0.3, 1, 0.3],
+                scale: [1, 1.5, 1],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                delay: 1,
+              }}
+            />
+            
+            {/* Градиенты */}
+            <defs>
+              <linearGradient id="boxGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#8B4513" />
+                <stop offset="50%" stopColor="#A0522D" />
+                <stop offset="100%" stopColor="#8B4513" />
+              </linearGradient>
+              <linearGradient id="boxGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#A0522D" />
+                <stop offset="50%" stopColor="#CD853F" />
+                <stop offset="100%" stopColor="#A0522D" />
+              </linearGradient>
+              <linearGradient id="ribbonGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#D4AF37" />
+                <stop offset="50%" stopColor="#F4E4BC" />
+                <stop offset="100%" stopColor="#D4AF37" />
+              </linearGradient>
+              <linearGradient id="bowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#D4AF37" />
+                <stop offset="50%" stopColor="#FFD700" />
+                <stop offset="100%" stopColor="#D4AF37" />
+              </linearGradient>
+              <radialGradient id="bowCenterGradient" cx="50%" cy="50%">
+                <stop offset="0%" stopColor="#FFD700" />
+                <stop offset="100%" stopColor="#D4AF37" />
+              </radialGradient>
+            </defs>
           </svg>
 
-          {/* Дополнительное сияние */}
+          {/* Дополнительное сияние вокруг коробки */}
           <motion.div
-            className="absolute inset-0 rounded-full"
+            className="absolute inset-0 rounded-lg"
             animate={{
               boxShadow: [
-                '0 0 20px rgba(212, 175, 55, 0.6)',
-                '0 0 40px rgba(212, 175, 55, 0.8)',
-                '0 0 20px rgba(212, 175, 55, 0.6)',
+                '0 0 25px rgba(212, 175, 55, 0.7)',
+                '0 0 50px rgba(212, 175, 55, 0.9)',
+                '0 0 25px rgba(212, 175, 55, 0.7)',
               ],
             }}
             transition={{
