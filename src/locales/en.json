@@ -69,8 +69,8 @@
         "price2": "€1/km + toll road costs",
         "planning": "Creating a complete trip plan:",
         "planningPrice": "€200/service",
-        "hotelTransfer": "Transfer from hotel to lift parking:",
-        "hotelTransferPrice": "€200/day"
+        "hotelTransfer": "Transfer from hotel to lift parking and individual slope accompaniment",
+        "hotelTransferPrice": "400 euro/day"
       }
     },
     "superComfort": {
@@ -91,9 +91,8 @@
         "price2": "€1/km + toll road costs",
         "planning": "Creating a complete trip plan:",
         "planningPrice": "€200/service",
-        "hotelTransfer": "Transfer from hotel to lift parking:",
-        "hotelTransferPrice": "€400/day",
-        "individualSlope": "Individual guidance on the slopes (only one person at a time)"
+        "hotelTransfer": "Transfer from hotel to lift parking and individual slope accompaniment",
+        "hotelTransferPrice": "400 euro/day"
       }
     },
     "whatIncluded": "What's Included:",

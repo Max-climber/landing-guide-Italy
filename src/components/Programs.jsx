@@ -189,7 +189,7 @@ const Programs = () => {
                   {program.pricing.transfer && (
                     <div>
                       <p className="font-semibold text-white mb-3">
-                        {t(`programs.${activeProgram === 0 ? 'experienced' : activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.transfer`)}:
+                        {t(`programs.${activeProgram === 0 ? 'experienced' : activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.transfer`)}
                       </p>
                       <div className="space-y-2">
                         {program.pricing.transfer.map((item, idx) => (
@@ -198,7 +198,7 @@ const Programs = () => {
                             className="bg-white/10 rounded-lg p-3"
                           >
                             <p className="text-white/90 font-medium">
-                              {item.time}
+                              {idx === 0 ? `${t(`programs.${activeProgram === 0 ? 'experienced' : activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.transferStart`)} ${item.time}` : item.time}
                             </p>
                             <p className="text-premium-gold">
                               {item.price}
@@ -225,13 +225,6 @@ const Programs = () => {
                         <span className="text-premium-gold font-semibold">
                           {program.pricing.hotelTransfer}
                         </span>
-                      </p>
-                    </div>
-                  )}
-                  {program.pricing.individualSlope && (
-                    <div>
-                      <p className="text-white/80">
-                        {program.pricing.individualSlope}
                       </p>
                     </div>
                   )}

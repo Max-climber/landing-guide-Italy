@@ -178,17 +178,18 @@ const Contact = () => {
       return
     }
     
-    // Формируем сообщение для WhatsApp (без эмодзи для корректной кодировки)
+    // Формируем сообщение для WhatsApp (минимальное, чтобы можно было редактировать)
     const whatsappMessage = `Здравствуйте! Меня зовут ${formData.name}.
 
 Email: ${formData.email}
 Телефон: ${formData.phone}
 ${formData.program ? `Интересующая программа: ${formData.program}` : ''}
-${formData.message ? `Сообщение:\n${formData.message}` : ''}
+${formData.message ? `Сообщение: ${formData.message}` : ''}
 
 Готов(а) обсудить детали моего горнолыжного тура в Италию!`
 
-    const whatsappUrl = `https://wa.me/79627264633?text=${encodeURIComponent(whatsappMessage)}`
+    // Используем итальянский номер телефона
+    const whatsappUrl = `https://wa.me/393311535788?text=${encodeURIComponent(whatsappMessage)}`
     window.open(whatsappUrl, '_blank')
   }
 
@@ -333,12 +334,12 @@ ${formData.message ? `Сообщение:\n${formData.message}` : ''}
                   name="program"
                   value={formData.program}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-white/10 border border-white/20 rounded-lg text-white text-sm sm:text-base focus:outline-none focus:border-premium-gold transition-colors"
+                  className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-white/10 border border-white/20 rounded-lg text-white text-sm sm:text-base focus:outline-none focus:border-premium-gold transition-colors [&>option]:bg-premium-navy [&>option]:text-white"
                 >
-                  <option value="">{t('contact.form.selectProgram')}</option>
-                  <option value={t('programs.experienced.title')}>{t('programs.experienced.title')}</option>
-                  <option value={t('programs.comfortable.title')}>{t('programs.comfortable.title')}</option>
-                  <option value={t('programs.superComfort.title')}>{t('programs.superComfort.title')}</option>
+                  <option value="" className="bg-premium-navy text-white">{t('contact.form.selectProgram')}</option>
+                  <option value={t('programs.experienced.title')} className="bg-premium-navy text-white">{t('programs.experienced.title')}</option>
+                  <option value={t('programs.comfortable.title')} className="bg-premium-navy text-white">{t('programs.comfortable.title')}</option>
+                  <option value={t('programs.superComfort.title')} className="bg-premium-navy text-white">{t('programs.superComfort.title')}</option>
                 </select>
               </div>
               <div>
@@ -377,7 +378,7 @@ ${formData.message ? `Сообщение:\n${formData.message}` : ''}
               </h3>
               <div className="space-y-3 sm:space-y-4">
                 <motion.a
-                  href="https://wa.me/79627264633"
+                  href="https://wa.me/393311535788"
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.05 }}
@@ -393,7 +394,7 @@ ${formData.message ? `Сообщение:\n${formData.message}` : ''}
                   <span className="text-white font-semibold text-sm sm:text-base">WhatsApp</span>
                 </motion.a>
                 <motion.a
-                  href="tel:+79627264633"
+                  href="tel:+393311535788"
                   whileHover={{ scale: 1.05 }}
                   className="flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 bg-white/10 rounded-lg hover:bg-white/20 transition-colors"
                 >
@@ -410,7 +411,7 @@ ${formData.message ? `Сообщение:\n${formData.message}` : ''}
                       d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                     />
                   </svg>
-                  <span className="text-white font-semibold text-sm sm:text-base">+7 (962) 726-46-33</span>
+                  <span className="text-white font-semibold text-sm sm:text-base">+39 331 153 5788</span>
                 </motion.a>
                 <motion.a
                   href="mailto:dmitryiz975@gmail.com"
