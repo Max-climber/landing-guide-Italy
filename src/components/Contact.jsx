@@ -178,7 +178,7 @@ const Contact = () => {
       return
     }
     
-    // Формируем сообщение для WhatsApp (минимальное, чтобы можно было редактировать)
+    // Формируем сообщение для WhatsApp
     const whatsappMessage = `Здравствуйте! Меня зовут ${formData.name}.
 
 Email: ${formData.email}
@@ -189,8 +189,11 @@ ${formData.message ? `Сообщение: ${formData.message}` : ''}
 Готов(а) обсудить детали моего горнолыжного тура в Италию!`
 
     // Используем итальянский номер телефона
+    // На Windows WhatsApp может открываться без возможности редактирования,
+    // поэтому используем стандартный формат с encodeURIComponent
     const whatsappUrl = `https://wa.me/393311535788?text=${encodeURIComponent(whatsappMessage)}`
-    window.open(whatsappUrl, '_blank')
+    // Открываем в новом окне
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer')
   }
 
   const handleChange = (e) => {
