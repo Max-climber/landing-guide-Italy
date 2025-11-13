@@ -244,7 +244,7 @@ const Conditions = () => {
                             animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
                             transition={{ duration: 0.3 }}
-                            className="space-y-3"
+                            className="space-y-3 lg:flex-1"
                           >
                             {/* Условия для каждого типа */}
                             {condition.key === 'planning' && (
@@ -529,7 +529,7 @@ const Conditions = () => {
                             animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
                             transition={{ duration: 0.3 }}
-                            className="space-y-3"
+                            className="space-y-3 lg:flex-1"
                           >
                             {/* Условия для каждого типа */}
                             {condition.key === 'planning' && (
