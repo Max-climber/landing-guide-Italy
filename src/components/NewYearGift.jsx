@@ -1,9 +1,7 @@
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
 
 const NewYearGift = ({ onClick }) => {
-  const { t } = useTranslation()
   const [isVisible, setIsVisible] = useState(false)
 
   // Появление через 5 секунд
@@ -19,7 +17,7 @@ const NewYearGift = ({ onClick }) => {
 
   return (
     <motion.div
-      className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-50 cursor-pointer"
+      className="fixed bottom-20 right-20 sm:bottom-24 sm:right-24 z-50 cursor-pointer"
       initial={{ opacity: 0, scale: 0 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
@@ -58,7 +56,7 @@ const NewYearGift = ({ onClick }) => {
         className="relative"
       >
         {/* Елочка/Подарок */}
-        <div className="relative w-16 h-16 sm:w-20 sm:h-20">
+        <div className="relative w-20 h-20 sm:w-28 sm:h-28">
           {/* Елочка SVG */}
           <svg
             viewBox="0 0 100 100"
@@ -176,24 +174,6 @@ const NewYearGift = ({ onClick }) => {
             }}
           />
         </div>
-      </motion.div>
-
-      {/* Текст "Нажми!" */}
-      <motion.div
-        className="absolute -top-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap"
-        animate={{
-          y: [0, -5, 0],
-          opacity: [0.7, 1, 0.7],
-        }}
-        transition={{
-          duration: 1.5,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-      >
-        <span className="text-xs sm:text-sm font-bold text-premium-gold bg-premium-navy/90 px-2 py-1 rounded-full shadow-lg">
-          🎁 {t('newYear.clickMe')}
-        </span>
       </motion.div>
     </motion.div>
   )
