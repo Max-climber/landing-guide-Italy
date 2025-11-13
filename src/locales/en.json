@@ -63,7 +63,8 @@
       },
       "pricing": {
         "consultation": "Discussion of trip plans, ticket selection, ski resort selection, etc. - free",
-        "transfer": "Airport transfer:",
+        "transfer": "Airport transfer",
+        "transferStart": "start of trip",
         "workingDays": "7:00 AM to 9:00 PM on weekdays",
         "otherTime": "Other times",
         "price1": "€0.7/km + toll road costs",
@@ -85,7 +86,8 @@
       },
       "pricing": {
         "consultation": "Discussion of trip plans, ticket selection, ski resort selection, etc. - free",
-        "transfer": "Airport transfer:",
+        "transfer": "Airport transfer",
+        "transferStart": "start of trip",
         "workingDays": "7:00 AM to 9:00 PM on weekdays",
         "otherTime": "Other times",
         "price1": "€0.7/km + toll road costs",
