@@ -110,11 +110,10 @@ const NewYearModal = ({ isOpen, onClose }) => {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0 }}
                     transition={{ duration: 0.3 }}
-                    onClick={canClose ? onClose : undefined}
-                    disabled={!canClose}
-                    className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center bg-premium-gold/20 hover:bg-premium-gold/30 rounded-full transition-colors group disabled:opacity-50 disabled:cursor-not-allowed"
-                    whileHover={canClose ? { scale: 1.1, rotate: 90 } : {}}
-                    whileTap={canClose ? { scale: 0.9 } : {}}
+                    onClick={onClose}
+                    className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center bg-premium-gold/20 hover:bg-premium-gold/30 rounded-full transition-colors group"
+                    whileHover={{ scale: 1.1, rotate: 90 }}
+                    whileTap={{ scale: 0.9 }}
                   >
                     <svg
                       className="w-6 h-6 text-premium-gold group-hover:text-white transition-colors"
