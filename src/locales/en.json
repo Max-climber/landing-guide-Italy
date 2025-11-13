@@ -304,6 +304,13 @@
     "email": "Email:",
     "phone": "Phone:",
     "rights": "All rights reserved."
+  },
+  "newYear": {
+    "title": "New Year Discount!",
+    "description": "Book services before mid-December and get a special discount on all programs!",
+    "deadline": "Valid until December 15",
+    "cta": "Submit Request",
+    "clickMe": "Click!"
   }
 }
 
