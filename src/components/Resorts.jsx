@@ -55,18 +55,18 @@ const Resorts = () => {
     },
     {
       id: 3,
-      ...getResortData('sanktMoritz'),
-      image:
-        'https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-      url: 'https://www.engadin.ch/de',
-    },
-    {
-      id: 4,
       ...getResortData('bivio'),
       image:
         'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
       isFeatured: true,
       url: 'https://www.schneesportbivio.ch/',
+    },
+    {
+      id: 4,
+      ...getResortData('sanktMoritz'),
+      image:
+        'https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      url: 'https://www.engadin.ch/de',
     },
     {
       id: 5,
