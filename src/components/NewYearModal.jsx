@@ -66,7 +66,7 @@ const NewYearModal = ({ isOpen, onClose }) => {
           >
             <div className="relative bg-gradient-to-br from-white via-premium-lightGold/20 to-white rounded-3xl shadow-2xl max-w-md w-full pointer-events-auto overflow-hidden border-2 border-premium-gold/30">
               {/* Декоративные элементы */}
-              <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+              <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
                 {/* Сияющие частицы */}
                 {[...Array(20)].map((_, i) => (
                   <motion.div
@@ -103,34 +103,36 @@ const NewYearModal = ({ isOpen, onClose }) => {
               </div>
 
               {/* Крестик для закрытия */}
-              <AnimatePresence>
-                {showCloseButton && (
-                  <motion.button
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0 }}
-                    transition={{ duration: 0.3 }}
-                    onClick={onClose}
-                    className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center bg-premium-gold/20 hover:bg-premium-gold/30 rounded-full transition-colors group"
-                    whileHover={{ scale: 1.1, rotate: 90 }}
-                    whileTap={{ scale: 0.9 }}
+              {showCloseButton && (
+                <motion.button
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0 }}
+                  transition={{ duration: 0.3 }}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    onClose()
+                  }}
+                  className="absolute top-4 right-4 z-50 w-10 h-10 flex items-center justify-center bg-premium-gold/20 hover:bg-premium-gold/30 rounded-full transition-colors group cursor-pointer"
+                  whileHover={{ scale: 1.1, rotate: 90 }}
+                  whileTap={{ scale: 0.9 }}
+                  style={{ pointerEvents: 'auto' }}
+                >
+                  <svg
+                    className="w-6 h-6 text-premium-gold group-hover:text-white transition-colors pointer-events-none"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
                   >
-                    <svg
-                      className="w-6 h-6 text-premium-gold group-hover:text-white transition-colors"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </motion.button>
-                )}
-              </AnimatePresence>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </motion.button>
+              )}
 
               {/* Контент */}
               <div className="relative z-10 p-6 sm:p-8">
