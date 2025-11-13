@@ -118,14 +118,14 @@ const Conditions = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:max-w-5xl lg:mx-auto">
           {/* Первый ряд - 3 карточки по центру */}
-          <div className="lg:col-span-3 lg:flex lg:justify-center lg:gap-6 lg:mb-0">
+          <div className="lg:col-span-3 lg:flex lg:justify-center lg:gap-6 lg:mb-6">
             {conditions.slice(0, 3).map((condition, index) => (
-              <div key={condition.key} className="lg:w-1/3">
+              <div key={condition.key} className="lg:w-1/3 lg:flex lg:flex-col">
                     <motion.div
                       initial={{ opacity: 0, y: 50 }}
                       animate={inView ? { opacity: 1, y: 0 } : {}}
                       transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className={`relative bg-gradient-to-br ${condition.gradient} backdrop-blur-md rounded-2xl p-6 sm:p-8 border-2 ${condition.borderColor} hover:border-premium-gold transition-all duration-300 hover:shadow-2xl hover:scale-105 group`}
+                      className={`relative bg-gradient-to-br ${condition.gradient} backdrop-blur-md rounded-2xl p-6 sm:p-8 border-2 ${condition.borderColor} hover:border-premium-gold transition-all duration-300 hover:shadow-2xl hover:scale-105 group lg:h-full lg:flex lg:flex-col`}
                     >
                       {/* Shine Effect */}
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
@@ -405,12 +405,12 @@ const Conditions = () => {
           {/* Второй ряд - 2 карточки по центру */}
           <div className="lg:col-span-3 lg:flex lg:justify-center lg:gap-6 lg:mt-0">
             {conditions.slice(3, 5).map((condition, index) => (
-              <div key={condition.key} className="lg:w-1/3">
+              <div key={condition.key} className="lg:w-1/3 lg:flex lg:flex-col">
                     <motion.div
                       initial={{ opacity: 0, y: 50 }}
                       animate={inView ? { opacity: 1, y: 0 } : {}}
                       transition={{ duration: 0.5, delay: (index + 3) * 0.1 }}
-                      className={`relative bg-gradient-to-br ${condition.gradient} backdrop-blur-md rounded-2xl p-6 sm:p-8 border-2 ${condition.borderColor} hover:border-premium-gold transition-all duration-300 hover:shadow-2xl hover:scale-105 group`}
+                      className={`relative bg-gradient-to-br ${condition.gradient} backdrop-blur-md rounded-2xl p-6 sm:p-8 border-2 ${condition.borderColor} hover:border-premium-gold transition-all duration-300 hover:shadow-2xl hover:scale-105 group lg:h-full lg:flex lg:flex-col`}
                     >
                       {/* Shine Effect */}
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />

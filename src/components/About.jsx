@@ -79,20 +79,50 @@ const About = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-8 sm:mt-12 md:mt-16 p-4 sm:p-6 md:p-8 bg-premium-navy rounded-2xl text-white"
+          className="mt-8 sm:mt-12 md:mt-16 relative overflow-hidden"
         >
-          <h3 className="text-xl sm:text-2xl md:text-3xl font-elegant font-bold mb-4 sm:mb-6 text-center">
-            {t('about.whyUs')}
-          </h3>
-          <p className="text-base sm:text-lg leading-relaxed text-center max-w-4xl mx-auto px-4">
-            {t('about.whyUsText1')}
-          </p>
-          <p className="text-base sm:text-lg leading-relaxed text-center max-w-4xl mx-auto mt-4 sm:mt-6 px-4">
-            {t('about.whyUsText2')}
-          </p>
-          <p className="text-base sm:text-lg leading-relaxed text-center max-w-4xl mx-auto mt-4 sm:mt-6 text-premium-gold font-semibold px-4">
-            {t('about.whyUsText3')}
-          </p>
+          {/* Декоративные элементы */}
+          <div className="absolute top-0 left-0 w-32 h-32 bg-premium-gold/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute bottom-0 right-0 w-40 h-40 bg-premium-gold/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+          
+          <div className="relative bg-gradient-to-br from-premium-navy via-premium-navy/95 to-premium-navy rounded-2xl p-6 sm:p-8 md:p-12 text-white border-2 border-premium-gold/20 shadow-2xl">
+            {/* Снежинки декоративные */}
+            <div className="absolute top-4 right-4 text-premium-gold/20 text-2xl">❄</div>
+            <div className="absolute bottom-4 left-4 text-premium-gold/20 text-xl">❄</div>
+            <div className="absolute top-1/2 right-8 text-premium-gold/10 text-xl">❄</div>
+            
+            <motion.h3 
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.7 }}
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-elegant font-bold mb-6 sm:mb-8 text-center text-premium-gold"
+            >
+              {t('about.whyUs')}
+            </motion.h3>
+            
+            <div className="w-24 h-1 bg-gradient-to-r from-transparent via-premium-gold to-transparent mx-auto mb-6 sm:mb-8" />
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="space-y-4 sm:space-y-6 max-w-4xl mx-auto"
+            >
+              <p className="text-base sm:text-lg md:text-xl leading-relaxed text-white/95 px-4">
+                {t('about.whyUsText1')}
+              </p>
+              
+              <p className="text-base sm:text-lg md:text-xl leading-relaxed text-white/90 px-4">
+                {t('about.whyUsText2')}
+              </p>
+              
+              <div className="pt-4 sm:pt-6 border-t border-premium-gold/30 mt-6 sm:mt-8">
+                <p className="text-lg sm:text-xl md:text-2xl leading-relaxed text-center text-premium-gold font-bold px-4">
+                  {t('about.whyUsText3')}
+                </p>
+              </div>
+            </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>
