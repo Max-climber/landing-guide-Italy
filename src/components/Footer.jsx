@@ -73,6 +73,11 @@ const Footer = () => {
         </div>
         <div className="border-t border-white/20 pt-6 sm:pt-8 text-center text-white/60">
           <p className="text-xs sm:text-sm">&copy; {currentYear} La Vacanza Bianca. {t('footer.rights')}</p>
+          <p className="text-xs mt-2 opacity-50">
+            <a target="_blank" href="https://icons8.com/icon/kLORTzuNOM2d/wrapped-gift" className="hover:text-premium-gold transition-colors">
+              Wrapped Gift
+            </a> icon by <a target="_blank" href="https://icons8.com" className="hover:text-premium-gold transition-colors">Icons8</a>
+          </p>
         </div>
       </div>
     </footer>

@@ -135,152 +135,37 @@ const NewYearModal = ({ isOpen, onClose }) => {
 
               {/* Контент */}
               <div className="relative z-10 p-6 sm:p-8">
-                {/* Иконка лыжника */}
+                {/* Иконка подарочной коробки от Icons8 */}
                 <motion.div
                   className="flex justify-center mb-6"
-                  animate={{
-                    y: [0, -10, 0],
-                    rotate: [0, 3, -3, 0],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
+                  style={{ perspective: '1000px' }}
                 >
-                  <div className="w-24 h-24 relative">
-                    <svg
-                      viewBox="0 0 100 120"
-                      className="w-full h-full"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      {/* Лыжи */}
-                      <path
-                        d="M20 100 L25 95 L75 95 L80 100 Z"
-                        fill="url(#modalSkiGradient)"
-                      />
-                      <path
-                        d="M25 95 L30 90 L35 95 L30 100 Z"
-                        fill="#FFFFFF"
-                      />
-                      <path
-                        d="M65 95 L70 90 L75 95 L70 100 Z"
-                        fill="#FFFFFF"
-                      />
-                      
-                      {/* Ботинки */}
-                      <ellipse cx="30" cy="95" rx="8" ry="5" fill="url(#modalBootGradient)" />
-                      <ellipse cx="70" cy="95" rx="8" ry="5" fill="url(#modalBootGradient)" />
-                      
-                      {/* Ноги */}
-                      <rect x="28" y="75" width="4" height="20" fill="url(#modalLegGradient)" />
-                      <rect x="68" y="75" width="4" height="20" fill="url(#modalLegGradient)" />
-                      
-                      {/* Тело/куртка */}
-                      <path
-                        d="M35 50 L65 50 L68 75 L32 75 Z"
-                        fill="url(#modalJacketGradient)"
-                      />
-                      <path
-                        d="M35 50 L30 45 L28 60 L32 65 Z"
-                        fill="url(#modalJacketGradient)"
-                      />
-                      <path
-                        d="M65 50 L70 45 L72 60 L68 65 Z"
-                        fill="url(#modalJacketGradient)"
-                      />
-                      
-                      {/* Левая рука с палкой */}
-                      <g>
-                        <line
-                          x1="30"
-                          y1="45"
-                          x2="20"
-                          y2="70"
-                          stroke="url(#modalPoleGradient)"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                        />
-                        <circle cx="20" cy="70" r="3" fill="#D4AF37" />
-                      </g>
-                      
-                      {/* Правая рука с палкой */}
-                      <g>
-                        <line
-                          x1="70"
-                          y1="45"
-                          x2="80"
-                          y2="70"
-                          stroke="url(#modalPoleGradient)"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                        />
-                        <circle cx="80" cy="70" r="3" fill="#D4AF37" />
-                      </g>
-                      
-                      {/* Голова */}
-                      <circle cx="50" cy="35" r="12" fill="url(#modalHeadGradient)" />
-                      
-                      {/* Шлем/шапка */}
-                      <path
-                        d="M38 30 Q50 25 62 30 Q50 20 38 30"
-                        fill="url(#modalHelmetGradient)"
-                      />
-                      
-                      {/* Помпон на шапке */}
-                      <motion.circle
-                        cx="50"
-                        cy="28"
-                        r="4"
-                        fill="#D4AF37"
-                        animate={{
-                          scale: [1, 1.3, 1],
-                          opacity: [0.8, 1, 0.8],
-                        }}
-                        transition={{
-                          duration: 1.5,
-                          repeat: Infinity,
-                          ease: 'easeInOut',
-                        }}
-                      />
-                      
-                      <defs>
-                        <linearGradient id="modalSkiGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                          <stop offset="0%" stopColor="#1E3A5F" />
-                          <stop offset="50%" stopColor="#0A1929" />
-                          <stop offset="100%" stopColor="#1E3A5F" />
-                        </linearGradient>
-                        <linearGradient id="modalBootGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stopColor="#2C3E50" />
-                          <stop offset="50%" stopColor="#0A1929" />
-                          <stop offset="100%" stopColor="#2C3E50" />
-                        </linearGradient>
-                        <linearGradient id="modalLegGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                          <stop offset="0%" stopColor="#1E3A5F" />
-                          <stop offset="100%" stopColor="#0A1929" />
-                        </linearGradient>
-                        <linearGradient id="modalJacketGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stopColor="#D4AF37" />
-                          <stop offset="50%" stopColor="#F4E4BC" />
-                          <stop offset="100%" stopColor="#D4AF37" />
-                        </linearGradient>
-                        <linearGradient id="modalPoleGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                          <stop offset="0%" stopColor="#D4AF37" />
-                          <stop offset="100%" stopColor="#B8941F" />
-                        </linearGradient>
-                        <radialGradient id="modalHeadGradient" cx="50%" cy="50%">
-                          <stop offset="0%" stopColor="#F4E4BC" />
-                          <stop offset="100%" stopColor="#D4AF37" />
-                        </radialGradient>
-                        <linearGradient id="modalHelmetGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stopColor="#0A1929" />
-                          <stop offset="50%" stopColor="#1E3A5F" />
-                          <stop offset="100%" stopColor="#0A1929" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                  </div>
+                  <motion.div
+                    style={{
+                      transformStyle: 'preserve-3d',
+                    }}
+                    animate={{
+                      rotateX: [0, 8, -8, 5, -5, 0],
+                      rotateY: [0, -8, 8, -5, 5, 0],
+                      rotateZ: [0, 3, -3, 2, -2, 0],
+                      scale: [1, 1.08, 0.95, 1.05, 0.98, 1],
+                      y: [0, -10, 10, -6, 6, 0],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                    }}
+                  >
+                    <img
+                      src="https://img.icons8.com/emoji/48/wrapped-gift.png"
+                      alt="wrapped-gift"
+                      className="w-24 h-24"
+                      style={{
+                        filter: 'drop-shadow(0 0 15px rgba(212, 175, 55, 0.7))',
+                      }}
+                    />
+                  </motion.div>
                 </motion.div>
 
                 {/* Заголовок */}
