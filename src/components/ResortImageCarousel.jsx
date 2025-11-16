@@ -185,12 +185,6 @@ const ResortImageCarousel = ({ images, resortName, isMobile, onImageClick }) => 
         </div>
       )}
 
-      {/* Счетчик изображений (опционально) */}
-      {images.length > 1 && (
-        <div className="absolute top-2 sm:top-4 right-2 sm:right-4 z-20 bg-black/50 text-white text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-full">
-          {currentIndex + 1} / {images.length}
-        </div>
-      )}
     </div>
   )
 }
