@@ -2,6 +2,8 @@ import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import ResortImageCarousel from './ResortImageCarousel'
+import ImageModal from './ImageModal'
 
 const Resorts = () => {
   const { t } = useTranslation()
@@ -12,6 +14,7 @@ const Resorts = () => {
 
   const [selectedResort, setSelectedResort] = useState(null)
   const [isMobile, setIsMobile] = useState(false)
+  const [modalImage, setModalImage] = useState({ isOpen: false, images: [], index: 0, resortName: '' })
 
   useEffect(() => {
     const checkMobile = () => {
@@ -35,12 +38,54 @@ const Resorts = () => {
     highlights: t(`resorts.resorts.${key}.highlights`, { returnObjects: true }),
   })
 
+  /**
+   * Получает массив изображений для курорта
+   * Ищет изображения в папке public/images/resorts/[resort-folder]/
+   * Формат имен: 1.jpg, 2.jpg, 3.jpg и т.д.
+   * Если изображения не найдены, возвращает fallback (старое изображение из resort.image)
+   * 
+   * @param {string} resortFolder - Название папки курорта (например, 'piani-di-bobbio')
+   * @param {string} fallbackImage - Fallback изображение (старое изображение курорта)
+   * @param {number} maxImages - Максимальное количество изображений для поиска
+   * @returns {Array} Массив путей к изображениям
+   */
+  const getResortImages = (resortFolder, fallbackImage = null, maxImages = 8) => {
+    const images = []
+    for (let i = 1; i <= maxImages; i++) {
+      // В Vite изображения из public доступны через корневой путь
+      const imagePath = `/images/resorts/${resortFolder}/${i}.jpg`
+      images.push(imagePath)
+    }
+    
+    // Если есть fallback и нет изображений, используем его
+    // В реальности мы всегда возвращаем массив путей, браузер сам проверит существование
+    // Но можно добавить fallback как первый элемент, если нужно
+    return images.length > 0 ? images : (fallbackImage ? [fallbackImage] : [])
+  }
+
+  /**
+   * Обработчик клика на изображение (для мобилки)
+   * Открывает модальное окно с изображением
+   */
+  const handleImageClick = (resortId, resortName, resortFolder, fallbackImage) => {
+    if (isMobile) {
+      const images = getResortImages(resortFolder, fallbackImage)
+      setModalImage({
+        isOpen: true,
+        images: images,
+        index: 0,
+        resortName: resortName,
+      })
+    }
+  }
+
   const resorts = [
     {
       id: 1,
       ...getResortData('pianiDiBobbio'),
       image:
         'https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      folder: 'piani-di-bobbio', // Название папки для изображений
       discount: 25,
       isFeatured: true,
       url: 'https://pianidibobbio.com/it/',
@@ -50,6 +95,7 @@ const Resorts = () => {
       ...getResortData('madesimo'),
       image:
         'https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      folder: 'madesimo',
       isFeatured: true,
       url: 'https://www.skiareavalchiavenna.it/',
     },
@@ -58,6 +104,7 @@ const Resorts = () => {
       ...getResortData('sanktMoritz'),
       image:
         'https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      folder: 'sankt-moritz',
       url: 'https://www.engadin.ch/de',
     },
     {
@@ -65,6 +112,7 @@ const Resorts = () => {
       ...getResortData('bivio'),
       image:
         'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      folder: 'bivio',
       isFeatured: true,
       url: 'https://www.schneesportbivio.ch/',
     },
@@ -73,6 +121,7 @@ const Resorts = () => {
       ...getResortData('valmalenco'),
       image:
         'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      folder: 'valmalenco',
       url: 'https://www.sondrioevalmalenco.it/it/ski-area-valmalenco',
     },
     {
@@ -80,6 +129,7 @@ const Resorts = () => {
       ...getResortData('aprica'),
       image:
         'https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      folder: 'aprica',
       url: 'https://www.apricaonline.com/it/montagna-inverno/sci',
     },
     {
@@ -87,6 +137,7 @@ const Resorts = () => {
       ...getResortData('livigno'),
       image:
         'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      folder: 'livigno',
       url: 'https://www.livigno.eu/sciare-livigno',
     },
   ]
@@ -145,13 +196,14 @@ const Resorts = () => {
               {isMobile ? (
                 <>
                   <div className="relative h-32 overflow-hidden">
-                    <img
-                      src={resort.image}
-                      alt={resort.name}
-                      className="w-full h-full object-cover"
+                    <ResortImageCarousel
+                      images={getResortImages(resort.folder, resort.image)}
+                      resortName={resort.name}
+                      isMobile={isMobile}
+                      onImageClick={() => handleImageClick(resort.id, resort.name, resort.folder, resort.image)}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-premium-navy/90 via-premium-navy/50 to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-3">
+                    <div className="absolute inset-0 bg-gradient-to-t from-premium-navy/90 via-premium-navy/50 to-transparent pointer-events-none" />
+                    <div className="absolute bottom-0 left-0 right-0 p-3 pointer-events-none">
                       <h3 className="text-lg font-elegant font-bold text-white mb-0.5">
                         {resort.name}
                       </h3>
@@ -261,13 +313,13 @@ const Resorts = () => {
               ) : (
                 <>
                   <div className="relative h-64 sm:h-72 overflow-hidden">
-                    <img
-                      src={resort.image}
-                      alt={resort.name}
-                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                    <ResortImageCarousel
+                      images={getResortImages(resort.folder, resort.image)}
+                      resortName={resort.name}
+                      isMobile={isMobile}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-premium-navy/90 via-premium-navy/50 to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
+                    <div className="absolute inset-0 bg-gradient-to-t from-premium-navy/90 via-premium-navy/50 to-transparent pointer-events-none" />
+                    <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 pointer-events-none">
                       <h3 className="text-2xl sm:text-3xl font-elegant font-bold text-white mb-1">
                         {resort.name}
                       </h3>
@@ -391,6 +443,15 @@ const Resorts = () => {
           ))}
         </div>
       </div>
+
+      {/* Модальное окно для просмотра изображений на мобилке */}
+      <ImageModal
+        isOpen={modalImage.isOpen}
+        onClose={() => setModalImage({ ...modalImage, isOpen: false })}
+        images={modalImage.images}
+        initialIndex={modalImage.index}
+        resortName={modalImage.resortName}
+      />
     </section>
   )
 }
