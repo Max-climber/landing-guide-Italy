@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion'
  * @param {Array} images - Массив путей к изображениям
  * @param {string} resortName - Название курорта (для alt текста)
  * @param {boolean} isMobile - Флаг мобильного устройства
- * @param {Function} onImageClick - Callback при клике на изображение (для мобилки)
+ * @param {Function} onImageClick - Callback при клике на изображение (работает на всех устройствах)
  */
 const ResortImageCarousel = ({ images, resortName, isMobile, onImageClick }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -78,9 +78,8 @@ const ResortImageCarousel = ({ images, resortName, isMobile, onImageClick }) => 
         <img
           src={images[0]}
           alt={resortName}
-          className="w-full h-full object-cover"
-          onClick={isMobile ? () => onImageClick?.(0) : undefined}
-          style={{ cursor: isMobile ? 'pointer' : 'default' }}
+          className="w-full h-full object-cover cursor-pointer"
+          onClick={() => onImageClick?.(0)}
         />
       </div>
     )
@@ -107,9 +106,8 @@ const ResortImageCarousel = ({ images, resortName, isMobile, onImageClick }) => 
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -100 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="w-full h-full object-cover"
-            onClick={isMobile ? () => onImageClick?.(currentIndex) : undefined}
-            style={{ cursor: isMobile ? 'pointer' : 'default' }}
+            className="w-full h-full object-cover cursor-pointer"
+            onClick={() => onImageClick?.(currentIndex)}
           />
         </AnimatePresence>
       </div>

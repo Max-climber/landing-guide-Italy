@@ -56,16 +56,16 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-3 sm:mb-4 text-base sm:text-lg">{t('footer.contacts')}</h4>
             <ul className="space-y-2 text-sm sm:text-base text-white/80">
-              <li>{t('footer.email')} dmitryiz975@gmail.com</li>
-              <li>{t('footer.phone')} +39 331 153 5788</li>
+              <li>{t('footer.email')} artarxi@gmail.com</li>
+              <li>{t('footer.phone')} +39 333 143 0647</li>
               <li className="flex space-x-4 mt-4">
                 <a
-                  href="https://wa.me/393311535788"
+                  href="https://wa.me/393331430647"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-premium-gold transition-colors"
                 >
-                  WhatsApp
+                  WhatsApp (Танин)
                 </a>
               </li>
             </ul>

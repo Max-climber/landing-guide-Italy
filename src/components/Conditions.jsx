@@ -9,7 +9,7 @@ const Conditions = () => {
     triggerOnce: true,
     threshold: 0.1,
   })
-  const [selectedCondition, setSelectedCondition] = useState(null)
+  const [openConditions, setOpenConditions] = useState([]) // Массив открытых условий для FAQ-режима на мобилке
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
@@ -210,21 +210,27 @@ const Conditions = () => {
                           </h3>
                         </div>
 
-                        {/* Mobile Toggle Button */}
+                        {/* Mobile Toggle Button - только стрелка, без текста */}
                         {isMobile && (
                           <motion.button
-                            onClick={() => setSelectedCondition(selectedCondition === condition.key ? null : condition.key)}
+                            onClick={() => {
+                              // FAQ-режим: добавляем/удаляем условие из массива открытых
+                              setOpenConditions(prev => 
+                                prev.includes(condition.key)
+                                  ? prev.filter(key => key !== condition.key)
+                                  : [...prev, condition.key]
+                              )
+                            }}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-white/10 text-white rounded-lg font-semibold text-sm hover:bg-white/20 transition-colors mt-4"
+                            className="w-full flex items-center justify-center px-4 py-3 bg-white/10 text-white rounded-lg hover:bg-white/20 transition-colors mt-4"
                           >
-                            <span>{selectedCondition === condition.key ? t('contact.hideDetails') : t('contact.showDetails')}</span>
                             <motion.svg
-                              className="w-5 h-5"
+                              className="w-6 h-6"
                               fill="none"
                               stroke="currentColor"
                               viewBox="0 0 24 24"
-                              animate={{ rotate: selectedCondition === condition.key ? 180 : 0 }}
+                              animate={{ rotate: openConditions.includes(condition.key) ? 180 : 0 }}
                               transition={{ duration: 0.3 }}
                             >
                               <path
@@ -238,9 +244,9 @@ const Conditions = () => {
                         )}
 
                         {/* Content - показываем всегда на десктопе, на мобилке только если открыта */}
-                        {(selectedCondition === condition.key || !isMobile) && (
+                        {(openConditions.includes(condition.key) || !isMobile) && (
                           <motion.div
-                            initial={isMobile ? { opacity: 0, height: 0 } : { opacity: 1, height: 'auto' }}
+                            initial={isMobile && !openConditions.includes(condition.key) ? { opacity: 0, height: 0 } : { opacity: 1, height: 'auto' }}
                             animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
                             transition={{ duration: 0.3 }}
@@ -495,21 +501,27 @@ const Conditions = () => {
                           </h3>
                         </div>
 
-                        {/* Mobile Toggle Button */}
+                        {/* Mobile Toggle Button - только стрелка, без текста */}
                         {isMobile && (
                           <motion.button
-                            onClick={() => setSelectedCondition(selectedCondition === condition.key ? null : condition.key)}
+                            onClick={() => {
+                              // FAQ-режим: добавляем/удаляем условие из массива открытых
+                              setOpenConditions(prev => 
+                                prev.includes(condition.key)
+                                  ? prev.filter(key => key !== condition.key)
+                                  : [...prev, condition.key]
+                              )
+                            }}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-white/10 text-white rounded-lg font-semibold text-sm hover:bg-white/20 transition-colors mt-4"
+                            className="w-full flex items-center justify-center px-4 py-3 bg-white/10 text-white rounded-lg hover:bg-white/20 transition-colors mt-4"
                           >
-                            <span>{selectedCondition === condition.key ? t('contact.hideDetails') : t('contact.showDetails')}</span>
                             <motion.svg
-                              className="w-5 h-5"
+                              className="w-6 h-6"
                               fill="none"
                               stroke="currentColor"
                               viewBox="0 0 24 24"
-                              animate={{ rotate: selectedCondition === condition.key ? 180 : 0 }}
+                              animate={{ rotate: openConditions.includes(condition.key) ? 180 : 0 }}
                               transition={{ duration: 0.3 }}
                             >
                               <path
@@ -523,9 +535,9 @@ const Conditions = () => {
                         )}
 
                         {/* Content - показываем всегда на десктопе, на мобилке только если открыта */}
-                        {(selectedCondition === condition.key || !isMobile) && (
+                        {(openConditions.includes(condition.key) || !isMobile) && (
                           <motion.div
-                            initial={isMobile ? { opacity: 0, height: 0 } : { opacity: 1, height: 'auto' }}
+                            initial={isMobile && !openConditions.includes(condition.key) ? { opacity: 0, height: 0 } : { opacity: 1, height: 'auto' }}
                             animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
                             transition={{ duration: 0.3 }}
