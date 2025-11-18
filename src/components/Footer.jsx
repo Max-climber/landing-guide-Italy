@@ -65,7 +65,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   className="hover:text-premium-gold transition-colors"
                 >
-                  WhatsApp (Танин)
+                  WhatsApp
                 </a>
               </li>
             </ul>
