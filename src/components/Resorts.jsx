@@ -40,27 +40,45 @@ const Resorts = () => {
   })
 
   /**
+   * Получает реальное количество изображений для каждого курорта
+   * @param {string} resortFolder - Название папки курорта
+   * @returns {number} Количество изображений
+   */
+  const getResortImageCount = (resortFolder) => {
+    const imageCounts = {
+      'piani-di-bobbio': 6,
+      'madesimo': 4,
+      'sankt-moritz': 6,
+      'bivio': 3,
+      'valmalenco': 4,
+      'aprica': 6,
+      'livigno': 6, // 1.jpg, 2.webp, 3-6.jpg
+    }
+    return imageCounts[resortFolder] || 0
+  }
+
+  /**
    * Получает массив изображений для курорта
-   * Ищет изображения в папке public/images/resorts/[resort-folder]/
-   * Формат имен: 1.jpg, 2.jpg, 3.jpg и т.д.
-   * Если изображения не найдены, возвращает fallback (старое изображение из resort.image)
+   * Возвращает только реально существующие изображения
    * 
    * @param {string} resortFolder - Название папки курорта (например, 'piani-di-bobbio')
    * @param {string} fallbackImage - Fallback изображение (старое изображение курорта)
-   * @param {number} maxImages - Максимальное количество изображений для поиска
    * @returns {Array} Массив путей к изображениям
    */
-  const getResortImages = (resortFolder, fallbackImage = null, maxImages = 8) => {
+  const getResortImages = (resortFolder, fallbackImage = null) => {
+    const imageCount = getResortImageCount(resortFolder)
     const images = []
-    for (let i = 1; i <= maxImages; i++) {
-      // В Vite изображения из public доступны через корневой путь
-      const imagePath = `/images/resorts/${resortFolder}/${i}.jpg`
-      images.push(imagePath)
+    
+    for (let i = 1; i <= imageCount; i++) {
+      // Для livigno второе изображение - webp
+      if (resortFolder === 'livigno' && i === 2) {
+        images.push(`/images/resorts/${resortFolder}/${i}.webp`)
+      } else {
+        images.push(`/images/resorts/${resortFolder}/${i}.jpg`)
+      }
     }
     
-    // Если есть fallback и нет изображений, используем его
-    // В реальности мы всегда возвращаем массив путей, браузер сам проверит существование
-    // Но можно добавить fallback как первый элемент, если нужно
+    // Если нет изображений, используем fallback
     return images.length > 0 ? images : (fallbackImage ? [fallbackImage] : [])
   }
 
@@ -157,7 +175,6 @@ const Resorts = () => {
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-elegant font-bold text-premium-navy mb-4 sm:mb-6 px-4">
             {t('resorts.title')}
           </h2>
-          <div className="w-24 h-1 bg-premium-gold mx-auto mb-6 sm:mb-8" />
           <p className="text-base sm:text-lg md:text-xl text-premium-darkGray max-w-3xl mx-auto px-4">
             {t('resorts.subtitle')}
           </p>

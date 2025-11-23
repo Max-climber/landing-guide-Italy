@@ -25,7 +25,6 @@ const About = () => {
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-elegant font-bold text-premium-navy mb-4 sm:mb-6 px-4">
             {t('about.title')}
           </h2>
-          <div className="w-24 h-1 bg-premium-gold mx-auto mb-6 sm:mb-8" />
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-center">

@@ -60,33 +60,6 @@ const Conditions = () => {
       ref={ref}
       className="relative section-padding bg-gradient-to-b from-premium-navy via-premium-navy/95 to-premium-navy overflow-hidden"
     >
-      {/* Animated Snowflakes Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {typeof window !== 'undefined' && [...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute text-white/10 text-2xl"
-            initial={{
-              x: typeof window !== 'undefined' ? Math.random() * window.innerWidth : 0,
-              y: -50,
-              opacity: Math.random() * 0.5 + 0.3,
-            }}
-            animate={{
-              y: typeof window !== 'undefined' ? window.innerHeight + 100 : 1000,
-              x: typeof window !== 'undefined' ? Math.random() * window.innerWidth : 0,
-              rotate: 360,
-            }}
-            transition={{
-              duration: Math.random() * 10 + 10,
-              repeat: Infinity,
-              ease: 'linear',
-              delay: Math.random() * 5,
-            }}
-          >
-            ❄
-          </motion.div>
-        ))}
-      </div>
 
       {/* Gradient Orbs */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-premium-gold/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
