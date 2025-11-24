@@ -45,7 +45,7 @@ const Navigation = ({ scrollY }) => {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-3 lg:space-x-4 flex-shrink-0">
+          <div className="hidden md:flex items-center gap-6 lg:gap-8 flex-shrink-0">
             {navItems.map((item) => (
               <button
                 key={item.href}
@@ -55,13 +55,15 @@ const Navigation = ({ scrollY }) => {
                 {item.name}
               </button>
             ))}
-            <LanguageSwitcher />
+            <div className="ml-2">
+              <LanguageSwitcher />
+            </div>
             <motion.a
               href="#contact"
               onClick={() => scrollToSection('#contact')}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-6 py-2 bg-color1 text-color3 rounded-none font-oswald font-semibold uppercase tracking-wider hover:bg-color1/90 transition-colors"
+              className="px-6 py-2 bg-color1 text-color3 rounded-none font-oswald font-semibold uppercase tracking-wider hover:bg-color1/90 transition-colors ml-2"
             >
               {t('nav.connect')}
             </motion.a>
