@@ -235,7 +235,7 @@ const Resorts = () => {
                       href={resort.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-sm text-premium-gold hover:text-premium-navy font-semibold mb-4 transition-colors"
+                      className="inline-flex items-center gap-2 text-sm text-color1 hover:text-premium-navy font-semibold mb-4 transition-colors"
                     >
                       <span>{t('resorts.learnMore')}</span>
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -277,7 +277,7 @@ const Resorts = () => {
 
                   <div className="mb-4 p-3 bg-premium-gold/10 rounded-lg border border-premium-gold/20">
                     <p className="text-sm text-premium-darkGray font-medium">
-                      <span className="text-premium-gold font-semibold">📍 {t('resorts.distance')}</span>{' '}
+                      <span className="text-color1 font-semibold">📍 {t('resorts.distance')}</span>{' '}
                       {resort.airportDistance}
                     </p>
                   </div>
@@ -320,7 +320,7 @@ const Resorts = () => {
                       <ul className="space-y-2">
                         {resort.highlights.map((highlight, idx) => (
                           <li key={idx} className="flex items-start gap-2">
-                            <span className="text-premium-gold text-lg mt-0.5">✓</span>
+                            <span className="text-color1 text-lg mt-0.5">✓</span>
                             <span className="text-sm text-premium-darkGray leading-relaxed">{highlight}</span>
                           </li>
                         ))}
@@ -437,7 +437,7 @@ const Resorts = () => {
                             href={resort.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 text-xs text-premium-gold hover:text-premium-navy font-semibold mb-3 transition-colors"
+                            className="inline-flex items-center gap-2 text-xs text-color1 hover:text-premium-navy font-semibold mb-3 transition-colors"
                           >
                             <span>{t('resorts.learnMore')}</span>
                             <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -477,7 +477,7 @@ const Resorts = () => {
                         </div>
                         <div className="mb-3 p-2 bg-premium-gold/10 rounded-lg border border-premium-gold/20">
                           <p className="text-xs text-premium-darkGray font-medium">
-                            <span className="text-premium-gold font-semibold">📍 {t('resorts.distance')}</span>{' '}
+                            <span className="text-color1 font-semibold">📍 {t('resorts.distance')}</span>{' '}
                             {resort.airportDistance}
                           </p>
                         </div>
@@ -487,7 +487,7 @@ const Resorts = () => {
                         <ul className="space-y-1.5">
                           {resort.highlights.map((highlight, idx) => (
                             <li key={idx} className="flex items-start gap-2">
-                              <span className="text-premium-gold text-sm mt-0.5">✓</span>
+                              <span className="text-color1 text-sm mt-0.5">✓</span>
                               <span className="text-xs text-premium-darkGray leading-relaxed">{highlight}</span>
                             </li>
                           ))}
@@ -525,7 +525,7 @@ const Resorts = () => {
                         href={resort.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-sm sm:text-base text-premium-gold hover:text-premium-navy font-semibold mb-4 sm:mb-6 transition-colors"
+                        className="inline-flex items-center gap-2 text-sm sm:text-base text-color1 hover:text-premium-navy font-semibold mb-4 sm:mb-6 transition-colors"
                       >
                         <span>{t('resorts.learnMore')}</span>
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -567,7 +567,7 @@ const Resorts = () => {
 
                     <div className="mb-4 sm:mb-6 p-2 sm:p-3 bg-premium-gold/10 rounded-lg border border-premium-gold/20">
                       <p className="text-xs sm:text-sm text-premium-darkGray font-medium">
-                        <span className="text-premium-gold font-semibold">📍 {t('resorts.distance')}</span>{' '}
+                        <span className="text-color1 font-semibold">📍 {t('resorts.distance')}</span>{' '}
                         {resort.airportDistance}
                       </p>
                     </div>
@@ -616,7 +616,7 @@ const Resorts = () => {
                               transition={{ delay: idx * 0.1 }}
                               className="flex items-start gap-2 sm:gap-3"
                             >
-                              <span className="text-premium-gold text-lg sm:text-xl mt-0.5">✓</span>
+                              <span className="text-color1 text-lg sm:text-xl mt-0.5">✓</span>
                               <span className="text-sm sm:text-base text-premium-darkGray leading-relaxed">{highlight}</span>
                             </motion.li>
                           ))}

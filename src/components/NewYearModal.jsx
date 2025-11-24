@@ -119,7 +119,7 @@ const NewYearModal = ({ isOpen, onClose }) => {
                   style={{ pointerEvents: 'auto' }}
                 >
                   <svg
-                    className="w-6 h-6 text-premium-gold group-hover:text-white transition-colors pointer-events-none"
+                    className="w-6 h-6 text-color1 group-hover:text-white transition-colors pointer-events-none"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -196,7 +196,7 @@ const NewYearModal = ({ isOpen, onClose }) => {
                         repeat: Infinity,
                         ease: 'easeInOut',
                       }}
-                      className="text-6xl sm:text-7xl font-bold text-premium-gold drop-shadow-lg"
+                      className="text-6xl sm:text-7xl font-bold text-color1 drop-shadow-lg"
                     >
                       15%
                     </motion.div>

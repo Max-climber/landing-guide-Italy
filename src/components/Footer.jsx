@@ -9,7 +9,7 @@ const Footer = () => {
       <div className="container-max px-4 md:px-8 lg:px-16">
         <div className="grid md:grid-cols-3 gap-6 sm:gap-8 mb-6 sm:mb-8">
           <div>
-            <h3 className="text-xl sm:text-2xl font-elegant font-bold text-premium-gold mb-3 sm:mb-4">
+            <h3 className="text-xl sm:text-2xl font-elegant font-bold text-color1 mb-3 sm:mb-4">
               La Vacanza Bianca
             </h3>
             <p className="text-sm sm:text-base text-white/80 mb-3 sm:mb-4">
@@ -22,7 +22,7 @@ const Footer = () => {
               <li>
                 <a
                   href="#about"
-                  className="text-white/80 hover:text-premium-gold transition-colors"
+                  className="text-white/80 hover:text-color1 transition-colors"
                 >
                   {t('nav.about')}
                 </a>
@@ -30,7 +30,7 @@ const Footer = () => {
               <li>
                 <a
                   href="#programs"
-                  className="text-white/80 hover:text-premium-gold transition-colors"
+                  className="text-white/80 hover:text-color1 transition-colors"
                 >
                   {t('nav.programs')}
                 </a>
@@ -38,7 +38,7 @@ const Footer = () => {
               <li>
                 <a
                   href="#resorts"
-                  className="text-white/80 hover:text-premium-gold transition-colors"
+                  className="text-white/80 hover:text-color1 transition-colors"
                 >
                   {t('nav.resorts')}
                 </a>
@@ -46,7 +46,7 @@ const Footer = () => {
               <li>
                 <a
                   href="#contact"
-                  className="text-white/80 hover:text-premium-gold transition-colors"
+                  className="text-white/80 hover:text-color1 transition-colors"
                 >
                   {t('nav.contact')}
                 </a>
@@ -63,7 +63,7 @@ const Footer = () => {
                   href="https://wa.me/393331430647"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-premium-gold transition-colors"
+                  className="hover:text-color1 transition-colors"
                 >
                   WhatsApp
                 </a>
@@ -74,9 +74,9 @@ const Footer = () => {
         <div className="border-t border-white/20 pt-6 sm:pt-8 text-center text-white/60">
           <p className="text-xs sm:text-sm">&copy; {currentYear} La Vacanza Bianca. {t('footer.rights')}</p>
           <p className="text-xs mt-2 opacity-50">
-            <a target="_blank" href="https://icons8.com/icon/kLORTzuNOM2d/wrapped-gift" className="hover:text-premium-gold transition-colors">
+            <a target="_blank" href="https://icons8.com/icon/kLORTzuNOM2d/wrapped-gift" className="hover:text-color1 transition-colors">
               Wrapped Gift
-            </a> icon by <a target="_blank" href="https://icons8.com" className="hover:text-premium-gold transition-colors">Icons8</a>
+            </a> icon by <a target="_blank" href="https://icons8.com" className="hover:text-color1 transition-colors">Icons8</a>
           </p>
         </div>
       </div>

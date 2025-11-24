@@ -362,7 +362,7 @@ ${formData.message ? `Сообщение: ${formData.message}` : ''}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="bg-white/10 backdrop-blur-md rounded-2xl p-4 sm:p-6 md:p-8"
           >
-            <h3 className="text-xl sm:text-2xl font-elegant font-bold mb-4 sm:mb-6 text-premium-gold">
+            <h3 className="text-xl sm:text-2xl font-elegant font-bold mb-4 sm:mb-6 text-color1">
               {t('contact.sendRequest')}
             </h3>
             <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
@@ -475,7 +475,7 @@ ${formData.message ? `Сообщение: ${formData.message}` : ''}
                     <option value={t('programs.superComfort.title')} className="bg-premium-navy text-white">{t('programs.superComfort.title')}</option>
                   </select>
                   <div className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                    <svg className="w-4 h-4 sm:w-5 sm:h-5 text-premium-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 sm:w-5 sm:h-5 text-color1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </div>
@@ -512,7 +512,7 @@ ${formData.message ? `Сообщение: ${formData.message}` : ''}
           >
             {/* Quick Contact */}
             <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 sm:p-6 md:p-8">
-              <h3 className="text-xl sm:text-2xl font-elegant font-bold mb-4 sm:mb-6 text-premium-gold">
+              <h3 className="text-xl sm:text-2xl font-elegant font-bold mb-4 sm:mb-6 text-color1">
                 {t('contact.quickContact')}
               </h3>
               <div className="space-y-3 sm:space-y-4">

@@ -228,7 +228,7 @@ const Conditions = () => {
                             {condition.key === 'planning' && (
                               <>
                                 <div className="flex items-start gap-3">
-                                  <span className="text-premium-gold mt-1 text-lg">•</span>
+                                  <span className="text-color1 mt-1 text-lg">•</span>
                                   <p className="text-sm sm:text-base text-white/90 leading-relaxed">
                                     <span className="font-semibold text-white">
                                       {t('contact.conditionsSections.planning.startPlanning').split('–')[0]}
@@ -238,7 +238,7 @@ const Conditions = () => {
                                   </p>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                  <span className="text-premium-gold mt-1 text-lg">•</span>
+                                  <span className="text-color1 mt-1 text-lg">•</span>
                                   <p className="text-sm sm:text-base text-white/90 leading-relaxed">
                                     <span className="font-semibold text-white">
                                       {t('contact.conditionsSections.planning.firstConsultation').split('–')[0]}
@@ -248,13 +248,13 @@ const Conditions = () => {
                                   </p>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                  <span className="text-premium-gold mt-1 text-lg">•</span>
+                                  <span className="text-color1 mt-1 text-lg">•</span>
                                   <p className="text-sm sm:text-base text-white/90 leading-relaxed">
                                     <span className="font-semibold text-white">
                                       {t('contact.conditionsSections.planning.prepayment').split('–')[0]}
                                     </span>
                                     {' – '}
-                                    <span className="text-premium-gold font-bold">
+                                    <span className="text-color1 font-bold">
                                       {t('contact.conditionsSections.planning.prepayment').split('–')[1]}
                                     </span>
                                   </p>
@@ -265,7 +265,7 @@ const Conditions = () => {
                             {condition.key === 'hotels' && (
                               <>
                                 <div className="flex items-start gap-3">
-                                  <span className="text-premium-gold mt-1 text-lg">•</span>
+                                  <span className="text-color1 mt-1 text-lg">•</span>
                                   <p className="text-sm sm:text-base text-white/90 leading-relaxed">
                                     <span className="font-semibold text-white">
                                       {t('contact.conditionsSections.hotels.selection').split('–')[0]}
@@ -275,7 +275,7 @@ const Conditions = () => {
                                   </p>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                  <span className="text-premium-gold mt-1 text-lg">•</span>
+                                  <span className="text-color1 mt-1 text-lg">•</span>
                                   <p className="text-sm sm:text-base text-white/90 leading-relaxed">
                                     <span className="font-semibold text-white">
                                       {t('contact.conditionsSections.hotels.booking').split('–')[0]}
@@ -290,7 +290,7 @@ const Conditions = () => {
                             {condition.key === 'transfers' && (
                               <>
                                 <div className="flex items-start gap-3">
-                                  <span className="text-premium-gold mt-1 text-lg">•</span>
+                                  <span className="text-color1 mt-1 text-lg">•</span>
                                   <p className="text-sm sm:text-base text-white/90 leading-relaxed">
                                     <span className="font-semibold text-white">
                                       {t('contact.conditionsSections.transfers.airportPickup').split('–')[0]}
@@ -300,7 +300,7 @@ const Conditions = () => {
                                   </p>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                  <span className="text-premium-gold mt-1 text-lg">•</span>
+                                  <span className="text-color1 mt-1 text-lg">•</span>
                                   <p className="text-sm sm:text-base text-white/90 leading-relaxed">
                                     <span className="font-semibold text-white">
                                       {t('contact.conditionsSections.transfers.betweenResorts').split('–')[0]}
@@ -315,31 +315,31 @@ const Conditions = () => {
                             {condition.key === 'service' && (
                               <>
                                 <div className="flex items-start gap-3">
-                                  <span className="text-premium-gold mt-1 text-lg">•</span>
+                                  <span className="text-color1 mt-1 text-lg">•</span>
                                   <p className="text-sm sm:text-base text-white/90 leading-relaxed">
                                     <span className="font-semibold text-white">
                                       {t('contact.conditionsSections.service.maxDays').split('–')[0]}
                                     </span>
                                     {' – '}
-                                    <span className="text-premium-gold font-bold">
+                                    <span className="text-color1 font-bold">
                                       {t('contact.conditionsSections.service.maxDays').split('–')[1]}
                                     </span>
                                   </p>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                  <span className="text-premium-gold mt-1 text-lg">•</span>
+                                  <span className="text-color1 mt-1 text-lg">•</span>
                                   <p className="text-sm sm:text-base text-white/90 leading-relaxed">
                                     <span className="font-semibold text-white">
                                       {t('contact.conditionsSections.service.maxHours').split('–')[0]}
                                     </span>
                                     {' – '}
-                                    <span className="text-premium-gold font-bold">
+                                    <span className="text-color1 font-bold">
                                       {t('contact.conditionsSections.service.maxHours').split('–')[1]}
                                     </span>
                                   </p>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                  <span className="text-premium-gold mt-1 text-lg">•</span>
+                                  <span className="text-color1 mt-1 text-lg">•</span>
                                   <p className="text-sm sm:text-base text-white/90 leading-relaxed">
                                     {t('contact.conditionsSections.service.safety')}
                                   </p>
@@ -350,7 +350,7 @@ const Conditions = () => {
                             {condition.key === 'payment' && (
                               <>
                                 <div className="flex items-start gap-3">
-                                  <span className="text-premium-gold mt-1 text-lg">•</span>
+                                  <span className="text-color1 mt-1 text-lg">•</span>
                                   <p className="text-sm sm:text-base text-white/90 leading-relaxed">
                                     <span className="font-semibold text-white">
                                       {t('contact.conditionsSections.payment.dailyPayment').split('–')[0]}
@@ -360,13 +360,13 @@ const Conditions = () => {
                                   </p>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                  <span className="text-premium-gold mt-1 text-lg">•</span>
+                                  <span className="text-color1 mt-1 text-lg">•</span>
                                   <p className="text-sm sm:text-base text-white/90 leading-relaxed">
                                     <span className="font-semibold text-white">
                                       {t('contact.conditionsSections.payment.rublesPayment').split('+')[0]}
                                     </span>
                                     {' '}
-                                    <span className="text-premium-gold font-bold">
+                                    <span className="text-color1 font-bold">
                                       + {t('contact.conditionsSections.payment.rublesPayment').split('+')[1]}
                                     </span>
                                   </p>
@@ -519,7 +519,7 @@ const Conditions = () => {
                             {condition.key === 'planning' && (
                               <>
                                 <div className="flex items-start gap-3">
-                                  <span className="text-premium-gold mt-1 text-lg">•</span>
+                                  <span className="text-color1 mt-1 text-lg">•</span>
                                   <p className="text-sm sm:text-base text-white/90 leading-relaxed">
                                     <span className="font-semibold text-white">
                                       {t('contact.conditionsSections.planning.startPlanning').split('–')[0]}
@@ -529,7 +529,7 @@ const Conditions = () => {
                                   </p>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                  <span className="text-premium-gold mt-1 text-lg">•</span>
+                                  <span className="text-color1 mt-1 text-lg">•</span>
                                   <p className="text-sm sm:text-base text-white/90 leading-relaxed">
                                     <span className="font-semibold text-white">
                                       {t('contact.conditionsSections.planning.firstConsultation').split('–')[0]}
@@ -539,13 +539,13 @@ const Conditions = () => {
                                   </p>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                  <span className="text-premium-gold mt-1 text-lg">•</span>
+                                  <span className="text-color1 mt-1 text-lg">•</span>
                                   <p className="text-sm sm:text-base text-white/90 leading-relaxed">
                                     <span className="font-semibold text-white">
                                       {t('contact.conditionsSections.planning.prepayment').split('–')[0]}
                                     </span>
                                     {' – '}
-                                    <span className="text-premium-gold font-bold">
+                                    <span className="text-color1 font-bold">
                                       {t('contact.conditionsSections.planning.prepayment').split('–')[1]}
                                     </span>
                                   </p>
@@ -556,7 +556,7 @@ const Conditions = () => {
                             {condition.key === 'hotels' && (
                               <>
                                 <div className="flex items-start gap-3">
-                                  <span className="text-premium-gold mt-1 text-lg">•</span>
+                                  <span className="text-color1 mt-1 text-lg">•</span>
                                   <p className="text-sm sm:text-base text-white/90 leading-relaxed">
                                     <span className="font-semibold text-white">
                                       {t('contact.conditionsSections.hotels.selection').split('–')[0]}
@@ -566,7 +566,7 @@ const Conditions = () => {
                                   </p>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                  <span className="text-premium-gold mt-1 text-lg">•</span>
+                                  <span className="text-color1 mt-1 text-lg">•</span>
                                   <p className="text-sm sm:text-base text-white/90 leading-relaxed">
                                     <span className="font-semibold text-white">
                                       {t('contact.conditionsSections.hotels.booking').split('–')[0]}
@@ -581,7 +581,7 @@ const Conditions = () => {
                             {condition.key === 'transfers' && (
                               <>
                                 <div className="flex items-start gap-3">
-                                  <span className="text-premium-gold mt-1 text-lg">•</span>
+                                  <span className="text-color1 mt-1 text-lg">•</span>
                                   <p className="text-sm sm:text-base text-white/90 leading-relaxed">
                                     <span className="font-semibold text-white">
                                       {t('contact.conditionsSections.transfers.airportPickup').split('–')[0]}
@@ -591,7 +591,7 @@ const Conditions = () => {
                                   </p>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                  <span className="text-premium-gold mt-1 text-lg">•</span>
+                                  <span className="text-color1 mt-1 text-lg">•</span>
                                   <p className="text-sm sm:text-base text-white/90 leading-relaxed">
                                     <span className="font-semibold text-white">
                                       {t('contact.conditionsSections.transfers.betweenResorts').split('–')[0]}
@@ -606,31 +606,31 @@ const Conditions = () => {
                             {condition.key === 'service' && (
                               <>
                                 <div className="flex items-start gap-3">
-                                  <span className="text-premium-gold mt-1 text-lg">•</span>
+                                  <span className="text-color1 mt-1 text-lg">•</span>
                                   <p className="text-sm sm:text-base text-white/90 leading-relaxed">
                                     <span className="font-semibold text-white">
                                       {t('contact.conditionsSections.service.maxDays').split('–')[0]}
                                     </span>
                                     {' – '}
-                                    <span className="text-premium-gold font-bold">
+                                    <span className="text-color1 font-bold">
                                       {t('contact.conditionsSections.service.maxDays').split('–')[1]}
                                     </span>
                                   </p>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                  <span className="text-premium-gold mt-1 text-lg">•</span>
+                                  <span className="text-color1 mt-1 text-lg">•</span>
                                   <p className="text-sm sm:text-base text-white/90 leading-relaxed">
                                     <span className="font-semibold text-white">
                                       {t('contact.conditionsSections.service.maxHours').split('–')[0]}
                                     </span>
                                     {' – '}
-                                    <span className="text-premium-gold font-bold">
+                                    <span className="text-color1 font-bold">
                                       {t('contact.conditionsSections.service.maxHours').split('–')[1]}
                                     </span>
                                   </p>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                  <span className="text-premium-gold mt-1 text-lg">•</span>
+                                  <span className="text-color1 mt-1 text-lg">•</span>
                                   <p className="text-sm sm:text-base text-white/90 leading-relaxed">
                                     {t('contact.conditionsSections.service.safety')}
                                   </p>
@@ -641,7 +641,7 @@ const Conditions = () => {
                             {condition.key === 'payment' && (
                               <>
                                 <div className="flex items-start gap-3">
-                                  <span className="text-premium-gold mt-1 text-lg">•</span>
+                                  <span className="text-color1 mt-1 text-lg">•</span>
                                   <p className="text-sm sm:text-base text-white/90 leading-relaxed">
                                     <span className="font-semibold text-white">
                                       {t('contact.conditionsSections.payment.dailyPayment').split('–')[0]}
@@ -651,13 +651,13 @@ const Conditions = () => {
                                   </p>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                  <span className="text-premium-gold mt-1 text-lg">•</span>
+                                  <span className="text-color1 mt-1 text-lg">•</span>
                                   <p className="text-sm sm:text-base text-white/90 leading-relaxed">
                                     <span className="font-semibold text-white">
                                       {t('contact.conditionsSections.payment.rublesPayment').split('+')[0]}
                                     </span>
                                     {' '}
-                                    <span className="text-premium-gold font-bold">
+                                    <span className="text-color1 font-bold">
                                       + {t('contact.conditionsSections.payment.rublesPayment').split('+')[1]}
                                     </span>
                                   </p>

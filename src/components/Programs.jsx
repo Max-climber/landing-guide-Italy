@@ -150,7 +150,7 @@ const Programs = () => {
           >
             <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
               <div>
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-elegant font-bold mb-3 sm:mb-4 text-premium-gold">
+                <h3 className="text-2xl sm:text-3xl md:text-4xl font-elegant font-bold mb-3 sm:mb-4 text-color1">
                   {program.title}
                 </h3>
                 <p className="text-lg sm:text-xl text-white/90 mb-4 sm:mb-6">{program.subtitle}</p>
@@ -159,13 +159,13 @@ const Programs = () => {
                 </p>
 
                 <div className="space-y-3 sm:space-y-4">
-                  <h4 className="text-lg sm:text-xl font-semibold text-premium-gold">
+                  <h4 className="text-lg sm:text-xl font-semibold text-color1">
                     {t('programs.whatIncluded')}
                   </h4>
                   <ul className="space-y-2 sm:space-y-3">
                     {program.features.map((feature, idx) => (
                       <li key={idx} className="flex items-start">
-                        <span className="text-premium-gold mr-2 sm:mr-3 mt-1 text-sm sm:text-base">✓</span>
+                        <span className="text-color1 mr-2 sm:mr-3 mt-1 text-sm sm:text-base">✓</span>
                         <span className="text-sm sm:text-base text-white/90">{feature}</span>
                       </li>
                     ))}
@@ -174,7 +174,7 @@ const Programs = () => {
               </div>
 
               <div className="bg-white/5 rounded-xl p-4 sm:p-6">
-                <h4 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-premium-gold">
+                <h4 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-color1">
                   {t('programs.cost')}
                 </h4>
                 <div className="space-y-6">
@@ -199,7 +199,7 @@ const Programs = () => {
                             <p className="text-white/90 font-medium">
                               {idx === 0 ? `${t(`programs.${activeProgram === 0 ? 'experienced' : activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.transferStart`)} ${item.time}` : item.time}
                             </p>
-                            <p className="text-premium-gold">
+                            <p className="text-color1">
                               {item.price}
                             </p>
                           </div>
@@ -211,7 +211,7 @@ const Programs = () => {
                     <div>
                       <p className="text-white/80">
                         {t(`programs.${activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.planning`)}{' '}
-                        <span className="text-premium-gold font-semibold">
+                        <span className="text-color1 font-semibold">
                           {program.pricing.planning}
                         </span>
                       </p>
@@ -221,7 +221,7 @@ const Programs = () => {
                     <div>
                       <p className="text-white/80">
                         {t(`programs.${activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.hotelTransfer`)}{' '}
-                        <span className="text-premium-gold font-semibold">
+                        <span className="text-color1 font-semibold">
                           {program.pricing.hotelTransfer}
                         </span>
                       </p>

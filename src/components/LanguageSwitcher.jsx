@@ -20,21 +20,12 @@ const LanguageSwitcher = () => {
     }
     if (country === 'en') {
       return (
-        <svg className="w-5 h-5" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <clipPath id="a">
-              <path fillOpacity=".7" d="M-85.3 0h682.6v512h-682.6z"/>
-            </clipPath>
-          </defs>
-          <g clipPath="url(#a)" transform="translate(80) scale(.94)">
-            <g strokeWidth="1pt">
-              <path fill="#006" d="M-256 0H768v512H-256z"/>
-              <path fill="#fff" d="m-256 0 582 512M768 0L186 512" stroke="#fff" strokeWidth="80.5"/>
-              <path fill="#fff" d="m170 0h512v512H170zM-256 170h1024v172H-256z" stroke="#fff" strokeWidth="80.5"/>
-              <path fill="#c00" d="m-256 204 582 512M768 204L186 716" stroke="#c00" strokeWidth="53.7"/>
-              <path fill="#c00" d="m170 0h512v512H170zM-256 170h1024v172H-256z"/>
-            </g>
-          </g>
+        <svg className="w-5 h-5" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+          <rect width="60" height="30" fill="#012169"/>
+          <path d="M0 0L60 30M60 0L0 30" stroke="#fff" strokeWidth="3"/>
+          <path d="M0 0L60 30M60 0L0 30" stroke="#C8102E" strokeWidth="2"/>
+          <path d="M30 0V30M0 15H60" stroke="#fff" strokeWidth="4"/>
+          <path d="M30 0V30M0 15H60" stroke="#C8102E" strokeWidth="2.5"/>
         </svg>
       )
     }
@@ -98,7 +89,7 @@ const LanguageSwitcher = () => {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
-          className="absolute right-0 mt-2 w-48 bg-white/95 backdrop-blur-md rounded-xl shadow-2xl border border-white/20 overflow-hidden z-50"
+          className="absolute right-0 mt-2 w-48 bg-white/95 backdrop-blur-md rounded-xl shadow-2xl overflow-hidden z-50"
         >
           {languages.map((lang) => (
             <motion.button
@@ -115,7 +106,7 @@ const LanguageSwitcher = () => {
               <span className="flex-1">{lang.name}</span>
               {i18n.language === lang.code && (
                 <motion.svg
-                  className="w-5 h-5 text-premium-gold"
+                  className="w-5 h-5 text-color1"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   initial={{ scale: 0 }}
