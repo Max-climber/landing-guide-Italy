@@ -64,9 +64,6 @@ const LanguageSwitcher = () => {
         className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors backdrop-blur-sm"
       >
         <FlagIcon country={currentLanguage.code} />
-        <span className="text-white font-medium text-sm hidden sm:inline">
-          {currentLanguage.code.toUpperCase()}
-        </span>
         <motion.svg
           className="w-4 h-4 text-white"
           fill="none"
