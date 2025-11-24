@@ -16,10 +16,16 @@ export default {
           gray: '#F5F5F5',
           darkGray: '#2C3E50',
         },
+        // Новые цвета из дизайна
+        color1: '#cfd1a8', // Светлый оливково-зеленый - для кнопки Contact Us на темном фоне
+        color2: '#5c5969', // Темный фиолетово-серый - для темного фона вставок
+        color3: '#3e394d', // Темный фиолетово-серый - для кнопок на светлом фоне
       },
       fontFamily: {
         elegant: ['Playfair Display', 'serif'],
         modern: ['Inter', 'sans-serif'],
+        oswald: ['Oswald', 'sans-serif'],
+        'oswald-condensed': ['"Oswald Condensed"', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.6s ease-in',

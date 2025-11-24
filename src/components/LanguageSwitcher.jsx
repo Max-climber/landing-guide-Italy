@@ -7,9 +7,43 @@ const LanguageSwitcher = () => {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef(null)
 
+  // Используем SVG флаги вместо эмодзи для совместимости с Windows
+  const FlagIcon = ({ country }) => {
+    if (country === 'ru') {
+      return (
+        <svg className="w-5 h-5" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+          <rect width="640" height="160" fill="#fff"/>
+          <rect y="160" width="640" height="160" fill="#0039a6"/>
+          <rect y="320" width="640" height="160" fill="#d52b1e"/>
+        </svg>
+      )
+    }
+    if (country === 'en') {
+      return (
+        <svg className="w-5 h-5" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="a">
+              <path fillOpacity=".7" d="M-85.3 0h682.6v512h-682.6z"/>
+            </clipPath>
+          </defs>
+          <g clipPath="url(#a)" transform="translate(80) scale(.94)">
+            <g strokeWidth="1pt">
+              <path fill="#006" d="M-256 0H768v512H-256z"/>
+              <path fill="#fff" d="m-256 0 582 512M768 0L186 512" stroke="#fff" strokeWidth="80.5"/>
+              <path fill="#fff" d="m170 0h512v512H170zM-256 170h1024v172H-256z" stroke="#fff" strokeWidth="80.5"/>
+              <path fill="#c00" d="m-256 204 582 512M768 204L186 716" stroke="#c00" strokeWidth="53.7"/>
+              <path fill="#c00" d="m170 0h512v512H170zM-256 170h1024v172H-256z"/>
+            </g>
+          </g>
+        </svg>
+      )
+    }
+    return null
+  }
+
   const languages = [
-    { code: 'ru', name: 'Русский', flag: '🇷🇺' },
-    { code: 'en', name: 'English', flag: '🇬🇧' },
+    { code: 'ru', name: 'Русский' },
+    { code: 'en', name: 'English' },
   ]
 
   const currentLanguage = languages.find((lang) => lang.code === i18n.language) || languages[0]
@@ -36,9 +70,9 @@ const LanguageSwitcher = () => {
         onClick={() => setIsOpen(!isOpen)}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors backdrop-blur-sm border border-white/20"
+        className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors backdrop-blur-sm"
       >
-        <span className="text-xl">{currentLanguage.flag}</span>
+        <FlagIcon country={currentLanguage.code} />
         <span className="text-white font-medium text-sm hidden sm:inline">
           {currentLanguage.code.toUpperCase()}
         </span>
@@ -77,7 +111,7 @@ const LanguageSwitcher = () => {
                   : 'text-premium-navy hover:bg-premium-gray/20'
               }`}
             >
-              <span className="text-2xl">{lang.flag}</span>
+              <FlagIcon country={lang.code} />
               <span className="flex-1">{lang.name}</span>
               {i18n.language === lang.code && (
                 <motion.svg

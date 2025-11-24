@@ -31,7 +31,7 @@ const Navigation = ({ scrollY }) => {
     <motion.nav
       initial={{ y: 0 }}
       animate={{ y: 0 }}
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-premium-navy backdrop-blur-md shadow-lg"
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-color2 backdrop-blur-md shadow-lg"
     >
       <div className="container-max px-4 md:px-8 lg:px-16">
         <div className="flex items-center justify-between h-16 sm:h-18 md:h-20">
@@ -61,7 +61,7 @@ const Navigation = ({ scrollY }) => {
               onClick={() => scrollToSection('#contact')}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-6 py-2 bg-premium-gold text-premium-navy rounded-full font-semibold hover:bg-premium-lightGold transition-colors"
+              className="px-6 py-2 bg-color1 text-color3 rounded-none font-oswald font-semibold uppercase tracking-wider hover:bg-color1/90 transition-colors"
             >
               {t('nav.connect')}
             </motion.a>
@@ -115,7 +115,7 @@ const Navigation = ({ scrollY }) => {
             <motion.a
               href="#contact"
               onClick={() => scrollToSection('#contact')}
-              className="block mx-2 mt-2 px-4 py-3 bg-premium-gold text-premium-navy rounded-lg font-semibold text-center hover:bg-premium-lightGold transition-colors"
+              className="block mx-2 mt-2 px-4 py-3 bg-color1 text-color3 rounded-none font-oswald font-semibold text-center uppercase tracking-wider hover:bg-color1/90 transition-colors"
             >
               {t('nav.connect')}
             </motion.a>

@@ -99,7 +99,6 @@ const About = () => {
               {t('about.whyUs')}
             </motion.h3>
             
-            <div className="w-24 h-1 bg-gradient-to-r from-transparent via-premium-gold to-transparent mx-auto mb-6 sm:mb-8" />
             
             <motion.div
               initial={{ opacity: 0, y: 20 }}

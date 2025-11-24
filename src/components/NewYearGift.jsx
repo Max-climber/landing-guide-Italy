@@ -100,14 +100,21 @@ const NewYearGift = ({ onClick }) => {
               ease: 'easeInOut',
             }}
           >
+            {/* Вариант 1: Используем большее изображение для лучшего качества */}
             <img
-              src="https://img.icons8.com/emoji/48/wrapped-gift.png"
+              src="https://img.icons8.com/emoji/96/wrapped-gift.png"
               alt="wrapped-gift"
-              className="w-full h-full drop-shadow-2xl"
+              className="w-full h-full object-contain drop-shadow-2xl"
               style={{
                 filter: 'drop-shadow(0 0 20px rgba(212, 175, 55, 0.8))',
+                imageRendering: 'crisp-edges', // Улучшает качество на ретине
               }}
             />
+            {/* Альтернативные варианты (закомментированы):
+              Вариант 2: SVG подарок (более четкий, но требует создания SVG)
+              Вариант 3: Локальное изображение высокого разрешения (нужно добавить в public/)
+              Вариант 4: Использовать иконку из другого источника с лучшим качеством
+            */}
           </motion.div>
 
           {/* Дополнительное сияние вокруг подарка */}

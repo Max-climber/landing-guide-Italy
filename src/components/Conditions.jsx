@@ -83,7 +83,6 @@ const Conditions = () => {
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-elegant font-bold text-white mb-4 sm:mb-6 px-4">
             {t('contact.conditions')}
           </h2>
-          <div className="w-32 h-1 bg-gradient-to-r from-transparent via-premium-gold to-transparent mx-auto mb-6 sm:mb-8" />
           <p className="text-base sm:text-lg md:text-xl text-white/80 max-w-3xl mx-auto px-4">
             {t('contact.conditionsSubtitle')}
           </p>
