@@ -94,7 +94,7 @@ const About = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.7 }}
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-elegant font-bold mb-6 sm:mb-8 text-center text-premium-gold"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-elegant font-bold mb-6 sm:mb-8 text-center text-color1"
             >
               {t('about.whyUs')}
             </motion.h3>
@@ -115,7 +115,7 @@ const About = () => {
               </p>
               
               <div className="pt-4 sm:pt-6 border-t border-premium-gold/30 mt-6 sm:mt-8">
-                <p className="text-lg sm:text-xl md:text-2xl leading-relaxed text-center text-premium-gold font-bold px-4">
+                <p className="text-lg sm:text-xl md:text-2xl leading-relaxed text-center text-color1 font-bold px-4">
                   {t('about.whyUsText3')}
                 </p>
               </div>

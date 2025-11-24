@@ -127,10 +127,10 @@ const Programs = () => {
               onClick={() => setActiveProgram(index)}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className={`px-4 py-2 sm:px-6 sm:py-3 rounded-full font-semibold text-sm sm:text-base transition-all ${
+              className={`px-4 py-2 sm:px-6 sm:py-3 rounded-none font-oswald font-semibold text-sm sm:text-base uppercase tracking-wider transition-all ${
                 activeProgram === index
-                  ? 'bg-premium-gold text-premium-navy'
-                  : 'bg-white/10 text-white hover:bg-white/20'
+                  ? 'bg-color1 text-color3'
+                  : 'bg-white/10 text-white hover:bg-color1 hover:text-color3'
               }`}
             >
               {program.title}
