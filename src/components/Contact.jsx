@@ -496,7 +496,7 @@ ${formData.message ? `Сообщение: ${formData.message}` : ''}
                 type="submit"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full px-4 py-3 sm:px-6 sm:py-4 bg-premium-gold text-premium-navy rounded-full font-semibold text-base sm:text-lg hover:bg-premium-lightGold transition-colors"
+                className="w-full px-4 py-3 sm:px-6 sm:py-4 bg-color1 text-color3 rounded-none font-oswald font-semibold text-base sm:text-lg uppercase tracking-wider hover:bg-color1/90 transition-colors"
               >
                 {t('contact.form.submit')}
               </motion.button>

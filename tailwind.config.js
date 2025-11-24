@@ -22,10 +22,11 @@ export default {
         color3: '#3e394d', // Темный фиолетово-серый - для кнопок на светлом фоне
       },
       fontFamily: {
-        elegant: ['Playfair Display', 'serif'],
-        modern: ['Inter', 'sans-serif'],
+        elegant: ['Cormorant', 'serif'],
+        modern: ['Stack Sans Headline', 'sans-serif'],
         oswald: ['Oswald', 'sans-serif'],
-        'oswald-condensed': ['"Oswald Condensed"', 'sans-serif'],
+        sans: ['Stack Sans Headline', 'sans-serif'],
+        serif: ['Cormorant', 'serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.6s ease-in',

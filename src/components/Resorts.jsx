@@ -87,13 +87,13 @@ const Resorts = () => {
    * Открывает модальное окно с изображением
    */
   const handleImageClick = (resortId, resortName, resortFolder, fallbackImage, imageIndex = 0) => {
-    const images = getResortImages(resortFolder, fallbackImage)
-    setModalImage({
-      isOpen: true,
-      images: images,
+      const images = getResortImages(resortFolder, fallbackImage)
+      setModalImage({
+        isOpen: true,
+        images: images,
       index: imageIndex,
-      resortName: resortName,
-    })
+        resortName: resortName,
+      })
   }
 
   const resorts = [
@@ -195,14 +195,14 @@ const Resorts = () => {
               >
                 {/* Discount Badge */}
                 {resort.discount && (
-                  <div className="absolute top-2 right-2 z-10 bg-premium-gold text-premium-navy px-3 py-1.5 rounded-full font-bold text-sm shadow-lg">
+                  <div className="absolute top-2 right-2 z-10 bg-color3 text-white px-3 py-1.5 rounded-none font-oswald font-bold text-sm uppercase tracking-wider shadow-lg">
                     {t('resorts.discount', { value: resort.discount })}
                   </div>
                 )}
 
                 {/* Featured Badge */}
                 {resort.isFeatured && !resort.discount && (
-                  <div className="absolute top-2 right-2 z-10 bg-premium-navy text-premium-gold px-3 py-1.5 rounded-full font-bold text-xs shadow-lg">
+                  <div className="absolute top-2 right-2 z-10 bg-color2 text-color1 px-3 py-1.5 rounded-none font-oswald font-bold text-xs uppercase tracking-wider shadow-lg">
                     {t('resorts.recommended')}
                   </div>
                 )}
@@ -342,7 +342,7 @@ const Resorts = () => {
                 onClick={() => setShowAllResorts(true)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full px-6 py-4 bg-premium-gold text-premium-navy rounded-full font-bold text-lg hover:bg-premium-lightGold transition-colors shadow-lg"
+                className="w-full px-6 py-4 bg-color3 text-white rounded-none font-oswald font-bold text-lg uppercase tracking-wider hover:bg-color3/90 transition-colors shadow-lg"
               >
                 Больше курортов
               </motion.button>
@@ -351,29 +351,29 @@ const Resorts = () => {
         ) : (
           // Десктопный вид или все курорты на мобилке
           <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'} gap-6 sm:gap-8`}>
-            {resorts.map((resort, index) => (
-              <motion.div
-                key={resort.id}
-                initial={{ opacity: 0, y: 50 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+          {resorts.map((resort, index) => (
+            <motion.div
+              key={resort.id}
+              initial={{ opacity: 0, y: 50 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={!isMobile ? { y: -10 } : {}}
-                className={`bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all relative ${
-                  resort.discount ? 'ring-4 ring-premium-gold ring-opacity-50' : ''
-                } ${resort.isFeatured ? 'border-2 border-premium-gold' : ''} ${
+              className={`bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all relative ${
+                resort.discount ? 'ring-4 ring-premium-gold ring-opacity-50' : ''
+              } ${resort.isFeatured ? 'border-2 border-premium-gold' : ''} ${
                   index === resorts.length - 1 && resorts.length % 3 === 1 && !isMobile ? 'lg:col-start-2' : ''
-                }`}
-              >
+              }`}
+            >
                 {/* Discount Badge */}
               {resort.discount && (
-                <div className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 bg-premium-gold text-premium-navy px-3 py-1.5 sm:px-4 sm:py-2 rounded-full font-bold text-sm sm:text-lg shadow-lg">
+                <div className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 bg-color3 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-none font-oswald font-bold text-sm sm:text-lg uppercase tracking-wider shadow-lg">
                   {t('resorts.discount', { value: resort.discount })}
                 </div>
               )}
 
               {/* Featured Badge */}
               {resort.isFeatured && !resort.discount && (
-                <div className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 bg-premium-navy text-premium-gold px-3 py-1.5 sm:px-4 sm:py-2 rounded-full font-bold text-xs sm:text-sm shadow-lg">
+                <div className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 bg-color2 text-color1 px-3 py-1.5 sm:px-4 sm:py-2 rounded-none font-oswald font-bold text-xs sm:text-sm uppercase tracking-wider shadow-lg">
                   {t('resorts.recommended')}
                 </div>
               )}
@@ -628,7 +628,7 @@ const Resorts = () => {
               )}
             </motion.div>
           ))}
-          </div>
+        </div>
         )}
       </div>
 

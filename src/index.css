@@ -2,14 +2,134 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Подключение локальных шрифтов */
+@font-face {
+  font-family: 'Cormorant';
+  src: url('/шрифты/Cormorant/static/Cormorant-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cormorant';
+  src: url('/шрифты/Cormorant/static/Cormorant-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cormorant';
+  src: url('/шрифты/Cormorant/static/Cormorant-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cormorant';
+  src: url('/шрифты/Cormorant/static/Cormorant-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cormorant';
+  src: url('/шрифты/Cormorant/static/Cormorant-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Oswald';
+  src: url('/шрифты/Oswald/static/Oswald-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Oswald';
+  src: url('/шрифты/Oswald/static/Oswald-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Oswald';
+  src: url('/шрифты/Oswald/static/Oswald-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Oswald';
+  src: url('/шрифты/Oswald/static/Oswald-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Oswald';
+  src: url('/шрифты/Oswald/static/Oswald-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Stack Sans Headline';
+  src: url('/шрифты/Stack_Sans_Headline/static/StackSansHeadline-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Stack Sans Headline';
+  src: url('/шрифты/Stack_Sans_Headline/static/StackSansHeadline-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Stack Sans Headline';
+  src: url('/шрифты/Stack_Sans_Headline/static/StackSansHeadline-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Stack Sans Headline';
+  src: url('/шрифты/Stack_Sans_Headline/static/StackSansHeadline-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Stack Sans Headline';
+  src: url('/шрифты/Stack_Sans_Headline/static/StackSansHeadline-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   body {
     @apply bg-white text-premium-navy;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Stack Sans Headline', sans-serif;
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Oswald', sans-serif;
-    font-stretch: condensed;
+    font-family: 'Cormorant', serif;
   }
 }
 

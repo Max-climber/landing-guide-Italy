@@ -252,7 +252,7 @@ const NewYearModal = ({ isOpen, onClose }) => {
                   }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-full bg-gradient-to-r from-premium-gold to-premium-lightGold text-premium-navy font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all text-lg"
+                  className="w-full bg-color3 text-white font-oswald font-bold py-4 px-6 rounded-none uppercase tracking-wider shadow-lg hover:shadow-xl hover:bg-color3/90 transition-all text-lg"
                 >
                   {t('newYear.cta')}
                 </motion.button>

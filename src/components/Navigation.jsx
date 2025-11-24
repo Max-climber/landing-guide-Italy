@@ -39,7 +39,7 @@ const Navigation = ({ scrollY }) => {
             whileHover={{ scale: 1.05 }}
             className="flex items-center space-x-2 flex-shrink-0 min-w-0"
           >
-            <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-elegant font-bold text-premium-gold whitespace-nowrap overflow-hidden text-ellipsis">
+            <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-elegant font-bold text-color1 whitespace-nowrap overflow-hidden text-ellipsis">
               La Vacanza Bianca
             </span>
           </motion.div>
@@ -50,7 +50,7 @@ const Navigation = ({ scrollY }) => {
               <button
                 key={item.href}
                 onClick={() => scrollToSection(item.href)}
-                className="text-white hover:text-premium-gold transition-colors duration-300 font-medium"
+                className="text-white hover:text-color1 transition-colors duration-300 font-medium"
               >
                 {item.name}
               </button>
@@ -102,7 +102,7 @@ const Navigation = ({ scrollY }) => {
               <button
                 key={item.href}
                 onClick={() => scrollToSection(item.href)}
-                className="block w-full text-left py-3 px-4 text-white hover:text-premium-gold hover:bg-white/5 transition-colors rounded-lg mx-2"
+                className="block w-full text-left py-3 px-4 text-white hover:text-color1 hover:bg-white/5 transition-colors rounded-lg mx-2"
               >
                 {item.name}
               </button>
