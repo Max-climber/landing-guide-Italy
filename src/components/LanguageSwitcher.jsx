@@ -8,10 +8,10 @@ const LanguageSwitcher = () => {
   const dropdownRef = useRef(null)
 
   // Используем SVG флаги вместо эмодзи для совместимости с Windows
-  const FlagIcon = ({ country }) => {
+  const FlagIcon = ({ country, size = 'w-6 h-6' }) => {
     if (country === 'ru') {
       return (
-        <svg className="w-5 h-5" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+        <svg className={size} viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
           <rect width="640" height="160" fill="#fff"/>
           <rect y="160" width="640" height="160" fill="#0039a6"/>
           <rect y="320" width="640" height="160" fill="#d52b1e"/>
@@ -20,7 +20,7 @@ const LanguageSwitcher = () => {
     }
     if (country === 'en') {
       return (
-        <svg className="w-5 h-5" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+        <svg className={size} viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
           <rect width="60" height="30" fill="#012169"/>
           <path d="M0 0L60 30M60 0L0 30" stroke="#fff" strokeWidth="3"/>
           <path d="M0 0L60 30M60 0L0 30" stroke="#C8102E" strokeWidth="2"/>
@@ -59,26 +59,11 @@ const LanguageSwitcher = () => {
     <div className="relative" ref={dropdownRef}>
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        whileHover={{ scale: 1.05 }}
+        whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
-        className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors backdrop-blur-sm"
+        className="cursor-pointer transition-transform"
       >
         <FlagIcon country={currentLanguage.code} />
-        <motion.svg
-          className="w-4 h-4 text-white"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.2 }}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19 9l-7 7-7-7"
-          />
-        </motion.svg>
       </motion.button>
 
       {isOpen && (
@@ -99,7 +84,7 @@ const LanguageSwitcher = () => {
                   : 'text-premium-navy hover:bg-premium-gray/20'
               }`}
             >
-              <FlagIcon country={lang.code} />
+              <FlagIcon country={lang.code} size="w-6 h-6" />
               <span className="flex-1">{lang.name}</span>
               {i18n.language === lang.code && (
                 <motion.svg
