@@ -114,20 +114,20 @@ const Programs = () => {
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-elegant font-bold mb-4 sm:mb-6 px-4 text-white">
             {t('programs.title')}
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-white/80 max-w-3xl mx-auto px-4">
+          <p className="text-base sm:text-lg md:text-xl text-white max-w-3xl mx-auto px-4">
             {t('programs.subtitle')}
           </p>
         </motion.div>
 
         {/* Program Tabs */}
-        <div className="flex flex-wrap justify-center gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12">
+        <div className="flex flex-wrap justify-center gap-6 sm:gap-8 lg:gap-12 mb-8 sm:mb-12">
           {programs.map((program, index) => (
             <motion.button
               key={program.id}
               onClick={() => setActiveProgram(index)}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className={`px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-oswald font-semibold text-sm sm:text-base uppercase tracking-wider transition-all ${
+              className={`px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-oswald font-semibold text-sm sm:text-base uppercase tracking-wider transition-all ${
                 activeProgram === index
                   ? 'bg-color1 text-color3'
                   : 'bg-white/10 text-white hover:bg-color1 hover:text-color3'
@@ -153,8 +153,8 @@ const Programs = () => {
                 <h3 className="text-2xl sm:text-3xl md:text-4xl font-elegant font-bold mb-3 sm:mb-4 text-white">
                   {program.title}
                 </h3>
-                <p className="text-lg sm:text-xl text-white/90 mb-4 sm:mb-6">{program.subtitle}</p>
-                <p className="text-base sm:text-lg text-white/80 mb-6 sm:mb-8 leading-relaxed">
+                <p className="text-lg sm:text-xl text-white mb-4 sm:mb-6">{program.subtitle}</p>
+                <p className="text-base sm:text-lg text-white mb-6 sm:mb-8 leading-relaxed">
                   {program.description}
                 </p>
 
@@ -166,7 +166,7 @@ const Programs = () => {
                     {program.features.map((feature, idx) => (
                       <li key={idx} className="flex items-start">
                         <span className="text-color1 mr-2 sm:mr-3 mt-1 text-sm sm:text-base">✓</span>
-                        <span className="text-sm sm:text-base text-white/90">{feature}</span>
+                        <span className="text-sm sm:text-base text-white">{feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -180,7 +180,7 @@ const Programs = () => {
                 <div className="space-y-6">
                   {program.pricing.consultation && (
                     <div>
-                      <p className="text-white/80 mb-2">
+                      <p className="text-white mb-2">
                         {program.pricing.consultation}
                       </p>
                     </div>
@@ -196,7 +196,7 @@ const Programs = () => {
                             key={idx}
                             className="bg-white/10 rounded-lg p-3"
                           >
-                            <p className="text-white/90 font-medium">
+                            <p className="text-white font-medium">
                               {idx === 0 ? `${t(`programs.${activeProgram === 0 ? 'experienced' : activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.transferStart`)} ${item.time}` : item.time}
                             </p>
                             <p className="text-color1">
@@ -209,7 +209,7 @@ const Programs = () => {
                   )}
                   {program.pricing.planning && (
                     <div>
-                      <p className="text-white/80">
+                      <p className="text-white">
                         {t(`programs.${activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.planning`)}{' '}
                         <span className="text-color1 font-semibold">
                           {program.pricing.planning}
@@ -219,7 +219,7 @@ const Programs = () => {
                   )}
                   {program.pricing.hotelTransfer && (
                     <div>
-                      <p className="text-white/80">
+                      <p className="text-white">
                         {t(`programs.${activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.hotelTransfer`)}{' '}
                         <span className="text-color1 font-semibold">
                           {program.pricing.hotelTransfer}

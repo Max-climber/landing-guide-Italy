@@ -63,18 +63,31 @@ const Resorts = () => {
    * 
    * @param {string} resortFolder - Название папки курорта (например, 'piani-di-bobbio')
    * @param {string} fallbackImage - Fallback изображение (старое изображение курорта)
+   * @param {Array} imageOrder - Кастомный порядок изображений (опционально)
    * @returns {Array} Массив путей к изображениям
    */
-  const getResortImages = (resortFolder, fallbackImage = null) => {
+  const getResortImages = (resortFolder, fallbackImage = null, imageOrder = null) => {
     const imageCount = getResortImageCount(resortFolder)
     const images = []
     
-    for (let i = 1; i <= imageCount; i++) {
-      // Для livigno второе изображение - webp
-      if (resortFolder === 'livigno' && i === 2) {
-        images.push(`/images/resorts/${resortFolder}/${i}.webp`)
-      } else {
-        images.push(`/images/resorts/${resortFolder}/${i}.jpg`)
+    // Если указан кастомный порядок, используем его
+    if (imageOrder && imageOrder.length > 0) {
+      imageOrder.forEach((num) => {
+        if (resortFolder === 'livigno' && num === 2) {
+          images.push(`/images/resorts/${resortFolder}/${num}.webp`)
+        } else {
+          images.push(`/images/resorts/${resortFolder}/${num}.jpg`)
+        }
+      })
+    } else {
+      // Стандартный порядок
+      for (let i = 1; i <= imageCount; i++) {
+        // Для livigno второе изображение - webp
+        if (resortFolder === 'livigno' && i === 2) {
+          images.push(`/images/resorts/${resortFolder}/${i}.webp`)
+        } else {
+          images.push(`/images/resorts/${resortFolder}/${i}.jpg`)
+        }
       }
     }
     
@@ -87,7 +100,7 @@ const Resorts = () => {
    * Открывает модальное окно с изображением
    */
   const handleImageClick = (resortId, resortName, resortFolder, fallbackImage, imageIndex = 0) => {
-      const images = getResortImages(resortFolder, fallbackImage)
+      const images = getResortImages(resortFolder, fallbackImage, resort.imageOrder)
       setModalImage({
         isOpen: true,
         images: images,
@@ -106,6 +119,7 @@ const Resorts = () => {
       discount: 25,
       isFeatured: true,
       url: 'https://pianidibobbio.com/it/',
+      imageOrder: [3, 2, 1, 4, 5, 6], // Порядок изображений: первое будет 3.jpg
     },
     {
       id: 2,
@@ -118,20 +132,20 @@ const Resorts = () => {
     },
     {
       id: 3,
-      ...getResortData('sanktMoritz'),
-      image:
-        'https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-      folder: 'sankt-moritz',
-      url: 'https://www.engadin.ch/de',
-    },
-    {
-      id: 4,
       ...getResortData('bivio'),
       image:
         'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
       folder: 'bivio',
       isFeatured: true,
       url: 'https://www.schneesportbivio.ch/',
+    },
+    {
+      id: 4,
+      ...getResortData('sanktMoritz'),
+      image:
+        'https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      folder: 'sankt-moritz',
+      url: 'https://www.engadin.ch/de',
     },
     {
       id: 5,
@@ -210,7 +224,7 @@ const Resorts = () => {
                 {/* Полная карточка для мобилки */}
                 <div className="relative h-64 overflow-hidden">
                   <ResortImageCarousel
-                    images={getResortImages(resort.folder, resort.image)}
+                    images={getResortImages(resort.folder, resort.image, resort.imageOrder)}
                     resortName={resort.name}
                     isMobile={isMobile}
                     onImageClick={(imageIndex) => handleImageClick(resort.id, resort.name, resort.folder, resort.image, imageIndex)}
@@ -383,7 +397,7 @@ const Resorts = () => {
                 <>
                   <div className="relative h-32 overflow-hidden">
                     <ResortImageCarousel
-                      images={getResortImages(resort.folder, resort.image)}
+                      images={getResortImages(resort.folder, resort.image, resort.imageOrder)}
                       resortName={resort.name}
                       isMobile={isMobile}
                       onImageClick={(imageIndex) => handleImageClick(resort.id, resort.name, resort.folder, resort.image, imageIndex)}
@@ -500,7 +514,7 @@ const Resorts = () => {
                 <>
                   <div className="relative h-64 sm:h-72 overflow-hidden">
                     <ResortImageCarousel
-                      images={getResortImages(resort.folder, resort.image)}
+                      images={getResortImages(resort.folder, resort.image, resort.imageOrder)}
                       resortName={resort.name}
                       isMobile={isMobile}
                       onImageClick={(imageIndex) => handleImageClick(resort.id, resort.name, resort.folder, resort.image, imageIndex)}

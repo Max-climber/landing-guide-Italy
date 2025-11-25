@@ -99,71 +99,16 @@ const Conditions = () => {
                           {condition.key === 'transfers' ? (
                             <div className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center">
                               <svg className="w-full h-full" viewBox="0 0 140 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                {/* Rolls-Royce стиль - длинный капот, элегантный силуэт */}
-                                {/* Основной кузов */}
-                                <path d="M10 40 L15 25 L25 20 L50 20 L55 18 L85 18 L90 20 L115 20 L125 25 L130 40 L130 48 L10 48 Z" 
-                                      fill="#000000" stroke="#1a1a1a" strokeWidth="0.8"/>
-                                {/* Длинный капот с плавным изгибом */}
-                                <path d="M15 25 Q20 22 25 20 L50 20 Q55 19 60 20" 
-                                      stroke="#0a0a0a" strokeWidth="1" fill="none"/>
-                                {/* Лобовое стекло - наклонное, элегантное */}
-                                <path d="M60 20 L65 18 L95 18 L100 20 L100 32 L60 32 Z" 
-                                      fill="#050505" stroke="#1a1a1a" strokeWidth="0.5"/>
-                                {/* Заднее стекло - fastback стиль */}
-                                <path d="M100 20 L110 22 L125 25 L125 32 L100 32 Z" 
-                                      fill="#050505" stroke="#1a1a1a" strokeWidth="0.5"/>
-                                {/* Крыша - плавная линия */}
-                                <path d="M60 20 Q80 18 100 20" 
-                                      stroke="#1a1a1a" strokeWidth="0.8" fill="none"/>
-                                {/* Дверная линия */}
-                                <path d="M75 20 L75 48" 
-                                      stroke="#1a1a1a" strokeWidth="0.6" opacity="0.6"/>
-                                {/* Колеса - премиум многоспицевые диски */}
-                                <circle cx="30" cy="48" r="7" fill="#000000" stroke="#1a1a1a" strokeWidth="1.2"/>
-                                <circle cx="30" cy="48" r="5" fill="#0a0a0a"/>
-                                {/* Спицы диска */}
-                                <g stroke="#1a1a1a" strokeWidth="0.4" opacity="0.8">
-                                  <line x1="30" y1="48" x2="30" y2="43" strokeLinecap="round"/>
-                                  <line x1="30" y1="48" x2="33" y2="45" strokeLinecap="round"/>
-                                  <line x1="30" y1="48" x2="35" y2="46" strokeLinecap="round"/>
-                                  <line x1="30" y1="48" x2="33" y2="51" strokeLinecap="round"/>
-                                  <line x1="30" y1="48" x2="35" y2="50" strokeLinecap="round"/>
-                                  <line x1="30" y1="48" x2="30" y2="53" strokeLinecap="round"/>
-                                  <line x1="30" y1="48" x2="27" y2="51" strokeLinecap="round"/>
-                                  <line x1="30" y1="48" x2="25" y2="50" strokeLinecap="round"/>
-                                </g>
-                                <circle cx="30" cy="48" r="2" fill="#D4AF37"/>
-                                
-                                <circle cx="110" cy="48" r="7" fill="#000000" stroke="#1a1a1a" strokeWidth="1.2"/>
-                                <circle cx="110" cy="48" r="5" fill="#0a0a0a"/>
-                                {/* Спицы диска */}
-                                <g stroke="#1a1a1a" strokeWidth="0.4" opacity="0.8">
-                                  <line x1="110" y1="48" x2="110" y2="43" strokeLinecap="round"/>
-                                  <line x1="110" y1="48" x2="113" y2="45" strokeLinecap="round"/>
-                                  <line x1="110" y1="48" x2="115" y2="46" strokeLinecap="round"/>
-                                  <line x1="110" y1="48" x2="113" y2="51" strokeLinecap="round"/>
-                                  <line x1="110" y1="48" x2="115" y2="50" strokeLinecap="round"/>
-                                  <line x1="110" y1="48" x2="110" y2="53" strokeLinecap="round"/>
-                                  <line x1="110" y1="48" x2="107" y2="51" strokeLinecap="round"/>
-                                  <line x1="110" y1="48" x2="105" y2="50" strokeLinecap="round"/>
-                                </g>
-                                <circle cx="110" cy="48" r="2" fill="#D4AF37"/>
-                                
-                                {/* Решетка радиатора - вертикальная, премиум */}
-                                <rect x="20" y="22" width="8" height="3" fill="#0a0a0a" stroke="#1a1a1a" strokeWidth="0.4"/>
-                                <line x1="22" y1="22" x2="22" y2="25" stroke="#1a1a1a" strokeWidth="0.3"/>
-                                <line x1="24" y1="22" x2="24" y2="25" stroke="#1a1a1a" strokeWidth="0.3"/>
-                                <line x1="26" y1="22" x2="26" y2="25" stroke="#1a1a1a" strokeWidth="0.3"/>
-                                
-                                {/* Фары - элегантные, овальные */}
-                                <ellipse cx="15" cy="26" rx="2.5" ry="1.8" fill="#0a0a0a" stroke="#D4AF37" strokeWidth="0.6"/>
-                                <ellipse cx="125" cy="26" rx="2.5" ry="1.8" fill="#0a0a0a" stroke="#D4AF37" strokeWidth="0.6"/>
-                                
-                                {/* Блеск на кузове - премиум эффект */}
-                                <path d="M15 28 Q70 25 125 28" 
-                                      stroke="#1a1a1a" strokeWidth="0.4" fill="none" opacity="0.4"/>
-                                <path d="M20 30 Q70 27 120 30" 
-                                      stroke="#1a1a1a" strokeWidth="0.3" fill="none" opacity="0.3"/>
+                                {/* Красная машинка */}
+                                <rect x="15" y="25" width="110" height="25" rx="3" fill="#DC2626" stroke="#991B1B" strokeWidth="1"/>
+                                <rect x="30" y="20" width="80" height="15" rx="2" fill="#DC2626" stroke="#991B1B" strokeWidth="1"/>
+                                <rect x="40" y="18" width="60" height="12" rx="1" fill="#B91C1C"/>
+                                <circle cx="40" cy="50" r="8" fill="#1F2937" stroke="#111827" strokeWidth="1.5"/>
+                                <circle cx="40" cy="50" r="5" fill="#374151"/>
+                                <circle cx="100" cy="50" r="8" fill="#1F2937" stroke="#111827" strokeWidth="1.5"/>
+                                <circle cx="100" cy="50" r="5" fill="#374151"/>
+                                <rect x="25" y="22" width="15" height="8" rx="1" fill="#7F1D1D" opacity="0.6"/>
+                                <rect x="100" y="22" width="15" height="8" rx="1" fill="#7F1D1D" opacity="0.6"/>
                               </svg>
                             </div>
                           ) : (
@@ -390,71 +335,16 @@ const Conditions = () => {
                           {condition.key === 'transfers' ? (
                             <div className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center">
                               <svg className="w-full h-full" viewBox="0 0 140 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                {/* Rolls-Royce стиль - длинный капот, элегантный силуэт */}
-                                {/* Основной кузов */}
-                                <path d="M10 40 L15 25 L25 20 L50 20 L55 18 L85 18 L90 20 L115 20 L125 25 L130 40 L130 48 L10 48 Z" 
-                                      fill="#000000" stroke="#1a1a1a" strokeWidth="0.8"/>
-                                {/* Длинный капот с плавным изгибом */}
-                                <path d="M15 25 Q20 22 25 20 L50 20 Q55 19 60 20" 
-                                      stroke="#0a0a0a" strokeWidth="1" fill="none"/>
-                                {/* Лобовое стекло - наклонное, элегантное */}
-                                <path d="M60 20 L65 18 L95 18 L100 20 L100 32 L60 32 Z" 
-                                      fill="#050505" stroke="#1a1a1a" strokeWidth="0.5"/>
-                                {/* Заднее стекло - fastback стиль */}
-                                <path d="M100 20 L110 22 L125 25 L125 32 L100 32 Z" 
-                                      fill="#050505" stroke="#1a1a1a" strokeWidth="0.5"/>
-                                {/* Крыша - плавная линия */}
-                                <path d="M60 20 Q80 18 100 20" 
-                                      stroke="#1a1a1a" strokeWidth="0.8" fill="none"/>
-                                {/* Дверная линия */}
-                                <path d="M75 20 L75 48" 
-                                      stroke="#1a1a1a" strokeWidth="0.6" opacity="0.6"/>
-                                {/* Колеса - премиум многоспицевые диски */}
-                                <circle cx="30" cy="48" r="7" fill="#000000" stroke="#1a1a1a" strokeWidth="1.2"/>
-                                <circle cx="30" cy="48" r="5" fill="#0a0a0a"/>
-                                {/* Спицы диска */}
-                                <g stroke="#1a1a1a" strokeWidth="0.4" opacity="0.8">
-                                  <line x1="30" y1="48" x2="30" y2="43" strokeLinecap="round"/>
-                                  <line x1="30" y1="48" x2="33" y2="45" strokeLinecap="round"/>
-                                  <line x1="30" y1="48" x2="35" y2="46" strokeLinecap="round"/>
-                                  <line x1="30" y1="48" x2="33" y2="51" strokeLinecap="round"/>
-                                  <line x1="30" y1="48" x2="35" y2="50" strokeLinecap="round"/>
-                                  <line x1="30" y1="48" x2="30" y2="53" strokeLinecap="round"/>
-                                  <line x1="30" y1="48" x2="27" y2="51" strokeLinecap="round"/>
-                                  <line x1="30" y1="48" x2="25" y2="50" strokeLinecap="round"/>
-                                </g>
-                                <circle cx="30" cy="48" r="2" fill="#D4AF37"/>
-                                
-                                <circle cx="110" cy="48" r="7" fill="#000000" stroke="#1a1a1a" strokeWidth="1.2"/>
-                                <circle cx="110" cy="48" r="5" fill="#0a0a0a"/>
-                                {/* Спицы диска */}
-                                <g stroke="#1a1a1a" strokeWidth="0.4" opacity="0.8">
-                                  <line x1="110" y1="48" x2="110" y2="43" strokeLinecap="round"/>
-                                  <line x1="110" y1="48" x2="113" y2="45" strokeLinecap="round"/>
-                                  <line x1="110" y1="48" x2="115" y2="46" strokeLinecap="round"/>
-                                  <line x1="110" y1="48" x2="113" y2="51" strokeLinecap="round"/>
-                                  <line x1="110" y1="48" x2="115" y2="50" strokeLinecap="round"/>
-                                  <line x1="110" y1="48" x2="110" y2="53" strokeLinecap="round"/>
-                                  <line x1="110" y1="48" x2="107" y2="51" strokeLinecap="round"/>
-                                  <line x1="110" y1="48" x2="105" y2="50" strokeLinecap="round"/>
-                                </g>
-                                <circle cx="110" cy="48" r="2" fill="#D4AF37"/>
-                                
-                                {/* Решетка радиатора - вертикальная, премиум */}
-                                <rect x="20" y="22" width="8" height="3" fill="#0a0a0a" stroke="#1a1a1a" strokeWidth="0.4"/>
-                                <line x1="22" y1="22" x2="22" y2="25" stroke="#1a1a1a" strokeWidth="0.3"/>
-                                <line x1="24" y1="22" x2="24" y2="25" stroke="#1a1a1a" strokeWidth="0.3"/>
-                                <line x1="26" y1="22" x2="26" y2="25" stroke="#1a1a1a" strokeWidth="0.3"/>
-                                
-                                {/* Фары - элегантные, овальные */}
-                                <ellipse cx="15" cy="26" rx="2.5" ry="1.8" fill="#0a0a0a" stroke="#D4AF37" strokeWidth="0.6"/>
-                                <ellipse cx="125" cy="26" rx="2.5" ry="1.8" fill="#0a0a0a" stroke="#D4AF37" strokeWidth="0.6"/>
-                                
-                                {/* Блеск на кузове - премиум эффект */}
-                                <path d="M15 28 Q70 25 125 28" 
-                                      stroke="#1a1a1a" strokeWidth="0.4" fill="none" opacity="0.4"/>
-                                <path d="M20 30 Q70 27 120 30" 
-                                      stroke="#1a1a1a" strokeWidth="0.3" fill="none" opacity="0.3"/>
+                                {/* Красная машинка */}
+                                <rect x="15" y="25" width="110" height="25" rx="3" fill="#DC2626" stroke="#991B1B" strokeWidth="1"/>
+                                <rect x="30" y="20" width="80" height="15" rx="2" fill="#DC2626" stroke="#991B1B" strokeWidth="1"/>
+                                <rect x="40" y="18" width="60" height="12" rx="1" fill="#B91C1C"/>
+                                <circle cx="40" cy="50" r="8" fill="#1F2937" stroke="#111827" strokeWidth="1.5"/>
+                                <circle cx="40" cy="50" r="5" fill="#374151"/>
+                                <circle cx="100" cy="50" r="8" fill="#1F2937" stroke="#111827" strokeWidth="1.5"/>
+                                <circle cx="100" cy="50" r="5" fill="#374151"/>
+                                <rect x="25" y="22" width="15" height="8" rx="1" fill="#7F1D1D" opacity="0.6"/>
+                                <rect x="100" y="22" width="15" height="8" rx="1" fill="#7F1D1D" opacity="0.6"/>
                               </svg>
                             </div>
                           ) : (

@@ -13,7 +13,7 @@ const About = () => {
     <section
       id="about"
       ref={ref}
-      className="section-padding bg-color2"
+      className="section-padding bg-color3"
     >
       <div className="container-max">
         <motion.div
@@ -32,7 +32,7 @@ const About = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex flex-col justify-between text-white h-full"
+            className="flex flex-col justify-end text-white h-full"
           >
             <div className="space-y-4 sm:space-y-6">
               <p className="text-base sm:text-lg leading-relaxed text-justify">
@@ -80,9 +80,9 @@ const About = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-8 sm:mt-12 md:mt-16 relative overflow-hidden"
+          className="mt-8 sm:mt-12 md:mt-16 relative overflow-hidden -mx-4 md:-mx-8 lg:-mx-16 px-4 md:px-8 lg:px-16 py-6 sm:py-8 md:py-12 bg-white"
         >
-          <div className="relative bg-white rounded-2xl p-6 sm:p-8 md:p-12 shadow-2xl">
+          <div className="relative">
             <motion.h3 
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
