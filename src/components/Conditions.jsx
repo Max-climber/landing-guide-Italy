@@ -96,24 +96,7 @@ const Conditions = () => {
 
                       <div className="relative z-10">
                         <div className="flex items-center gap-4 mb-4">
-                          {condition.key === 'transfers' ? (
-                            <div className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center">
-                              <svg className="w-full h-full" viewBox="0 0 140 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                {/* Красная машинка */}
-                                <rect x="15" y="25" width="110" height="25" rx="3" fill="#DC2626" stroke="#991B1B" strokeWidth="1"/>
-                                <rect x="30" y="20" width="80" height="15" rx="2" fill="#DC2626" stroke="#991B1B" strokeWidth="1"/>
-                                <rect x="40" y="18" width="60" height="12" rx="1" fill="#B91C1C"/>
-                                <circle cx="40" cy="50" r="8" fill="#1F2937" stroke="#111827" strokeWidth="1.5"/>
-                                <circle cx="40" cy="50" r="5" fill="#374151"/>
-                                <circle cx="100" cy="50" r="8" fill="#1F2937" stroke="#111827" strokeWidth="1.5"/>
-                                <circle cx="100" cy="50" r="5" fill="#374151"/>
-                                <rect x="25" y="22" width="15" height="8" rx="1" fill="#7F1D1D" opacity="0.6"/>
-                                <rect x="100" y="22" width="15" height="8" rx="1" fill="#7F1D1D" opacity="0.6"/>
-                              </svg>
-                            </div>
-                          ) : (
-                            <div className="text-4xl sm:text-5xl">{condition.icon}</div>
-                          )}
+                          <div className="text-4xl sm:text-5xl">{condition.key === 'transfers' ? '🚗' : condition.icon}</div>
                           <h3 className="text-xl sm:text-2xl font-elegant font-bold text-white">
                             {t(`contact.conditionsSections.${condition.key}.title`).replace(/📅|🏨|🚗|⛷️|💳/g, '').trim()}
                           </h3>
@@ -332,24 +315,7 @@ const Conditions = () => {
 
                       <div className="relative z-10">
                         <div className="flex items-center gap-4 mb-4">
-                          {condition.key === 'transfers' ? (
-                            <div className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center">
-                              <svg className="w-full h-full" viewBox="0 0 140 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                {/* Красная машинка */}
-                                <rect x="15" y="25" width="110" height="25" rx="3" fill="#DC2626" stroke="#991B1B" strokeWidth="1"/>
-                                <rect x="30" y="20" width="80" height="15" rx="2" fill="#DC2626" stroke="#991B1B" strokeWidth="1"/>
-                                <rect x="40" y="18" width="60" height="12" rx="1" fill="#B91C1C"/>
-                                <circle cx="40" cy="50" r="8" fill="#1F2937" stroke="#111827" strokeWidth="1.5"/>
-                                <circle cx="40" cy="50" r="5" fill="#374151"/>
-                                <circle cx="100" cy="50" r="8" fill="#1F2937" stroke="#111827" strokeWidth="1.5"/>
-                                <circle cx="100" cy="50" r="5" fill="#374151"/>
-                                <rect x="25" y="22" width="15" height="8" rx="1" fill="#7F1D1D" opacity="0.6"/>
-                                <rect x="100" y="22" width="15" height="8" rx="1" fill="#7F1D1D" opacity="0.6"/>
-                              </svg>
-                            </div>
-                          ) : (
-                            <div className="text-4xl sm:text-5xl">{condition.icon}</div>
-                          )}
+                          <div className="text-4xl sm:text-5xl">{condition.key === 'transfers' ? '🚗' : condition.icon}</div>
                           <h3 className="text-xl sm:text-2xl font-elegant font-bold text-white">
                             {t(`contact.conditionsSections.${condition.key}.title`).replace(/📅|🏨|🚗|⛷️|💳/g, '').trim()}
                           </h3>
