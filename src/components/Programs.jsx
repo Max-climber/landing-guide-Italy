@@ -102,7 +102,7 @@ const Programs = () => {
     <section
       id="programs"
       ref={ref}
-      className="section-padding bg-premium-navy text-white"
+      className="section-padding bg-color3 text-white"
     >
       <div className="container-max">
         <motion.div
@@ -111,7 +111,7 @@ const Programs = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-elegant font-bold mb-4 sm:mb-6 px-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-elegant font-bold mb-4 sm:mb-6 px-4 text-white">
             {t('programs.title')}
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-white/80 max-w-3xl mx-auto px-4">
@@ -120,20 +120,20 @@ const Programs = () => {
         </motion.div>
 
         {/* Program Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-8 sm:mb-12">
+        <div className="flex flex-wrap justify-center gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12">
           {programs.map((program, index) => (
             <motion.button
               key={program.id}
               onClick={() => setActiveProgram(index)}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className={`px-4 py-2 sm:px-6 sm:py-3 rounded-none font-oswald font-semibold text-sm sm:text-base uppercase tracking-wider transition-all ${
+              className={`px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-oswald font-semibold text-sm sm:text-base uppercase tracking-wider transition-all ${
                 activeProgram === index
                   ? 'bg-color1 text-color3'
                   : 'bg-white/10 text-white hover:bg-color1 hover:text-color3'
               }`}
             >
-              {program.title}
+              {index === 0 ? 'expert' : index === 1 ? 'balance' : 'ultracomfort'}
             </motion.button>
           ))}
         </div>
@@ -146,11 +146,11 @@ const Programs = () => {
               initial={{ opacity: 0, y: 50 }}
               animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
               transition={{ duration: 0.5 }}
-            className="bg-white/10 backdrop-blur-md rounded-2xl p-4 sm:p-6 md:p-8 lg:p-12"
+            className="bg-color3 rounded-2xl p-4 sm:p-6 md:p-8 lg:p-12"
           >
             <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
               <div>
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-elegant font-bold mb-3 sm:mb-4 text-color1">
+                <h3 className="text-2xl sm:text-3xl md:text-4xl font-elegant font-bold mb-3 sm:mb-4 text-white">
                   {program.title}
                 </h3>
                 <p className="text-lg sm:text-xl text-white/90 mb-4 sm:mb-6">{program.subtitle}</p>
@@ -173,8 +173,8 @@ const Programs = () => {
                 </div>
               </div>
 
-              <div className="bg-white/5 rounded-xl p-4 sm:p-6">
-                <h4 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-color1">
+              <div className="bg-color2 rounded-xl p-4 sm:p-6">
+                <h4 className="text-2xl sm:text-3xl md:text-4xl font-elegant font-bold mb-4 sm:mb-6 text-color1">
                   {t('programs.cost')}
                 </h4>
                 <div className="space-y-6">

@@ -72,14 +72,6 @@ const Conditions = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12 sm:mb-16"
         >
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={inView ? { scale: 1 } : {}}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="inline-block mb-6"
-          >
-            <div className="text-6xl sm:text-8xl">❄️</div>
-          </motion.div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-elegant font-bold text-white mb-4 sm:mb-6 px-4">
             {t('contact.conditions')}
           </h2>

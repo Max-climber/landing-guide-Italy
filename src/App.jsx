@@ -7,12 +7,9 @@ import Resorts from './components/Resorts'
 import Conditions from './components/Conditions'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
-import NewYearGift from './components/NewYearGift'
-import NewYearModal from './components/NewYearModal'
 
 function App() {
   const [scrollY, setScrollY] = useState(0)
-  const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY)
@@ -30,12 +27,6 @@ function App() {
       <Conditions />
       <Contact />
       <Footer />
-      
-      {/* Новогодний подарок */}
-      <NewYearGift onClick={() => setIsModalOpen(true)} />
-      
-      {/* Модальное окно со скидкой */}
-      <NewYearModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   )
 }

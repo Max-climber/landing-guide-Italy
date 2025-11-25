@@ -34,7 +34,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-sm sm:text-base md:text-lg tracking-[0.3em] uppercase text-color3 mb-4 sm:mb-6 px-4 font-oswald font-light"
+            className="text-sm sm:text-base md:text-lg tracking-[0.3em] uppercase text-color3 mb-4 sm:mb-6 px-4 font-oswald font-bold"
           >
             {t('hero.subtitle')}
           </motion.p>
@@ -42,7 +42,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-oswald font-bold text-color3 mb-6 sm:mb-8 px-4 tracking-tight"
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-oswald font-bold text-color3/60 mb-6 sm:mb-8 px-4 tracking-tight"
             style={{ fontStretch: 'condensed' }}
           >
             {t('hero.title')}
@@ -59,7 +59,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center px-4"
+            className="flex flex-col sm:flex-row gap-4 sm:gap-8 lg:gap-12 justify-center px-4"
           >
             <motion.button
               onClick={() => {
@@ -70,7 +70,7 @@ const Hero = () => {
               }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 sm:px-10 sm:py-5 bg-color3 text-white rounded-none font-oswald font-semibold text-base sm:text-lg uppercase tracking-wider hover:bg-color3/90 transition-colors"
+              className="px-8 py-4 sm:px-10 sm:py-5 bg-color3 text-white rounded-lg font-oswald font-semibold text-base sm:text-lg uppercase tracking-wider hover:bg-color3/90 transition-colors"
             >
               {t('hero.ourPrograms')}
             </motion.button>
@@ -83,7 +83,7 @@ const Hero = () => {
               }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 sm:px-10 sm:py-5 bg-color3 text-white rounded-none font-oswald font-semibold text-base sm:text-lg uppercase tracking-wider hover:bg-color3/90 transition-colors"
+              className="px-8 py-4 sm:px-10 sm:py-5 bg-color3 text-white rounded-lg font-oswald font-semibold text-base sm:text-lg uppercase tracking-wider hover:bg-color3/90 transition-colors"
             >
               {t('hero.bestResorts')}
             </motion.button>

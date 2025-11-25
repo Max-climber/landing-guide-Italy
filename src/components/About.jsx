@@ -13,7 +13,7 @@ const About = () => {
     <section
       id="about"
       ref={ref}
-      className="section-padding bg-gradient-to-b from-white to-premium-gray"
+      className="section-padding bg-color2"
     >
       <div className="container-max">
         <motion.div
@@ -22,39 +22,41 @@ const About = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-elegant font-bold text-premium-navy mb-4 sm:mb-6 px-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-elegant font-bold text-color1 mb-4 sm:mb-6 px-4">
             {t('about.title')}
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-center">
+        <div className="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-stretch">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="space-y-4 sm:space-y-6"
+            className="flex flex-col justify-between text-white h-full"
           >
-            <p className="text-base sm:text-lg text-premium-darkGray leading-relaxed">
-              <Trans
-                i18nKey="about.paragraph1"
-                values={{ country: t('about.italy') }}
-                components={{ bold: <span className="font-semibold text-premium-navy" /> }}
-              />
-            </p>
-            <p className="text-base sm:text-lg text-premium-darkGray leading-relaxed">
-              <Trans
-                i18nKey="about.paragraph2"
-                values={{ alps: t('about.alps') }}
-                components={{ bold: <span className="font-semibold text-premium-navy" /> }}
-              />
-            </p>
-            <p className="text-base sm:text-lg text-premium-darkGray leading-relaxed">
-              <Trans
-                i18nKey="about.paragraph3"
-                values={{ vacation: t('about.vacation') }}
-                components={{ bold: <span className="font-semibold text-premium-navy" /> }}
-              />
-            </p>
+            <div className="space-y-4 sm:space-y-6">
+              <p className="text-base sm:text-lg leading-relaxed text-justify">
+                <Trans
+                  i18nKey="about.paragraph1"
+                  values={{ country: t('about.italy') }}
+                  components={{ bold: <span className="font-semibold text-color1" /> }}
+                />
+              </p>
+              <p className="text-base sm:text-lg leading-relaxed text-justify">
+                <Trans
+                  i18nKey="about.paragraph2"
+                  values={{ alps: t('about.alps') }}
+                  components={{ bold: <span className="font-semibold text-color1" /> }}
+                />
+              </p>
+              <p className="text-base sm:text-lg leading-relaxed text-justify">
+                <Trans
+                  i18nKey="about.paragraph3"
+                  values={{ vacation: t('about.vacation') }}
+                  components={{ bold: <span className="font-semibold text-color1" /> }}
+                />
+              </p>
+            </div>
           </motion.div>
 
           <motion.div
@@ -69,7 +71,7 @@ const About = () => {
                 alt="Альпы"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-premium-navy/50 to-transparent" />
+              <div className="absolute inset-0 bg-color2/20" />
             </div>
           </motion.div>
         </div>
@@ -80,21 +82,12 @@ const About = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="mt-8 sm:mt-12 md:mt-16 relative overflow-hidden"
         >
-          {/* Декоративные элементы */}
-          <div className="absolute top-0 left-0 w-32 h-32 bg-premium-gold/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 right-0 w-40 h-40 bg-premium-gold/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-          
-          <div className="relative bg-gradient-to-br from-premium-navy via-premium-navy/95 to-premium-navy rounded-2xl p-6 sm:p-8 md:p-12 text-white border-2 border-premium-gold/20 shadow-2xl">
-            {/* Снежинки декоративные */}
-            <div className="absolute top-4 right-4 text-premium-gold/20 text-2xl">❄</div>
-            <div className="absolute bottom-4 left-4 text-premium-gold/20 text-xl">❄</div>
-            <div className="absolute top-1/2 right-8 text-premium-gold/10 text-xl">❄</div>
-            
+          <div className="relative bg-white rounded-2xl p-6 sm:p-8 md:p-12 shadow-2xl">
             <motion.h3 
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.7 }}
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-elegant font-bold mb-6 sm:mb-8 text-center text-color1"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-elegant font-bold mb-6 sm:mb-8 text-center text-color3"
             >
               {t('about.whyUs')}
             </motion.h3>
@@ -106,19 +99,44 @@ const About = () => {
               transition={{ duration: 0.6, delay: 0.8 }}
               className="space-y-4 sm:space-y-6 max-w-4xl mx-auto"
             >
-              <p className="text-base sm:text-lg md:text-xl leading-relaxed text-white/95 px-4">
+              <p className="text-base sm:text-lg md:text-xl leading-relaxed text-color3 text-justify">
                 {t('about.whyUsText1')}
               </p>
               
-              <p className="text-base sm:text-lg md:text-xl leading-relaxed text-white/90 px-4">
-                {t('about.whyUsText2')}
-              </p>
-              
-              <div className="pt-4 sm:pt-6 border-t border-premium-gold/30 mt-6 sm:mt-8">
-                <p className="text-lg sm:text-xl md:text-2xl leading-relaxed text-center text-color1 font-bold px-4">
-                  {t('about.whyUsText3')}
-                </p>
-              </div>
+              <ul className="space-y-3 sm:space-y-4 text-base sm:text-lg md:text-xl leading-relaxed text-color3 text-justify">
+                <li className="flex items-start">
+                  <span className="mr-2">-</span>
+                  <span>{t('about.whyUsList.item1')}</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="mr-2">-</span>
+                  <span>{t('about.whyUsList.item2')}</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="mr-2">-</span>
+                  <span>{t('about.whyUsList.item3')}</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="mr-2">-</span>
+                  <span>{t('about.whyUsList.item4')}</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="mr-2">-</span>
+                  <span>{t('about.whyUsList.item5')}</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="mr-2">-</span>
+                  <span>{t('about.whyUsList.item6')}</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="mr-2">-</span>
+                  <span>{t('about.whyUsList.item7')}</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="mr-2">-</span>
+                  <span>{t('about.whyUsList.item8')}</span>
+                </li>
+              </ul>
             </motion.div>
           </div>
         </motion.div>

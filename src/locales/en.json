@@ -23,9 +23,17 @@
     "paragraph3": "This is where the incredible beauty of snow-capped peaks is accompanied by impeccable service at ski resorts. This is where vacation is truly a <bold>{{vacation}}</bold>.",
     "vacation": "Vacation",
     "whyUs": "Why Us?",
-    "whyUsText1": "And, having enjoyed all of this, we decided that making La Vacanza Bianca for our clients that wonderful time when you don't have to worry about anything except the very fact of arriving in Italy – that's a great idea.",
-    "whyUsText2": "You don't rack your brains about how to rent a car at the airport without a 'proper' credit card. How to book a hotel without it. How to drive 4 hours on snow-covered serpentines after a long and difficult flight. How and where to park the car so you don't have to walk half an hour to the lift.",
-    "whyUsText3": "So now we'll take care of all of this. And you just fly to Milan or Bergamo and truly enjoy yourself!"
+    "whyUsText1": "We decided that making La Vacanza Bianca for our clients that wonderful time when you don't have to worry about anything except the very fact of arriving in Italy – that's a great idea.",
+    "whyUsList": {
+      "item1": "We will meet you right at the arrival area of Milan or Bergamo airport at any time",
+      "item2": "We will take you to the hotel",
+      "item3": "We will drive you from the hotel to the nearest parking near the lifts. And back",
+      "item4": "We will help you choose and rent equipment and buy ski passes",
+      "item5": "Together we will discuss and choose the slopes for the current day",
+      "item6": "We will get on the lift with you and be with you all day so you don't worry about anything",
+      "item7": "On the rest day, we will take you shopping, for a city walk, or to a hiking trail",
+      "item8": "We will deliver you safe, sound, and happy to the airport"
+    }
   },
   "programs": {
     "title": "Our Programs",

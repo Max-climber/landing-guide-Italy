@@ -521,7 +521,7 @@ ${formData.message ? `Сообщение: ${formData.message}` : ''}
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.05 }}
-                  className="flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 bg-green-500/20 rounded-lg hover:bg-green-500/30 transition-colors"
+                  className="flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 bg-white/10 rounded-lg hover:bg-white/20 transition-colors"
                 >
                   <svg
                     className="w-6 h-6 sm:w-8 sm:h-8"
