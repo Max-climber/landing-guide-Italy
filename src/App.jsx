@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Navigation from './components/Navigation'
 import Hero from './components/Hero'
 import About from './components/About'
+import WhyUs from './components/WhyUs'
 import Programs from './components/Programs'
 import Resorts from './components/Resorts'
 import Conditions from './components/Conditions'
@@ -22,6 +23,7 @@ function App() {
       <Navigation scrollY={scrollY} />
       <Hero />
       <About />
+      <WhyUs />
       <Programs />
       <Resorts />
       <Conditions />

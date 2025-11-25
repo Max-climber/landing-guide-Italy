@@ -58,7 +58,7 @@ const Conditions = () => {
     <section
       id="conditions"
       ref={ref}
-      className="relative section-padding bg-gradient-to-b from-premium-navy via-premium-navy/95 to-premium-navy overflow-hidden"
+      className="relative section-padding bg-color3 overflow-hidden"
     >
 
       {/* Gradient Orbs */}

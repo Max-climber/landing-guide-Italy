@@ -133,7 +133,7 @@ const Programs = () => {
                   : 'bg-white/10 text-white hover:bg-color1 hover:text-color3'
               }`}
             >
-              {index === 0 ? 'expert' : index === 1 ? 'balance' : 'ultracomfort'}
+              {index === 0 ? 'эксперт' : index === 1 ? 'баланс' : 'ультракомфорт'}
             </motion.button>
           ))}
         </div>
