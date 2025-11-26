@@ -34,7 +34,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-lg sm:text-xl md:text-2xl font-oswald font-bold uppercase text-color3 mb-2 sm:mb-3 px-4 tracking-[0.2em]"
+            className="text-xl sm:text-2xl font-oswald font-bold uppercase text-color3 mb-2 sm:mb-3 px-4 tracking-[0.2em]"
           >
             {t('hero.subtitle')}
           </motion.h1>
