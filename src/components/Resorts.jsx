@@ -223,13 +223,15 @@ const Resorts = () => {
 
                 {/* Полная карточка для мобилки */}
                 <div className="relative h-64 overflow-hidden">
-                  <ResortImageCarousel
-                    images={getResortImages(resort.folder, resort.image, resort.imageOrder)}
-                    resortName={resort.name}
-                    isMobile={isMobile}
-                    onImageClick={(imageIndex) => handleImageClick(resort.id, resort.name, resort.folder, resort.image, imageIndex)}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-premium-navy/90 via-premium-navy/50 to-transparent pointer-events-none" />
+                  <div className="relative w-full h-full">
+                    <ResortImageCarousel
+                      images={getResortImages(resort.folder, resort.image, resort.imageOrder)}
+                      resortName={resort.name}
+                      isMobile={isMobile}
+                      onImageClick={(imageIndex) => handleImageClick(resort.id, resort.name, resort.folder, resort.image, imageIndex)}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-premium-navy/90 via-premium-navy/50 to-transparent pointer-events-none z-10" />
+                  </div>
                 </div>
 
                 <div className="p-4">
@@ -393,13 +395,15 @@ const Resorts = () => {
               {isMobile ? (
                 <>
                   <div className="relative h-32 overflow-hidden">
-                    <ResortImageCarousel
-                      images={getResortImages(resort.folder, resort.image, resort.imageOrder)}
-                      resortName={resort.name}
-                      isMobile={isMobile}
-                      onImageClick={(imageIndex) => handleImageClick(resort.id, resort.name, resort.folder, resort.image, imageIndex)}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-premium-navy/90 via-premium-navy/50 to-transparent pointer-events-none" />
+                    <div className="relative w-full h-full">
+                      <ResortImageCarousel
+                        images={getResortImages(resort.folder, resort.image, resort.imageOrder)}
+                        resortName={resort.name}
+                        isMobile={isMobile}
+                        onImageClick={(imageIndex) => handleImageClick(resort.id, resort.name, resort.folder, resort.image, imageIndex)}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-premium-navy/90 via-premium-navy/50 to-transparent pointer-events-none z-10" />
+                    </div>
                   </div>
                   <div className="p-3">
                     <h3 className="text-lg font-elegant font-bold text-premium-navy mb-0.5">
@@ -507,13 +511,15 @@ const Resorts = () => {
               ) : (
                 <>
                   <div className="relative h-64 sm:h-72 overflow-hidden">
-                    <ResortImageCarousel
-                      images={getResortImages(resort.folder, resort.image, resort.imageOrder)}
-                      resortName={resort.name}
-                      isMobile={isMobile}
-                      onImageClick={(imageIndex) => handleImageClick(resort.id, resort.name, resort.folder, resort.image, imageIndex)}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-premium-navy/90 via-premium-navy/50 to-transparent pointer-events-none" />
+                    <div className="relative w-full h-full">
+                      <ResortImageCarousel
+                        images={getResortImages(resort.folder, resort.image, resort.imageOrder)}
+                        resortName={resort.name}
+                        isMobile={isMobile}
+                        onImageClick={(imageIndex) => handleImageClick(resort.id, resort.name, resort.folder, resort.image, imageIndex)}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-premium-navy/90 via-premium-navy/50 to-transparent pointer-events-none z-10" />
+                    </div>
                   </div>
 
                   <div className="p-4 sm:p-6">

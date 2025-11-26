@@ -85,6 +85,23 @@ const ResortImageCarousel = ({ images, resortName, isMobile, onImageClick }) => 
     )
   }
 
+  // Обработка клика на изображение
+  const handleImageClick = () => {
+    onImageClick?.(currentIndex)
+  }
+
+  // Обработка окончания касания - проверяем, был ли это свайп или клик
+  const handleTouchEnd = () => {
+    const wasSwipe = touchStart && touchEnd && Math.abs(touchStart - touchEnd) > minSwipeDistance
+    onTouchEnd()
+    // Если это был короткий тап (не свайп), открываем модальное окно
+    if (!wasSwipe && touchStart !== null) {
+      setTimeout(() => {
+        onImageClick?.(currentIndex)
+      }, 100)
+    }
+  }
+
   return (
     <div
       ref={carouselRef}
@@ -93,10 +110,10 @@ const ResortImageCarousel = ({ images, resortName, isMobile, onImageClick }) => 
       onMouseLeave={() => !isMobile && setIsHovered(false)}
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
-      onTouchEnd={onTouchEnd}
+      onTouchEnd={handleTouchEnd}
     >
       {/* Контейнер изображений */}
-      <div className="relative w-full h-full">
+      <div className="relative w-full h-full" onClick={handleImageClick}>
         <AnimatePresence mode="wait">
           <motion.img
             key={currentIndex}
@@ -107,7 +124,7 @@ const ResortImageCarousel = ({ images, resortName, isMobile, onImageClick }) => 
             exit={{ opacity: 0, x: -100 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
             className="w-full h-full object-cover cursor-pointer"
-            onClick={() => onImageClick?.(currentIndex)}
+            onClick={handleImageClick}
           />
         </AnimatePresence>
       </div>
