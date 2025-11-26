@@ -16,12 +16,12 @@
   },
   "about": {
     "title": "About Us",
-    "paragraph1": "Being passionate enthusiasts of sports like alpine skiing, rock climbing, hiking, and kayaking, after some consideration, we chose, believe it or not, <bold>{{country}}</bold>!",
-    "italy": "Italy",
-    "paragraph2": "We've traveled extensively, especially with alpine skiing. The Urals, Apatity, the Caucasus, Armenia, Georgia, Finland – wonderful places for those who understand. But <bold>{{alps}}</bold>... The Alps are where you need to go and return to.",
-    "alps": "the Alps",
-    "paragraph3": "This is where the incredible beauty of snow-capped peaks is accompanied by impeccable service at ski resorts. This is where vacation is truly a <bold>{{vacation}}</bold>.",
-    "vacation": "Vacation",
+    "text": [
+      "Being passionate fans of sports like skiing, climbing, hiking and kayaking,\nafter a short deliberation we chose — believe it or not — Italy!",
+      "We have traveled a lot, especially with skis.\nThe Alps attract so much that one trip becomes the start of a tradition.",
+      "The Alps mean mountains inspire, service takes care,\nwe fully accompany you, and you simply enjoy.",
+      "With us, vacation is that very Vacation you dream about."
+    ],
     "whyUs": "Why Us?",
     "whyUsText1": "We decided that making La Vacanza Bianca for our clients that wonderful time when you don't have to worry about anything except the very fact of arriving in Italy – that's a great idea.",
     "whyUsList": {

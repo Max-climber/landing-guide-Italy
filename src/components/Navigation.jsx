@@ -50,7 +50,7 @@ const Navigation = ({ scrollY }) => {
               <button
                 key={item.href}
                 onClick={() => scrollToSection(item.href)}
-                className="text-black hover:text-color1 transition-colors duration-300 font-medium"
+                className="text-color1 hover:text-white transition-colors duration-300 font-semibold"
               >
                 {item.name}
               </button>
@@ -104,7 +104,7 @@ const Navigation = ({ scrollY }) => {
               <button
                 key={item.href}
                 onClick={() => scrollToSection(item.href)}
-                className="block w-full text-left py-3 px-4 text-white hover:text-color1 hover:bg-white/5 transition-colors rounded-lg mx-2"
+                className="block w-full text-left py-3 px-4 text-color1 hover:text-white hover:bg-white/5 transition-colors rounded-lg mx-2 font-semibold"
               >
                 {item.name}
               </button>

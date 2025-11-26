@@ -30,28 +30,28 @@ const Hero = () => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-sm sm:text-base md:text-lg tracking-[0.3em] uppercase text-color3 mb-4 sm:mb-6 px-4 font-oswald font-bold"
-          >
-            {t('hero.subtitle')}
-          </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-oswald font-extrabold uppercase text-color1 mb-4 sm:mb-6 px-4 tracking-wide"
+          >
+            {t('hero.subtitle')}
+          </motion.h1>
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-oswald font-light text-color3 mb-6 sm:mb-8 px-4 tracking-tight"
+            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-oswald font-bold text-color1 mb-6 sm:mb-8 px-4 tracking-tight"
             style={{ fontStretch: 'condensed' }}
           >
             {t('hero.title')}
-          </motion.h1>
+          </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-base sm:text-lg md:text-xl lg:text-2xl text-color3 mb-12 sm:mb-16 max-w-3xl mx-auto px-4 font-oswald font-light leading-relaxed"
+            className="text-base sm:text-lg md:text-xl lg:text-2xl text-color1 mb-12 sm:mb-16 max-w-3xl mx-auto px-4 font-oswald font-light leading-relaxed"
           >
             {t('hero.description')}
           </motion.p>

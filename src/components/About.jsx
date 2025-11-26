@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { useTranslation, Trans } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 
 const About = () => {
   const { t } = useTranslation()
+  const aboutText = t('about.text', { returnObjects: true })
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.2,
@@ -32,30 +33,22 @@ const About = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex flex-col justify-between text-white h-full"
+            className="flex flex-col justify-between text-color1 h-full"
           >
             <div className="space-y-4 sm:space-y-6">
-              <p className="text-base sm:text-lg leading-relaxed text-justify">
-                <Trans
-                  i18nKey="about.paragraph1"
-                  values={{ country: t('about.italy') }}
-                  components={{ bold: <span className="font-semibold text-color1" /> }}
-                />
-              </p>
-              <p className="text-base sm:text-lg leading-relaxed text-justify">
-                <Trans
-                  i18nKey="about.paragraph2"
-                  values={{ alps: t('about.alps') }}
-                  components={{ bold: <span className="font-semibold text-color1" /> }}
-                />
-              </p>
-              <p className="text-base sm:text-lg leading-relaxed text-justify">
-                <Trans
-                  i18nKey="about.paragraph3"
-                  values={{ vacation: t('about.vacation') }}
-                  components={{ bold: <span className="font-semibold text-color1" /> }}
-                />
-              </p>
+              {aboutText.map((paragraph, idx) => {
+                const lines = paragraph.split('\n')
+                return (
+                  <p key={idx} className="text-base sm:text-lg leading-relaxed text-justify">
+                    {lines.map((line, lineIdx) => (
+                      <span key={lineIdx}>
+                        {line}
+                        {lineIdx !== lines.length - 1 && <br />}
+                      </span>
+                    ))}
+                  </p>
+                )
+              })}
             </div>
           </motion.div>
 

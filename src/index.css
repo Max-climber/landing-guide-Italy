@@ -126,10 +126,14 @@
 @layer base {
   body {
     @apply bg-white text-premium-navy;
-    font-family: 'Stack Sans Headline', sans-serif;
+    font-family: 'Oswald', sans-serif;
+    font-stretch: condensed;
+    font-optical-sizing: auto;
   }
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Cormorant', serif;
+  h1, h2, h3, h4, h5, h6,
+  button, input, textarea, select {
+    font-family: 'Oswald', sans-serif;
+    font-stretch: condensed;
   }
 }
 
