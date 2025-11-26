@@ -146,8 +146,8 @@
     text-align: justify;
     text-align-last: justify;
     text-justify: inter-word;
-    hyphens: auto;
     word-break: break-word;
+    hyphens: auto;
   }
   
   .section-padding {
