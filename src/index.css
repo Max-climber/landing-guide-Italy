@@ -145,6 +145,15 @@
   .full-justify {
     text-align: justify;
     text-align-last: justify;
+    word-spacing: normal;
+  }
+  
+  .hyphens-auto {
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
   
   .section-padding {

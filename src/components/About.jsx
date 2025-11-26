@@ -28,18 +28,18 @@ const About = () => {
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-stretch">
+        <div className="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-6 items-stretch">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex flex-col justify-between text-color1 h-full text-left"
           >
-            <div className="flex flex-col h-full justify-between gap-4 sm:gap-6 w-full max-w-sm md:max-w-[22rem] lg:max-w-[24rem] xl:max-w-[26rem] 2xl:max-w-[28rem] md:pr-4 lg:pr-6">
+            <div className="flex flex-col h-full justify-between gap-4 sm:gap-6 w-full max-w-sm md:max-w-[22rem] lg:max-w-[24rem] xl:max-w-[26rem] 2xl:max-w-[28rem] md:pr-2 lg:pr-4">
               {aboutText.map((paragraph, idx) => {
                 const lines = paragraph.split('\n')
                 return (
-                  <p key={idx} className="text-base sm:text-lg leading-relaxed full-justify">
+                  <p key={idx} className="text-base sm:text-lg leading-relaxed text-left hyphens-auto break-words">
                     {lines.map((line, lineIdx) => (
                       <span key={lineIdx}>
                         {line}
@@ -49,6 +49,11 @@ const About = () => {
                   </p>
                 )
               })}
+              {t('about.whyUsText1') && (
+                <p className="text-base sm:text-lg leading-relaxed full-justify mt-4 sm:mt-6">
+                  {t('about.whyUsText1')}
+                </p>
+              )}
             </div>
           </motion.div>
 
