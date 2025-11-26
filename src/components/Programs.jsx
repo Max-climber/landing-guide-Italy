@@ -133,7 +133,7 @@ const Programs = () => {
                   : 'bg-white/10 text-white hover:bg-color1 hover:text-color3'
               }`}
             >
-              {index === 0 ? 'эксперт' : index === 1 ? 'баланс' : 'ультракомфорт'}
+              {index === 0 ? t('programs.buttonNames.expert') : index === 1 ? t('programs.buttonNames.balance') : t('programs.buttonNames.ultracomfort')}
             </motion.button>
           ))}
         </div>

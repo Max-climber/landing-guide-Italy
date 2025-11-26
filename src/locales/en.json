@@ -38,6 +38,11 @@
   "programs": {
     "title": "Our Programs",
     "subtitle": "Choose the program that suits you best",
+    "buttonNames": {
+      "expert": "expert",
+      "balance": "balance",
+      "ultracomfort": "ultracomfort"
+    },
     "experienced": {
       "title": "For Experienced",
       "subtitle": "For skiers who know how to do everything themselves",

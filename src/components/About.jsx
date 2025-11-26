@@ -32,7 +32,7 @@ const About = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex flex-col justify-end text-white h-full"
+            className="flex flex-col justify-between text-white h-full"
           >
             <div className="space-y-4 sm:space-y-6">
               <p className="text-base sm:text-lg leading-relaxed text-justify">

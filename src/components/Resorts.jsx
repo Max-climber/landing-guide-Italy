@@ -230,16 +230,14 @@ const Resorts = () => {
                     onImageClick={(imageIndex) => handleImageClick(resort.id, resort.name, resort.folder, resort.image, imageIndex)}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-premium-navy/90 via-premium-navy/50 to-transparent pointer-events-none" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4 pointer-events-none">
-                    <h3 className="text-2xl font-elegant font-bold text-white mb-1">
-                      {resort.name}
-                    </h3>
-                    <p className="text-premium-lightGold text-sm mb-2">{resort.nameEn}</p>
-                    <p className="text-white/90 text-xs font-medium">{resort.region}</p>
-                  </div>
                 </div>
 
                 <div className="p-4">
+                  <h3 className="text-2xl font-elegant font-bold text-premium-navy mb-1">
+                    {resort.name}
+                  </h3>
+                  <p className="text-premium-lightGold text-sm mb-2">{resort.nameEn}</p>
+                  <p className="text-premium-darkGray text-xs font-medium mb-4">{resort.region}</p>
                   <p className="text-premium-darkGray mb-4 leading-relaxed text-sm">
                     {resort.description}
                   </p>
@@ -403,15 +401,13 @@ const Resorts = () => {
                       onImageClick={(imageIndex) => handleImageClick(resort.id, resort.name, resort.folder, resort.image, imageIndex)}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-premium-navy/90 via-premium-navy/50 to-transparent pointer-events-none" />
-                    <div className="absolute bottom-0 left-0 right-0 p-3 pointer-events-none">
-                      <h3 className="text-lg font-elegant font-bold text-white mb-0.5">
-                        {resort.name}
-                      </h3>
-                      <p className="text-premium-lightGold text-xs mb-1">{resort.nameEn}</p>
-                      <p className="text-white/90 text-xs font-medium">{resort.region}</p>
-                    </div>
                   </div>
                   <div className="p-3">
+                    <h3 className="text-lg font-elegant font-bold text-premium-navy mb-0.5">
+                      {resort.name}
+                    </h3>
+                    <p className="text-premium-lightGold text-xs mb-1">{resort.nameEn}</p>
+                    <p className="text-premium-darkGray text-xs font-medium mb-3">{resort.region}</p>
                     <motion.button
                       onClick={() => setSelectedResort(selectedResort === resort.id ? null : resort.id)}
                       whileHover={{ scale: 1.05 }}
@@ -520,16 +516,14 @@ const Resorts = () => {
                       onImageClick={(imageIndex) => handleImageClick(resort.id, resort.name, resort.folder, resort.image, imageIndex)}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-premium-navy/90 via-premium-navy/50 to-transparent pointer-events-none" />
-                    <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 pointer-events-none">
-                      <h3 className="text-2xl sm:text-3xl font-elegant font-bold text-white mb-1">
-                        {resort.name}
-                      </h3>
-                      <p className="text-premium-lightGold text-sm sm:text-base mb-2 sm:mb-3">{resort.nameEn}</p>
-                      <p className="text-white/90 text-xs sm:text-sm font-medium">{resort.region}</p>
-                    </div>
                   </div>
 
                   <div className="p-4 sm:p-6">
+                    <h3 className="text-2xl sm:text-3xl font-elegant font-bold text-premium-navy mb-1">
+                      {resort.name}
+                    </h3>
+                    <p className="text-premium-lightGold text-sm sm:text-base mb-2 sm:mb-3">{resort.nameEn}</p>
+                    <p className="text-premium-darkGray text-xs sm:text-sm font-medium mb-4 sm:mb-6">{resort.region}</p>
                     <p className="text-premium-darkGray mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
                       {resort.description}
                     </p>
