@@ -114,7 +114,7 @@ const Programs = () => {
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-oswald font-bold mb-4 sm:mb-6 px-4 text-color1">
             {t('programs.title')}
           </h2>
-          <p className="text-lg sm:text-xl md:text-2xl text-white max-w-3xl mx-auto px-4">
+          <p className="text-xl sm:text-2xl md:text-3xl font-oswald text-white max-w-3xl mx-auto px-4">
             {t('programs.subtitle')}
           </p>
         </motion.div>

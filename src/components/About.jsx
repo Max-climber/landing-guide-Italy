@@ -35,7 +35,7 @@ const About = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex flex-col justify-between text-white h-full text-left"
           >
-            <div className="flex flex-col h-full justify-between gap-4 sm:gap-6 w-full max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl">
+            <div className="flex flex-col h-full justify-between gap-4 sm:gap-6 w-full max-w-sm md:max-w-lg lg:max-w-xl xl:max-w-2xl 2xl:max-w-3xl">
               {aboutText.map((paragraph, idx) => {
                 const lines = paragraph.split('\n')
                 return (

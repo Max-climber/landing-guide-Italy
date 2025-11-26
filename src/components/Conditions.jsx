@@ -75,7 +75,7 @@ const Conditions = () => {
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-oswald font-bold text-color1 mb-4 sm:mb-6 px-4">
             {t('contact.conditions')}
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-white/80 max-w-3xl mx-auto px-4">
+          <p className="text-xl sm:text-2xl md:text-3xl font-oswald text-white/80 max-w-3xl mx-auto px-4">
             {t('contact.conditionsSubtitle')}
           </p>
         </motion.div>
