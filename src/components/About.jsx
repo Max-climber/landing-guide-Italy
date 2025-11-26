@@ -33,13 +33,13 @@ const About = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex flex-col justify-between text-color1 h-full text-left"
+            className="flex flex-col justify-between text-white h-full text-left"
           >
             <div className="flex flex-col h-full justify-between gap-4 sm:gap-6 w-full max-w-sm md:max-w-[22rem] lg:max-w-[24rem] xl:max-w-[26rem] 2xl:max-w-[28rem]">
               {aboutText.map((paragraph, idx) => {
                 const lines = paragraph.split('\n')
                 return (
-                  <p key={idx} className="text-base sm:text-lg leading-relaxed full-justify">
+                  <p key={idx} className="text-base sm:text-lg leading-relaxed text-left">
                     {lines.map((line, lineIdx) => (
                       <span key={lineIdx}>
                         {line}
@@ -50,7 +50,7 @@ const About = () => {
                 )
               })}
               {t('about.whyUsText1') && (
-                <p className="text-base sm:text-lg leading-relaxed full-justify mt-4 sm:mt-6">
+                <p className="text-base sm:text-lg leading-relaxed text-left mt-4 sm:mt-6">
                   {t('about.whyUsText1')}
                 </p>
               )}
