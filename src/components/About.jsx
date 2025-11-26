@@ -35,7 +35,7 @@ const About = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex flex-col justify-between text-color1 h-full text-left"
           >
-            <div className="flex flex-col h-full justify-between gap-4 sm:gap-6 w-full max-w-2xl md:max-w-md lg:max-w-lg xl:max-w-xl md:pr-4 lg:pr-6">
+            <div className="flex flex-col h-full justify-between gap-4 sm:gap-6 w-full max-w-sm md:max-w-[22rem] lg:max-w-[24rem] xl:max-w-[26rem] 2xl:max-w-[28rem] md:pr-4 lg:pr-6">
               {aboutText.map((paragraph, idx) => {
                 const lines = paragraph.split('\n')
                 return (
@@ -60,7 +60,7 @@ const About = () => {
           >
             <div className="relative h-64 sm:h-80 md:h-96 rounded-2xl overflow-hidden shadow-2xl">
               <img
-                src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=90"
+                src="/images/about_Us.jpg"
                 alt="Альпы"
                 className="w-full h-full object-cover"
                 loading="lazy"
