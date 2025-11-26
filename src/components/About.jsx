@@ -39,7 +39,7 @@ const About = () => {
               {aboutText.map((paragraph, idx) => {
                 const lines = paragraph.split('\n')
                 return (
-                  <p key={idx} className="text-base sm:text-lg leading-relaxed text-left tracking-wide">
+                  <p key={idx} className="text-base sm:text-lg leading-relaxed text-left tracking-[0.08em]">
                     {lines.map((line, lineIdx) => (
                       <span key={lineIdx}>
                         {line}
@@ -50,7 +50,7 @@ const About = () => {
                 )
               })}
               {t('about.whyUsText1') && (
-                <p className="text-base sm:text-lg leading-relaxed text-left tracking-wide mt-4 sm:mt-6">
+                <p className="text-base sm:text-lg leading-relaxed text-left tracking-[0.08em] mt-4 sm:mt-6">
                   {t('about.whyUsText1')}
                 </p>
               )}
