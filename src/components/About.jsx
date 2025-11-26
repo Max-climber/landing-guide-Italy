@@ -33,13 +33,13 @@ const About = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex flex-col justify-between text-color1 h-full"
+            className="flex flex-col justify-between text-color1 h-full text-right"
           >
-            <div className="space-y-4 sm:space-y-6">
+            <div className="flex flex-col h-full justify-between gap-4 sm:gap-6">
               {aboutText.map((paragraph, idx) => {
                 const lines = paragraph.split('\n')
                 return (
-                  <p key={idx} className="text-base sm:text-lg leading-relaxed text-justify">
+                  <p key={idx} className="text-base sm:text-lg leading-relaxed">
                     {lines.map((line, lineIdx) => (
                       <span key={lineIdx}>
                         {line}
