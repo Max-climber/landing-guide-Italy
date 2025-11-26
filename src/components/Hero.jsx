@@ -34,7 +34,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl sm:text-2xl font-oswald font-bold uppercase text-color3 mb-2 sm:mb-3 px-4 tracking-[0.2em]"
+            className="text-xl sm:text-2xl font-oswald font-bold text-color3 mb-2 sm:mb-3 px-4 max-w-3xl mx-auto leading-snug"
           >
             {t('hero.subtitle')}
           </motion.h1>
@@ -51,7 +51,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-xl sm:text-2xl text-color3 font-bold mb-12 sm:mb-16 max-w-3xl mx-auto px-4 leading-snug"
+            className="text-xl sm:text-2xl font-oswald font-bold text-color3 mb-12 sm:mb-16 max-w-3xl mx-auto px-4 leading-snug"
           >
             {t('hero.description')}
           </motion.p>
