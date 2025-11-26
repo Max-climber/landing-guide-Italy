@@ -39,7 +39,7 @@ const About = () => {
               {aboutText.map((paragraph, idx) => {
                 const lines = paragraph.split('\n')
                 return (
-                  <p key={idx} className="text-base sm:text-lg leading-relaxed text-left hyphens-auto break-words">
+                  <p key={idx} className="text-base sm:text-lg leading-relaxed full-justify">
                     {lines.map((line, lineIdx) => (
                       <span key={lineIdx}>
                         {line}
