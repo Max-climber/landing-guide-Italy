@@ -189,7 +189,7 @@ const Resorts = () => {
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-oswald font-bold text-premium-navy mb-4 sm:mb-6 px-4">
             {t('resorts.title')}
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-premium-darkGray max-w-3xl mx-auto px-4">
+          <p className="text-lg sm:text-xl md:text-2xl text-premium-darkGray max-w-3xl mx-auto px-4">
             {t('resorts.subtitle')}
           </p>
         </motion.div>

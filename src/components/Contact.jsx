@@ -349,7 +349,7 @@ ${formData.message ? `Сообщение: ${formData.message}` : ''}
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-oswald font-bold mb-4 sm:mb-6 px-4 text-color3">
             {t('contact.title')}
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-color3 max-w-3xl mx-auto px-4">
+          <p className="text-lg sm:text-xl md:text-2xl text-color3 max-w-3xl mx-auto px-4">
             {t('contact.subtitle')}
           </p>
         </motion.div>
