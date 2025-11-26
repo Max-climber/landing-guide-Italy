@@ -122,38 +122,17 @@ const ImageModal = ({ isOpen, onClose, images, initialIndex = 0, resortName }) =
               onTouchMove={onTouchMove}
               onTouchEnd={onTouchEnd}
             >
-              {/* Кнопка закрытия */}
-              <button
-                onClick={onClose}
-                className="absolute top-4 right-4 z-30 bg-white/20 hover:bg-white/30 text-white rounded-full p-3 transition-all duration-300 hover:scale-110 active:scale-95"
-                aria-label="Закрыть"
-              >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-
               {/* Изображение */}
               <AnimatePresence mode="wait">
                 <motion.img
                   key={currentIndex}
                   src={images[currentIndex]}
                   alt={`${resortName} - фото ${currentIndex + 1}`}
-                  initial={{ opacity: 0, x: 100 }}
+                  initial={{ opacity: 0, x: 120 }}
                   animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -100 }}
+                  exit={{ opacity: 0, x: -120 }}
                   transition={{ duration: 0.3 }}
-                  className="max-w-full max-h-full object-contain"
+                  className="w-auto max-w-[90vw] max-h-[85vh] object-contain drop-shadow-2xl"
                 />
               </AnimatePresence>
 
@@ -202,24 +181,6 @@ const ImageModal = ({ isOpen, onClose, images, initialIndex = 0, resortName }) =
                     </svg>
                   </button>
                 </>
-              )}
-
-              {/* Индикаторы (точки) */}
-              {images.length > 1 && (
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex gap-2">
-                  {images.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setCurrentIndex(index)}
-                      className={`transition-all duration-300 rounded-full ${
-                        index === currentIndex
-                          ? 'bg-white w-8 h-2'
-                          : 'bg-white/50 w-2 h-2 hover:bg-white/75'
-                      }`}
-                      aria-label={`Перейти к изображению ${index + 1}`}
-                    />
-                  ))}
-                </div>
               )}
             </motion.div>
           </div>

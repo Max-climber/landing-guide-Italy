@@ -99,14 +99,14 @@ const Resorts = () => {
    * Обработчик клика на изображение - работает на всех устройствах
    * Открывает модальное окно с изображением
    */
-  const handleImageClick = (resortId, resortName, resortFolder, fallbackImage, imageIndex = 0) => {
-      const images = getResortImages(resortFolder, fallbackImage, resort.imageOrder)
-      setModalImage({
-        isOpen: true,
-        images: images,
+  const handleImageClick = (resortId, resortName, resortFolder, fallbackImage, imageOrder = null, imageIndex = 0) => {
+    const images = getResortImages(resortFolder, fallbackImage, imageOrder)
+    setModalImage({
+      isOpen: true,
+      images,
       index: imageIndex,
-        resortName: resortName,
-      })
+      resortName,
+    })
   }
 
   const resorts = [
@@ -228,9 +228,11 @@ const Resorts = () => {
                       images={getResortImages(resort.folder, resort.image, resort.imageOrder)}
                       resortName={resort.name}
                       isMobile={isMobile}
-                      onImageClick={(imageIndex) => handleImageClick(resort.id, resort.name, resort.folder, resort.image, imageIndex)}
+                      onImageClick={(imageIndex) =>
+                        handleImageClick(resort.id, resort.name, resort.folder, resort.image, resort.imageOrder, imageIndex)
+                      }
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-premium-navy/90 via-premium-navy/50 to-transparent pointer-events-none z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-premium-navy/25 via-transparent to-transparent pointer-events-none z-10" />
                   </div>
                 </div>
 
@@ -400,9 +402,11 @@ const Resorts = () => {
                         images={getResortImages(resort.folder, resort.image, resort.imageOrder)}
                         resortName={resort.name}
                         isMobile={isMobile}
-                        onImageClick={(imageIndex) => handleImageClick(resort.id, resort.name, resort.folder, resort.image, imageIndex)}
+                        onImageClick={(imageIndex) =>
+                          handleImageClick(resort.id, resort.name, resort.folder, resort.image, resort.imageOrder, imageIndex)
+                        }
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-premium-navy/90 via-premium-navy/50 to-transparent pointer-events-none z-10" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-premium-navy/20 via-transparent to-transparent pointer-events-none z-10" />
                     </div>
                   </div>
                   <div className="p-3">
@@ -516,9 +520,11 @@ const Resorts = () => {
                         images={getResortImages(resort.folder, resort.image, resort.imageOrder)}
                         resortName={resort.name}
                         isMobile={isMobile}
-                        onImageClick={(imageIndex) => handleImageClick(resort.id, resort.name, resort.folder, resort.image, imageIndex)}
+                        onImageClick={(imageIndex) =>
+                          handleImageClick(resort.id, resort.name, resort.folder, resort.image, resort.imageOrder, imageIndex)
+                        }
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-premium-navy/90 via-premium-navy/50 to-transparent pointer-events-none z-10" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-premium-navy/20 via-transparent to-transparent pointer-events-none z-10" />
                     </div>
                   </div>
 
