@@ -14,6 +14,7 @@ const ResortImageCarousel = ({ images, resortName, isMobile, onImageClick }) => 
   const [isHovered, setIsHovered] = useState(false)
   const [touchStart, setTouchStart] = useState(null)
   const [touchEnd, setTouchEnd] = useState(null)
+  const [hasSwiped, setHasSwiped] = useState(false)
   const carouselRef = useRef(null)
 
   // Минимальное расстояние для свайпа (в пикселях)
@@ -23,16 +24,28 @@ const ResortImageCarousel = ({ images, resortName, isMobile, onImageClick }) => 
   const onTouchStart = (e) => {
     setTouchEnd(null)
     setTouchStart(e.targetTouches[0].clientX)
+    setHasSwiped(false)
   }
 
   // Обработка движения касания
   const onTouchMove = (e) => {
     setTouchEnd(e.targetTouches[0].clientX)
+    // Проверяем, был ли это свайп
+    if (touchStart && e.targetTouches[0].clientX) {
+      const distance = Math.abs(touchStart - e.targetTouches[0].clientX)
+      if (distance > minSwipeDistance) {
+        setHasSwiped(true)
+      }
+    }
   }
 
   // Обработка окончания касания (свайп)
   const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) return
+    if (!touchStart || !touchEnd) {
+      setTouchStart(null)
+      setTouchEnd(null)
+      return
+    }
 
     const distance = touchStart - touchEnd
     const isLeftSwipe = distance > minSwipeDistance
@@ -40,10 +53,12 @@ const ResortImageCarousel = ({ images, resortName, isMobile, onImageClick }) => 
 
     if (isLeftSwipe) {
       goToNext()
-    }
-    if (isRightSwipe) {
+    } else if (isRightSwipe) {
       goToPrevious()
     }
+
+    setTouchStart(null)
+    setTouchEnd(null)
   }
 
   // Переход к следующему изображению
@@ -86,20 +101,21 @@ const ResortImageCarousel = ({ images, resortName, isMobile, onImageClick }) => 
   }
 
   // Обработка клика на изображение
-  const handleImageClick = () => {
+  const handleImageClick = (e) => {
+    e.stopPropagation()
     onImageClick?.(currentIndex)
   }
 
   // Обработка окончания касания - проверяем, был ли это свайп или клик
-  const handleTouchEnd = () => {
-    const wasSwipe = touchStart && touchEnd && Math.abs(touchStart - touchEnd) > minSwipeDistance
+  const handleTouchEnd = (e) => {
     onTouchEnd()
     // Если это был короткий тап (не свайп), открываем модальное окно
-    if (!wasSwipe && touchStart !== null) {
+    if (!hasSwiped && touchStart !== null) {
       setTimeout(() => {
         onImageClick?.(currentIndex)
-      }, 100)
+      }, 50)
     }
+    setHasSwiped(false)
   }
 
   return (
