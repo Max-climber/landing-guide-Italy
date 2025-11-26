@@ -35,14 +35,22 @@ const Navigation = ({ scrollY }) => {
     >
       <div className="container-max px-4 md:px-8 lg:px-16">
         <div className="flex items-center justify-between h-16 sm:h-18 md:h-20">
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="flex items-center space-x-2 flex-shrink-0 min-w-0"
+          <a
+            className="flex items-center flex-shrink-0 min-w-0 h-full"
+            href="#"
+            aria-label="La Vacanza Bianca"
+            onClick={(e) => {
+              e.preventDefault()
+              window.scrollTo({ top: 0, behavior: 'smooth' })
+            }}
           >
-            <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-elegant font-bold text-color1 whitespace-nowrap overflow-hidden text-ellipsis">
-              La Vacanza Bianca
-            </span>
-          </motion.div>
+            <img
+              src="/logo.jpg"
+              alt="La Vacanza Bianca"
+              className="h-full w-auto object-contain block"
+              loading="lazy"
+            />
+          </a>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6 lg:gap-8 flex-shrink-0">

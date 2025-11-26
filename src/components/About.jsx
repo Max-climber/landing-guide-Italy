@@ -23,7 +23,7 @@ const About = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-elegant font-bold text-color1 mb-4 sm:mb-6 px-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-oswald font-bold text-color1 mb-4 sm:mb-6 px-4">
             {t('about.title')}
           </h2>
         </motion.div>
@@ -33,13 +33,13 @@ const About = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex flex-col justify-between text-color1 h-full text-right"
+            className="flex flex-col justify-between text-color1 h-full text-left"
           >
-            <div className="flex flex-col h-full justify-between gap-4 sm:gap-6">
+            <div className="flex flex-col h-full justify-between gap-4 sm:gap-6 w-full md:max-w-xl md:pr-4 lg:pr-6">
               {aboutText.map((paragraph, idx) => {
                 const lines = paragraph.split('\n')
                 return (
-                  <p key={idx} className="text-base sm:text-lg leading-relaxed">
+                  <p key={idx} className="text-base sm:text-lg leading-relaxed full-justify">
                     {lines.map((line, lineIdx) => (
                       <span key={lineIdx}>
                         {line}

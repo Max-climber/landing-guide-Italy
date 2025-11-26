@@ -111,7 +111,7 @@ const Programs = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-elegant font-bold mb-4 sm:mb-6 px-4 text-white">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-oswald font-bold mb-4 sm:mb-6 px-4 text-color1">
             {t('programs.title')}
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-white max-w-3xl mx-auto px-4">
@@ -150,7 +150,7 @@ const Programs = () => {
           >
             <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
               <div>
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-elegant font-bold mb-3 sm:mb-4 text-white">
+                <h3 className="text-2xl sm:text-3xl md:text-4xl font-oswald font-bold mb-3 sm:mb-4 text-color1">
                   {program.title}
                 </h3>
                 <p className="text-lg sm:text-xl text-white mb-4 sm:mb-6">{program.subtitle}</p>
@@ -174,7 +174,7 @@ const Programs = () => {
               </div>
 
               <div className="bg-color2 rounded-xl p-4 sm:p-6">
-                <h4 className="text-2xl sm:text-3xl md:text-4xl font-elegant font-bold mb-4 sm:mb-6 text-color1">
+                <h4 className="text-2xl sm:text-3xl md:text-4xl font-oswald font-bold mb-4 sm:mb-6 text-color1">
                   {t('programs.cost')}
                 </h4>
                 <div className="space-y-6">

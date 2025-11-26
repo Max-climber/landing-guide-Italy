@@ -346,7 +346,7 @@ ${formData.message ? `Сообщение: ${formData.message}` : ''}
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-elegant font-bold mb-4 sm:mb-6 px-4 text-color3">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-oswald font-bold mb-4 sm:mb-6 px-4 text-color3">
             {t('contact.title')}
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-color3 max-w-3xl mx-auto px-4">
@@ -362,7 +362,7 @@ ${formData.message ? `Сообщение: ${formData.message}` : ''}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="bg-color2/10 rounded-2xl p-4 sm:p-6 md:p-8 border border-color2/20"
           >
-            <h3 className="text-xl sm:text-2xl font-elegant font-bold mb-4 sm:mb-6 text-color3">
+            <h3 className="text-xl sm:text-2xl font-oswald font-bold mb-4 sm:mb-6 text-color3">
               {t('contact.sendRequest')}
             </h3>
             <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
@@ -496,7 +496,7 @@ ${formData.message ? `Сообщение: ${formData.message}` : ''}
                 type="submit"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full px-4 py-3 sm:px-6 sm:py-4 bg-color1 text-color3 rounded-none font-oswald font-semibold text-base sm:text-lg uppercase tracking-wider hover:bg-color1/90 transition-colors"
+                className="w-full px-4 py-3 sm:px-6 sm:py-4 bg-color3 text-color1 rounded-lg font-oswald font-semibold text-base sm:text-lg uppercase tracking-wider hover:bg-color3/90 transition-colors"
               >
                 {t('contact.form.submit')}
               </motion.button>
@@ -512,7 +512,7 @@ ${formData.message ? `Сообщение: ${formData.message}` : ''}
           >
             {/* Quick Contact */}
             <div className="bg-color2/10 rounded-2xl p-4 sm:p-6 md:p-8 border border-color2/20">
-              <h3 className="text-xl sm:text-2xl font-elegant font-bold mb-4 sm:mb-6 text-color3">
+            <h3 className="text-xl sm:text-2xl font-oswald font-bold mb-4 sm:mb-6 text-color3">
                 {t('contact.quickContact')}
               </h3>
               <div className="space-y-3 sm:space-y-4">

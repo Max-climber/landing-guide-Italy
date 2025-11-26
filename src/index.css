@@ -142,6 +142,11 @@
     @apply bg-gradient-to-r from-premium-gold to-premium-lightGold bg-clip-text text-transparent;
   }
   
+  .full-justify {
+    text-align: justify;
+    text-align-last: justify;
+  }
+  
   .section-padding {
     @apply py-20 px-4 md:px-8 lg:px-16;
   }

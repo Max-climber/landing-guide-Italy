@@ -186,7 +186,7 @@ const Resorts = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-elegant font-bold text-premium-navy mb-4 sm:mb-6 px-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-oswald font-bold text-premium-navy mb-4 sm:mb-6 px-4">
             {t('resorts.title')}
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-premium-darkGray max-w-3xl mx-auto px-4">
@@ -235,7 +235,7 @@ const Resorts = () => {
                 </div>
 
                 <div className="p-4">
-                  <h3 className="text-2xl font-elegant font-bold text-premium-navy mb-1">
+                  <h3 className="text-2xl font-oswald font-bold text-premium-navy mb-1">
                     {resort.name}
                   </h3>
                   <p className="text-premium-darkGray text-xs font-medium mb-4">{resort.region}</p>
@@ -299,7 +299,7 @@ const Resorts = () => {
                     onClick={() => setSelectedResort(selectedResort === resort.id ? null : resort.id)}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-premium-navy text-white rounded-lg font-semibold text-sm hover:bg-premium-navy/90 transition-colors mb-4"
+                    className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-color2 text-color1 rounded-lg font-semibold text-sm hover:bg-color2/80 transition-colors mb-4"
                   >
                     <span>{selectedResort === resort.id ? t('resorts.hideFeatures') : t('resorts.showFeatures')}</span>
                     <motion.svg
@@ -327,7 +327,7 @@ const Resorts = () => {
                       transition={{ duration: 0.3 }}
                       className="pt-4 border-t-2 border-premium-gray"
                     >
-                      <h4 className="text-lg font-elegant font-bold text-premium-navy mb-3">
+                      <h4 className="text-lg font-oswald font-bold text-premium-navy mb-3">
                         {t('resorts.features')}
                       </h4>
                       <ul className="space-y-2">
@@ -355,7 +355,7 @@ const Resorts = () => {
                 onClick={() => setShowAllResorts(true)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full px-6 py-4 bg-color3 text-white rounded-none font-oswald font-bold text-lg uppercase tracking-wider hover:bg-color3/90 transition-colors shadow-lg"
+                className="w-full px-6 py-4 bg-color3 text-white rounded-lg font-oswald font-bold text-lg uppercase tracking-wider hover:bg-color3/90 transition-colors shadow-lg"
               >
                 Больше курортов
               </motion.button>
@@ -406,7 +406,7 @@ const Resorts = () => {
                     </div>
                   </div>
                   <div className="p-3">
-                    <h3 className="text-lg font-elegant font-bold text-premium-navy mb-0.5">
+                    <h3 className="text-lg font-oswald font-bold text-premium-navy mb-0.5">
                       {resort.name}
                     </h3>
                     <p className="text-premium-darkGray text-xs font-medium mb-3">{resort.region}</p>
@@ -493,7 +493,7 @@ const Resorts = () => {
                             {resort.airportDistance}
                           </p>
                         </div>
-                        <h4 className="text-base font-elegant font-bold text-premium-navy mb-2">
+                        <h4 className="text-base font-oswald font-bold text-premium-navy mb-2">
                           {t('resorts.features')}
                         </h4>
                         <ul className="space-y-1.5">
@@ -523,7 +523,7 @@ const Resorts = () => {
                   </div>
 
                   <div className="p-4 sm:p-6">
-                    <h3 className="text-2xl sm:text-3xl font-elegant font-bold text-premium-navy mb-1">
+                    <h3 className="text-2xl sm:text-3xl font-oswald font-bold text-premium-navy mb-1">
                       {resort.name}
                     </h3>
                     <p className="text-premium-darkGray text-xs sm:text-sm font-medium mb-4 sm:mb-6">{resort.region}</p>
@@ -587,7 +587,7 @@ const Resorts = () => {
                       onClick={() => setSelectedResort(selectedResort === resort.id ? null : resort.id)}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="w-full flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-3 bg-premium-navy text-white rounded-lg font-semibold text-sm sm:text-base hover:bg-premium-navy/90 transition-colors"
+                      className="w-full flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-3 bg-color2 text-color1 rounded-lg font-semibold text-sm sm:text-base hover:bg-color2/80 transition-colors"
                     >
                       <span>{selectedResort === resort.id ? t('resorts.hideFeatures') : t('resorts.showFeatures')}</span>
                       <motion.svg
@@ -615,7 +615,7 @@ const Resorts = () => {
                         transition={{ duration: 0.3 }}
                         className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t-2 border-premium-gray"
                       >
-                        <h4 className="text-lg sm:text-xl font-elegant font-bold text-premium-navy mb-3 sm:mb-4">
+                        <h4 className="text-lg sm:text-xl font-oswald font-bold text-premium-navy mb-3 sm:mb-4">
                           {t('resorts.features')}
                         </h4>
                         <ul className="space-y-2 sm:space-y-3">

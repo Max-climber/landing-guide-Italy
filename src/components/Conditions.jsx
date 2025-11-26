@@ -72,7 +72,7 @@ const Conditions = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-elegant font-bold text-white mb-4 sm:mb-6 px-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-oswald font-bold text-color1 mb-4 sm:mb-6 px-4">
             {t('contact.conditions')}
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-white/80 max-w-3xl mx-auto px-4">
@@ -89,7 +89,7 @@ const Conditions = () => {
                       initial={{ opacity: 0, y: 50 }}
                       animate={inView ? { opacity: 1, y: 0 } : {}}
                       transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className={`relative bg-gradient-to-br ${condition.gradient} backdrop-blur-md rounded-2xl p-6 sm:p-8 border-2 ${condition.borderColor} hover:border-premium-gold transition-all duration-300 hover:shadow-2xl hover:scale-105 group lg:h-full lg:flex lg:flex-col`}
+                      className="relative bg-color2 rounded-2xl p-6 sm:p-8 border border-white hover:border-white transition-all duration-300 hover:shadow-2xl hover:scale-105 group lg:h-full lg:flex lg:flex-col text-white"
                     >
                       {/* Shine Effect */}
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
@@ -97,7 +97,7 @@ const Conditions = () => {
                       <div className="relative z-10">
                         <div className="flex items-center gap-4 mb-4">
                           <div className="text-4xl sm:text-5xl">{condition.key === 'transfers' ? '🚗' : condition.icon}</div>
-                          <h3 className="text-xl sm:text-2xl font-elegant font-bold text-white">
+                          <h3 className="text-xl sm:text-2xl font-oswald font-bold text-white">
                             {t(`contact.conditionsSections.${condition.key}.title`).replace(/📅|🏨|🚗|⛷️|💳/g, '').trim()}
                           </h3>
                         </div>
@@ -308,7 +308,7 @@ const Conditions = () => {
                       initial={{ opacity: 0, y: 50 }}
                       animate={inView ? { opacity: 1, y: 0 } : {}}
                       transition={{ duration: 0.5, delay: (index + 3) * 0.1 }}
-                      className={`relative bg-gradient-to-br ${condition.gradient} backdrop-blur-md rounded-2xl p-6 sm:p-8 border-2 ${condition.borderColor} hover:border-premium-gold transition-all duration-300 hover:shadow-2xl hover:scale-105 group lg:h-full lg:flex lg:flex-col`}
+                      className="relative bg-color2 rounded-2xl p-6 sm:p-8 border border-white hover:border-white transition-all duration-300 hover:shadow-2xl hover:scale-105 group lg:h-full lg:flex lg:flex-col text-white"
                     >
                       {/* Shine Effect */}
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
@@ -316,7 +316,7 @@ const Conditions = () => {
                       <div className="relative z-10">
                         <div className="flex items-center gap-4 mb-4">
                           <div className="text-4xl sm:text-5xl">{condition.key === 'transfers' ? '🚗' : condition.icon}</div>
-                          <h3 className="text-xl sm:text-2xl font-elegant font-bold text-white">
+                          <h3 className="text-xl sm:text-2xl font-oswald font-bold text-white">
                             {t(`contact.conditionsSections.${condition.key}.title`).replace(/📅|🏨|🚗|⛷️|💳/g, '').trim()}
                           </h3>
                         </div>

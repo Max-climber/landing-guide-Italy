@@ -9,7 +9,7 @@ const Footer = () => {
       <div className="container-max px-4 md:px-8 lg:px-16">
         <div className="grid md:grid-cols-3 gap-6 sm:gap-8 mb-6 sm:mb-8">
           <div>
-            <h3 className="text-xl sm:text-2xl font-elegant font-bold text-color1 mb-3 sm:mb-4">
+            <h3 className="text-xl sm:text-2xl font-oswald font-bold text-color1 mb-3 sm:mb-4">
               La Vacanza Bianca
             </h3>
             <p className="text-sm sm:text-base text-white/80 mb-3 sm:mb-4">
@@ -17,7 +17,7 @@ const Footer = () => {
             </p>
           </div>
           <div>
-            <h4 className="font-semibold mb-3 sm:mb-4 text-base sm:text-lg">{t('footer.quickLinks')}</h4>
+            <h4 className="font-oswald font-semibold text-color1 mb-3 sm:mb-4 text-base sm:text-lg">{t('footer.quickLinks')}</h4>
             <ul className="space-y-2">
               <li>
                 <a
@@ -54,7 +54,7 @@ const Footer = () => {
             </ul>
           </div>
           <div>
-            <h4 className="font-semibold mb-3 sm:mb-4 text-base sm:text-lg">{t('footer.contacts')}</h4>
+            <h4 className="font-oswald font-semibold text-color1 mb-3 sm:mb-4 text-base sm:text-lg">{t('footer.contacts')}</h4>
             <ul className="space-y-2 text-sm sm:text-base text-white/80">
               <li>{t('footer.email')} artarxi@gmail.com</li>
               <li>{t('footer.phone')} +39 333 143 0647</li>
