@@ -236,7 +236,6 @@ const Resorts = () => {
                   <h3 className="text-2xl font-elegant font-bold text-premium-navy mb-1">
                     {resort.name}
                   </h3>
-                  <p className="text-premium-lightGold text-sm mb-2">{resort.nameEn}</p>
                   <p className="text-premium-darkGray text-xs font-medium mb-4">{resort.region}</p>
                   <p className="text-premium-darkGray mb-4 leading-relaxed text-sm">
                     {resort.description}
@@ -406,7 +405,6 @@ const Resorts = () => {
                     <h3 className="text-lg font-elegant font-bold text-premium-navy mb-0.5">
                       {resort.name}
                     </h3>
-                    <p className="text-premium-lightGold text-xs mb-1">{resort.nameEn}</p>
                     <p className="text-premium-darkGray text-xs font-medium mb-3">{resort.region}</p>
                     <motion.button
                       onClick={() => setSelectedResort(selectedResort === resort.id ? null : resort.id)}
@@ -522,7 +520,6 @@ const Resorts = () => {
                     <h3 className="text-2xl sm:text-3xl font-elegant font-bold text-premium-navy mb-1">
                       {resort.name}
                     </h3>
-                    <p className="text-premium-lightGold text-sm sm:text-base mb-2 sm:mb-3">{resort.nameEn}</p>
                     <p className="text-premium-darkGray text-xs sm:text-sm font-medium mb-4 sm:mb-6">{resort.region}</p>
                     <p className="text-premium-darkGray mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
                       {resort.description}
