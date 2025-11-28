@@ -23,7 +23,7 @@ const About = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-oswald font-bold text-color1 mb-4 sm:mb-6 px-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-oswald font-bold text-color1 mb-4 sm:mb-6 px-4">
             {t('about.title')}
           </h2>
         </motion.div>
@@ -37,23 +37,12 @@ const About = () => {
           >
             <div className="flex flex-col h-full justify-between gap-4 sm:gap-6 w-full max-w-sm md:max-w-lg lg:max-w-xl xl:max-w-2xl 2xl:max-w-3xl">
               {aboutText.map((paragraph, idx) => {
-                const lines = paragraph.split('\n')
                 return (
-                  <p key={idx} className="text-base sm:text-lg leading-relaxed text-left tracking-[0.08em]">
-                    {lines.map((line, lineIdx) => (
-                      <span key={lineIdx}>
-                        {line}
-                        {lineIdx !== lines.length - 1 && <br />}
-                      </span>
-                    ))}
+                  <p key={idx} className="text-base sm:text-lg md:text-xl leading-relaxed text-left tracking-[0.08em]">
+                    {paragraph}
                   </p>
                 )
               })}
-              {t('about.whyUsText1') && (
-                <p className="text-base sm:text-lg leading-relaxed text-left tracking-[0.08em] mt-4 sm:mt-6">
-                  {t('about.whyUsText1')}
-                </p>
-              )}
             </div>
           </motion.div>
 

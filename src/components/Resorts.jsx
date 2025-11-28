@@ -132,20 +132,20 @@ const Resorts = () => {
     },
     {
       id: 3,
-      ...getResortData('bivio'),
-      image:
-        'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-      folder: 'bivio',
-      isFeatured: true,
-      url: 'https://www.schneesportbivio.ch/',
-    },
-    {
-      id: 4,
       ...getResortData('sanktMoritz'),
       image:
         'https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
       folder: 'sankt-moritz',
+      isFeatured: true,
       url: 'https://www.engadin.ch/de',
+    },
+    {
+      id: 4,
+      ...getResortData('bivio'),
+      image:
+        'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      folder: 'bivio',
+      url: 'https://www.schneesportbivio.ch/',
     },
     {
       id: 5,
@@ -186,7 +186,7 @@ const Resorts = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-oswald font-bold text-premium-navy mb-4 sm:mb-6 px-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-oswald font-bold text-premium-navy mb-4 sm:mb-6 px-4">
             {t('resorts.title')}
           </h2>
           <p className="text-xl sm:text-2xl md:text-3xl font-oswald text-premium-darkGray max-w-3xl mx-auto px-4">
@@ -373,7 +373,7 @@ const Resorts = () => {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={!isMobile ? { y: -10 } : {}}
-              className={`bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all relative ${
+              className={`bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all relative flex flex-col ${
                 resort.discount ? 'ring-4 ring-premium-gold ring-opacity-50' : ''
               } ${resort.isFeatured ? 'border-2 border-premium-gold' : ''} ${
                   index === resorts.length - 1 && resorts.length % 3 === 1 && !isMobile ? 'lg:col-start-2' : ''
@@ -418,7 +418,7 @@ const Resorts = () => {
                       onClick={() => setSelectedResort(selectedResort === resort.id ? null : resort.id)}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-premium-navy text-white rounded-lg font-semibold text-sm hover:bg-premium-navy/90 transition-colors"
+                      className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-color3 text-white rounded-lg font-semibold text-sm hover:bg-color3/90 transition-colors"
                     >
                       <span>{selectedResort === resort.id ? t('resorts.hideFeatures') : t('resorts.showFeatures')}</span>
                       <motion.svg
@@ -528,12 +528,12 @@ const Resorts = () => {
                     </div>
                   </div>
 
-                  <div className="p-4 sm:p-6">
+                  <div className="p-4 sm:p-6 flex flex-col flex-grow">
                     <h3 className="text-2xl sm:text-3xl font-oswald font-bold text-premium-navy mb-1">
                       {resort.name}
                     </h3>
-                    <p className="text-premium-darkGray text-xs sm:text-sm font-medium mb-4 sm:mb-6">{resort.region}</p>
-                    <p className="text-premium-darkGray mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
+                    <p className="text-premium-darkGray text-sm sm:text-base font-medium mb-4 sm:mb-6">{resort.region}</p>
+                    <p className="text-premium-darkGray mb-4 sm:mb-6 leading-relaxed text-base sm:text-lg">
                       {resort.description}
                     </p>
                     
@@ -593,7 +593,7 @@ const Resorts = () => {
                       onClick={() => setSelectedResort(selectedResort === resort.id ? null : resort.id)}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="w-full flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-3 bg-color2 text-color1 rounded-lg font-semibold text-sm sm:text-base hover:bg-color2/80 transition-colors"
+                      className="w-full flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-3 bg-color3 text-white rounded-lg font-semibold text-sm sm:text-base hover:bg-color3/90 transition-colors mt-auto"
                     >
                       <span>{selectedResort === resort.id ? t('resorts.hideFeatures') : t('resorts.showFeatures')}</span>
                       <motion.svg
@@ -634,7 +634,7 @@ const Resorts = () => {
                               className="flex items-start gap-2 sm:gap-3"
                             >
                               <span className="text-color1 text-lg sm:text-xl mt-0.5">✓</span>
-                              <span className="text-sm sm:text-base text-premium-darkGray leading-relaxed">{highlight}</span>
+                              <span className="text-base sm:text-lg text-premium-darkGray leading-relaxed">{highlight}</span>
                             </motion.li>
                           ))}
                         </ul>

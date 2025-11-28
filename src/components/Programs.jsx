@@ -111,7 +111,7 @@ const Programs = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-oswald font-bold mb-4 sm:mb-6 px-4 text-color1">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-oswald font-bold mb-4 sm:mb-6 px-4 text-color1">
             {t('programs.title')}
           </h2>
           <p className="text-xl sm:text-2xl md:text-3xl font-oswald text-white max-w-3xl mx-auto px-4">
@@ -127,7 +127,7 @@ const Programs = () => {
               onClick={() => setActiveProgram(index)}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className={`px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-oswald font-semibold text-sm sm:text-base uppercase tracking-wider transition-all ${
+              className={`px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-oswald font-semibold text-base sm:text-lg uppercase tracking-wider transition-all ${
                 activeProgram === index
                   ? 'bg-color1 text-color3'
                   : 'bg-white/10 text-white hover:bg-color1 hover:text-color3'
@@ -154,7 +154,7 @@ const Programs = () => {
                   {program.title}
                 </h3>
                 <p className="text-xl sm:text-2xl text-white mb-4 sm:mb-6">{program.subtitle}</p>
-                <p className="text-base sm:text-lg text-white mb-6 sm:mb-8 leading-relaxed">
+                <p className="text-base sm:text-lg md:text-xl text-white mb-6 sm:mb-8 leading-relaxed">
                   {program.description}
                 </p>
 
@@ -166,7 +166,7 @@ const Programs = () => {
                     {program.features.map((feature, idx) => (
                       <li key={idx} className="flex items-start">
                         <span className="text-color1 mr-2 sm:mr-3 mt-1 text-sm sm:text-base">✓</span>
-                        <span className="text-sm sm:text-base text-white">{feature}</span>
+                        <span className="text-base sm:text-lg text-white">{feature}</span>
                       </li>
                     ))}
                   </ul>

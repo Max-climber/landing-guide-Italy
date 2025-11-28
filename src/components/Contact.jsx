@@ -346,7 +346,7 @@ ${formData.message ? `Сообщение: ${formData.message}` : ''}
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-oswald font-bold mb-4 sm:mb-6 px-4 text-color3">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-oswald font-bold mb-4 sm:mb-6 px-4 text-color3">
             {t('contact.title')}
           </h2>
           <p className="text-xl sm:text-2xl md:text-3xl font-oswald text-color3 max-w-3xl mx-auto px-4">

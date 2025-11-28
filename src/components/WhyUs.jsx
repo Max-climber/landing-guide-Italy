@@ -20,7 +20,7 @@ const WhyUs = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-oswald font-bold mb-6 sm:mb-8 text-center text-color3"
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-oswald font-bold mb-6 sm:mb-8 text-center text-color3"
         >
           {t('about.whyUs')}
         </motion.h3>
@@ -32,11 +32,11 @@ const WhyUs = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="space-y-4 sm:space-y-6 max-w-4xl mx-auto"
         >
-          <p className="text-base sm:text-lg md:text-xl leading-relaxed text-color3 text-justify">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-color3 text-justify">
             {t('about.whyUsText1')}
           </p>
           
-          <ul className="space-y-3 sm:space-y-4 text-base sm:text-lg md:text-xl leading-relaxed text-color3 text-justify">
+          <ul className="space-y-3 sm:space-y-4 text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-color3 text-justify">
             <li className="flex items-start">
               <span className="mr-2">-</span>
               <span>{t('about.whyUsList.item1')}</span>

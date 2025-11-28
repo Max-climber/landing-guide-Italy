@@ -54,11 +54,11 @@ const Navigation = ({ scrollY }) => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6 lg:gap-8 flex-shrink-0">
-            {navItems.map((item) => (
+            {navItems.filter(item => item.href !== '#contact').map((item) => (
               <button
                 key={item.href}
                 onClick={() => scrollToSection(item.href)}
-                className="text-color1 hover:text-white transition-colors duration-300 font-semibold"
+                className="text-color1 hover:text-white transition-colors duration-300 font-oswald font-semibold text-base"
               >
                 {item.name}
               </button>
