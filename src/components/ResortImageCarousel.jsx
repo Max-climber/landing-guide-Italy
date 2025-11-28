@@ -1,5 +1,4 @@
 import { useState, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 
 /**
  * Компонент карусели изображений для карточек курортов
@@ -12,53 +11,70 @@ import { motion, AnimatePresence } from 'framer-motion'
 const ResortImageCarousel = ({ images, resortName, isMobile, onImageClick }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isHovered, setIsHovered] = useState(false)
-  const [touchStart, setTouchStart] = useState(null)
-  const [touchEnd, setTouchEnd] = useState(null)
-  const [hasSwiped, setHasSwiped] = useState(false)
+  const touchStartRef = useRef(null)
+  const touchEndRef = useRef(null)
+  const touchTimeRef = useRef(null)
   const carouselRef = useRef(null)
 
   // Минимальное расстояние для свайпа (в пикселях)
   const minSwipeDistance = 50
+  // Максимальное время для тапа (в миллисекундах)
+  const maxTapTime = 300
 
   // Обработка начала касания
   const onTouchStart = (e) => {
-    setTouchEnd(null)
-    setTouchStart(e.targetTouches[0].clientX)
-    setHasSwiped(false)
+    const touch = e.touches[0]
+    touchStartRef.current = touch.clientX
+    touchEndRef.current = null
+    touchTimeRef.current = Date.now()
   }
 
   // Обработка движения касания
   const onTouchMove = (e) => {
-    setTouchEnd(e.targetTouches[0].clientX)
-    // Проверяем, был ли это свайп
-    if (touchStart && e.targetTouches[0].clientX) {
-      const distance = Math.abs(touchStart - e.targetTouches[0].clientX)
-      if (distance > minSwipeDistance) {
-        setHasSwiped(true)
-      }
+    if (touchStartRef.current !== null) {
+      touchEndRef.current = e.touches[0].clientX
     }
   }
 
-  // Обработка окончания касания (свайп)
+  // Обработка окончания касания
   const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) {
-      setTouchStart(null)
-      setTouchEnd(null)
+    if (touchStartRef.current === null) return
+
+    const touchTime = Date.now() - touchTimeRef.current
+    const startX = touchStartRef.current
+    const endX = touchEndRef.current
+
+    // Если не было движения - это клик
+    if (endX === null) {
+      if (touchTime < maxTapTime) {
+        onImageClick?.(currentIndex)
+      }
+      touchStartRef.current = null
+      touchTimeRef.current = null
       return
     }
 
-    const distance = touchStart - touchEnd
-    const isLeftSwipe = distance > minSwipeDistance
-    const isRightSwipe = distance < -minSwipeDistance
+    const distance = Math.abs(startX - endX)
+    const isSwipe = distance > minSwipeDistance
 
-    if (isLeftSwipe) {
-      goToNext()
-    } else if (isRightSwipe) {
-      goToPrevious()
+    if (isSwipe) {
+      // Это свайп - переключаем изображение
+      const isLeftSwipe = startX - endX > minSwipeDistance
+      const isRightSwipe = endX - startX > minSwipeDistance
+
+      if (isLeftSwipe) {
+        goToNext()
+      } else if (isRightSwipe) {
+        goToPrevious()
+      }
+    } else if (touchTime < maxTapTime) {
+      // Это короткий тап - открываем модальное окно
+      onImageClick?.(currentIndex)
     }
 
-    setTouchStart(null)
-    setTouchEnd(null)
+    touchStartRef.current = null
+    touchEndRef.current = null
+    touchTimeRef.current = null
   }
 
   // Переход к следующему изображению
@@ -100,22 +116,11 @@ const ResortImageCarousel = ({ images, resortName, isMobile, onImageClick }) => 
     )
   }
 
-  // Обработка клика на изображение
+  // Обработка клика на изображение (для десктопа)
   const handleImageClick = (e) => {
     e.stopPropagation()
+    e.preventDefault()
     onImageClick?.(currentIndex)
-  }
-
-  // Обработка окончания касания - проверяем, был ли это свайп или клик
-  const handleTouchEnd = (e) => {
-    onTouchEnd()
-    // Если это был короткий тап (не свайп), открываем модальное окно
-    if (!hasSwiped && touchStart !== null) {
-      setTimeout(() => {
-        onImageClick?.(currentIndex)
-      }, 50)
-    }
-    setHasSwiped(false)
   }
 
   return (
@@ -126,23 +131,17 @@ const ResortImageCarousel = ({ images, resortName, isMobile, onImageClick }) => 
       onMouseLeave={() => !isMobile && setIsHovered(false)}
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
-      onTouchEnd={handleTouchEnd}
+      onTouchEnd={onTouchEnd}
     >
       {/* Контейнер изображений */}
-      <div className="relative w-full h-full" onClick={handleImageClick}>
-        <AnimatePresence mode="wait">
-          <motion.img
-            key={currentIndex}
-            src={images[currentIndex]}
-            alt={`${resortName} - фото ${currentIndex + 1}`}
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -100 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="w-full h-full object-cover cursor-pointer"
-            onClick={handleImageClick}
-          />
-        </AnimatePresence>
+      <div className="relative w-full h-full">
+        <img
+          src={images[currentIndex]}
+          alt={`${resortName} - фото ${currentIndex + 1}`}
+          className="w-full h-full object-cover cursor-pointer select-none"
+          onClick={handleImageClick}
+          draggable="false"
+        />
       </div>
 
       {/* Стрелки навигации */}

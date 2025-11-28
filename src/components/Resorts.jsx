@@ -1,5 +1,3 @@
-import { motion } from 'framer-motion'
-import { useInView } from 'react-intersection-observer'
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import ResortImageCarousel from './ResortImageCarousel'
@@ -7,10 +5,6 @@ import ImageModal from './ImageModal'
 
 const Resorts = () => {
   const { t } = useTranslation()
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  })
 
   const [selectedResort, setSelectedResort] = useState(null)
   const [isMobile, setIsMobile] = useState(false)
@@ -176,33 +170,24 @@ const Resorts = () => {
   return (
     <section
       id="resorts"
-      ref={ref}
       className="section-padding bg-gradient-to-b from-premium-gray to-white"
     >
       <div className="container-max">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-oswald font-bold text-premium-navy mb-4 sm:mb-6 px-4">
             {t('resorts.title')}
           </h2>
           <p className="text-xl sm:text-2xl md:text-3xl font-oswald text-premium-darkGray max-w-3xl mx-auto px-4">
             {t('resorts.subtitle')}
           </p>
-        </motion.div>
+        </div>
 
         {isMobile && !showAllResorts ? (
           // Мобильный вид: показываем только первую карточку целиком
           <>
             {resorts.slice(0, 1).map((resort) => (
-              <motion.div
+              <div
                 key={resort.id}
-                initial={{ opacity: 0, y: 50 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5 }}
                 className={`bg-white rounded-2xl overflow-hidden shadow-lg transition-all relative ${
                   resort.discount ? 'ring-4 ring-premium-gold ring-opacity-50' : ''
                 } ${resort.isFeatured ? 'border-2 border-premium-gold' : ''}`}
@@ -297,20 +282,16 @@ const Resorts = () => {
                     </p>
                   </div>
 
-                  <motion.button
+                  <button
                     onClick={() => setSelectedResort(selectedResort === resort.id ? null : resort.id)}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
                     className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-color2 text-color1 rounded-lg font-semibold text-sm hover:bg-color2/80 transition-colors mb-4"
                   >
                     <span>{selectedResort === resort.id ? t('resorts.hideFeatures') : t('resorts.showFeatures')}</span>
-                    <motion.svg
-                      className="w-5 h-5"
+                    <svg
+                      className={`w-5 h-5 transition-transform ${selectedResort === resort.id ? 'rotate-180' : ''}`}
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
-                      animate={{ rotate: selectedResort === resort.id ? 180 : 0 }}
-                      transition={{ duration: 0.3 }}
                     >
                       <path
                         strokeLinecap="round"
@@ -318,17 +299,11 @@ const Resorts = () => {
                         strokeWidth={2}
                         d="M19 9l-7 7-7-7"
                       />
-                    </motion.svg>
-                  </motion.button>
+                    </svg>
+                  </button>
 
                   {selectedResort === resort.id && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="pt-4 border-t-2 border-premium-gray"
-                    >
+                    <div className="pt-4 border-t-2 border-premium-gray">
                       <h4 className="text-lg font-oswald font-bold text-premium-navy mb-3">
                         {t('resorts.features')}
                       </h4>
@@ -340,39 +315,28 @@ const Resorts = () => {
                           </li>
                         ))}
                       </ul>
-                    </motion.div>
+                    </div>
                   )}
                 </div>
-              </motion.div>
+              </div>
             ))}
             
             {/* Кнопка "Больше курортов" */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="mt-6"
-            >
-              <motion.button
+            <div className="mt-6">
+              <button
                 onClick={() => setShowAllResorts(true)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
                 className="w-full px-6 py-4 bg-color3 text-white rounded-lg font-oswald font-bold text-lg uppercase tracking-wider hover:bg-color3/90 transition-colors shadow-lg"
               >
                 Больше курортов
-              </motion.button>
-            </motion.div>
+              </button>
+            </div>
           </>
         ) : (
           // Десктопный вид или все курорты на мобилке
           <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'} gap-6 sm:gap-8`}>
           {resorts.map((resort, index) => (
-            <motion.div
+            <div
               key={resort.id}
-              initial={{ opacity: 0, y: 50 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={!isMobile ? { y: -10 } : {}}
               className={`bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all relative flex flex-col ${
                 resort.discount ? 'ring-4 ring-premium-gold ring-opacity-50' : ''
               } ${resort.isFeatured ? 'border-2 border-premium-gold' : ''} ${
@@ -414,20 +378,16 @@ const Resorts = () => {
                       {resort.name}
                     </h3>
                     <p className="text-premium-darkGray text-xs font-medium mb-3">{resort.region}</p>
-                    <motion.button
+                    <button
                       onClick={() => setSelectedResort(selectedResort === resort.id ? null : resort.id)}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
                       className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-color2 text-color1 rounded-lg font-semibold text-sm hover:bg-color2/80 transition-colors"
                     >
                       <span>{selectedResort === resort.id ? t('resorts.hideFeatures') : t('resorts.showFeatures')}</span>
-                      <motion.svg
-                        className="w-4 h-4"
+                      <svg
+                        className={`w-4 h-4 transition-transform ${selectedResort === resort.id ? 'rotate-180' : ''}`}
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
-                        animate={{ rotate: selectedResort === resort.id ? 180 : 0 }}
-                        transition={{ duration: 0.3 }}
                       >
                         <path
                           strokeLinecap="round"
@@ -435,16 +395,10 @@ const Resorts = () => {
                           strokeWidth={2}
                           d="M19 9l-7 7-7-7"
                         />
-                      </motion.svg>
-                    </motion.button>
+                      </svg>
+                    </button>
                     {selectedResort === resort.id && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="mt-3 pt-3 border-t-2 border-premium-gray"
-                      >
+                      <div className="mt-3 pt-3 border-t-2 border-premium-gray">
                         <p className="text-premium-darkGray mb-3 leading-relaxed text-xs">
                           {resort.description}
                         </p>
@@ -508,7 +462,7 @@ const Resorts = () => {
                             </li>
                           ))}
                         </ul>
-                      </motion.div>
+                      </div>
                     )}
                   </div>
                 </>
@@ -589,20 +543,16 @@ const Resorts = () => {
                       </p>
                     </div>
 
-                    <motion.button
+                    <button
                       onClick={() => setSelectedResort(selectedResort === resort.id ? null : resort.id)}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
                       className="w-full flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-3 bg-color2 text-color1 rounded-lg font-semibold text-sm sm:text-base hover:bg-color2/80 transition-colors mt-auto"
                     >
                       <span>{selectedResort === resort.id ? t('resorts.hideFeatures') : t('resorts.showFeatures')}</span>
-                      <motion.svg
-                        className="w-4 h-4 sm:w-5 sm:h-5"
+                      <svg
+                        className={`w-4 h-4 sm:w-5 sm:h-5 transition-transform ${selectedResort === resort.id ? 'rotate-180' : ''}`}
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
-                        animate={{ rotate: selectedResort === resort.id ? 180 : 0 }}
-                        transition={{ duration: 0.3 }}
                       >
                         <path
                           strokeLinecap="round"
@@ -610,40 +560,31 @@ const Resorts = () => {
                           strokeWidth={2}
                           d="M19 9l-7 7-7-7"
                         />
-                      </motion.svg>
-                    </motion.button>
+                      </svg>
+                    </button>
 
                     {selectedResort === resort.id && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t-2 border-premium-gray"
-                      >
+                      <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t-2 border-premium-gray">
                         <h4 className="text-lg sm:text-xl font-oswald font-bold text-premium-navy mb-3 sm:mb-4">
                           {t('resorts.features')}
                         </h4>
                         <ul className="space-y-2 sm:space-y-3">
                           {resort.highlights.map((highlight, idx) => (
-                            <motion.li
+                            <li
                               key={idx}
-                              initial={{ opacity: 0, x: -20 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ delay: idx * 0.1 }}
                               className="flex items-start gap-2 sm:gap-3"
                             >
                               <span className="text-color1 text-lg sm:text-xl mt-0.5">✓</span>
                               <span className="text-base sm:text-lg text-premium-darkGray leading-relaxed">{highlight}</span>
-                            </motion.li>
+                            </li>
                           ))}
                         </ul>
-                      </motion.div>
+                      </div>
                     )}
                   </div>
                 </>
               )}
-            </motion.div>
+            </div>
           ))}
         </div>
         )}

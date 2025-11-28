@@ -1,15 +1,8 @@
-import { motion } from 'framer-motion'
-import { useInView } from 'react-intersection-observer'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 const Programs = () => {
   const { t } = useTranslation()
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  })
-
   const [activeProgram, setActiveProgram] = useState(0)
 
   const programs = [
@@ -101,32 +94,24 @@ const Programs = () => {
   return (
     <section
       id="programs"
-      ref={ref}
       className="section-padding bg-color3 text-white"
     >
       <div className="container-max">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-oswald font-bold mb-4 sm:mb-6 px-4 text-color1">
             {t('programs.title')}
           </h2>
           <p className="text-xl sm:text-2xl md:text-3xl font-oswald text-white max-w-3xl mx-auto px-4">
             {t('programs.subtitle')}
           </p>
-        </motion.div>
+        </div>
 
         {/* Program Tabs */}
         <div className="flex flex-wrap justify-center gap-6 sm:gap-8 lg:gap-12 mb-8 sm:mb-12">
           {programs.map((program, index) => (
-            <motion.button
+            <button
               key={program.id}
               onClick={() => setActiveProgram(index)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
               className={`px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-oswald font-semibold text-base sm:text-lg uppercase tracking-wider transition-all ${
                 activeProgram === index
                   ? 'bg-color1 text-color3'
@@ -134,25 +119,19 @@ const Programs = () => {
               }`}
             >
               {index === 0 ? t('programs.buttonNames.expert') : index === 1 ? t('programs.buttonNames.balance') : t('programs.buttonNames.ultracomfort')}
-            </motion.button>
+            </button>
           ))}
         </div>
 
         {/* Active Program Details */}
         {programs.map((program, index) => (
           activeProgram === index && (
-            <motion.div
+            <div
               key={program.id}
-              initial={{ opacity: 0, y: 50 }}
-              animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-              transition={{ duration: 0.5 }}
-            className="bg-color3 rounded-2xl p-4 sm:p-6 md:p-8 lg:p-12"
-          >
+              className="bg-color3 rounded-2xl p-4 sm:p-6 md:p-8 lg:p-12"
+            >
             <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
               <div>
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-oswald font-bold mb-3 sm:mb-4 text-color1">
-                  {program.title}
-                </h3>
                 <p className="text-xl sm:text-2xl text-white mb-4 sm:mb-6">{program.subtitle}</p>
                 <p className="text-base sm:text-lg md:text-xl text-white mb-6 sm:mb-8 leading-relaxed">
                   {program.description}
@@ -230,7 +209,7 @@ const Programs = () => {
                 </div>
               </div>
             </div>
-            </motion.div>
+            </div>
           )
         ))}
       </div>

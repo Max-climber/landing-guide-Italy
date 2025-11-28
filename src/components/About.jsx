@@ -1,40 +1,23 @@
-import { motion } from 'framer-motion'
-import { useInView } from 'react-intersection-observer'
 import { useTranslation } from 'react-i18next'
 
 const About = () => {
   const { t } = useTranslation()
   const aboutText = t('about.text', { returnObjects: true })
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.2,
-  })
 
   return (
     <section
       id="about"
-      ref={ref}
       className="section-padding bg-color3"
     >
       <div className="container-max">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-oswald font-bold text-color1 mb-4 sm:mb-6 px-4">
             {t('about.title')}
           </h2>
-        </motion.div>
+        </div>
 
         <div className="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-6 items-stretch">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex flex-col justify-between text-white h-full text-left"
-          >
+          <div className="flex flex-col justify-between text-white h-full text-left">
             <div className="flex flex-col h-full justify-between gap-2 sm:gap-3 w-full max-w-sm md:max-w-lg lg:max-w-xl xl:max-w-2xl 2xl:max-w-3xl">
               {aboutText.map((paragraph, idx) => {
                 return (
@@ -44,14 +27,9 @@ const About = () => {
                 )
               })}
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="relative"
-          >
+          <div className="relative">
             <div className="relative h-64 sm:h-72 md:h-80 lg:h-[28rem] rounded-2xl overflow-hidden shadow-2xl">
               <img
                 src="/images/about_Us.jpg"
@@ -61,7 +39,7 @@ const About = () => {
               />
               <div className="absolute inset-0 bg-color2/20 pointer-events-none" />
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

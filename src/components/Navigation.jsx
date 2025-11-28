@@ -1,16 +1,10 @@
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import LanguageSwitcher from './LanguageSwitcher'
 
-const Navigation = ({ scrollY }) => {
+const Navigation = () => {
   const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
-
-  useEffect(() => {
-    setIsScrolled(scrollY > 50)
-  }, [scrollY])
 
   const navItems = [
     { name: t('nav.about'), href: '#about' },
@@ -28,11 +22,7 @@ const Navigation = ({ scrollY }) => {
   }
 
   return (
-    <motion.nav
-      initial={{ y: 0 }}
-      animate={{ y: 0 }}
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-color2 backdrop-blur-md shadow-lg"
-    >
+    <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-color2 backdrop-blur-md shadow-lg">
       <div className="container-max px-4 md:px-8 lg:px-16">
         <div className="flex items-center justify-between h-16 sm:h-18 md:h-20">
           <a
@@ -68,15 +58,13 @@ const Navigation = ({ scrollY }) => {
             <div className="ml-2">
               <LanguageSwitcher />
             </div>
-            <motion.a
+            <a
               href="#contact"
               onClick={() => scrollToSection('#contact')}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
               className="px-6 py-2 bg-color1 text-color3 rounded-none font-oswald font-semibold uppercase tracking-wider hover:bg-color1/90 transition-colors ml-2"
             >
               {t('nav.connect')}
-            </motion.a>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -104,12 +92,7 @@ const Navigation = ({ scrollY }) => {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-premium-navy/98 backdrop-blur-md border-t border-white/10 pb-4 space-y-1"
-          >
+          <div className="md:hidden bg-premium-navy/98 backdrop-blur-md border-t border-white/10 pb-4 space-y-1">
             {navItems.map((item) => (
               <button
                 key={item.href}
@@ -124,17 +107,17 @@ const Navigation = ({ scrollY }) => {
                 <LanguageSwitcher />
               </div>
             </div>
-            <motion.a
+            <a
               href="#contact"
               onClick={() => scrollToSection('#contact')}
               className="block mx-2 mt-2 px-4 py-3 bg-color1 text-color3 rounded-none font-oswald font-semibold text-center uppercase tracking-wider hover:bg-color1/90 transition-colors"
             >
               {t('nav.connect')}
-            </motion.a>
-          </motion.div>
+            </a>
+          </div>
         )}
       </div>
-    </motion.nav>
+    </nav>
   )
 }
 

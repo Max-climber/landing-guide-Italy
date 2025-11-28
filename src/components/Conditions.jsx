@@ -1,14 +1,8 @@
-import { motion } from 'framer-motion'
-import { useInView } from 'react-intersection-observer'
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 const Conditions = () => {
   const { t } = useTranslation()
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  })
   const [openConditions, setOpenConditions] = useState([]) // Массив открытых условий для FAQ-режима на мобилке
   const [isMobile, setIsMobile] = useState(false)
 
@@ -57,7 +51,6 @@ const Conditions = () => {
   return (
     <section
       id="conditions"
-      ref={ref}
       className="relative section-padding bg-color3 overflow-hidden"
     >
 
@@ -66,31 +59,21 @@ const Conditions = () => {
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
 
       <div className="container-max relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-12 sm:mb-16"
-        >
+        <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-oswald font-bold text-color1 mb-4 sm:mb-6 px-4">
             {t('contact.conditions')}
           </h2>
           <p className="text-xl sm:text-2xl md:text-3xl font-oswald text-white/80 max-w-3xl mx-auto px-4">
             {t('contact.conditionsSubtitle')}
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:max-w-5xl lg:mx-auto">
           {/* Первый ряд - 3 карточки по центру */}
           <div className="lg:col-span-3 lg:flex lg:justify-center lg:gap-6 lg:mb-6">
             {conditions.slice(0, 3).map((condition, index) => (
               <div key={condition.key} className="lg:w-1/3 lg:flex lg:flex-col">
-                    <motion.div
-                      initial={{ opacity: 0, y: 50 }}
-                      animate={inView ? { opacity: 1, y: 0 } : {}}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className="relative bg-color2 rounded-2xl p-6 sm:p-8 border border-white hover:border-white transition-all duration-300 hover:shadow-2xl hover:scale-105 group lg:h-full lg:flex lg:flex-col text-white"
-                    >
+                    <div className="relative bg-color2 rounded-2xl p-6 sm:p-8 border border-white hover:border-white transition-all duration-300 hover:shadow-2xl hover:scale-105 group lg:h-full lg:flex lg:flex-col text-white">
                       {/* Shine Effect */}
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
 
@@ -104,7 +87,7 @@ const Conditions = () => {
 
                         {/* Mobile Toggle Button - только стрелка, без текста */}
                         {isMobile && (
-                          <motion.button
+                          <button
                             onClick={() => {
                               // FAQ-режим: добавляем/удаляем условие из массива открытых
                               setOpenConditions(prev => 
@@ -113,17 +96,13 @@ const Conditions = () => {
                                   : [...prev, condition.key]
                               )
                             }}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
                             className="w-full flex items-center justify-center px-4 py-3 bg-white/10 text-white rounded-lg hover:bg-white/20 transition-colors mt-4"
                           >
-                            <motion.svg
-                              className="w-6 h-6"
+                            <svg
+                              className={`w-6 h-6 transition-transform ${openConditions.includes(condition.key) ? 'rotate-180' : ''}`}
                               fill="none"
                               stroke="currentColor"
                               viewBox="0 0 24 24"
-                              animate={{ rotate: openConditions.includes(condition.key) ? 180 : 0 }}
-                              transition={{ duration: 0.3 }}
                             >
                               <path
                                 strokeLinecap="round"
@@ -131,19 +110,13 @@ const Conditions = () => {
                                 strokeWidth={2}
                                 d="M19 9l-7 7-7-7"
                               />
-                            </motion.svg>
-                          </motion.button>
+                            </svg>
+                          </button>
                         )}
 
                         {/* Content - показываем всегда на десктопе, на мобилке только если открыта */}
                         {(openConditions.includes(condition.key) || !isMobile) && (
-                          <motion.div
-                            initial={isMobile && !openConditions.includes(condition.key) ? { opacity: 0, height: 0 } : { opacity: 1, height: 'auto' }}
-                            animate={{ opacity: 1, height: 'auto' }}
-                            exit={{ opacity: 0, height: 0 }}
-                            transition={{ duration: 0.3 }}
-                            className="space-y-3 lg:flex-1"
-                          >
+                          <div className="space-y-3 lg:flex-1">
                             {/* Условия для каждого типа */}
                             {condition.key === 'planning' && (
                               <>
@@ -293,10 +266,10 @@ const Conditions = () => {
                                 </div>
                               </>
                             )}
-                          </motion.div>
+                          </div>
                         )}
                       </div>
-                    </motion.div>
+                    </div>
               </div>
             ))}
           </div>
@@ -304,12 +277,7 @@ const Conditions = () => {
           <div className="lg:col-span-3 lg:flex lg:justify-center lg:gap-6 lg:mt-0">
             {conditions.slice(3, 5).map((condition, index) => (
               <div key={condition.key} className="lg:w-1/3 lg:flex lg:flex-col">
-                    <motion.div
-                      initial={{ opacity: 0, y: 50 }}
-                      animate={inView ? { opacity: 1, y: 0 } : {}}
-                      transition={{ duration: 0.5, delay: (index + 3) * 0.1 }}
-                      className="relative bg-color2 rounded-2xl p-6 sm:p-8 border border-white hover:border-white transition-all duration-300 hover:shadow-2xl hover:scale-105 group lg:h-full lg:flex lg:flex-col text-white"
-                    >
+                    <div className="relative bg-color2 rounded-2xl p-6 sm:p-8 border border-white hover:border-white transition-all duration-300 hover:shadow-2xl hover:scale-105 group lg:h-full lg:flex lg:flex-col text-white">
                       {/* Shine Effect */}
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
 
@@ -323,7 +291,7 @@ const Conditions = () => {
 
                         {/* Mobile Toggle Button - только стрелка, без текста */}
                         {isMobile && (
-                          <motion.button
+                          <button
                             onClick={() => {
                               // FAQ-режим: добавляем/удаляем условие из массива открытых
                               setOpenConditions(prev => 
@@ -332,17 +300,13 @@ const Conditions = () => {
                                   : [...prev, condition.key]
                               )
                             }}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
                             className="w-full flex items-center justify-center px-4 py-3 bg-white/10 text-white rounded-lg hover:bg-white/20 transition-colors mt-4"
                           >
-                            <motion.svg
-                              className="w-6 h-6"
+                            <svg
+                              className={`w-6 h-6 transition-transform ${openConditions.includes(condition.key) ? 'rotate-180' : ''}`}
                               fill="none"
                               stroke="currentColor"
                               viewBox="0 0 24 24"
-                              animate={{ rotate: openConditions.includes(condition.key) ? 180 : 0 }}
-                              transition={{ duration: 0.3 }}
                             >
                               <path
                                 strokeLinecap="round"
@@ -350,19 +314,13 @@ const Conditions = () => {
                                 strokeWidth={2}
                                 d="M19 9l-7 7-7-7"
                               />
-                            </motion.svg>
-                          </motion.button>
+                            </svg>
+                          </button>
                         )}
 
                         {/* Content - показываем всегда на десктопе, на мобилке только если открыта */}
                         {(openConditions.includes(condition.key) || !isMobile) && (
-                          <motion.div
-                            initial={isMobile && !openConditions.includes(condition.key) ? { opacity: 0, height: 0 } : { opacity: 1, height: 'auto' }}
-                            animate={{ opacity: 1, height: 'auto' }}
-                            exit={{ opacity: 0, height: 0 }}
-                            transition={{ duration: 0.3 }}
-                            className="space-y-3 lg:flex-1"
-                          >
+                          <div className="space-y-3 lg:flex-1">
                             {/* Условия для каждого типа */}
                             {condition.key === 'planning' && (
                               <>
@@ -512,10 +470,10 @@ const Conditions = () => {
                                 </div>
                               </>
                             )}
-                          </motion.div>
+                          </div>
                         )}
                       </div>
-                    </motion.div>
+                    </div>
               </div>
             ))}  
           </div>
