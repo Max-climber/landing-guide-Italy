@@ -53,16 +53,18 @@ const Navigation = ({ scrollY }) => {
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-6 lg:gap-8 flex-shrink-0">
-            {navItems.filter(item => item.href !== '#contact').map((item) => (
-              <button
-                key={item.href}
-                onClick={() => scrollToSection(item.href)}
-                className="text-color1 hover:text-white transition-colors duration-300 font-oswald font-semibold text-base"
-              >
-                {item.name}
-              </button>
-            ))}
+          <div className="hidden md:flex items-center gap-4 lg:gap-6 flex-shrink-0">
+            {navItems
+              .filter((item) => item.href !== '#contact')
+              .map((item) => (
+                <button
+                  key={item.href}
+                  onClick={() => scrollToSection(item.href)}
+                  className="px-4 py-2 text-color1 hover:text-white transition-colors duration-300 font-oswald font-semibold text-base uppercase tracking-wide border border-transparent hover:border-white/40 rounded-none"
+                >
+                  {item.name}
+                </button>
+              ))}
             <div className="ml-2">
               <LanguageSwitcher />
             </div>

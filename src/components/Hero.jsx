@@ -30,19 +30,11 @@ const Hero = () => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl sm:text-2xl font-oswald font-bold text-color3 mb-2 sm:mb-3 px-4 max-w-3xl mx-auto leading-snug"
-          >
-            {t('hero.subtitle')}
-          </motion.h1>
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-oswald font-extrabold text-color3 mb-5 sm:mb-6 px-4 tracking-tight"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl font-oswald font-extrabold text-color3 mb-4 sm:mb-5 px-4 tracking-tight"
             style={{ fontStretch: 'condensed' }}
           >
             {t('hero.title')}
@@ -50,8 +42,16 @@ const Hero = () => {
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-3xl sm:text-4xl md:text-5xl font-oswald font-semibold text-color3 mb-3 sm:mb-4 max-w-5xl mx-auto px-4 leading-snug"
+          >
+            {t('hero.subtitle')}
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-xl sm:text-2xl font-oswald font-bold text-color3 mb-12 sm:mb-16 max-w-3xl mx-auto px-4 leading-snug"
+            className="text-3xl sm:text-4xl md:text-5xl font-oswald font-semibold text-color3 mb-12 sm:mb-16 max-w-5xl mx-auto px-4 leading-snug"
           >
             {t('hero.description')}
           </motion.p>

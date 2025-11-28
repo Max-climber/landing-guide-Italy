@@ -418,7 +418,7 @@ const Resorts = () => {
                       onClick={() => setSelectedResort(selectedResort === resort.id ? null : resort.id)}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-color3 text-white rounded-lg font-semibold text-sm hover:bg-color3/90 transition-colors"
+                      className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-color2 text-color1 rounded-lg font-semibold text-sm hover:bg-color2/80 transition-colors"
                     >
                       <span>{selectedResort === resort.id ? t('resorts.hideFeatures') : t('resorts.showFeatures')}</span>
                       <motion.svg
@@ -593,7 +593,7 @@ const Resorts = () => {
                       onClick={() => setSelectedResort(selectedResort === resort.id ? null : resort.id)}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="w-full flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-3 bg-color3 text-white rounded-lg font-semibold text-sm sm:text-base hover:bg-color3/90 transition-colors mt-auto"
+                      className="w-full flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-3 bg-color2 text-color1 rounded-lg font-semibold text-sm sm:text-base hover:bg-color2/80 transition-colors mt-auto"
                     >
                       <span>{selectedResort === resort.id ? t('resorts.hideFeatures') : t('resorts.showFeatures')}</span>
                       <motion.svg

@@ -35,10 +35,10 @@ const About = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex flex-col justify-between text-white h-full text-left"
           >
-            <div className="flex flex-col h-full justify-between gap-4 sm:gap-6 w-full max-w-sm md:max-w-lg lg:max-w-xl xl:max-w-2xl 2xl:max-w-3xl">
+            <div className="flex flex-col h-full justify-between gap-2 sm:gap-3 w-full max-w-sm md:max-w-lg lg:max-w-xl xl:max-w-2xl 2xl:max-w-3xl">
               {aboutText.map((paragraph, idx) => {
                 return (
-                  <p key={idx} className="text-base sm:text-lg md:text-xl leading-relaxed text-left tracking-[0.08em]">
+                  <p key={idx} className="text-base sm:text-lg md:text-xl leading-relaxed text-left tracking-[0.02em]">
                     {paragraph}
                   </p>
                 )
@@ -50,9 +50,9 @@ const About = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="relative h-full"
+            className="relative"
           >
-            <div className="relative h-full rounded-2xl overflow-hidden shadow-2xl">
+            <div className="relative h-64 sm:h-72 md:h-80 lg:h-[28rem] rounded-2xl overflow-hidden shadow-2xl">
               <img
                 src="/images/about_Us.jpg"
                 alt="Альпы"
