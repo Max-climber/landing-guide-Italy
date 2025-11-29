@@ -6,6 +6,11 @@ const Hero = () => {
   return (
     <section
       className="relative min-h-screen flex items-center justify-center bg-white"
+      style={{ 
+        willChange: 'auto',
+        transform: 'translateZ(0)',
+        backfaceVisibility: 'hidden'
+      }}
     >
       {/* Content */}
       <div className="relative z-10 container-max px-4 md:px-8 lg:px-16 text-center">

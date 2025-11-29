@@ -22,7 +22,18 @@ const Navigation = () => {
   }
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-color2 shadow-lg" style={{ WebkitBackdropFilter: 'blur(10px)', backdropFilter: 'blur(10px)' }}>
+    <nav 
+      className="fixed top-0 left-0 right-0 z-50 bg-color2 shadow-lg" 
+      style={{ 
+        WebkitBackdropFilter: 'blur(10px)', 
+        backdropFilter: 'blur(10px)',
+        willChange: 'transform',
+        transform: 'translateZ(0)',
+        backfaceVisibility: 'hidden',
+        WebkitBackfaceVisibility: 'hidden',
+        isolation: 'isolate'
+      }}
+    >
       <div className="container-max px-4 md:px-8 lg:px-16">
         <div className="flex items-center justify-between h-16 sm:h-18 md:h-20">
           <a

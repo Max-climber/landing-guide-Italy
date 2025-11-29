@@ -1,4 +1,3 @@
-import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
 
 /**
@@ -93,53 +92,50 @@ const ImageModal = ({ isOpen, onClose, images, initialIndex = 0, resortName }) =
     setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length)
   }
 
-  if (!images || images.length === 0) return null
+  if (!images || images.length === 0 || !isOpen) return null
 
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <>
-          {/* Затемненный фон */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black/95 z-50"
-            onClick={onClose}
-          />
+    <>
+      {/* Затемненный фон */}
+      <div
+        className="fixed inset-0 bg-black/95 z-50"
+        onClick={onClose}
+      />
 
-          {/* Контент модального окна */}
-          <div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
-            onClick={onClose}
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.3 }}
-              className="relative w-full max-w-5xl aspect-video flex items-center justify-center rounded-3xl overflow-hidden bg-black/70 shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-              onTouchStart={onTouchStart}
-              onTouchMove={onTouchMove}
-              onTouchEnd={onTouchEnd}
-            >
-              {/* Изображение фиксированного размера */}
-              <div className="relative w-full h-full">
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={currentIndex}
-                    src={images[currentIndex]}
-                    alt={`${resortName} - фото ${currentIndex + 1}`}
-                    initial={{ opacity: 0, x: 120 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -120 }}
-                    transition={{ duration: 0.3 }}
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                </AnimatePresence>
-              </div>
+      {/* Контент модального окна */}
+      <div
+        className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4"
+        onClick={onClose}
+        style={{ 
+          alignItems: 'center',
+          justifyContent: 'center',
+          display: 'flex'
+        }}
+      >
+        <div
+          className="relative w-full max-w-5xl max-h-[90vh] flex items-center justify-center rounded-3xl overflow-hidden bg-black/70 shadow-2xl"
+          onClick={(e) => e.stopPropagation()}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+          style={{
+            aspectRatio: '16/9',
+            maxWidth: '90vw',
+            maxHeight: '90vh',
+            width: '100%',
+            height: 'auto'
+          }}
+        >
+          {/* Изображение фиксированного размера */}
+          <div className="relative w-full h-full">
+            <img
+              key={currentIndex}
+              src={images[currentIndex]}
+              alt={`${resortName} - фото ${currentIndex + 1}`}
+              className="w-full h-full object-contain"
+              style={{ display: 'block' }}
+            />
+          </div>
 
               {/* Стрелки навигации */}
               {images.length > 1 && (
@@ -187,11 +183,9 @@ const ImageModal = ({ isOpen, onClose, images, initialIndex = 0, resortName }) =
                   </button>
                 </>
               )}
-            </motion.div>
-          </div>
-        </>
-      )}
-    </AnimatePresence>
+        </div>
+      </div>
+    </>
   )
 }
 
