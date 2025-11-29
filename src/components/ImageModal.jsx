@@ -109,21 +109,26 @@ const ImageModal = ({ isOpen, onClose, images, initialIndex = 0, resortName }) =
         style={{ 
           alignItems: 'center',
           justifyContent: 'center',
-          display: 'flex'
+          display: 'flex',
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0
         }}
       >
         <div
-          className="relative w-full max-w-5xl max-h-[90vh] flex items-center justify-center rounded-3xl overflow-hidden bg-black/70 shadow-2xl"
+          className="relative flex items-center justify-center rounded-3xl overflow-hidden bg-black/70 shadow-2xl"
           onClick={(e) => e.stopPropagation()}
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
           style={{
-            aspectRatio: '16/9',
+            width: '90vw',
             maxWidth: '90vw',
+            height: 'auto',
             maxHeight: '90vh',
-            width: '100%',
-            height: 'auto'
+            aspectRatio: '16/9'
           }}
         >
           {/* Изображение фиксированного размера */}
