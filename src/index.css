@@ -164,11 +164,31 @@
     -webkit-overflow-scrolling: touch;
   }
   
-  /* Оптимизация для секций */
-  section {
-    contain: layout style paint;
-    will-change: auto;
-  }
+/* Оптимизация для секций */
+section {
+  contain: layout style paint;
+  will-change: auto;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
+}
+
+/* Оптимизация для изображений */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  will-change: auto;
+  content-visibility: auto;
+}
+
+/* Предотвращение рефлоу при прокрутке */
+* {
+  box-sizing: border-box;
+}
+
+/* Оптимизация для карточек и контейнеров */
+.card, [class*="card"], .container, [class*="container"] {
+  contain: layout style;
+}
 }
 
 /* Smooth scrolling - оптимизировано для производительности */
@@ -190,6 +210,13 @@ body {
   -webkit-touch-callout: none;
   overscroll-behavior-y: none; /* Предотвращает "bounce" эффект при вертикальной прокрутке */
   -webkit-overflow-scrolling: touch;
+  /* Предотвращение вибрации при прокрутке */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  perspective: 1000;
 }
 
 /* Оптимизация для фиксированных элементов */
@@ -198,6 +225,10 @@ nav.fixed, [class*="fixed"] {
   transform: translateZ(0); /* Аппаратное ускорение */
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  /* Предотвращение вибрации */
+  -webkit-perspective: 1000;
+  perspective: 1000;
+  isolation: isolate;
 }
 
 /* Оптимизация изображений для плавной прокрутки */

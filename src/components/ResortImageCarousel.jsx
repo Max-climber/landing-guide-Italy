@@ -14,48 +14,91 @@ const ResortImageCarousel = ({ images, resortName, isMobile, onImageClick }) => 
   const touchStartRef = useRef(null)
   const touchEndRef = useRef(null)
   const touchTimeRef = useRef(null)
+  const touchStartYRef = useRef(null)
+  const touchEndYRef = useRef(null)
+  const scrollStartRef = useRef(null)
   const carouselRef = useRef(null)
 
   // Минимальное расстояние для свайпа (в пикселях)
   const minSwipeDistance = 50
   // Максимальное время для тапа (в миллисекундах)
-  const maxTapTime = 300
+  const maxTapTime = 250
+  // Максимальное вертикальное движение для определения скролла (в пикселях)
+  const maxVerticalMovement = 10
 
   // Обработка начала касания
   const onTouchStart = (e) => {
     const touch = e.touches[0]
     touchStartRef.current = touch.clientX
+    touchStartYRef.current = touch.clientY
     touchEndRef.current = null
+    touchEndYRef.current = null
     touchTimeRef.current = Date.now()
+    scrollStartRef.current = window.scrollY || window.pageYOffset
   }
 
   // Обработка движения касания
   const onTouchMove = (e) => {
     if (touchStartRef.current !== null) {
-      touchEndRef.current = e.touches[0].clientX
+      const touch = e.touches[0]
+      touchEndRef.current = touch.clientX
+      touchEndYRef.current = touch.clientY
     }
   }
 
   // Обработка окончания касания
-  const onTouchEnd = () => {
+  const onTouchEnd = (e) => {
     if (touchStartRef.current === null) return
 
     const touchTime = Date.now() - touchTimeRef.current
     const startX = touchStartRef.current
+    const startY = touchStartYRef.current
     const endX = touchEndRef.current
+    const endY = touchEndYRef.current
+    const scrollEnd = window.scrollY || window.pageYOffset
+    const scrollDelta = Math.abs(scrollEnd - scrollStartRef.current)
+
+    // Проверяем, был ли скролл страницы
+    if (scrollDelta > 5) {
+      // Был скролл - не открываем модальное окно
+      touchStartRef.current = null
+      touchEndRef.current = null
+      touchTimeRef.current = null
+      touchStartYRef.current = null
+      touchEndYRef.current = null
+      scrollStartRef.current = null
+      return
+    }
 
     // Если не было движения - это клик
-    if (endX === null) {
+    if (endX === null || endY === null) {
       if (touchTime < maxTapTime) {
         onImageClick?.(currentIndex)
       }
       touchStartRef.current = null
+      touchEndRef.current = null
       touchTimeRef.current = null
+      touchStartYRef.current = null
+      touchEndYRef.current = null
+      scrollStartRef.current = null
       return
     }
 
-    const distance = Math.abs(startX - endX)
-    const isSwipe = distance > minSwipeDistance
+    const distanceX = Math.abs(startX - endX)
+    const distanceY = Math.abs(startY - endY)
+    const isSwipe = distanceX > minSwipeDistance
+    const isVerticalScroll = distanceY > maxVerticalMovement
+
+    // Если было вертикальное движение - это скролл, не открываем модальное окно
+    if (isVerticalScroll && distanceY > distanceX) {
+      touchStartRef.current = null
+      touchEndRef.current = null
+      touchTimeRef.current = null
+      touchStartYRef.current = null
+      touchEndYRef.current = null
+      scrollStartRef.current = null
+      return
+    }
 
     if (isSwipe) {
       // Это свайп - переключаем изображение
@@ -67,14 +110,17 @@ const ResortImageCarousel = ({ images, resortName, isMobile, onImageClick }) => 
       } else if (isRightSwipe) {
         goToPrevious()
       }
-    } else if (touchTime < maxTapTime) {
-      // Это короткий тап - открываем модальное окно
+    } else if (touchTime < maxTapTime && distanceX < 10 && distanceY < 10) {
+      // Это короткий тап с минимальным движением - открываем модальное окно
       onImageClick?.(currentIndex)
     }
 
     touchStartRef.current = null
     touchEndRef.current = null
     touchTimeRef.current = null
+    touchStartYRef.current = null
+    touchEndYRef.current = null
+    scrollStartRef.current = null
   }
 
   // Переход к следующему изображению
@@ -111,6 +157,8 @@ const ResortImageCarousel = ({ images, resortName, isMobile, onImageClick }) => 
           alt={resortName}
           className="w-full h-full object-cover cursor-pointer"
           onClick={() => onImageClick?.(0)}
+          loading="lazy"
+          decoding="async"
         />
       </div>
     )
@@ -132,6 +180,7 @@ const ResortImageCarousel = ({ images, resortName, isMobile, onImageClick }) => 
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
+      style={{ touchAction: 'pan-y pinch-zoom' }}
     >
       {/* Контейнер изображений */}
       <div className="relative w-full h-full">
@@ -141,6 +190,8 @@ const ResortImageCarousel = ({ images, resortName, isMobile, onImageClick }) => 
           className="w-full h-full object-cover cursor-pointer select-none"
           onClick={handleImageClick}
           draggable="false"
+          loading="lazy"
+          decoding="async"
         />
       </div>
 
