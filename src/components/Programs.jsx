@@ -189,10 +189,7 @@ const Programs = () => {
                   {program.pricing.planning && (
                     <div>
                       <p className="text-white">
-                        {t(`programs.${activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.planning`)}{' '}
-                        <span className="text-color1 font-semibold">
-                          {program.pricing.planning}
-                        </span>
+                        {t(`programs.${activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.planning`)}
                       </p>
                     </div>
                   )}
