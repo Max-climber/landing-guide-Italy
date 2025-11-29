@@ -166,6 +166,7 @@ const ResortImageCarousel = ({ images, resortName, isMobile, onImageClick }) => 
 
   // Обработка клика на изображение (для десктопа)
   const handleImageClick = (e) => {
+    if (isMobile) return // На мобилке обрабатывается через touch события
     e.stopPropagation()
     e.preventDefault()
     onImageClick?.(currentIndex)
@@ -183,12 +184,14 @@ const ResortImageCarousel = ({ images, resortName, isMobile, onImageClick }) => 
       style={{ touchAction: 'pan-y pinch-zoom' }}
     >
       {/* Контейнер изображений */}
-      <div className="relative w-full h-full">
+      <div 
+        className="relative w-full h-full"
+        onClick={!isMobile ? handleImageClick : undefined}
+      >
         <img
           src={images[currentIndex]}
           alt={`${resortName} - фото ${currentIndex + 1}`}
           className="w-full h-full object-cover cursor-pointer select-none"
-          onClick={handleImageClick}
           draggable="false"
           loading="lazy"
           decoding="async"
