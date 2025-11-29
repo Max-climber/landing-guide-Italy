@@ -21,11 +21,27 @@ const ImageModal = ({ isOpen, onClose, images, initialIndex = 0, resortName }) =
   // Блокировка скролла при открытом модальном окне
   useEffect(() => {
     if (isOpen) {
+      // Сохраняем текущую позицию скролла
+      const scrollY = window.scrollY
+      document.body.style.position = 'fixed'
+      document.body.style.top = `-${scrollY}px`
+      document.body.style.width = '100%'
       document.body.style.overflow = 'hidden'
     } else {
+      // Восстанавливаем позицию скролла
+      const scrollY = document.body.style.top
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.width = ''
       document.body.style.overflow = 'unset'
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1)
+      }
     }
     return () => {
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.width = ''
       document.body.style.overflow = 'unset'
     }
   }, [isOpen])
@@ -107,18 +123,19 @@ const ImageModal = ({ isOpen, onClose, images, initialIndex = 0, resortName }) =
         className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4"
         onClick={onClose}
         style={{ 
-          alignItems: 'center',
-          justifyContent: 'center',
-          display: 'flex',
           position: 'fixed',
           top: 0,
           left: 0,
           right: 0,
-          bottom: 0
+          bottom: 0,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflow: 'hidden'
         }}
       >
         <div
-          className="relative flex items-center justify-center rounded-3xl overflow-hidden bg-black/70 shadow-2xl"
+          className="relative flex items-center justify-center overflow-hidden bg-black/70 shadow-2xl"
           onClick={(e) => e.stopPropagation()}
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
@@ -128,17 +145,23 @@ const ImageModal = ({ isOpen, onClose, images, initialIndex = 0, resortName }) =
             maxWidth: '90vw',
             height: 'auto',
             maxHeight: '90vh',
-            aspectRatio: '16/9'
+            aspectRatio: '16/9',
+            borderRadius: '1.5rem'
           }}
         >
           {/* Изображение фиксированного размера */}
-          <div className="relative w-full h-full">
+          <div className="relative w-full h-full" style={{ aspectRatio: '16/9' }}>
             <img
               key={currentIndex}
               src={images[currentIndex]}
               alt={`${resortName} - фото ${currentIndex + 1}`}
-              className="w-full h-full object-contain"
-              style={{ display: 'block' }}
+              className="w-full h-full object-cover"
+              style={{ 
+                display: 'block',
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover'
+              }}
             />
           </div>
 

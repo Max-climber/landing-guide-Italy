@@ -197,8 +197,8 @@ const Programs = () => {
                       <p className="text-white">
                         {(() => {
                           const planningText = t(`programs.${activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.planning`);
-                          // Ищем "200 евро" в конце строки
-                          const match = planningText.match(/^(.+?)(\d+\s*евро)$/);
+                          // Ищем "200 евро" или "200 euros" в конце строки
+                          const match = planningText.match(/^(.+?)(\d+\s*(?:евро|euros?))$/i);
                           if (match) {
                             return (
                               <>
