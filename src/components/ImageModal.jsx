@@ -22,27 +22,49 @@ const ImageModal = ({ isOpen, onClose, images, initialIndex = 0, resortName }) =
   useEffect(() => {
     if (isOpen) {
       // Сохраняем текущую позицию скролла
-      const scrollY = window.scrollY
+      const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop
+      
+      // Блокируем скролл
       document.body.style.position = 'fixed'
       document.body.style.top = `-${scrollY}px`
+      document.body.style.left = '0'
+      document.body.style.right = '0'
       document.body.style.width = '100%'
       document.body.style.overflow = 'hidden'
+      
+      // Сохраняем позицию для восстановления
+      document.body.setAttribute('data-scroll-y', scrollY.toString())
+      
+      // Также блокируем скролл на html
+      document.documentElement.style.overflow = 'hidden'
     } else {
       // Восстанавливаем позицию скролла
-      const scrollY = document.body.style.top
+      const scrollY = document.body.getAttribute('data-scroll-y')
+      
       document.body.style.position = ''
       document.body.style.top = ''
+      document.body.style.left = ''
+      document.body.style.right = ''
       document.body.style.width = ''
-      document.body.style.overflow = 'unset'
+      document.body.style.overflow = ''
+      document.documentElement.style.overflow = ''
+      
       if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || '0') * -1)
+        window.scrollTo(0, parseInt(scrollY))
       }
+      
+      document.body.removeAttribute('data-scroll-y')
     }
+    
     return () => {
       document.body.style.position = ''
       document.body.style.top = ''
+      document.body.style.left = ''
+      document.body.style.right = ''
       document.body.style.width = ''
-      document.body.style.overflow = 'unset'
+      document.body.style.overflow = ''
+      document.documentElement.style.overflow = ''
+      document.body.removeAttribute('data-scroll-y')
     }
   }, [isOpen])
 
