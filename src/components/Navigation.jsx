@@ -25,13 +25,12 @@ const Navigation = () => {
     <nav 
       className="fixed top-0 left-0 right-0 z-50 bg-color2 shadow-lg" 
       style={{ 
-        WebkitBackdropFilter: 'blur(10px)', 
-        backdropFilter: 'blur(10px)',
         willChange: 'transform',
         transform: 'translateZ(0)',
         backfaceVisibility: 'hidden',
         WebkitBackfaceVisibility: 'hidden',
-        isolation: 'isolate'
+        isolation: 'isolate',
+        WebkitTransform: 'translateZ(0)'
       }}
     >
       <div className="container-max px-4 md:px-8 lg:px-16">
