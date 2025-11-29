@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 
 /**
  * Модальное окно для просмотра изображения в полном размере
@@ -94,18 +95,25 @@ const ImageModal = ({ isOpen, onClose, images, initialIndex = 0, resortName }) =
 
   if (!images || images.length === 0 || !isOpen) return null
 
-  return (
+  const modalContent = (
     <>
       {/* Затемненный фон */}
       <div
-        className="fixed inset-0 bg-black/95 z-50"
+        className="fixed inset-0 bg-black/95"
         onClick={onClose}
-        style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
+        style={{ 
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          zIndex: 9999
+        }}
       />
 
       {/* Контент модального окна */}
       <div
-        className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4"
+        className="fixed inset-0 flex items-center justify-center p-2 sm:p-4"
         onClick={onClose}
         style={{ 
           position: 'fixed',
@@ -115,7 +123,9 @@ const ImageModal = ({ isOpen, onClose, images, initialIndex = 0, resortName }) =
           bottom: 0,
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          zIndex: 10000,
+          pointerEvents: 'auto'
         }}
       >
         <div
@@ -205,6 +215,9 @@ const ImageModal = ({ isOpen, onClose, images, initialIndex = 0, resortName }) =
       </div>
     </>
   )
+
+  // Рендерим модальное окно через Portal в body, чтобы оно было поверх всего контента
+  return createPortal(modalContent, document.body)
 }
 
 export default ImageModal
