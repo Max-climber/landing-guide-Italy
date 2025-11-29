@@ -157,11 +157,63 @@
   .container-max {
     @apply max-w-7xl mx-auto;
   }
+  
+  /* Оптимизация для плавной прокрутки */
+  .scroll-smooth {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Оптимизация для секций */
+  section {
+    contain: layout style paint;
+    will-change: auto;
+  }
 }
 
-/* Smooth scrolling */
+/* Smooth scrolling - оптимизировано для производительности */
 html {
   scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* Плавная прокрутка на iOS */
+  overflow-scrolling: touch;
+}
+
+/* Оптимизация производительности прокрутки */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Оптимизация для мобильных устройств */
+body {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  overscroll-behavior-y: none; /* Предотвращает "bounce" эффект при вертикальной прокрутке */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Оптимизация для фиксированных элементов */
+nav.fixed, [class*="fixed"] {
+  will-change: transform;
+  transform: translateZ(0); /* Аппаратное ускорение */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Оптимизация изображений для плавной прокрутки */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  will-change: auto;
+}
+
+/* Отключение анимаций при предпочтении пользователя */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Custom scrollbar */
