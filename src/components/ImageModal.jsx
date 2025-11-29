@@ -21,50 +21,12 @@ const ImageModal = ({ isOpen, onClose, images, initialIndex = 0, resortName }) =
   // Блокировка скролла при открытом модальном окне
   useEffect(() => {
     if (isOpen) {
-      // Сохраняем текущую позицию скролла
-      const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop
-      
-      // Блокируем скролл
-      document.body.style.position = 'fixed'
-      document.body.style.top = `-${scrollY}px`
-      document.body.style.left = '0'
-      document.body.style.right = '0'
-      document.body.style.width = '100%'
       document.body.style.overflow = 'hidden'
-      
-      // Сохраняем позицию для восстановления
-      document.body.setAttribute('data-scroll-y', scrollY.toString())
-      
-      // Также блокируем скролл на html
-      document.documentElement.style.overflow = 'hidden'
     } else {
-      // Восстанавливаем позицию скролла
-      const scrollY = document.body.getAttribute('data-scroll-y')
-      
-      document.body.style.position = ''
-      document.body.style.top = ''
-      document.body.style.left = ''
-      document.body.style.right = ''
-      document.body.style.width = ''
-      document.body.style.overflow = ''
-      document.documentElement.style.overflow = ''
-      
-      if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY))
-      }
-      
-      document.body.removeAttribute('data-scroll-y')
+      document.body.style.overflow = 'unset'
     }
-    
     return () => {
-      document.body.style.position = ''
-      document.body.style.top = ''
-      document.body.style.left = ''
-      document.body.style.right = ''
-      document.body.style.width = ''
-      document.body.style.overflow = ''
-      document.documentElement.style.overflow = ''
-      document.body.removeAttribute('data-scroll-y')
+      document.body.style.overflow = 'unset'
     }
   }, [isOpen])
 
@@ -138,6 +100,7 @@ const ImageModal = ({ isOpen, onClose, images, initialIndex = 0, resortName }) =
       <div
         className="fixed inset-0 bg-black/95 z-50"
         onClick={onClose}
+        style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
       />
 
       {/* Контент модального окна */}
@@ -152,22 +115,21 @@ const ImageModal = ({ isOpen, onClose, images, initialIndex = 0, resortName }) =
           bottom: 0,
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center',
-          overflow: 'hidden'
+          justifyContent: 'center'
         }}
       >
         <div
-          className="relative flex items-center justify-center overflow-hidden bg-black/70 shadow-2xl"
+          className="relative w-full max-w-5xl flex items-center justify-center overflow-hidden bg-black/70 shadow-2xl"
           onClick={(e) => e.stopPropagation()}
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
           style={{
-            width: '90vw',
-            maxWidth: '90vw',
-            height: 'auto',
-            maxHeight: '90vh',
             aspectRatio: '16/9',
+            maxWidth: '90vw',
+            maxHeight: '90vh',
+            width: '100%',
+            height: 'auto',
             borderRadius: '1.5rem'
           }}
         >
@@ -187,52 +149,58 @@ const ImageModal = ({ isOpen, onClose, images, initialIndex = 0, resortName }) =
             />
           </div>
 
-              {/* Стрелки навигации */}
-              {images.length > 1 && (
-                <>
-                  {/* Стрелка влево */}
-                  <button
-                    onClick={goToPrevious}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-white/20 hover:bg-white/30 text-white rounded-full p-3 transition-all duration-300 hover:scale-110 active:scale-95"
-                    aria-label="Предыдущее изображение"
-                  >
-                    <svg
-                      className="w-6 h-6"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15 19l-7-7 7-7"
-                      />
-                    </svg>
-                  </button>
+          {/* Стрелки навигации */}
+          {images.length > 1 && (
+            <>
+              {/* Стрелка влево */}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  goToPrevious()
+                }}
+                className="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-white/20 hover:bg-white/30 text-white rounded-full p-3 transition-all duration-300 hover:scale-110 active:scale-95"
+                aria-label="Предыдущее изображение"
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+              </button>
 
-                  {/* Стрелка вправо */}
-                  <button
-                    onClick={goToNext}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-white/20 hover:bg-white/30 text-white rounded-full p-3 transition-all duration-300 hover:scale-110 active:scale-95"
-                    aria-label="Следующее изображение"
-                  >
-                    <svg
-                      className="w-6 h-6"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
-                  </button>
-                </>
-              )}
+              {/* Стрелка вправо */}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  goToNext()
+                }}
+                className="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-white/20 hover:bg-white/30 text-white rounded-full p-3 transition-all duration-300 hover:scale-110 active:scale-95"
+                aria-label="Следующее изображение"
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
+            </>
+          )}
         </div>
       </div>
     </>
@@ -240,4 +208,3 @@ const ImageModal = ({ isOpen, onClose, images, initialIndex = 0, resortName }) =
 }
 
 export default ImageModal
-
