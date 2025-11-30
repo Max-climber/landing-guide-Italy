@@ -16,20 +16,28 @@ const Navigation = () => {
   const scrollToSection = (href) => {
     const element = document.querySelector(href)
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
+      // Получаем высоту навигации (примерно 80px на десктопе, 64px на мобилке)
+      const navHeight = window.innerWidth >= 768 ? 80 : 64
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
+      const offsetPosition = elementPosition - navHeight
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
       setIsOpen(false)
     }
   }
 
   return (
     <nav 
-      className="fixed top-0 left-0 right-0 bg-color2 shadow-lg" 
+      className="fixed top-0 left-0 right-0 bg-color2 shadow-lg z-50" 
       style={{ 
         position: 'fixed',
         top: 0,
         left: 0,
         right: 0,
-        zIndex: 100,
+        zIndex: 9999,
         willChange: 'transform',
         transform: 'translateZ(0)',
         backfaceVisibility: 'hidden',

@@ -126,6 +126,7 @@
     "hideFeatures": "Скрыть особенности",
     "features": "Особенности курорта:",
     "learnMore": "Узнать больше о курорте",
+    "moreResorts": "Больше курортов",
     "discount": "-{{value}}%",
     "recommended": "⭐ Рекомендуем",
     "resorts": {

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 
 /**
@@ -22,12 +22,19 @@ const ImageModal = ({ isOpen, onClose, images, initialIndex = 0, resortName }) =
   // Блокировка скролла при открытом модальном окне
   useEffect(() => {
     if (isOpen) {
+      // Блокируем скролл страницы
       document.body.style.overflow = 'hidden'
+      // Также блокируем скролл на html элементе для надежности
+      document.documentElement.style.overflow = 'hidden'
     } else {
-      document.body.style.overflow = 'unset'
+      // Восстанавливаем скролл
+      document.body.style.overflow = ''
+      document.documentElement.style.overflow = ''
     }
     return () => {
-      document.body.style.overflow = 'unset'
+      // Очистка при размонтировании
+      document.body.style.overflow = ''
+      document.documentElement.style.overflow = ''
     }
   }, [isOpen])
 
@@ -37,6 +44,16 @@ const ImageModal = ({ isOpen, onClose, images, initialIndex = 0, resortName }) =
       setCurrentIndex(initialIndex)
     }
   }, [initialIndex, isOpen])
+
+  // Переход к следующему изображению
+  const goToNext = useCallback(() => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length)
+  }, [images.length])
+
+  // Переход к предыдущему изображению
+  const goToPrevious = useCallback(() => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length)
+  }, [images.length])
 
   // Обработка клавиатуры (ESC для закрытия, стрелки для навигации)
   useEffect(() => {
@@ -54,7 +71,7 @@ const ImageModal = ({ isOpen, onClose, images, initialIndex = 0, resortName }) =
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [isOpen, currentIndex, images.length])
+  }, [isOpen, goToNext, goToPrevious, onClose])
 
   // Обработка начала касания
   const onTouchStart = (e) => {
@@ -83,16 +100,6 @@ const ImageModal = ({ isOpen, onClose, images, initialIndex = 0, resortName }) =
     }
   }
 
-  // Переход к следующему изображению
-  const goToNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length)
-  }
-
-  // Переход к предыдущему изображению
-  const goToPrevious = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length)
-  }
-
   if (!images || images.length === 0 || !isOpen) return null
 
   const modalContent = (
@@ -109,7 +116,8 @@ const ImageModal = ({ isOpen, onClose, images, initialIndex = 0, resortName }) =
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        pointerEvents: 'auto'
+        pointerEvents: 'auto',
+        overflow: 'hidden'
       }}
       onClick={onClose}
     >
@@ -136,7 +144,8 @@ const ImageModal = ({ isOpen, onClose, images, initialIndex = 0, resortName }) =
           zIndex: 10002,
           width: '100%',
           height: '100%',
-          padding: '1rem'
+          padding: '1rem',
+          overflow: 'hidden'
         }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -171,6 +180,30 @@ const ImageModal = ({ isOpen, onClose, images, initialIndex = 0, resortName }) =
               }}
             />
           </div>
+
+          {/* Кнопка закрытия (крестик) */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              onClose()
+            }}
+            className="absolute right-4 top-4 z-30 bg-white/20 hover:bg-white/30 text-white rounded-full p-3 transition-all duration-300 hover:scale-110 active:scale-95"
+            aria-label="Закрыть модальное окно"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
 
           {/* Стрелки навигации */}
           {images.length > 1 && (

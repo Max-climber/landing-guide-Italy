@@ -126,6 +126,7 @@
     "hideFeatures": "Hide Features",
     "features": "Resort Features:",
     "learnMore": "Learn more about the resort",
+    "moreResorts": "More Resorts",
     "discount": "-{{value}}%",
     "recommended": "⭐ Recommended",
     "resorts": {
