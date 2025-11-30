@@ -160,10 +160,16 @@ const Programs = () => {
                   {program.pricing.consultation && (
                     <div>
                       <p className="text-white mb-2">
-                        {program.pricing.consultation.split(':')[0]}:{' '}
-                        <span className="text-color1 font-semibold">
-                          {program.pricing.consultation.split(':')[1]?.trim()}
-                        </span>
+                        {program.pricing.consultation.includes(':') ? (
+                          <>
+                            {program.pricing.consultation.split(':')[0]}:{' '}
+                            <span className="text-color1 font-semibold">
+                              {program.pricing.consultation.split(':')[1]?.trim()}
+                            </span>
+                          </>
+                        ) : (
+                          program.pricing.consultation
+                        )}
                       </p>
                     </div>
                   )}
