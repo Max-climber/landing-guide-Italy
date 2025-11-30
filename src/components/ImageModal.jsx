@@ -96,51 +96,64 @@ const ImageModal = ({ isOpen, onClose, images, initialIndex = 0, resortName }) =
   if (!images || images.length === 0 || !isOpen) return null
 
   const modalContent = (
-    <>
+    <div
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        width: '100vw',
+        height: '100vh',
+        zIndex: 10000,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        pointerEvents: 'auto'
+      }}
+      onClick={onClose}
+    >
       {/* Затемненный фон */}
       <div
-        className="fixed inset-0 bg-black/95"
-        onClick={onClose}
         style={{ 
-          position: 'fixed',
+          position: 'absolute',
           top: 0,
           left: 0,
           right: 0,
           bottom: 0,
-          zIndex: 9999
+          backgroundColor: 'rgba(0, 0, 0, 0.95)',
+          zIndex: 10001
         }}
       />
 
       {/* Контент модального окна */}
       <div
-        className="fixed inset-0 flex items-center justify-center p-2 sm:p-4"
-        onClick={onClose}
         style={{ 
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
+          position: 'relative',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          zIndex: 10000,
-          pointerEvents: 'auto'
+          zIndex: 10002,
+          width: '100%',
+          height: '100%',
+          padding: '1rem'
         }}
+        onClick={(e) => e.stopPropagation()}
       >
         <div
-          className="relative w-full max-w-5xl flex items-center justify-center overflow-hidden bg-black/70 shadow-2xl"
-          onClick={(e) => e.stopPropagation()}
+          className="relative flex items-center justify-center overflow-hidden bg-black/70 shadow-2xl"
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
+          onClick={(e) => e.stopPropagation()}
           style={{
             aspectRatio: '16/9',
             maxWidth: '90vw',
             maxHeight: '90vh',
             width: '100%',
             height: 'auto',
-            borderRadius: '1.5rem'
+            borderRadius: '1.5rem',
+            position: 'relative'
           }}
         >
           {/* Изображение фиксированного размера */}
@@ -213,7 +226,7 @@ const ImageModal = ({ isOpen, onClose, images, initialIndex = 0, resortName }) =
           )}
         </div>
       </div>
-    </>
+    </div>
   )
 
   // Рендерим модальное окно через Portal в body, чтобы оно было поверх всего контента

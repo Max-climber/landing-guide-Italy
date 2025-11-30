@@ -23,8 +23,13 @@ const Navigation = () => {
 
   return (
     <nav 
-      className="fixed top-0 left-0 right-0 z-50 bg-color2 shadow-lg" 
+      className="fixed top-0 left-0 right-0 bg-color2 shadow-lg" 
       style={{ 
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 100,
         willChange: 'transform',
         transform: 'translateZ(0)',
         backfaceVisibility: 'hidden',
