@@ -160,13 +160,7 @@ const Programs = () => {
                   {program.pricing.consultation && (
                     <div>
                       <p className="text-white mb-2">
-                        {program.pricing.consultation.split(': ').map((part, idx) => 
-                          idx === 0 ? (
-                            <span key={idx}>{part}: </span>
-                          ) : (
-                            <span key={idx} className="text-color1 font-semibold">{part}</span>
-                          )
-                        )}
+                        {program.pricing.consultation}
                       </p>
                     </div>
                   )}
@@ -195,20 +189,10 @@ const Programs = () => {
                   {program.pricing.planning && (
                     <div>
                       <p className="text-white">
-                        {(() => {
-                          const planningText = t(`programs.${activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.planning`);
-                          // Ищем "200 евро" или "200 euros" в конце строки
-                          const match = planningText.match(/^(.+?)(\d+\s*(?:евро|euros?))$/i);
-                          if (match) {
-                            return (
-                              <>
-                                {match[1]}
-                                <span className="text-color1 font-semibold">{match[2]}</span>
-                              </>
-                            );
-                          }
-                          return planningText;
-                        })()}
+                        {t(`programs.${activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.planning`)}{' '}
+                        <span className="text-color1 font-semibold">
+                          {program.pricing.planning}
+                        </span>
                       </p>
                     </div>
                   )}

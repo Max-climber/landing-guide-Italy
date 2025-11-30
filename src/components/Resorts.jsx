@@ -174,10 +174,10 @@ const Resorts = () => {
     >
       <div className="container-max">
         <div className="text-center mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-oswald font-bold text-color3 mb-4 sm:mb-6 px-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-oswald font-bold text-premium-navy mb-4 sm:mb-6 px-4">
             {t('resorts.title')}
           </h2>
-          <p className="text-xl sm:text-2xl md:text-3xl font-oswald text-color3 max-w-3xl mx-auto px-4">
+          <p className="text-xl sm:text-2xl md:text-3xl font-oswald text-premium-darkGray max-w-3xl mx-auto px-4">
             {t('resorts.subtitle')}
           </p>
         </div>
@@ -327,7 +327,7 @@ const Resorts = () => {
                 onClick={() => setShowAllResorts(true)}
                 className="w-full px-6 py-4 bg-color3 text-white rounded-lg font-oswald font-bold text-lg uppercase tracking-wider hover:bg-color3/90 transition-colors shadow-lg"
               >
-                {t('resorts.moreResorts')}
+                Больше курортов
               </button>
             </div>
           </>

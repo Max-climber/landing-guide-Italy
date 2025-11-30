@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback } from 'react'
-import { createPortal } from 'react-dom'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect } from 'react'
 
 /**
  * Модальное окно для просмотра изображения в полном размере
@@ -22,19 +22,12 @@ const ImageModal = ({ isOpen, onClose, images, initialIndex = 0, resortName }) =
   // Блокировка скролла при открытом модальном окне
   useEffect(() => {
     if (isOpen) {
-      // Блокируем скролл страницы
       document.body.style.overflow = 'hidden'
-      // Также блокируем скролл на html элементе для надежности
-      document.documentElement.style.overflow = 'hidden'
     } else {
-      // Восстанавливаем скролл
-      document.body.style.overflow = ''
-      document.documentElement.style.overflow = ''
+      document.body.style.overflow = 'unset'
     }
     return () => {
-      // Очистка при размонтировании
-      document.body.style.overflow = ''
-      document.documentElement.style.overflow = ''
+      document.body.style.overflow = 'unset'
     }
   }, [isOpen])
 
@@ -44,16 +37,6 @@ const ImageModal = ({ isOpen, onClose, images, initialIndex = 0, resortName }) =
       setCurrentIndex(initialIndex)
     }
   }, [initialIndex, isOpen])
-
-  // Переход к следующему изображению
-  const goToNext = useCallback(() => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length)
-  }, [images.length])
-
-  // Переход к предыдущему изображению
-  const goToPrevious = useCallback(() => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length)
-  }, [images.length])
 
   // Обработка клавиатуры (ESC для закрытия, стрелки для навигации)
   useEffect(() => {
@@ -71,7 +54,7 @@ const ImageModal = ({ isOpen, onClose, images, initialIndex = 0, resortName }) =
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [isOpen, goToNext, goToPrevious, onClose])
+  }, [isOpen, currentIndex, images.length])
 
   // Обработка начала касания
   const onTouchStart = (e) => {
@@ -100,170 +83,117 @@ const ImageModal = ({ isOpen, onClose, images, initialIndex = 0, resortName }) =
     }
   }
 
-  if (!images || images.length === 0 || !isOpen) return null
+  // Переход к следующему изображению
+  const goToNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length)
+  }
 
-  const modalContent = (
-    <div
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        width: '100vw',
-        height: '100vh',
-        zIndex: 10000,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        pointerEvents: 'auto',
-        overflow: 'hidden'
-      }}
-      onClick={onClose}
-    >
-      {/* Затемненный фон */}
-      <div
-        style={{ 
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: 'rgba(0, 0, 0, 0.95)',
-          zIndex: 10001
-        }}
-      />
+  // Переход к предыдущему изображению
+  const goToPrevious = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length)
+  }
 
-      {/* Контент модального окна */}
-      <div
-        style={{ 
-          position: 'relative',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          zIndex: 10002,
-          width: '100%',
-          height: '100%',
-          padding: '1rem',
-          overflow: 'hidden'
-        }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div
-          className="relative flex items-center justify-center overflow-hidden bg-black/70 shadow-2xl"
-          onTouchStart={onTouchStart}
-          onTouchMove={onTouchMove}
-          onTouchEnd={onTouchEnd}
-          onClick={(e) => e.stopPropagation()}
-          style={{
-            aspectRatio: '16/9',
-            maxWidth: '90vw',
-            maxHeight: '90vh',
-            width: '100%',
-            height: 'auto',
-            borderRadius: '1.5rem',
-            position: 'relative'
-          }}
-        >
-          {/* Изображение фиксированного размера */}
-          <div className="relative w-full h-full" style={{ aspectRatio: '16/9' }}>
-            <img
-              key={currentIndex}
-              src={images[currentIndex]}
-              alt={`${resortName} - фото ${currentIndex + 1}`}
-              className="w-full h-full object-cover"
-              style={{ 
-                display: 'block',
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover'
-              }}
-            />
-          </div>
+  if (!images || images.length === 0) return null
 
-          {/* Кнопка закрытия (крестик) */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation()
-              onClose()
-            }}
-            className="absolute right-4 top-4 z-30 bg-white/20 hover:bg-white/30 text-white rounded-full p-3 transition-all duration-300 hover:scale-110 active:scale-95"
-            aria-label="Закрыть модальное окно"
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* Затемненный фон */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 bg-black/95 z-50"
+            onClick={onClose}
+          />
+
+          {/* Контент модального окна */}
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            onClick={onClose}
           >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.3 }}
+              className="relative w-full max-w-5xl aspect-video flex items-center justify-center rounded-3xl overflow-hidden bg-black/70 shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+              onTouchStart={onTouchStart}
+              onTouchMove={onTouchMove}
+              onTouchEnd={onTouchEnd}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-
-          {/* Стрелки навигации */}
-          {images.length > 1 && (
-            <>
-              {/* Стрелка влево */}
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  goToPrevious()
-                }}
-                className="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-white/20 hover:bg-white/30 text-white rounded-full p-3 transition-all duration-300 hover:scale-110 active:scale-95"
-                aria-label="Предыдущее изображение"
-              >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 19l-7-7 7-7"
+              {/* Изображение фиксированного размера */}
+              <div className="relative w-full h-full">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={currentIndex}
+                    src={images[currentIndex]}
+                    alt={`${resortName} - фото ${currentIndex + 1}`}
+                    initial={{ opacity: 0, x: 120 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -120 }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute inset-0 w-full h-full object-cover"
                   />
-                </svg>
-              </button>
+                </AnimatePresence>
+              </div>
 
-              {/* Стрелка вправо */}
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  goToNext()
-                }}
-                className="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-white/20 hover:bg-white/30 text-white rounded-full p-3 transition-all duration-300 hover:scale-110 active:scale-95"
-                aria-label="Следующее изображение"
-              >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </button>
-            </>
-          )}
-        </div>
-      </div>
-    </div>
+              {/* Стрелки навигации */}
+              {images.length > 1 && (
+                <>
+                  {/* Стрелка влево */}
+                  <button
+                    onClick={goToPrevious}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-white/20 hover:bg-white/30 text-white rounded-full p-3 transition-all duration-300 hover:scale-110 active:scale-95"
+                    aria-label="Предыдущее изображение"
+                  >
+                    <svg
+                      className="w-6 h-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M15 19l-7-7 7-7"
+                      />
+                    </svg>
+                  </button>
+
+                  {/* Стрелка вправо */}
+                  <button
+                    onClick={goToNext}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-white/20 hover:bg-white/30 text-white rounded-full p-3 transition-all duration-300 hover:scale-110 active:scale-95"
+                    aria-label="Следующее изображение"
+                  >
+                    <svg
+                      className="w-6 h-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </button>
+                </>
+              )}
+            </motion.div>
+          </div>
+        </>
+      )}
+    </AnimatePresence>
   )
-
-  // Рендерим модальное окно через Portal в body, чтобы оно было поверх всего контента
-  return createPortal(modalContent, document.body)
 }
 
 export default ImageModal
+
