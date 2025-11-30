@@ -75,14 +75,14 @@
         "skipass": "Help with ski pass purchases"
       },
       "pricing": {
-        "consultation": "Discussion of trip plans, ticket selection, ski resort selection, etc. - free",
+        "consultation": "Discussion of trip plans: free",
         "transfer": "Airport transfer",
         "transferStart": "start of trip",
         "workingDays": "7:00 AM to 9:00 PM on weekdays",
         "otherTime": "Other times",
         "price1": "€0.7/km + toll road costs",
         "price2": "€1/km + toll road costs",
-        "planning": "Creating a complete trip plan:",
+        "planning": "Trip planning (ticket selection, ski resort selection, hotel booking): €200",
         "planningPrice": "€200/service",
         "hotelTransfer": "Transfer from hotel to lifts",
         "hotelTransferPrice": "200 euro/day"
@@ -98,16 +98,16 @@
         "restDay": "Client guidance on rest days – shopping trips, excursions, hiking, etc."
       },
       "pricing": {
-        "consultation": "Discussion of trip plans, ticket selection, ski resort selection, etc. - free",
+        "consultation": "Discussion of trip plans: free",
         "transfer": "Airport transfer",
         "transferStart": "start of trip",
         "workingDays": "7:00 AM to 9:00 PM on weekdays",
         "otherTime": "Other times",
         "price1": "€0.7/km + toll road costs",
         "price2": "€1/km + toll road costs",
-        "planning": "Creating a complete trip plan:",
+        "planning": "Trip planning (ticket selection, ski resort selection, hotel booking): €200",
         "planningPrice": "€200/service",
-        "hotelTransfer": "Transfer from hotel to lift parking and individual slope accompaniment",
+        "hotelTransfer": "Transfer from hotel to lift parking and individual slope accompaniment:",
         "hotelTransferPrice": "400 euro/day"
       }
     },
@@ -126,6 +126,7 @@
     "hideFeatures": "Hide Features",
     "features": "Resort Features:",
     "learnMore": "Learn more about the resort",
+    "moreResorts": "More Resorts",
     "discount": "-{{value}}%",
     "recommended": "⭐ Recommended",
     "resorts": {

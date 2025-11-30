@@ -56,7 +56,7 @@ const Programs = () => {
           },
         ],
         consultation: t('programs.comfortable.pricing.consultation'),
-        planning: t('programs.comfortable.pricing.planningPrice'),
+        planning: t('programs.comfortable.pricing.planning'),
         hotelTransfer: t('programs.comfortable.pricing.hotelTransferPrice'),
       },
       color: 'from-purple-600 to-purple-800',
@@ -83,7 +83,7 @@ const Programs = () => {
           },
         ],
         consultation: t('programs.superComfort.pricing.consultation'),
-        planning: t('programs.superComfort.pricing.planningPrice'),
+        planning: t('programs.superComfort.pricing.planning'),
         hotelTransfer: t('programs.superComfort.pricing.hotelTransferPrice'),
         individualSlope: t('programs.superComfort.pricing.individualSlope'),
       },
@@ -160,7 +160,10 @@ const Programs = () => {
                   {program.pricing.consultation && (
                     <div>
                       <p className="text-white mb-2">
-                        {program.pricing.consultation}
+                        {program.pricing.consultation.split(':')[0]}:{' '}
+                        <span className="text-color1 font-semibold">
+                          {program.pricing.consultation.split(':')[1]?.trim()}
+                        </span>
                       </p>
                     </div>
                   )}
@@ -189,9 +192,9 @@ const Programs = () => {
                   {program.pricing.planning && (
                     <div>
                       <p className="text-white">
-                        {t(`programs.${activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.planning`)}{' '}
+                        {program.pricing.planning.split(':')[0]}:{' '}
                         <span className="text-color1 font-semibold">
-                          {program.pricing.planning}
+                          {program.pricing.planning.split(':')[1]?.trim()}
                         </span>
                       </p>
                     </div>
