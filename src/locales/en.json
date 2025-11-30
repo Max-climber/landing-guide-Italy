@@ -84,7 +84,7 @@
         "price2": "€1/km + toll road costs",
         "planning": "Trip planning (ticket selection, ski resort selection, hotel booking): €200",
         "planningPrice": "€200/service",
-        "hotelTransfer": "Transfer from hotel to lifts",
+        "hotelTransfer": "Transfer from hotel to lifts:",
         "hotelTransferPrice": "200 euro/day"
       }
     },
