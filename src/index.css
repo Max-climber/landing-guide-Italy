@@ -129,11 +129,32 @@
     font-family: 'Oswald', sans-serif;
     font-stretch: condensed;
     font-optical-sizing: auto;
+    /* Оптимизация для плавного скролла */
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+    /* GPU ускорение */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    perspective: 1000px;
+    -webkit-perspective: 1000px;
   }
   h1, h2, h3, h4, h5, h6,
   button, input, textarea, select {
     font-family: 'Oswald', sans-serif;
     font-stretch: condensed;
+  }
+  
+  /* Оптимизация для всех секций */
+  section {
+    /* GPU ускорение */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    will-change: auto;
+    /* Предотвращение вибрации при скролле */
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
   }
 }
 
@@ -152,16 +173,76 @@
   
   .section-padding {
     @apply py-20 px-4 md:px-8 lg:px-16;
+    /* Оптимизация для плавного скролла */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    will-change: auto;
   }
   
   .container-max {
     @apply max-w-7xl mx-auto;
+    /* Оптимизация для плавного скролла */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+  
+  /* Оптимизация изображений для плавного скролла */
+  img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    /* GPU ускорение */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    will-change: auto;
   }
 }
 
-/* Smooth scrolling */
+/* Smooth scrolling - оптимизировано для мобильных */
 html {
   scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+  /* GPU ускорение для плавного скролла */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: scroll-position;
+}
+
+/* Оптимизация для мобильных устройств */
+@media (max-width: 768px) {
+  html {
+    scroll-behavior: auto; /* Отключаем smooth на мобильных для лучшей производительности */
+  }
+  
+  * {
+    -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent;
+    /* Оптимизация touch-событий */
+    touch-action: manipulation;
+  }
+  
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Оптимизация рендеринга */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    /* Предотвращение bounce-эффекта на iOS */
+    overscroll-behavior-y: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Оптимизация для интерактивных элементов */
+  button, a {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Оптимизация для секций */
+  section {
+    contain: layout style paint;
+    will-change: auto;
+  }
 }
 
 /* Custom scrollbar */
