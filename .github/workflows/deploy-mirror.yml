@@ -48,7 +48,8 @@ jobs:
             **/node_modules/**
             **/.DS_Store
           log-level: verbose
-          dangerous-clean-slate: false
+          dangerous-clean-slate: true
+          dry-run: false
 
       - name: Verify deployment and fix permissions
         run: |
