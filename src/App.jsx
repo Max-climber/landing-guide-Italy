@@ -20,6 +20,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white">
+      <CountryRedirect />
       <Navigation scrollY={scrollY} />
       <Hero />
       <About />
