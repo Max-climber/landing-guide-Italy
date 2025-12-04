@@ -50,7 +50,7 @@ jobs:
           log-level: verbose
           dangerous-clean-slate: false
 
-      - name: Verify deployment and remove index.php
+      - name: Verify deployment and fix permissions
         run: |
           sudo apt-get update && sudo apt-get install -y lftp
           lftp -c "
@@ -61,7 +61,10 @@ jobs:
           ls -la
           echo '=== Removing index.php ==='
           rm -f index.php || echo 'index.php not found'
-          echo '=== Files after removal ==='
+          echo '=== Setting correct permissions ==='
+          chmod 644 index.html .htaccess robots.txt logo.jpg vite.svg || echo 'Failed to chmod files'
+          chmod 755 assets images шрифты || echo 'Failed to chmod directories'
+          echo '=== Files after cleanup ==='
           ls -la
           quit
           " || echo "Error connecting via FTP"
