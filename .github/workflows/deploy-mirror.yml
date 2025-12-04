@@ -34,7 +34,7 @@ jobs:
           username: ${{ secrets.TIMEWEB_FTP_USER }}
           password: ${{ secrets.TIMEWEB_FTP_PASS }}
           local-dir: ./dist/
-          server-dir: ${{ secrets.TIMEWEB_FTP_PATH }}
+          server-dir: ${{ secrets.TIMEWEB_FTP_PATH }}/
           exclude: |
             **/.git*
             **/.git*/**
