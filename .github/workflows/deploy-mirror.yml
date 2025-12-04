@@ -52,7 +52,7 @@ jobs:
 
       - name: Verify deployment and remove index.php
         run: |
-          apt-get update && apt-get install -y lftp
+          sudo apt-get update && sudo apt-get install -y lftp
           lftp -c "
           set ftp:ssl-allow no
           open -u ${{ secrets.TIMEWEB_FTP_USER }},${{ secrets.TIMEWEB_FTP_PASS }} ${{ secrets.TIMEWEB_FTP_HOST }}
@@ -60,7 +60,7 @@ jobs:
           echo '=== Files in deployment directory ==='
           ls -la
           echo '=== Removing index.php ==='
-          rm -f index.php
+          rm -f index.php || echo 'index.php not found'
           echo '=== Files after removal ==='
           ls -la
           quit
