@@ -50,16 +50,21 @@ jobs:
           log-level: verbose
           dangerous-clean-slate: false
 
-      - name: Remove default index.php
+      - name: Verify deployment and remove index.php
         run: |
           apt-get update && apt-get install -y lftp
           lftp -c "
           set ftp:ssl-allow no
           open -u ${{ secrets.TIMEWEB_FTP_USER }},${{ secrets.TIMEWEB_FTP_PASS }} ${{ secrets.TIMEWEB_FTP_HOST }}
           cd ${{ secrets.TIMEWEB_FTP_PATH }}
+          echo '=== Files in deployment directory ==='
+          ls -la
+          echo '=== Removing index.php ==='
           rm -f index.php
+          echo '=== Files after removal ==='
+          ls -la
           quit
-          " || echo "index.php not found or already removed"
+          " || echo "Error connecting via FTP"
 
       - name: Deployment success
         run: echo "✅ Сайт успешно задеплоен на российский хостинг!"
