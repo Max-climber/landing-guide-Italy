@@ -27,7 +27,14 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Deploy to Timeweb via FTP
+      - name: List files to deploy
+        run: |
+          echo "Files in dist directory:"
+          ls -la ./dist/
+          echo "Total files:"
+          find ./dist -type f | wc -l
+
+      - name: Deploy to SprintHost via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.TIMEWEB_FTP_HOST }}
@@ -40,6 +47,8 @@ jobs:
             **/.git*/**
             **/node_modules/**
             **/.DS_Store
+          log-level: verbose
+          dangerous-clean-slate: false
 
       - name: Deployment success
         run: echo "✅ Сайт успешно задеплоен на российский хостинг!"
