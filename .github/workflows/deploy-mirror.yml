@@ -57,7 +57,12 @@ jobs:
           lftp -c "
           set ftp:ssl-allow no
           open -u ${{ secrets.TIMEWEB_FTP_USER }},${{ secrets.TIMEWEB_FTP_PASS }} ${{ secrets.TIMEWEB_FTP_HOST }}
-          cd ${{ secrets.TIMEWEB_FTP_PATH }}
+          echo '=== Current directory after login ==='
+          pwd
+          echo '=== Trying to change to deployment path ==='
+          cd ${{ secrets.TIMEWEB_FTP_PATH }} || echo 'Failed to cd to path'
+          echo '=== Current directory after cd ==='
+          pwd
           echo '=== Files in deployment directory ==='
           ls -la
           echo '=== Removing index.php ==='
@@ -65,7 +70,7 @@ jobs:
           echo '=== Setting correct permissions ==='
           chmod 644 index.html .htaccess robots.txt logo.jpg vite.svg || echo 'Failed to chmod files'
           chmod 755 assets images шрифты || echo 'Failed to chmod directories'
-          echo '=== Files after cleanup ==='
+          echo '=== Final file list ==='
           ls -la
           quit
           " || echo "Error connecting via FTP"
