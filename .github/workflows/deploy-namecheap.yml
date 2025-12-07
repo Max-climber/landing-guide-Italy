@@ -1,0 +1,78 @@
+name: Deploy to Namecheap (.com)
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy-to-namecheap:
+    name: Deploy to Namecheap FTP
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: List files to deploy
+        run: |
+          echo "Files in dist directory:"
+          ls -la ./dist/
+          echo "Total files:"
+          find ./dist -type f | wc -l
+
+      - name: Deploy to Namecheap via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.NAMECHEAP_FTP_HOST }}
+          username: ${{ secrets.NAMECHEAP_FTP_USER }}
+          password: ${{ secrets.NAMECHEAP_FTP_PASS }}
+          local-dir: ./dist/
+          server-dir: ${{ secrets.NAMECHEAP_FTP_PATH }}/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.DS_Store
+          log-level: verbose
+          dangerous-clean-slate: true
+          dry-run: false
+
+      - name: Verify deployment
+        run: |
+          sudo apt-get update && sudo apt-get install -y lftp
+          lftp -c "
+          set ftp:ssl-allow no
+          open -u ${{ secrets.NAMECHEAP_FTP_USER }},${{ secrets.NAMECHEAP_FTP_PASS }} ${{ secrets.NAMECHEAP_FTP_HOST }}
+          echo '=== Current directory after login ==='
+          pwd
+          echo '=== Trying to change to deployment path ==='
+          cd ${{ secrets.NAMECHEAP_FTP_PATH }} || echo 'Failed to cd to path'
+          echo '=== Current directory after cd ==='
+          pwd
+          echo '=== Files in deployment directory ==='
+          ls -la
+          echo '=== Setting correct permissions ==='
+          chmod 644 index.html .htaccess robots.txt logo.jpg vite.svg || echo 'Failed to chmod files'
+          chmod 755 assets images шрифты || echo 'Failed to chmod directories'
+          echo '=== Final file list ==='
+          ls -la
+          quit
+          " || echo "Error connecting via FTP"
+
+      - name: Deployment success
+        run: echo "✅ Сайт успешно задеплоен на Namecheap!"
+
