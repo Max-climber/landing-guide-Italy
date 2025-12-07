@@ -1,11 +1,8 @@
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
-import { useState, useRef, useEffect } from 'react'
 
 const LanguageSwitcher = () => {
   const { i18n } = useTranslation()
-  const [isOpen, setIsOpen] = useState(false)
-  const dropdownRef = useRef(null)
 
   // Используем SVG флаги вместо эмодзи для совместимости с Windows
   const FlagIcon = ({ country, size = 'w-6 h-6' }) => {
@@ -32,65 +29,24 @@ const LanguageSwitcher = () => {
     return null
   }
 
-  const languages = [
-    { code: 'ru', name: 'Русский' },
-    { code: 'en', name: 'English' },
-  ]
+  // Определяем текущий язык и противоположный
+  const currentLang = i18n.language === 'en' ? 'en' : 'ru'
+  const nextLang = currentLang === 'ru' ? 'en' : 'ru'
 
-  const currentLanguage = languages.find((lang) => lang.code === i18n.language) || languages[0]
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false)
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [])
-
-  const changeLanguage = (langCode) => {
-    i18n.changeLanguage(langCode)
-    setIsOpen(false)
+  const toggleLanguage = () => {
+    i18n.changeLanguage(nextLang)
   }
 
   return (
-    <div className="relative" ref={dropdownRef}>
-      <motion.button
-        onClick={() => setIsOpen(!isOpen)}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-        className="cursor-pointer transition-transform"
-      >
-        <FlagIcon country={currentLanguage.code} />
-      </motion.button>
-
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          className="absolute right-0 mt-2 flex gap-2 bg-white/95 backdrop-blur-md rounded-lg shadow-2xl p-2 z-50"
-        >
-          {languages.map((lang) => (
-            <motion.button
-              key={lang.code}
-              onClick={() => changeLanguage(lang.code)}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              className={`p-1 rounded transition-all ${
-                i18n.language === lang.code
-                  ? 'ring-2 ring-color1'
-                  : 'opacity-70 hover:opacity-100'
-              }`}
-            >
-              <FlagIcon country={lang.code} size="w-6 h-6" />
-            </motion.button>
-          ))}
-        </motion.div>
-      )}
-    </div>
+    <motion.button
+      onClick={toggleLanguage}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.95 }}
+      className="cursor-pointer transition-transform"
+      aria-label={`Switch to ${nextLang === 'ru' ? 'Russian' : 'English'}`}
+    >
+      <FlagIcon country={currentLang} />
+    </motion.button>
   )
 }
 

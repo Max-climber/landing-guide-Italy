@@ -67,7 +67,6 @@ const Programs = () => {
       subtitle: t('programs.superComfort.subtitle'),
       description: t('programs.superComfort.description'),
       features: [
-        t('programs.superComfort.features.fullDay'),
         t('programs.superComfort.features.individual'),
         t('programs.superComfort.features.restDay'),
       ],
@@ -139,7 +138,16 @@ const Programs = () => {
 
                 <div className="space-y-3 sm:space-y-4">
                   <h4 className="text-lg sm:text-xl font-semibold text-color1">
-                    {t('programs.whatIncluded')}
+                    {activeProgram === 2 ? (
+                      <>
+                        {t('programs.whatIncluded').replace(':', '')}{' '}
+                        <span className="text-white font-normal text-base sm:text-lg">
+                          ({t('programs.whatIncludedUltra')}):
+                        </span>
+                      </>
+                    ) : (
+                      t('programs.whatIncluded')
+                    )}
                   </h4>
                   <ul className="space-y-2 sm:space-y-3">
                     {program.features.map((feature, idx) => (
@@ -157,66 +165,122 @@ const Programs = () => {
                   {t('programs.cost')}
                 </h4>
                 <div className="space-y-6">
-                  {program.pricing.consultation && (
-                    <div>
-                      <p className="text-white mb-2">
-                        {program.pricing.consultation.includes(':') ? (
-                          <>
-                            {program.pricing.consultation.split(':')[0]}:{' '}
-                            <span className="text-color1 font-semibold">
-                              {program.pricing.consultation.split(':')[1]?.trim()}
-                            </span>
-                          </>
-                        ) : (
-                          program.pricing.consultation
-                        )}
-                      </p>
-                    </div>
-                  )}
-                  {program.pricing.transfer && (
-                    <div>
-                      <p className="font-semibold text-white mb-3">
-                        {t(`programs.${activeProgram === 0 ? 'experienced' : activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.transfer`)}
-                      </p>
-                      <div className="space-y-2">
-                        {program.pricing.transfer.map((item, idx) => (
-                          <div
-                            key={idx}
-                            className="bg-white/10 rounded-lg p-3"
-                          >
-                            <p className="text-white font-medium">
-                              {idx === 0 ? `${t(`programs.${activeProgram === 0 ? 'experienced' : activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.transferStart`)} ${item.time}` : item.time}
-                            </p>
-                            <p className="text-color1">
-                              {item.price}
-                            </p>
+                  {/* Эксперт: сначала трансфер, потом консультация */}
+                  {activeProgram === 0 && (
+                    <>
+                      {program.pricing.transfer && (
+                        <div>
+                          <p className="font-semibold text-white mb-3">
+                            {t(`programs.${activeProgram === 0 ? 'experienced' : activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.transfer`)}
+                          </p>
+                          <div className="space-y-2">
+                            {program.pricing.transfer.map((item, idx) => (
+                              <div
+                                key={idx}
+                                className="bg-white/10 rounded-lg p-3"
+                              >
+                                <p className="text-white font-medium">
+                                  {idx === 0 ? `${t(`programs.${activeProgram === 0 ? 'experienced' : activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.transferStart`)} ${item.time}` : item.time}
+                                </p>
+                                <p className="text-color1">
+                                  {item.price}
+                                </p>
+                              </div>
+                            ))}
                           </div>
-                        ))}
-                      </div>
-                    </div>
+                        </div>
+                      )}
+                      {program.pricing.consultation && (
+                        <div>
+                          <p className="text-white mb-2">
+                            {program.pricing.consultation.includes(':') ? (
+                              <>
+                                {program.pricing.consultation.split(':')[0]}:{' '}
+                                <span className="text-color1 font-semibold">
+                                  {program.pricing.consultation.split(':')[1]?.trim()}
+                                </span>
+                              </>
+                            ) : (
+                              program.pricing.consultation
+                            )}
+                          </p>
+                        </div>
+                      )}
+                    </>
                   )}
-                  {program.pricing.planning && (
-                    <div>
-                      <p className="text-white">
-                        {program.pricing.planning.split(':')[0]}:{' '}
-                        <span className="text-color1 font-semibold">
-                          {program.pricing.planning.split(':')[1]?.trim()}
-                        </span>
-                      </p>
-                    </div>
-                  )}
-                  {program.pricing.hotelTransfer && (
-                    <div>
-                      <p className="text-white">
-                        {t(`programs.${activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.hotelTransfer`)}{' '}
-                        <span className="text-color1 font-semibold">
-                          {program.pricing.hotelTransfer}
-                        </span>
-                      </p>
-                    </div>
+                  
+                  {/* Баланс и Ультракомфорт: сначала планирование, потом трансфер, потом отель, потом консультация */}
+                  {(activeProgram === 1 || activeProgram === 2) && (
+                    <>
+                      {program.pricing.planning && (
+                        <div>
+                          <p className="text-white">
+                            {program.pricing.planning.split(':')[0]}:{' '}
+                            <span className="text-color1 font-semibold">
+                              {program.pricing.planning.split(':')[1]?.trim()}
+                            </span>
+                          </p>
+                        </div>
+                      )}
+                      {program.pricing.transfer && (
+                        <div>
+                          <p className="font-semibold text-white mb-3">
+                            {t(`programs.${activeProgram === 0 ? 'experienced' : activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.transfer`)}
+                          </p>
+                          <div className="space-y-2">
+                            {program.pricing.transfer.map((item, idx) => (
+                              <div
+                                key={idx}
+                                className="bg-white/10 rounded-lg p-3"
+                              >
+                                <p className="text-white font-medium">
+                                  {idx === 0 ? `${t(`programs.${activeProgram === 0 ? 'experienced' : activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.transferStart`)} ${item.time}` : item.time}
+                                </p>
+                                <p className="text-color1">
+                                  {item.price}
+                                </p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      {program.pricing.hotelTransfer && (
+                        <div>
+                          <p className="text-white">
+                            {t(`programs.${activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.hotelTransfer`)}{' '}
+                            <span className="text-color1 font-semibold">
+                              {program.pricing.hotelTransfer}
+                            </span>
+                          </p>
+                        </div>
+                      )}
+                      {program.pricing.consultation && (
+                        <div>
+                          <p className="text-white mb-2">
+                            {program.pricing.consultation.includes(':') ? (
+                              <>
+                                {program.pricing.consultation.split(':')[0]}:{' '}
+                                <span className="text-color1 font-semibold">
+                                  {program.pricing.consultation.split(':')[1]?.trim()}
+                                </span>
+                              </>
+                            ) : (
+                              program.pricing.consultation
+                            )}
+                          </p>
+                        </div>
+                      )}
+                    </>
                   )}
                 </div>
               </div>
+            </div>
+            
+            {/* Сноска для всех тарифов - вне блоков */}
+            <div className="mt-6 pt-4">
+              <p className="text-white text-base sm:text-lg">
+                {t('programs.tollRoadsNote')}
+              </p>
             </div>
             </div>
           )

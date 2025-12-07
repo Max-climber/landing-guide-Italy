@@ -93,15 +93,17 @@ const Navigation = () => {
         {/* Mobile Menu */}
         {isOpen && (
           <div className="md:hidden bg-premium-navy/98 backdrop-blur-md border-t border-white/10 pb-4 space-y-1">
-            {navItems.map((item) => (
-              <button
-                key={item.href}
-                onClick={() => scrollToSection(item.href)}
-                className="block w-full text-left py-3 px-4 text-color1 hover:text-white hover:bg-white/5 transition-colors rounded-lg mx-2 font-semibold"
-              >
-                {item.name}
-              </button>
-            ))}
+            {navItems
+              .filter((item) => item.href !== '#contact')
+              .map((item) => (
+                <button
+                  key={item.href}
+                  onClick={() => scrollToSection(item.href)}
+                  className="block w-full text-left py-3 px-4 text-color1 hover:text-white hover:bg-white/5 transition-colors rounded-lg mx-2 font-semibold"
+                >
+                  {item.name}
+                </button>
+              ))}
             <div className="pt-3 mt-2 border-t border-white/20 mx-2">
               <div className="px-4 py-2">
                 <LanguageSwitcher />

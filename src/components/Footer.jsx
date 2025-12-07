@@ -56,7 +56,7 @@ const Footer = () => {
           <div>
             <h4 className="font-oswald font-semibold text-color1 mb-3 sm:mb-4 text-base sm:text-lg">{t('footer.contacts')}</h4>
             <ul className="space-y-2 text-sm sm:text-base text-white/80">
-              <li>{t('footer.email')} artarxi@gmail.com</li>
+              <li>{t('footer.email')} contact@vacanzabianca.com</li>
               <li>{t('footer.phone')} +39 333 143 0647</li>
               <li className="flex space-x-4 mt-4">
                 <a
@@ -66,6 +66,14 @@ const Footer = () => {
                   className="hover:text-color1 transition-colors"
                 >
                   WhatsApp
+                </a>
+                <a
+                  href="https://t.me/la_vacanza_bianca"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-color1 transition-colors"
+                >
+                  Telegram
                 </a>
               </li>
             </ul>
