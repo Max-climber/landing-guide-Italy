@@ -20,7 +20,8 @@ const Hero = () => {
             {t('hero.title')}
           </h2>
           <p className="text-2xl sm:text-3xl md:text-4xl font-oswald font-semibold text-color3 mb-12 sm:mb-16 max-w-4xl mx-auto px-4 leading-snug">
-            {t('hero.description')}
+            <span className="block">{t('hero.description').split('<br/>')[0]}</span>
+            <span className="block">{t('hero.description').split('<br/>')[1]}</span>
           </p>
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 lg:gap-12 justify-center px-4">
             <button

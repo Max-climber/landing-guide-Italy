@@ -142,15 +142,25 @@ const Conditions = () => {
                                 </div>
                                 <div className="flex items-start gap-3">
                                   <span className="text-color1 mt-1 text-lg">•</span>
-                                  <p className="text-base sm:text-lg text-white/90 leading-relaxed">
-                                    <span className="font-semibold text-white">
-                                      {t('contact.conditionsSections.planning.prepayment').split('–')[0]}
-                                    </span>
-                                    {' – '}
-                                    <span className="text-color1 font-bold">
-                                      {t('contact.conditionsSections.planning.prepayment').split('–')[1]}
-                                    </span>
-                                  </p>
+                                  <div className="flex-1">
+                                    <p className="text-base sm:text-lg text-white/90 leading-relaxed">
+                                      <span className="font-semibold text-white">
+                                        {t('contact.conditionsSections.planning.prepayment').split('=')[0].replace('*', '').trim()}
+                                      </span>
+                                      <sup className="text-white">*</sup>
+                                      {' = '}
+                                      <span className="text-white">
+                                        {t('contact.conditionsSections.planning.prepayment').split('=')[1]?.split('–')[0]?.trim()}
+                                      </span>
+                                      {' – '}
+                                      <span className="text-color1 font-bold">
+                                        {t('contact.conditionsSections.planning.prepayment').split('–')[1]?.trim()}
+                                      </span>
+                                    </p>
+                                    <p className="text-base sm:text-lg text-white/90 leading-relaxed mt-1">
+                                      {t('contact.conditionsSections.planning.prepaymentNote')}
+                                    </p>
+                                  </div>
                                 </div>
                               </>
                             )}
@@ -346,15 +356,25 @@ const Conditions = () => {
                                 </div>
                                 <div className="flex items-start gap-3">
                                   <span className="text-color1 mt-1 text-lg">•</span>
-                                  <p className="text-base sm:text-lg text-white/90 leading-relaxed">
-                                    <span className="font-semibold text-white">
-                                      {t('contact.conditionsSections.planning.prepayment').split('–')[0]}
-                                    </span>
-                                    {' – '}
-                                    <span className="text-color1 font-bold">
-                                      {t('contact.conditionsSections.planning.prepayment').split('–')[1]}
-                                    </span>
-                                  </p>
+                                  <div className="flex-1">
+                                    <p className="text-base sm:text-lg text-white/90 leading-relaxed">
+                                      <span className="font-semibold text-white">
+                                        {t('contact.conditionsSections.planning.prepayment').split('=')[0].replace('*', '').trim()}
+                                      </span>
+                                      <sup className="text-white">*</sup>
+                                      {' = '}
+                                      <span className="text-white">
+                                        {t('contact.conditionsSections.planning.prepayment').split('=')[1]?.split('–')[0]?.trim()}
+                                      </span>
+                                      {' – '}
+                                      <span className="text-color1 font-bold">
+                                        {t('contact.conditionsSections.planning.prepayment').split('–')[1]?.trim()}
+                                      </span>
+                                    </p>
+                                    <p className="text-base sm:text-lg text-white/90 leading-relaxed mt-1">
+                                      {t('contact.conditionsSections.planning.prepaymentNote')}
+                                    </p>
+                                  </div>
                                 </div>
                               </>
                             )}

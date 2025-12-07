@@ -9,7 +9,7 @@
   "hero": {
     "title": "La Vacanza Bianca",
     "subtitle": "Premium Ski Tours in Italy",
-    "description": "Personalized guidance on the Alpine slopes. From airport pickup to every turn on the trail.",
+    "description": "Personalized guidance on the Alpine slopes.<br/>From airport pickup to every turn on the trail.",
     "startJourney": "Start Your Journey",
     "ourPrograms": "Our Programs",
     "bestResorts": "Best Resorts"
@@ -58,8 +58,8 @@
         "transferStart": "start of trip",
         "workingDays": "7:00 AM to 9:00 PM on weekdays",
         "otherTime": "Other times",
-        "price1": "€1/km + toll road costs",
-        "price2": "€1.5/km + toll road costs"
+        "price1": "€1/km + toll road costs*",
+        "price2": "€1.5/km + toll road costs*"
       }
     },
     "comfortable": {
@@ -67,7 +67,7 @@
       "subtitle": "For skiers who want to travel in comfort",
         "description": "Do you ski or snowboard, have been to different resorts, and would like to spend a new unforgettable sports vacation in Italy?",
       "features": {
-        "tickets": "Help with choosing travel routes to Italy and ticket selection",
+        "tickets": "Online or offline consultation on options for ski holidays in Italy",
         "planning": "Creating a complete trip plan",
         "hotels": "Hotel bookings",
         "transfers": "Transfers from hotels to lifts and back",
@@ -80,11 +80,11 @@
         "transferStart": "start of trip",
         "workingDays": "7:00 AM to 9:00 PM on weekdays",
         "otherTime": "Other times",
-        "price1": "€0.7/km + toll road costs",
-        "price2": "€1/km + toll road costs",
+        "price1": "€0.7/km + toll road costs*",
+        "price2": "€1/km + toll road costs*",
         "planning": "Trip planning (ticket selection, ski resort selection, hotel booking): €200",
         "planningPrice": "€200/service",
-        "hotelTransfer": "Transfer from hotel to lifts:",
+        "hotelTransfer": "Transfer from hotel to lifts, help with equipment rental and ski pass purchase:",
         "hotelTransferPrice": "200 euro/day"
       }
     },
@@ -93,7 +93,6 @@
       "subtitle": "For first-timers",
       "description": "Are you a beginner in alpine skiing, or in a couple where one is an experienced skier and the other is just starting? We'll show, tell, explain everything.",
       "features": {
-        "fullDay": "Full day of client guidance on the slopes",
         "individual": "Individual guidance for one person on the slopes, full day",
         "restDay": "Client guidance on rest days – shopping trips, excursions, hiking, etc."
       },
@@ -103,8 +102,8 @@
         "transferStart": "start of trip",
         "workingDays": "7:00 AM to 9:00 PM on weekdays",
         "otherTime": "Other times",
-        "price1": "€0.7/km + toll road costs",
-        "price2": "€1/km + toll road costs",
+        "price1": "€0.7/km + toll road costs*",
+        "price2": "€1/km + toll road costs*",
         "planning": "Trip planning (ticket selection, ski resort selection, hotel booking): €200",
         "planningPrice": "€200/service",
         "hotelTransfer": "Transfer from hotel to lift parking and individual slope accompaniment:",
@@ -112,7 +111,9 @@
       }
     },
     "whatIncluded": "What's Included:",
-    "cost": "Pricing"
+    "whatIncludedUltra": "In addition to \"Balance\" tariff",
+    "cost": "Pricing",
+    "tollRoadsNote": "* Approximate distance from airport to resort is indicated in the resort description"
   },
   "resorts": {
     "title": "Best Ski Resorts in Italy",
@@ -267,6 +268,7 @@
     "hideDetails": "Hide Details",
     "sendRequest": "Send Request",
     "quickContact": "Quick Contact",
+    "telegram": "Telegram",
     "conditions": "Terms & Conditions",
     "form": {
       "name": "Name",
@@ -286,7 +288,8 @@
         "title": "📅 Trip Planning",
         "startPlanning": "Start of planning – minimum 5 days before trip start",
         "firstConsultation": "First consultation – within 40 minutes",
-        "prepayment": "Prepayment for program = payment for trip planning service – €200"
+        "prepayment": "Prepayment for program* = payment for trip planning service – €200",
+        "prepaymentNote": "*for \"balance\" and \"ultracomfort\" programs"
       },
       "hotels": {
         "title": "🏨 Hotel Booking",
