@@ -30,6 +30,7 @@ const Resorts = () => {
     difficulty: t(`resorts.resorts.${key}.difficulty`),
     airportDistance: t(`resorts.resorts.${key}.airportDistance`),
     airportFrom: t(`resorts.resorts.${key}.airportFrom`),
+    distance: t(`resorts.resorts.${key}.distance`),
     highlights: t(`resorts.resorts.${key}.highlights`, { returnObjects: true }),
   })
 
@@ -268,18 +269,11 @@ const Resorts = () => {
                     </div>
                     <div className="bg-premium-gray/30 rounded-lg p-3">
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="text-xl">✈️</span>
-                        <span className="text-xs text-premium-darkGray font-medium">{t('resorts.airport')}</span>
+                        <span className="text-xl">📍</span>
+                        <span className="text-xs text-premium-darkGray font-medium">{t('resorts.distanceFromAirport')}</span>
                       </div>
-                      <p className="text-premium-navy font-bold text-xs">{resort.airportFrom}</p>
+                      <p className="text-premium-navy font-bold text-xs">{resort.distance}</p>
                     </div>
-                  </div>
-
-                  <div className="mb-4 p-3 bg-premium-gold/10 rounded-lg border border-premium-gold/20">
-                    <p className="text-sm text-premium-darkGray font-medium">
-                      <span className="text-color1 font-semibold">📍 {t('resorts.distance')}</span>{' '}
-                      {resort.airportDistance}
-                    </p>
                   </div>
 
                   <button
@@ -439,17 +433,11 @@ const Resorts = () => {
                           </div>
                           <div className="bg-premium-gray/30 rounded-lg p-2">
                             <div className="flex items-center gap-1 mb-1">
-                              <span className="text-lg">✈️</span>
-                              <span className="text-xs text-premium-darkGray font-medium">{t('resorts.airport')}</span>
+                              <span className="text-lg">📍</span>
+                              <span className="text-xs text-premium-darkGray font-medium">{t('resorts.distanceFromAirport')}</span>
                             </div>
-                            <p className="text-premium-navy font-bold text-xs">{resort.airportFrom}</p>
+                            <p className="text-premium-navy font-bold text-xs">{resort.distance}</p>
                           </div>
-                        </div>
-                        <div className="mb-3 p-2 bg-premium-gold/10 rounded-lg border border-premium-gold/20">
-                          <p className="text-xs text-premium-darkGray font-medium">
-                            <span className="text-color1 font-semibold">📍 {t('resorts.distance')}</span>{' '}
-                            {resort.airportDistance}
-                          </p>
                         </div>
                         <h4 className="text-base font-oswald font-bold text-premium-navy mb-2">
                           {t('resorts.features')}
@@ -529,18 +517,11 @@ const Resorts = () => {
                       </div>
                       <div className="bg-premium-gray/30 rounded-lg p-2 sm:p-3">
                         <div className="flex items-center gap-1 sm:gap-2 mb-1">
-                          <span className="text-xl sm:text-2xl">✈️</span>
-                          <span className="text-xs text-premium-darkGray font-medium">{t('resorts.airport')}</span>
+                          <span className="text-xl sm:text-2xl">📍</span>
+                          <span className="text-xs text-premium-darkGray font-medium">{t('resorts.distanceFromAirport')}</span>
                         </div>
-                        <p className="text-premium-navy font-bold text-xs sm:text-sm">{resort.airportFrom}</p>
+                        <p className="text-premium-navy font-bold text-xs sm:text-sm">{resort.distance}</p>
                       </div>
-                    </div>
-
-                    <div className="mb-4 sm:mb-6 p-2 sm:p-3 bg-premium-gold/10 rounded-lg border border-premium-gold/20">
-                      <p className="text-xs sm:text-sm text-premium-darkGray font-medium">
-                        <span className="text-color1 font-semibold">📍 {t('resorts.distance')}</span>{' '}
-                        {resort.airportDistance}
-                      </p>
                     </div>
 
                     <button

@@ -121,8 +121,7 @@
     "trails": "Trails",
     "elevation": "Elevation",
     "level": "Level",
-    "airport": "Airport",
-    "distance": "Distance:",
+    "distanceFromAirport": "Distance from Milan Malpensa Airport:",
     "showFeatures": "Show Features",
     "hideFeatures": "Hide Features",
     "features": "Resort Features:",
@@ -141,6 +140,7 @@
         "difficulty": "Beginner, Intermediate",
         "airportDistance": "90 km from Milan Malpensa Airport",
         "airportFrom": "Milan Malpensa",
+        "distance": "90 km",
         "highlights": [
           "Excellent school for beginners",
           "Family atmosphere",
@@ -159,6 +159,7 @@
         "difficulty": "Intermediate, Advanced",
         "airportDistance": "120 km from Milan Malpensa Airport",
         "airportFrom": "Milan Malpensa",
+        "distance": "160 km",
         "highlights": [
           "Long trails for experienced skiers",
           "High-altitude skiing up to 3000 m",
@@ -177,6 +178,7 @@
         "difficulty": "Beginner, Intermediate",
         "airportDistance": "180 km from Milan Malpensa Airport",
         "airportFrom": "Milan Malpensa",
+        "distance": "200 km",
         "highlights": [
           "Family atmosphere",
           "Central village location",
@@ -195,6 +197,7 @@
         "difficulty": "Beginner, Intermediate, Advanced",
         "airportDistance": "220 km from Milan Malpensa Airport",
         "airportFrom": "Milan Malpensa",
+        "distance": "190 km",
         "highlights": [
           "World-class prestigious resort",
           "Luxury infrastructure",
@@ -213,6 +216,7 @@
         "difficulty": "Beginner, Intermediate, Advanced",
         "airportDistance": "130 km from Milan Malpensa Airport",
         "airportFrom": "Milan Malpensa",
+        "distance": "170 km",
         "highlights": [
           "Authentic atmosphere",
           "Fewer tourists",
@@ -231,6 +235,7 @@
         "difficulty": "Beginner, Intermediate",
         "airportDistance": "140 km from Milan Malpensa Airport",
         "airportFrom": "Milan Malpensa",
+        "distance": "190 km",
         "highlights": [
           "Family resort",
           "Excellent conditions for beginners",
@@ -249,6 +254,7 @@
         "difficulty": "Beginner, Intermediate, Advanced",
         "airportDistance": "200+ km from Milan Malpensa Airport",
         "airportFrom": "Milan Malpensa",
+        "distance": "250 km",
         "highlights": [
           "Duty-free zone",
           "Affordable prices",
