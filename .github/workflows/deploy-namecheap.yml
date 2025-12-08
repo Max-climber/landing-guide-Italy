@@ -1,10 +1,13 @@
 name: Deploy to Namecheap (.com)
 
+# Отключен: .com домен обновляется автоматически через Vercel
+# on:
+#   push:
+#     branches:
+#       - main
+#   workflow_dispatch:
 on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+  workflow_dispatch:  # Только ручной запуск, если понадобится
 
 jobs:
   deploy-to-namecheap:

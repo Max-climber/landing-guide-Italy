@@ -35,6 +35,11 @@ jobs:
           find ./dist -type f | wc -l
           echo "=== Checking key files ==="
           ls -la ./dist/index.html ./dist/.htaccess 2>/dev/null || echo "Some files missing"
+          echo "=== Creating deployment marker ==="
+          echo "Deployed at: $(date -u +'%Y-%m-%d %H:%M:%S UTC')" > ./dist/.deployment-marker.txt
+          echo "Commit: ${{ github.sha }}" >> ./dist/.deployment-marker.txt
+          echo "=== Checking index.html content hash ==="
+          md5sum ./dist/index.html || md5 ./dist/index.html || echo "Cannot calculate hash"
 
       - name: Check secrets are configured
         run: |
@@ -77,6 +82,8 @@ jobs:
           log-level: verbose
           dangerous-clean-slate: true
           dry-run: false
+          ftp-timeout: 60000
+          state-name: .ftp-deploy-sync-state.json
 
       - name: Ensure .htaccess is uploaded
         run: |
@@ -106,12 +113,22 @@ jobs:
           cd ${{ secrets.TIMEWEB_FTP_PATH }} || (echo 'Failed to cd to path, trying to create it' && mkdir -p ${{ secrets.TIMEWEB_FTP_PATH }} && cd ${{ secrets.TIMEWEB_FTP_PATH }} || echo 'Still failed')
           echo '=== Current directory after cd ==='
           pwd
-          echo '=== Files in deployment directory (before cleanup) ==='
+          echo '=== Files in deployment directory ==='
           ls -la
           echo '=== Checking if index.html exists ==='
-          ls -la index.html || echo 'index.html NOT FOUND!'
+          ls -la index.html || echo '❌ index.html NOT FOUND!'
           echo '=== Checking file sizes ==='
           du -sh index.html assets images 2>/dev/null || echo 'Some files/dirs not found'
+          echo '=== Checking index.html modification time ==='
+          ls -l --time-style=full-iso index.html 2>/dev/null || echo 'Cannot get file time'
+          echo '=== Checking if index.html contains latest changes ==='
+          cat index.html | grep -q 'click-outside' && echo '✅ index.html contains latest changes' || echo '⚠️ index.html might be old version'
+          echo '=== Checking deployment marker ==='
+          cat .deployment-marker.txt 2>/dev/null || echo 'Deployment marker not found'
+          echo '=== Checking assets directory ==='
+          ls -la assets/ 2>/dev/null | head -10 || echo 'assets directory not found'
+          echo '=== Checking index.html hash on server ==='
+          md5sum index.html 2>/dev/null || md5 index.html 2>/dev/null || echo 'Cannot calculate hash'
           echo '=== Removing index.php ==='
           rm -f index.php || echo 'index.php not found'
           echo '=== Setting correct permissions ==='
@@ -119,8 +136,8 @@ jobs:
           chmod 755 assets images шрифты 2>/dev/null || echo 'Failed to chmod some directories'
           echo '=== Final file list ==='
           ls -la
-          echo '=== Verifying index.html is accessible ==='
-          cat index.html | head -20 || echo 'Cannot read index.html'
+          echo '=== Verifying index.html content (first 30 lines) ==='
+          cat index.html | head -30 || echo 'Cannot read index.html'
           quit
           " || echo "Error connecting via FTP"
 
