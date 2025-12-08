@@ -34,6 +34,26 @@ jobs:
           echo "Total files:"
           find ./dist -type f | wc -l
 
+      - name: Check secrets are configured
+        run: |
+          if [ -z "${{ secrets.NAMECHEAP_FTP_HOST }}" ]; then
+            echo "❌ Error: NAMECHEAP_FTP_HOST secret is not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.NAMECHEAP_FTP_USER }}" ]; then
+            echo "❌ Error: NAMECHEAP_FTP_USER secret is not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.NAMECHEAP_FTP_PASS }}" ]; then
+            echo "❌ Error: NAMECHEAP_FTP_PASS secret is not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.NAMECHEAP_FTP_PATH }}" ]; then
+            echo "❌ Error: NAMECHEAP_FTP_PATH secret is not set"
+            exit 1
+          fi
+          echo "✅ All secrets are configured"
+
       - name: Deploy to Namecheap via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -51,7 +71,7 @@ jobs:
           dangerous-clean-slate: true
           dry-run: false
 
-      - name: Verify deployment
+      - name: Verify deployment and fix permissions
         run: |
           sudo apt-get update && sudo apt-get install -y lftp
           lftp -c "
@@ -65,6 +85,8 @@ jobs:
           pwd
           echo '=== Files in deployment directory ==='
           ls -la
+          echo '=== Removing index.php ==='
+          rm -f index.php || echo 'index.php not found'
           echo '=== Setting correct permissions ==='
           chmod 644 index.html .htaccess robots.txt logo.jpg vite.svg || echo 'Failed to chmod files'
           chmod 755 assets images шрифты || echo 'Failed to chmod directories'

@@ -33,6 +33,30 @@ jobs:
           ls -la ./dist/
           echo "Total files:"
           find ./dist -type f | wc -l
+          echo "=== Checking key files ==="
+          ls -la ./dist/index.html ./dist/.htaccess 2>/dev/null || echo "Some files missing"
+
+      - name: Check secrets are configured
+        run: |
+          if [ -z "${{ secrets.TIMEWEB_FTP_HOST }}" ]; then
+            echo "❌ Error: TIMEWEB_FTP_HOST secret is not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.TIMEWEB_FTP_USER }}" ]; then
+            echo "❌ Error: TIMEWEB_FTP_USER secret is not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.TIMEWEB_FTP_PASS }}" ]; then
+            echo "❌ Error: TIMEWEB_FTP_PASS secret is not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.TIMEWEB_FTP_PATH }}" ]; then
+            echo "❌ Error: TIMEWEB_FTP_PATH secret is not set"
+            exit 1
+          fi
+          echo "✅ All secrets are configured"
+          echo "FTP Host: ${{ secrets.TIMEWEB_FTP_HOST }}"
+          echo "FTP Path: ${{ secrets.TIMEWEB_FTP_PATH }}"
 
       - name: Deploy to SprintHost via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -47,31 +71,56 @@ jobs:
             **/.git*/**
             **/node_modules/**
             **/.DS_Store
+          include: |
+            **/.htaccess
+            **/robots.txt
           log-level: verbose
           dangerous-clean-slate: true
           dry-run: false
+
+      - name: Ensure .htaccess is uploaded
+        run: |
+          sudo apt-get update && sudo apt-get install -y lftp
+          lftp -c "
+          set ftp:ssl-allow no
+          set ftp:passive-mode yes
+          open -u ${{ secrets.TIMEWEB_FTP_USER }},${{ secrets.TIMEWEB_FTP_PASS }} ${{ secrets.TIMEWEB_FTP_HOST }}
+          cd ${{ secrets.TIMEWEB_FTP_PATH }} || exit 1
+          echo '=== Uploading .htaccess explicitly ==='
+          put -f ./dist/.htaccess .htaccess || echo 'Failed to upload .htaccess'
+          quit
+          " || echo "Error uploading .htaccess"
 
       - name: Verify deployment and fix permissions
         run: |
           sudo apt-get update && sudo apt-get install -y lftp
           lftp -c "
           set ftp:ssl-allow no
+          set ftp:passive-mode yes
           open -u ${{ secrets.TIMEWEB_FTP_USER }},${{ secrets.TIMEWEB_FTP_PASS }} ${{ secrets.TIMEWEB_FTP_HOST }}
           echo '=== Current directory after login ==='
           pwd
+          echo '=== Listing root directory ==='
+          ls -la
           echo '=== Trying to change to deployment path ==='
-          cd ${{ secrets.TIMEWEB_FTP_PATH }} || echo 'Failed to cd to path'
+          cd ${{ secrets.TIMEWEB_FTP_PATH }} || (echo 'Failed to cd to path, trying to create it' && mkdir -p ${{ secrets.TIMEWEB_FTP_PATH }} && cd ${{ secrets.TIMEWEB_FTP_PATH }} || echo 'Still failed')
           echo '=== Current directory after cd ==='
           pwd
-          echo '=== Files in deployment directory ==='
+          echo '=== Files in deployment directory (before cleanup) ==='
           ls -la
+          echo '=== Checking if index.html exists ==='
+          ls -la index.html || echo 'index.html NOT FOUND!'
+          echo '=== Checking file sizes ==='
+          du -sh index.html assets images 2>/dev/null || echo 'Some files/dirs not found'
           echo '=== Removing index.php ==='
           rm -f index.php || echo 'index.php not found'
           echo '=== Setting correct permissions ==='
-          chmod 644 index.html .htaccess robots.txt logo.jpg vite.svg || echo 'Failed to chmod files'
-          chmod 755 assets images шрифты || echo 'Failed to chmod directories'
+          chmod 644 index.html .htaccess robots.txt logo.jpg vite.svg 2>/dev/null || echo 'Failed to chmod some files'
+          chmod 755 assets images шрифты 2>/dev/null || echo 'Failed to chmod some directories'
           echo '=== Final file list ==='
           ls -la
+          echo '=== Verifying index.html is accessible ==='
+          cat index.html | head -20 || echo 'Cannot read index.html'
           quit
           " || echo "Error connecting via FTP"
 
