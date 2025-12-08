@@ -248,10 +248,10 @@ const Resorts = () => {
                   <div className="grid grid-cols-2 gap-3 mb-4">
                     <div className="bg-premium-gray/30 rounded-lg p-3">
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="text-xl">📏</span>
-                        <span className="text-xs text-premium-darkGray font-medium">{t('resorts.trails')}</span>
+                        <span className="text-xl">📍</span>
+                        <span className="text-xs text-premium-darkGray font-medium">{t('resorts.distanceFromAirport')}</span>
                       </div>
-                      <p className="text-premium-navy font-bold text-sm">{resort.trails}</p>
+                      <p className="text-premium-navy font-bold text-xs">{resort.distance}</p>
                     </div>
                     <div className="bg-premium-gray/30 rounded-lg p-3">
                       <div className="flex items-center gap-2 mb-1">
@@ -269,10 +269,10 @@ const Resorts = () => {
                     </div>
                     <div className="bg-premium-gray/30 rounded-lg p-3">
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="text-xl">📍</span>
-                        <span className="text-xs text-premium-darkGray font-medium">{t('resorts.distanceFromAirport')}</span>
+                        <span className="text-xl">📏</span>
+                        <span className="text-xs text-premium-darkGray font-medium">{t('resorts.trails')}</span>
                       </div>
-                      <p className="text-premium-navy font-bold text-xs">{resort.distance}</p>
+                      <p className="text-premium-navy font-bold text-sm">{resort.trails}</p>
                     </div>
                   </div>
 
@@ -412,10 +412,10 @@ const Resorts = () => {
                         <div className="grid grid-cols-2 gap-2 mb-3">
                           <div className="bg-premium-gray/30 rounded-lg p-2">
                             <div className="flex items-center gap-1 mb-1">
-                              <span className="text-lg">📏</span>
-                              <span className="text-xs text-premium-darkGray font-medium">{t('resorts.trails')}</span>
+                              <span className="text-lg">📍</span>
+                              <span className="text-xs text-premium-darkGray font-medium">{t('resorts.distanceFromAirport')}</span>
                             </div>
-                            <p className="text-premium-navy font-bold text-xs">{resort.trails}</p>
+                            <p className="text-premium-navy font-bold text-xs">{resort.distance}</p>
                           </div>
                           <div className="bg-premium-gray/30 rounded-lg p-2">
                             <div className="flex items-center gap-1 mb-1">
@@ -433,10 +433,10 @@ const Resorts = () => {
                           </div>
                           <div className="bg-premium-gray/30 rounded-lg p-2">
                             <div className="flex items-center gap-1 mb-1">
-                              <span className="text-lg">📍</span>
-                              <span className="text-xs text-premium-darkGray font-medium">{t('resorts.distanceFromAirport')}</span>
+                              <span className="text-lg">📏</span>
+                              <span className="text-xs text-premium-darkGray font-medium">{t('resorts.trails')}</span>
                             </div>
-                            <p className="text-premium-navy font-bold text-xs">{resort.distance}</p>
+                            <p className="text-premium-navy font-bold text-xs">{resort.trails}</p>
                           </div>
                         </div>
                         <h4 className="text-base font-oswald font-bold text-premium-navy mb-2">
@@ -496,10 +496,10 @@ const Resorts = () => {
                     <div className="grid grid-cols-2 gap-2 sm:gap-4 mb-4 sm:mb-6">
                       <div className="bg-premium-gray/30 rounded-lg p-2 sm:p-3">
                         <div className="flex items-center gap-1 sm:gap-2 mb-1">
-                          <span className="text-xl sm:text-2xl">📏</span>
-                          <span className="text-xs text-premium-darkGray font-medium">{t('resorts.trails')}</span>
+                          <span className="text-xl sm:text-2xl">📍</span>
+                          <span className="text-xs text-premium-darkGray font-medium">{t('resorts.distanceFromAirport')}</span>
                         </div>
-                        <p className="text-premium-navy font-bold text-sm sm:text-base">{resort.trails}</p>
+                        <p className="text-premium-navy font-bold text-xs sm:text-sm">{resort.distance}</p>
                       </div>
                       <div className="bg-premium-gray/30 rounded-lg p-2 sm:p-3">
                         <div className="flex items-center gap-1 sm:gap-2 mb-1">
@@ -517,10 +517,10 @@ const Resorts = () => {
                       </div>
                       <div className="bg-premium-gray/30 rounded-lg p-2 sm:p-3">
                         <div className="flex items-center gap-1 sm:gap-2 mb-1">
-                          <span className="text-xl sm:text-2xl">📍</span>
-                          <span className="text-xs text-premium-darkGray font-medium">{t('resorts.distanceFromAirport')}</span>
+                          <span className="text-xl sm:text-2xl">📏</span>
+                          <span className="text-xs text-premium-darkGray font-medium">{t('resorts.trails')}</span>
                         </div>
-                        <p className="text-premium-navy font-bold text-xs sm:text-sm">{resort.distance}</p>
+                        <p className="text-premium-navy font-bold text-sm sm:text-base">{resort.trails}</p>
                       </div>
                     </div>
 
