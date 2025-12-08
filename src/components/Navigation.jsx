@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import LanguageSwitcher from './LanguageSwitcher'
 
 const Navigation = () => {
   const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
+  const navRef = useRef(null)
 
   const navItems = [
     { name: t('nav.about'), href: '#about' },
@@ -21,8 +22,27 @@ const Navigation = () => {
     }
   }
 
+  // Закрытие меню при клике вне области навигации
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isOpen && navRef.current && !navRef.current.contains(event.target)) {
+        setIsOpen(false)
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+      document.addEventListener('touchstart', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('touchstart', handleClickOutside)
+    }
+  }, [isOpen])
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-color2 backdrop-blur-md shadow-lg">
+    <nav ref={navRef} className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-color2 backdrop-blur-md shadow-lg">
       <div className="container-max px-4 md:px-8 lg:px-16">
         <div className="flex items-center justify-between h-16 sm:h-18 md:h-20">
           <a
