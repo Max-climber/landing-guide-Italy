@@ -182,7 +182,7 @@ const Programs = () => {
                                 <p className="text-white font-medium text-base sm:text-lg md:text-xl">
                                   {idx === 0 ? `${t(`programs.${activeProgram === 0 ? 'experienced' : activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.transferStart`)} ${item.time}` : item.time}
                                 </p>
-                                <p className="text-color1 text-[1.5em]">
+                                <p className="text-color1">
                                   {item.price}
                                 </p>
                               </div>
@@ -201,7 +201,7 @@ const Programs = () => {
                           <p className="text-white text-base sm:text-lg md:text-xl">
                             <span className="mr-2">1.</span>
                             {program.pricing.planning.split(':')[0]}:{' '}
-                            <span className="text-color1 font-semibold text-[1.5em]">
+                            <span className="text-color1 font-semibold">
                               {program.pricing.planning.split(':')[1]?.trim()}
                             </span>
                           </p>
@@ -222,7 +222,7 @@ const Programs = () => {
                                 <p className="text-white font-medium text-base sm:text-lg md:text-xl">
                                   {idx === 0 ? `${t(`programs.${activeProgram === 0 ? 'experienced' : activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.transferStart`)} ${item.time}` : item.time}
                                 </p>
-                                <p className="text-color1 text-[1.5em]">
+                                <p className="text-color1">
                                   {item.price}
                                 </p>
                               </div>
@@ -232,10 +232,10 @@ const Programs = () => {
                       )}
                       {program.pricing.hotelTransfer && (
                         <div>
-                          <p className="text-white text-base sm:text-lg md:text-xl">
+                          <p className="text-white text-base sm:text-lg md:text-xl font-medium">
                             <span className="mr-2">3.</span>
                             {t(`programs.${activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.hotelTransfer`)}{' '}
-                            <span className="text-color1 font-semibold text-[1.5em]">
+                            <span className="text-color1 font-semibold">
                               {program.pricing.hotelTransfer}
                             </span>
                           </p>
