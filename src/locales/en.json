@@ -54,12 +54,12 @@
       },
       "pricing": {
         "consultation": "Discussion of trip plans: free",
-        "transfer": "Airport transfer",
+        "transfer": "Airport transfer*",
         "transferStart": "start of trip",
         "workingDays": "7:00 AM to 9:00 PM on weekdays",
         "otherTime": "Other times",
-        "price1": "€1/km + toll road costs*",
-        "price2": "€1.5/km + toll road costs*"
+        "price1": "€1/km + toll road costs",
+        "price2": "€1.5/km + toll road costs"
       }
     },
     "comfortable": {
@@ -76,12 +76,12 @@
       },
       "pricing": {
         "consultation": "Discussion of trip plans: free",
-        "transfer": "Airport transfer",
+        "transfer": "Airport transfer*",
         "transferStart": "start of trip",
         "workingDays": "7:00 AM to 9:00 PM on weekdays",
         "otherTime": "Other times",
-        "price1": "€0.7/km + toll road costs*",
-        "price2": "€1/km + toll road costs*",
+        "price1": "€0.7/km + toll road costs",
+        "price2": "€1/km + toll road costs",
         "planning": "Trip planning (ticket selection, ski resort selection, hotel booking): €200",
         "planningPrice": "€200/service",
         "hotelTransfer": "Transfer from hotel to lifts, help with equipment rental and ski pass purchase:",
@@ -98,12 +98,12 @@
       },
       "pricing": {
         "consultation": "Discussion of trip plans: free",
-        "transfer": "Airport transfer",
+        "transfer": "Airport transfer*",
         "transferStart": "start of trip",
         "workingDays": "7:00 AM to 9:00 PM on weekdays",
         "otherTime": "Other times",
-        "price1": "€0.7/km + toll road costs*",
-        "price2": "€1/km + toll road costs*",
+        "price1": "€0.7/km + toll road costs",
+        "price2": "€1/km + toll road costs",
         "planning": "Trip planning (ticket selection, ski resort selection, hotel booking): €200",
         "planningPrice": "€200/service",
         "hotelTransfer": "Transfer from hotel to lift parking and individual slope accompaniment:",
@@ -113,7 +113,7 @@
     "whatIncluded": "What's Included:",
     "whatIncludedUltra": "In addition to \"Balance\" tariff",
     "cost": "Pricing",
-    "tollRoadsNote": "* Approximate distance from airport to resort is indicated in the resort description"
+    "tollRoadsNote": "** Approximate distance from airport to resort is indicated in the resort description"
   },
   "resorts": {
     "title": "Best Ski Resorts in Italy",

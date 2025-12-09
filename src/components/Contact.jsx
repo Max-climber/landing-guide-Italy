@@ -318,7 +318,7 @@ ${formData.message ? `Сообщение:\n${formData.message}` : ''}
 Отправлено с сайта vacanzabianca.com`)
 
     // Открываем почтовый клиент
-    window.location.href = `mailto:contact@vacanzabianca.com?subject=${emailSubject}&body=${emailBody}`
+    window.location.href = `mailto:info@vacanzabianca.com?subject=${emailSubject}&body=${emailBody}`
   }
 
   const handleChange = (e) => {
@@ -530,7 +530,7 @@ ${formData.message ? `Сообщение:\n${formData.message}` : ''}
                   <span className="text-color3 font-semibold text-sm sm:text-base">+39 333 143 0647</span>
                 </a>
                 <a
-                  href="mailto:contact@vacanzabianca.com"
+                  href="mailto:info@vacanzabianca.com"
                   className="flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 bg-color2/10 rounded-lg hover:bg-color2/20 transition-colors"
                 >
                   <svg
@@ -547,7 +547,7 @@ ${formData.message ? `Сообщение:\n${formData.message}` : ''}
                     />
                   </svg>
                   <span className="text-color3 font-semibold text-xs sm:text-sm md:text-base break-all">
-                    contact@vacanzabianca.com
+                    info@vacanzabianca.com
                   </span>
                 </a>
                 <a
