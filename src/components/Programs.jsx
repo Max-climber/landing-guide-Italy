@@ -170,7 +170,7 @@ const Programs = () => {
                     <>
                       {program.pricing.transfer && (
                         <div>
-                          <p className="font-semibold text-white mb-3 text-lg sm:text-xl">
+                          <p className="font-semibold text-white mb-3 text-base sm:text-lg md:text-xl">
                             {t(`programs.${activeProgram === 0 ? 'experienced' : activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.transfer`)}
                           </p>
                           <div className="space-y-2">
@@ -179,7 +179,7 @@ const Programs = () => {
                                 key={idx}
                                 className="bg-white/10 rounded-lg p-3"
                               >
-                                <p className="text-white font-medium">
+                                <p className="text-white font-medium text-base sm:text-lg md:text-xl">
                                   {idx === 0 ? `${t(`programs.${activeProgram === 0 ? 'experienced' : activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.transferStart`)} ${item.time}` : item.time}
                                 </p>
                                 <p className="text-color1 text-[1.5em]">
@@ -198,7 +198,7 @@ const Programs = () => {
                     <>
                       {program.pricing.planning && (
                         <div>
-                          <p className="text-white">
+                          <p className="text-white text-base sm:text-lg md:text-xl">
                             <span className="mr-2">1.</span>
                             {program.pricing.planning.split(':')[0]}:{' '}
                             <span className="text-color1 font-semibold text-[1.5em]">
@@ -209,7 +209,7 @@ const Programs = () => {
                       )}
                       {program.pricing.transfer && (
                         <div>
-                          <p className="font-semibold text-white mb-3">
+                          <p className="font-semibold text-white mb-3 text-base sm:text-lg md:text-xl">
                             <span className="mr-2">2.</span>
                             {t(`programs.${activeProgram === 0 ? 'experienced' : activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.transfer`)}
                           </p>
@@ -219,7 +219,7 @@ const Programs = () => {
                                 key={idx}
                                 className="bg-white/10 rounded-lg p-3"
                               >
-                                <p className="text-white font-medium">
+                                <p className="text-white font-medium text-base sm:text-lg md:text-xl">
                                   {idx === 0 ? `${t(`programs.${activeProgram === 0 ? 'experienced' : activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.transferStart`)} ${item.time}` : item.time}
                                 </p>
                                 <p className="text-color1 text-[1.5em]">
@@ -232,7 +232,7 @@ const Programs = () => {
                       )}
                       {program.pricing.hotelTransfer && (
                         <div>
-                          <p className="text-white">
+                          <p className="text-white text-base sm:text-lg md:text-xl">
                             <span className="mr-2">3.</span>
                             {t(`programs.${activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.hotelTransfer`)}{' '}
                             <span className="text-color1 font-semibold text-[1.5em]">
