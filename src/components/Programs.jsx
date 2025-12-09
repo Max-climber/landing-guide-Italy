@@ -165,12 +165,12 @@ const Programs = () => {
                   {t('programs.cost')}
                 </h4>
                 <div className="space-y-6">
-                  {/* Эксперт: сначала трансфер, потом консультация */}
+                  {/* Эксперт: только трансфер */}
                   {activeProgram === 0 && (
                     <>
                       {program.pricing.transfer && (
                         <div>
-                          <p className="font-semibold text-white mb-3">
+                          <p className="font-semibold text-white mb-3 text-lg sm:text-xl">
                             {t(`programs.${activeProgram === 0 ? 'experienced' : activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.transfer`)}
                           </p>
                           <div className="space-y-2">
@@ -182,7 +182,7 @@ const Programs = () => {
                                 <p className="text-white font-medium">
                                   {idx === 0 ? `${t(`programs.${activeProgram === 0 ? 'experienced' : activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.transferStart`)} ${item.time}` : item.time}
                                 </p>
-                                <p className="text-color1">
+                                <p className="text-color1 text-[1.5em]">
                                   {item.price}
                                 </p>
                               </div>
@@ -190,33 +190,18 @@ const Programs = () => {
                           </div>
                         </div>
                       )}
-                      {program.pricing.consultation && (
-                        <div>
-                          <p className="text-white mb-2">
-                            {program.pricing.consultation.includes(':') ? (
-                              <>
-                                {program.pricing.consultation.split(':')[0]}:{' '}
-                                <span className="text-color1 font-semibold">
-                                  {program.pricing.consultation.split(':')[1]?.trim()}
-                                </span>
-                              </>
-                            ) : (
-                              program.pricing.consultation
-                            )}
-                          </p>
-                        </div>
-                      )}
                     </>
                   )}
                   
-                  {/* Баланс и Ультракомфорт: сначала планирование, потом трансфер, потом отель, потом консультация */}
+                  {/* Баланс и Ультракомфорт: планирование, трансфер, отель */}
                   {(activeProgram === 1 || activeProgram === 2) && (
                     <>
                       {program.pricing.planning && (
                         <div>
                           <p className="text-white">
+                            <span className="mr-2">1.</span>
                             {program.pricing.planning.split(':')[0]}:{' '}
-                            <span className="text-color1 font-semibold">
+                            <span className="text-color1 font-semibold text-[1.5em]">
                               {program.pricing.planning.split(':')[1]?.trim()}
                             </span>
                           </p>
@@ -225,6 +210,7 @@ const Programs = () => {
                       {program.pricing.transfer && (
                         <div>
                           <p className="font-semibold text-white mb-3">
+                            <span className="mr-2">2.</span>
                             {t(`programs.${activeProgram === 0 ? 'experienced' : activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.transfer`)}
                           </p>
                           <div className="space-y-2">
@@ -236,7 +222,7 @@ const Programs = () => {
                                 <p className="text-white font-medium">
                                   {idx === 0 ? `${t(`programs.${activeProgram === 0 ? 'experienced' : activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.transferStart`)} ${item.time}` : item.time}
                                 </p>
-                                <p className="text-color1">
+                                <p className="text-color1 text-[1.5em]">
                                   {item.price}
                                 </p>
                               </div>
@@ -247,26 +233,11 @@ const Programs = () => {
                       {program.pricing.hotelTransfer && (
                         <div>
                           <p className="text-white">
+                            <span className="mr-2">3.</span>
                             {t(`programs.${activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.hotelTransfer`)}{' '}
-                            <span className="text-color1 font-semibold">
+                            <span className="text-color1 font-semibold text-[1.5em]">
                               {program.pricing.hotelTransfer}
                             </span>
-                          </p>
-                        </div>
-                      )}
-                      {program.pricing.consultation && (
-                        <div>
-                          <p className="text-white mb-2">
-                            {program.pricing.consultation.includes(':') ? (
-                              <>
-                                {program.pricing.consultation.split(':')[0]}:{' '}
-                                <span className="text-color1 font-semibold">
-                                  {program.pricing.consultation.split(':')[1]?.trim()}
-                                </span>
-                              </>
-                            ) : (
-                              program.pricing.consultation
-                            )}
                           </p>
                         </div>
                       )}
@@ -279,7 +250,7 @@ const Programs = () => {
             {/* Сноска для всех тарифов - вне блоков */}
             <div className="mt-6 pt-4">
               <p className="text-white text-base sm:text-lg">
-                {t('programs.tollRoadsNote')}
+                <span className="text-xl sm:text-2xl">**</span>{t('programs.tollRoadsNote').replace('**', '')}
               </p>
             </div>
             </div>
