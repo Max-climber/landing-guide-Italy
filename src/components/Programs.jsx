@@ -182,7 +182,7 @@ const Programs = () => {
                                 <p className="text-white font-medium text-base sm:text-lg md:text-xl">
                                   {idx === 0 ? `${t(`programs.${activeProgram === 0 ? 'experienced' : activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.transferStart`)} ${item.time}` : item.time}
                                 </p>
-                                <p className="text-color1">
+                                <p className="text-color1 text-[1.5em]">
                                   {item.price}
                                 </p>
                               </div>
@@ -222,7 +222,7 @@ const Programs = () => {
                                 <p className="text-white font-medium text-base sm:text-lg md:text-xl">
                                   {idx === 0 ? `${t(`programs.${activeProgram === 0 ? 'experienced' : activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.transferStart`)} ${item.time}` : item.time}
                                 </p>
-                                <p className="text-color1">
+                                <p className="text-color1 text-[1.5em]">
                                   {item.price}
                                 </p>
                               </div>
