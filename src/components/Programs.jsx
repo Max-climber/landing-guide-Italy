@@ -250,7 +250,7 @@ const Programs = () => {
             {/* Сноска для всех тарифов - вне блоков */}
             <div className="mt-6 pt-4">
               <p className="text-white text-base sm:text-lg">
-                <span className="text-xl sm:text-2xl">**</span>{t('programs.tollRoadsNote').replace('**', '')}
+                <span className="text-xl sm:text-2xl">*</span>{t('programs.tollRoadsNote').replace('* ', '')}
               </p>
             </div>
             </div>
