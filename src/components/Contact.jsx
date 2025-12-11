@@ -314,7 +314,7 @@ const Contact = () => {
     
     try {
       // EmailJS параметры
-      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_1pcsgdu'
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_ieteu8c'
       const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_mgom9am'
       const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'hWDtd1yXUvolBOTS5'
       
