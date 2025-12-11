@@ -313,10 +313,15 @@ const Contact = () => {
     setIsSubmitting(true)
     
     try {
-      // EmailJS параметры (нужно будет настроить после регистрации на emailjs.com)
-      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID'
-      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID'
-      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY'
+      // EmailJS параметры
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_1pcsgdu'
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_mgom9am'
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'hWDtd1yXUvolBOTS5'
+      
+      // Проверка наличия всех параметров
+      if (!serviceId || serviceId === 'YOUR_SERVICE_ID' || !templateId || templateId === 'YOUR_TEMPLATE_ID' || !publicKey || publicKey === 'YOUR_PUBLIC_KEY') {
+        throw new Error('EmailJS параметры не настроены. Проверьте переменные окружения.')
+      }
       
       // Формируем данные для отправки
       const templateParams = {
