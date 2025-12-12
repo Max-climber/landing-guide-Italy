@@ -42,7 +42,7 @@ const Navigation = () => {
   }, [isOpen])
 
   return (
-    <nav ref={navRef} className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-color2 backdrop-blur-md shadow-lg">
+    <nav ref={navRef} className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-color2 backdrop-blur-md shadow-lg" style={{ transform: 'translateZ(0)', willChange: 'transform' }}>
       <div className="container-max px-4 md:px-8 lg:px-16">
         <div className="flex items-center justify-between h-16 sm:h-18 md:h-20">
           <a
