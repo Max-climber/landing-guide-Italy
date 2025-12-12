@@ -23,9 +23,7 @@ Auto Reply to Customer
 <div style="font-family: system-ui, sans-serif, Arial; font-size: 14px; line-height: 1.6; color: #333;">
   <p>Здравствуйте. Мы получили Вашу заявку и в ближайшее время свяжемся с Вами.</p>
   
-  <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd;">
-    <p style="color: #333; font-size: 14px;">Hello. We have received your request and will contact you shortly.</p>
-  </div>
+  <p style="margin-top: 20px; color: #333; font-size: 14px;">Hello. We have received your request and will contact you shortly.</p>
   
   <p style="margin-top: 20px;">La Vacanza Bianca</p>
   
