@@ -21,9 +21,13 @@ Auto Reply to Customer
 ### Content (HTML):
 ```html
 <div style="font-family: system-ui, sans-serif, Arial; font-size: 14px; line-height: 1.6; color: #333;">
-  <p>Здравствуйте. Мы получили Вашу заявку и в ближайшее время свяжемся с вами.</p>
+  <p>Здравствуйте. Мы получили Вашу заявку и в ближайшее время свяжемся с Вами.</p>
   
-  <p style="margin-top: 20px;">Ваша La Vacanza Bianca</p>
+  <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd;">
+    <p>Hello. We have received your request and will contact you shortly.</p>
+  </div>
+  
+  <p style="margin-top: 20px;">La Vacanza Bianca</p>
   
   <div style="margin-top: 20px; padding-top: 15px; border-top: 1px dashed #ccc; color: #999; font-size: 12px;">
     <p style="margin: 0;">info@vacanzabianca.com</p>
