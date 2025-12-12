@@ -286,7 +286,16 @@
       "selectProgram": "Выберите программу",
       "message": "Сообщение",
       "messagePlaceholder": "Расскажите о ваших планах...",
-      "submit": "Отправить заявку"
+      "submit": "Отправить заявку",
+      "emailValid": "Email введен корректно",
+      "phoneValid": "Телефон введен корректно",
+      "emailExample": "Пример: skilover@email.com",
+      "phoneFormat": "Формат: +7 (999) 123-45-67, +39 123 456 7890, или 8 (999) 123-45-67",
+      "submitSuccess": "Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.",
+      "submitError": "Произошла ошибка при отправке заявки. Пожалуйста, попробуйте позже или свяжитесь с нами напрямую.",
+      "sending": "Отправка...",
+      "subject": "Новая заявка!",
+      "autoReplySubject": "Ваша заявка получена - La Vacanza Bianca"
     },
     "conditionsSections": {
       "planning": {

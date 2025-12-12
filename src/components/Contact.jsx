@@ -329,9 +329,9 @@ const Contact = () => {
         from_name: formData.name,
         from_email: formData.email,
         phone: formData.phone,
-        program: formData.program || 'Не указана',
-        message: formData.message || 'Сообщение не указано',
-        subject: 'Новая заявка!'
+        program: formData.program || t('contact.form.program') || 'Не указана',
+        message: formData.message || t('contact.form.message') || 'Сообщение не указано',
+        subject: t('contact.form.subject')
       }
       
       await emailjs.send(serviceId, templateId, templateParams, publicKey)
@@ -342,7 +342,7 @@ const Contact = () => {
         const autoReplyParams = {
           to_email: formData.email,
           to_name: formData.name,
-          subject: 'Ваша заявка получена - La Vacanza Bianca'
+          subject: t('contact.form.autoReplySubject')
         }
         
         // Отправляем ответное письмо сразу (без задержки для лучшего UX)
@@ -373,7 +373,7 @@ const Contact = () => {
       
     } catch (error) {
       console.error('Ошибка отправки формы:', error)
-      setSubmitError('Произошла ошибка при отправке заявки. Пожалуйста, попробуйте позже или свяжитесь с нами напрямую.')
+      setSubmitError(t('contact.form.submitError'))
     } finally {
       setIsSubmitting(false)
     }
@@ -451,12 +451,12 @@ const Contact = () => {
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    Email введен корректно
+                    {t('contact.form.emailValid')}
                   </p>
                 )}
                 {!emailTouched && (
                   <p className="mt-1 text-xs text-color3/60">
-                    Пример: skilover@email.com
+                    {t('contact.form.emailExample')}
                   </p>
                 )}
               </div>
@@ -491,12 +491,12 @@ const Contact = () => {
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    Телефон введен корректно
+                    {t('contact.form.phoneValid')}
                   </p>
                 )}
                 {!phoneTouched && (
                   <p className="mt-1 text-xs text-color3/60">
-                    Формат: +7 (999) 123-45-67, +39 123 456 7890, или 8 (999) 123-45-67
+                    {t('contact.form.phoneFormat')}
                   </p>
                 )}
               </div>
@@ -540,7 +540,7 @@ const Contact = () => {
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.
+                    {t('contact.form.submitSuccess')}
                   </p>
                 </div>
               )}
@@ -567,7 +567,7 @@ const Contact = () => {
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    Отправка...
+                    {t('contact.form.sending')}
                   </>
                 ) : (
                   t('contact.form.submit')

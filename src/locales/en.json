@@ -287,7 +287,16 @@
       "selectProgram": "Select program",
       "message": "Message",
       "messagePlaceholder": "Tell us about your plans...",
-      "submit": "Send Request"
+      "submit": "Send Request",
+      "emailValid": "Email entered correctly",
+      "phoneValid": "Phone entered correctly",
+      "emailExample": "Example: skilover@email.com",
+      "phoneFormat": "Format: +1 (555) 123-4567, +39 123 456 7890, or 8 (999) 123-45-67",
+      "submitSuccess": "Request sent successfully! We will contact you shortly.",
+      "submitError": "An error occurred while sending the request. Please try again later or contact us directly.",
+      "sending": "Sending...",
+      "subject": "New Request!",
+      "autoReplySubject": "Your request received - La Vacanza Bianca"
     },
     "conditionsSections": {
       "planning": {
