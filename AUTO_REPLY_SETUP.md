@@ -24,7 +24,7 @@ Auto Reply to Customer
   <p>Здравствуйте. Мы получили Вашу заявку и в ближайшее время свяжемся с Вами.</p>
   
   <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd;">
-    <p>Hello. We have received your request and will contact you shortly.</p>
+    <p style="color: #333; font-size: 14px;">Hello. We have received your request and will contact you shortly.</p>
   </div>
   
   <p style="margin-top: 20px;">La Vacanza Bianca</p>
