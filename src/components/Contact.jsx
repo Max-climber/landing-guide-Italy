@@ -336,6 +336,22 @@ const Contact = () => {
       
       await emailjs.send(serviceId, templateId, templateParams, publicKey)
       
+      // Отправка ответного письма клиенту
+      try {
+        const autoReplyTemplateId = import.meta.env.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID || 'template_auto_reply'
+        const autoReplyParams = {
+          to_email: formData.email,
+          to_name: formData.name,
+          subject: 'Ваша заявка получена - La Vacanza Bianca'
+        }
+        
+        // Отправляем ответное письмо сразу (без задержки для лучшего UX)
+        await emailjs.send(serviceId, autoReplyTemplateId, autoReplyParams, publicKey)
+      } catch (error) {
+        console.error('Ошибка отправки ответного письма:', error)
+        // Не показываем ошибку пользователю, так как основное письмо уже отправлено
+      }
+      
       // Успешная отправка
       setSubmitSuccess(true)
       
