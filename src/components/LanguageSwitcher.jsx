@@ -44,8 +44,6 @@ const LanguageSwitcher = () => {
       whileTap={{ scale: 0.95 }}
       className="cursor-pointer transition-transform"
       aria-label={`Switch to ${nextLang === 'ru' ? 'Russian' : 'English'}`}
-      style={{ willChange: 'transform' }}
-      transition={{ type: 'spring', stiffness: 400, damping: 17 }}
     >
       <FlagIcon country={currentLang} />
     </motion.button>

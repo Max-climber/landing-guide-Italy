@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import Navigation from './components/Navigation'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -11,21 +11,10 @@ import Footer from './components/Footer'
 
 function App() {
   const [scrollY, setScrollY] = useState(0)
-  const ticking = useRef(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (!ticking.current) {
-        window.requestAnimationFrame(() => {
-          setScrollY(window.scrollY)
-          ticking.current = false
-        })
-        ticking.current = true
-      }
-    }
-    
-    // Используем passive для лучшей производительности на мобильных
-    window.addEventListener('scroll', handleScroll, { passive: true })
+    const handleScroll = () => setScrollY(window.scrollY)
+    window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
