@@ -30,6 +30,14 @@ jobs:
       - name: Build project
         run: npm run build
 
+      - name: Copy public assets to dist
+        run: |
+          echo "Copying images and videos to dist..."
+          cp -r public/images dist/ 2>/dev/null || echo "Images directory not found or already exists"
+          cp -r public/videos dist/ 2>/dev/null || echo "Videos directory not found or already exists"
+          cp robots.txt dist/ 2>/dev/null || echo "robots.txt not found"
+          echo "✅ Assets copied"
+
       - name: List files to deploy
         run: |
           echo "Files in dist directory:"
@@ -91,8 +99,8 @@ jobs:
           echo '=== Removing index.php ==='
           rm -f index.php || echo 'index.php not found'
           echo '=== Setting correct permissions ==='
-          chmod 644 index.html .htaccess robots.txt logo.jpg vite.svg || echo 'Failed to chmod files'
-          chmod 755 assets images шрифты || echo 'Failed to chmod directories'
+          chmod 644 index.html .htaccess robots.txt 2>/dev/null || echo 'Some files not found for chmod'
+          chmod 755 assets images videos 2>/dev/null || echo 'Some directories not found for chmod'
           echo '=== Final file list ==='
           ls -la
           quit
