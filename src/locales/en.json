@@ -7,15 +7,32 @@
     "connect": "Contact Us"
   },
   "hero": {
-    "title": "La Vacanza Bianca",
+    "title": "LA VACANZA BIANCA",
     "subtitle": "Premium Ski Tours in Italy",
-    "description": "Personalized guidance on the Alpine slopes.<br/>From airport pickup to every turn on the trail.",
-    "startJourney": "Start Your Journey",
-    "ourPrograms": "Our Programs",
-    "bestResorts": "Best Resorts"
+    "description": "Personalized planning, comfortable trips<br/>and the best skiing in the Alps - without hassle and unnecessary worries.",
+    "cta": "Get a Personal Offer"
   },
   "about": {
-    "title": "About Us",
+    "title": "Why Choose\nLA VACANZA BIANCA",
+    "subtitle": "We live in Italy and help organize ski holidays —\nprofessionally and with quality.",
+    "features": {
+      "experience": {
+        "title": "Experience",
+        "desc": "We know every slope and select trails for your skiing level."
+      },
+      "individual": {
+        "title": "Individual",
+        "desc": "No templates — only a personal route for you."
+      },
+      "logistics": {
+        "title": "Logistics",
+        "desc": "Comfortable transfer and personal airport meetings"
+      },
+      "comfort": {
+        "title": "Comfort",
+        "desc": "We care about details so you can enjoy your vacation"
+      }
+    },
     "text": [
       "Being passionate fans of sports like skiing, climbing, hiking and kayaking,\nafter a short deliberation we chose — believe it or not — Italy!",
       "We have traveled a lot, especially with skis.\nThe Alps attract so much that one trip becomes the start of a tradition.",
@@ -38,15 +55,17 @@
   "programs": {
     "title": "Our Programs",
     "subtitle": "Choose the program that suits you best",
+    "selectButton": "Select",
+    "recommended": "⭐ Recommended",
     "buttonNames": {
-      "expert": "expert",
-      "balance": "balance",
-      "ultracomfort": "ultracomfort"
+      "expert": "Expert",
+      "balance": "Balance",
+      "ultracomfort": "Ultracomfort"
     },
     "experienced": {
-      "title": "For Experienced",
-      "subtitle": "For skiers who know how to do everything themselves",
-        "description": "If you've been to the Italian or Swiss Alps more than once, you probably know how to independently choose the best ski resorts.",
+      "title": "Expert",
+      "subtitle": "For skiers who feel confident in the mountains",
+        "description": "If you've already been to the Alps and prefer to choose resorts and skiing format yourself, we'll step in exactly where needed — without unnecessary interference.",
       "features": {
         "consultation": "Online or offline consultation on options for ski holidays in Italy",
         "airportPickup": "Airport pickup and transfer to the first hotel",
@@ -56,21 +75,27 @@
         "consultation": "Discussion of trip plans: free",
         "transfer": "Airport transfer*",
         "transferStart": "start of trip",
-        "workingDays": "7:00 AM to 9:00 PM on weekdays",
+        "workingDays": "start of trip from 7:00 AM to 9:00 PM on weekdays",
         "otherTime": "Other times",
         "price1": "€1/km + toll road costs",
-        "price2": "€1.5/km + toll road costs"
+        "price2": "€1.5/km + toll road costs",
+        "planningTitle": "Trip planning",
+        "planningDesc": "(ticket selection, ski resort selection, hotel booking):",
+        "planningPrice": "€200",
+        "hotelTransfer": "Transfer to lifts + guidance:",
+        "hotelTransferDesc": "",
+        "hotelTransferPrice": "€400/day"
       }
     },
     "comfortable": {
-      "title": "Comfortable Travel",
-      "subtitle": "For skiers who want to travel in comfort",
-        "description": "Do you ski or snowboard, have been to different resorts, and would like to spend a new unforgettable sports vacation in Italy?",
+      "title": "Balance",
+      "subtitle": "For skiers who value comfort",
+        "description": "You ski or snowboard, have been to different resorts, and want to have a well-planned, comfortable sports vacation in Italy — without unnecessary worries and organizational questions.",
       "features": {
         "tickets": "Online or offline consultation on options for ski holidays in Italy",
-        "planning": "Creating a complete trip plan",
-        "hotels": "Hotel bookings",
-        "transfers": "Transfers from hotels to lifts and back",
+        "planning": "Creating an individual plan for the entire trip",
+        "hotels": "Airport pickup and transfer to hotel",
+        "transfers": "Transfers from hotel to lifts and back",
         "rental": "Help with equipment rental",
         "skipass": "Help with ski pass purchases"
       },
@@ -78,36 +103,46 @@
         "consultation": "Discussion of trip plans: free",
         "transfer": "Airport transfer*",
         "transferStart": "start of trip",
-        "workingDays": "7:00 AM to 9:00 PM on weekdays",
+        "workingDays": "start of trip from 7:00 AM to 9:00 PM on weekdays",
         "otherTime": "Other times",
         "price1": "€0.7/km + toll road costs",
         "price2": "€1/km + toll road costs",
-        "planning": "Trip planning (ticket selection, ski resort selection, hotel booking): €200",
-        "planningPrice": "€200/service",
-        "hotelTransfer": "Transfer from hotel to lifts, help with equipment rental and ski pass purchase:",
-        "hotelTransferPrice": "200 euro/day"
+        "planningTitle": "Trip planning",
+        "planningDesc": "(ticket selection, ski resort selection, hotel booking):",
+        "planningPrice": "€200",
+        "hotelTransfer": "Transfer to lifts + assistance:",
+        "hotelTransferDesc": "Transfer from hotel to lifts, help with equipment rental and ski pass purchase:",
+        "hotelTransferPrice": "€200/day"
       }
     },
     "superComfort": {
-      "title": "Super Comfort",
+      "title": "Ultracomfort",
       "subtitle": "For first-timers",
-      "description": "Are you a beginner in alpine skiing, or in a couple where one is an experienced skier and the other is just starting? We'll show, tell, explain everything.",
+      "description": "If you're just starting to ski or in a couple where one is already confident on the slopes and the other is taking first steps — we take on support and guidance at every stage. We'll show, tell, and explain everything necessary so you feel confident and calm from the first day.",
       "features": {
-        "individual": "Individual guidance for one person on the slopes, full day",
-        "restDay": "Client guidance on rest days – shopping trips, excursions, hiking, etc."
+        "tickets": "Online or offline consultation on options for ski holidays in Italy",
+        "planning": "Creating an individual plan for the entire trip",
+        "hotels": "Selection and booking of hotels",
+        "transfers": "Transfers from hotel to lifts and back",
+        "rental": "Help with equipment rental",
+        "skipass": "Help with ski pass purchases",
+        "individual": "Individual guidance for one person on the slopes throughout the full day",
+        "restDay": "Guidance on rest days: shopping trips, excursions, hiking and other activities"
       },
       "pricing": {
         "consultation": "Discussion of trip plans: free",
         "transfer": "Airport transfer*",
         "transferStart": "start of trip",
-        "workingDays": "7:00 AM to 9:00 PM on weekdays",
+        "workingDays": "start of trip from 7:00 AM to 9:00 PM on weekdays",
         "otherTime": "Other times",
         "price1": "€0.7/km + toll road costs",
         "price2": "€1/km + toll road costs",
-        "planning": "Trip planning (ticket selection, ski resort selection, hotel booking): €200",
-        "planningPrice": "€200/service",
-        "hotelTransfer": "Transfer from hotel to lift parking and individual slope accompaniment:",
-        "hotelTransferPrice": "400 euro/day"
+        "planningTitle": "Trip planning",
+        "planningDesc": "(ticket selection, ski resort selection, hotel booking):",
+        "planningPrice": "€200",
+        "hotelTransfer": "Transfer to lifts + guidance:",
+        "hotelTransferDesc": "Transfer from hotel to lift parking and individual slope accompaniment:",
+        "hotelTransferPrice": "€400/day"
       }
     },
     "whatIncluded": "What's Included:",
@@ -116,6 +151,7 @@
     "tollRoadsNote": "* Approximate distance from airport to resort is indicated in the resort description"
   },
   "resorts": {
+    "selectTourButton": "Select Tour",
     "title": "Best Ski Resorts in Italy",
     "subtitle": "We work at the most prestigious Alpine resorts",
     "trails": "Trails",
@@ -210,7 +246,7 @@
         "name": "Valmalenco",
         "nameEn": "Valmalenco",
         "region": "Lombardy",
-        "description": "Authentic Italian valley without tourist crowds. 40+ km of trails from 1200 to 2700 m, excellent freeride conditions. Ideal for those seeking a true Italian experience away from popular routes.",
+        "description": "Authentic Italian valley without tourist crowds. 40+ km of trails from 1200 to 2700 m, excellent freeride conditions. Ideal for those seeking to get a true Italian experience away from popular routes.",
         "trails": "40+ km",
         "elevation": "1200–2700 m",
         "difficulty": "Beginner, Intermediate, Advanced",
@@ -288,6 +324,7 @@
       "message": "Message",
       "messagePlaceholder": "Tell us about your plans...",
       "submit": "Send Request",
+      "finalNote": "No prepayment • Calmly • Individually",
       "emailValid": "Email entered correctly",
       "phoneValid": "Phone entered correctly",
       "emailExample": "Example: skilover@email.com",
@@ -328,6 +365,60 @@
         "rublesPayment": "When paying in rubles – cost at exchange rate on payment day + 5%"
       }
     }
+  },
+  "steps": {
+    "title": "How Your Journey Goes",
+    "subtitle": "We take care of all organizational details",
+    "cta": "Discuss Your Trip",
+    "step1": {
+      "title": "Introduction",
+      "desc": "We discuss your wishes, skiing level and format of your ideal vacation"
+    },
+    "step2": {
+      "title": "Tour Selection",
+      "desc": "We offer options that really suit you — without templates"
+    },
+    "step3": {
+      "title": "Planning",
+      "desc": "Together with you we coordinate accommodation, transfers and key trip details"
+    },
+    "step4": {
+      "title": "Preparation",
+      "desc": "We form a detailed travel program and give all necessary recommendations"
+    },
+    "step5": {
+      "title": "Your Vacation",
+      "desc": "We accompany you on the slopes: you enjoy the mountains and vacation, and we stay with you at every turn"
+    }
+  },
+  "instructor": {
+    "title": "Your Guide and Organizer",
+    "description": "My name is Dmitry. I am a ski guide and founder of La Vacanza Bianca. My goal is to show you the real Alps, their beauty and uniqueness, help you feel confident in skiing and organize a journey that you will remember only with warmth."
+  },
+  "reviews": {
+    "title": "Reviews from Our Guests",
+    "subtitle": "Stories from those who have already discovered the Alps with us",
+    "videoCaption": "Elena's story about a ski weekend in Piani di Bobbio",
+    "review1": {
+      "name": "Vardan",
+      "tour": "Tour to St. Moritz",
+      "text": "\"St. Moritz is a very high level. Thank you for the excellent hotel and route selection! The skiing was magnificent, the slopes were perfectly prepared. The organization was top-notch, no issues.\""
+    },
+    "review2": {
+      "name": "Ksenia",
+      "tour": "Trip to Valmalenco",
+      "text": "\"We've been to Italy before, skied at many popular resorts. This time we decided to go to Valmalenco with the guys from La Vacanza Bianca. It was really great. Few people, beautiful slopes, infrastructure, views - everything was super, thanks!\""
+    },
+    "review3": {
+      "name": "Olga",
+      "tour": "Tour to Piani di Bobbio",
+      "text": "\"Thank you so much for the wonderful ski weekend! We hesitated for a long time to go to the mountains, always no time and unclear where to go, how to organize everything. We saw an ad for La Vacanza Bianca on Instagram and decided to write. In the end, it was a real, sporty, beautiful, unforgettable vacation! With Tatyana we selected the route and hotel. Dmitry met us in Como and was our guide for both days. Very caring, calm, professional. We just had to ski and enjoy!\""
+    }
+  },
+  "individual": {
+    "title": "Individual Approach",
+    "text": "We don't work with templates.<br/>Each trip is created for your skiing level,<br/>vacation style and pace of life.",
+    "note": "That's why our clients come back and recommend us."
   },
   "footer": {
     "description": "Premium ski tours in Italy with personalized guidance.",
