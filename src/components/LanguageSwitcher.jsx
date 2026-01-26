@@ -33,7 +33,9 @@ const LanguageSwitcher = () => {
   const currentLang = i18n.language === 'en' ? 'en' : 'ru'
   const nextLang = currentLang === 'ru' ? 'en' : 'ru'
 
-  const toggleLanguage = () => {
+  const toggleLanguage = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
     i18n.changeLanguage(nextLang)
   }
 
@@ -44,6 +46,7 @@ const LanguageSwitcher = () => {
       whileTap={{ scale: 0.95 }}
       className="cursor-pointer transition-transform"
       aria-label={`Switch to ${nextLang === 'ru' ? 'Russian' : 'English'}`}
+      style={{ zIndex: 10 }}
     >
       <FlagIcon country={currentLang} />
     </motion.button>

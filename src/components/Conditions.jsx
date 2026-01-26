@@ -60,10 +60,10 @@ const Conditions = () => {
 
       <div className="container-max relative z-10">
         <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-oswald font-bold text-color1 mb-4 sm:mb-6 px-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-sans font-bold text-color1 mb-4 sm:mb-6 px-4">
             {t('contact.conditions')}
           </h2>
-          <p className="text-xl sm:text-2xl md:text-3xl font-oswald text-white/80 max-w-3xl mx-auto px-4">
+          <p className="text-xl sm:text-2xl md:text-3xl font-sans text-white/80 max-w-3xl mx-auto px-4">
             {t('contact.conditionsSubtitle')}
           </p>
         </div>
@@ -80,7 +80,7 @@ const Conditions = () => {
                       <div className="relative z-10">
                         <div className="flex items-center gap-4 mb-4">
                           <div className="text-4xl sm:text-5xl">{condition.key === 'transfers' ? '🚗' : condition.icon}</div>
-                          <h3 className="text-xl sm:text-2xl font-oswald font-bold text-white">
+                          <h3 className="text-xl sm:text-2xl font-sans font-bold text-white">
                             {t(`contact.conditionsSections.${condition.key}.title`).replace(/📅|🏨|🚗|⛷️|💳/g, '').trim()}
                           </h3>
                         </div>
@@ -294,7 +294,7 @@ const Conditions = () => {
                       <div className="relative z-10">
                         <div className="flex items-center gap-4 mb-4">
                           <div className="text-4xl sm:text-5xl">{condition.key === 'transfers' ? '🚗' : condition.icon}</div>
-                          <h3 className="text-xl sm:text-2xl font-oswald font-bold text-white">
+                          <h3 className="text-xl sm:text-2xl font-sans font-bold text-white">
                             {t(`contact.conditionsSections.${condition.key}.title`).replace(/📅|🏨|🚗|⛷️|💳/g, '').trim()}
                           </h3>
                         </div>

@@ -33,10 +33,25 @@ jobs:
       - name: Copy public assets to dist
         run: |
           echo "Copying images and videos to dist..."
-          cp -r public/images dist/ 2>/dev/null || echo "Images directory not found or already exists"
-          cp -r public/videos dist/ 2>/dev/null || echo "Videos directory not found or already exists"
-          cp robots.txt dist/ 2>/dev/null || echo "robots.txt not found"
-          echo "✅ Assets copied"
+          if [ -d "public/images" ]; then
+            cp -r public/images/* dist/images/ 2>/dev/null || cp -r public/images dist/ 2>/dev/null || true
+            echo "✅ Images copied"
+          else
+            echo "⚠️ public/images not found"
+          fi
+          if [ -d "public/videos" ]; then
+            cp -r public/videos/* dist/videos/ 2>/dev/null || cp -r public/videos dist/ 2>/dev/null || true
+            echo "✅ Videos copied"
+          else
+            echo "⚠️ public/videos not found"
+          fi
+          if [ -f "robots.txt" ]; then
+            cp robots.txt dist/ || true
+            echo "✅ robots.txt copied"
+          else
+            echo "⚠️ robots.txt not found"
+          fi
+          echo "✅ Assets copy completed"
 
       - name: List files to deploy
         run: |

@@ -6,10 +6,10 @@ const WhyUs = () => {
   return (
     <section
       id="whyUs"
-      className="section-padding bg-white"
+      className="section-padding bg-bg-base"
     >
       <div className="container-max">
-        <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-oswald font-bold mb-6 sm:mb-8 text-center text-color3">
+        <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-sans font-bold mb-6 sm:mb-8 text-center text-color3">
           {t('about.whyUs')}
         </h3>
         
