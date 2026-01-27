@@ -33,6 +33,7 @@ jobs:
       - name: Copy public assets to dist
         run: |
           echo "Copying images and videos to dist..."
+          mkdir -p dist/images dist/videos
           if [ -d "public/images" ]; then
             cp -r public/images/* dist/images/ 2>/dev/null || cp -r public/images dist/ 2>/dev/null || true
             echo "✅ Images copied"
