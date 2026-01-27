@@ -133,6 +133,7 @@ const About = () => {
           className="w-full h-full object-cover block"
           style={{ width: '100%', height: '100%', objectPosition: 'center bottom', display: 'block' }}
           loading="lazy"
+          decoding="async"
         />
       </div>
 
@@ -157,8 +158,8 @@ const About = () => {
                   src="/videos/guide-section.mp4"
                   className="video-cover w-full h-full object-cover opacity-90 transition-all duration-500"
                   onEnded={handleVideoEnd}
-                  preload="metadata"
-                  loading="lazy"
+                  preload="none"
+                  playsInline
                 />
                 <div className="play-button absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60px] h-[60px] bg-white/90 rounded-full flex items-center justify-center transition-all duration-300 z-[2] hover:scale-110 hover:bg-white">
                   <svg className="w-5 h-5 fill-text-main ml-0.5" viewBox="0 0 24 24">

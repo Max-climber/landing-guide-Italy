@@ -37,6 +37,33 @@
     background-color: #f1eceb;
     font-weight: 400;
   }
+
+  /* Кастомный scrollbar для планшета и десктопа */
+  @media (min-width: 768px) {
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f1eceb;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #999;
+      border-radius: 6px;
+      border: 2px solid #f1eceb;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #777;
+    }
+    
+    /* Для Firefox */
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: #999 #f1eceb;
+    }
+  }
   
   h1, h2, h3, h4, h5, h6,
   button, input, textarea, select {
@@ -666,6 +693,67 @@
       font-size: 32px;
     }
   }
+}
+
+/* Swiper стили для карусели курортов */
+.resort-img-box .swiper-button-prev,
+.resort-img-box .swiper-button-next {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  transition: all 0.3s;
+  margin-top: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.resort-img-box .swiper-button-prev:hover,
+.resort-img-box .swiper-button-next:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.resort-img-box .swiper-button-prev {
+  left: 8px;
+}
+
+.resort-img-box .swiper-button-next {
+  right: 8px;
+}
+
+.resort-img-box .swiper-button-prev::after,
+.resort-img-box .swiper-button-next::after {
+  font-size: 16px;
+  font-weight: bold;
+  color: #2f3035;
+}
+
+.resort-img-box .swiper-pagination {
+  bottom: 8px;
+}
+
+.resort-img-box .swiper-pagination-bullet {
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+  transition: all 0.3s;
+}
+
+.resort-img-box .swiper-pagination-bullet-active {
+  width: 24px;
+  background: rgba(255, 255, 255, 1);
+  border-radius: 3px;
+}
+
+/* Предотвращение скролла страницы при свайпе в Swiper */
+.resort-img-box .swiper {
+  touch-action: pan-y;
+}
+
+.resort-img-box .swiper-wrapper {
+  touch-action: pan-y;
 }
 
 /* Smooth scrolling */

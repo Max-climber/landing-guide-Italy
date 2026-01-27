@@ -16,6 +16,8 @@ const Hero = () => {
           className="w-full h-full object-cover"
           style={{ objectPosition: 'center top' }}
           loading="eager"
+          decoding="async"
+          fetchpriority="high"
           onError={(e) => {
             // Fallback на jpg если png не найден
             if (e.target.src.endsWith('.png')) {

@@ -204,9 +204,14 @@ const Navigation = () => {
             </div>
           </button>
           
-          <div className={`logo font-serif text-[24px] tracking-[0.05em] ${navStyle.text} uppercase flex-shrink-0`} style={{ fontWeight: '300' }}>
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className={`logo font-serif text-[24px] tracking-[0.05em] ${navStyle.text} uppercase flex-shrink-0 cursor-pointer hover:opacity-70 transition-opacity`}
+            style={{ fontWeight: '300', background: 'none', border: 'none', padding: 0 }}
+            aria-label="Наверх"
+          >
             LA VACANZA BIANCA
-          </div>
+          </button>
         </div>
         
         <nav className="nav-menu flex items-center gap-[30px]" ref={navRef}>

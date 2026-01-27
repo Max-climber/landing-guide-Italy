@@ -97,8 +97,8 @@ const Reviews = () => {
                 src="/videos/reviews/elena-review.mp4"
                 className="video-cover w-full h-full object-cover opacity-90 transition-all duration-500"
                 onEnded={handleVideoEnd}
-                preload="metadata"
-                loading="lazy"
+                preload="none"
+                playsInline
               />
               <div className="play-button absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60px] h-[60px] bg-white/90 rounded-full flex items-center justify-center transition-all duration-300 z-[2] hover:scale-110 hover:bg-white">
                 <svg className="w-5 h-5 fill-text-main ml-0.5" viewBox="0 0 24 24">
@@ -122,7 +122,7 @@ const Reviews = () => {
         </div>
       </div>
 
-      <div className="reviews-grid flex justify-center gap-[30px] max-w-[1200px] mx-auto flex-wrap px-4 sm:px-6 md:px-6 lg:px-8 xl:px-5" style={{ boxSizing: 'border-box' }}>
+      <div className="reviews-grid flex justify-center gap-[30px] max-w-[1200px] mx-auto flex-wrap px-4 sm:px-6 md:px-6 lg:px-8 xl:px-5" style={{ boxSizing: 'border-box', marginLeft: 'auto', marginRight: 'auto' }}>
         {reviews.map((review, idx) => (
           <div key={idx} className="review-card bg-white border border-border-soft rounded-xl p-[35px_30px] w-[350px] min-w-[350px] max-w-[350px] text-left shadow-[0_10px_30px_rgba(0,0,0,0.02)] flex-shrink-0" style={{ boxSizing: 'border-box' }}>
             <div className="review-header flex items-center mb-5">

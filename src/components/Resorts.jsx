@@ -1,5 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Navigation, Pagination } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
 import ImageModal from './ImageModal'
 import ContactModal from './ContactModal'
 
@@ -10,9 +15,7 @@ const Resorts = () => {
   const [isTablet, setIsTablet] = useState(false)
   const [modalImage, setModalImage] = useState({ isOpen: false, images: [], index: 0, resortName: '' })
   const [isContactModalOpen, setIsContactModalOpen] = useState(false)
-  const [currentImageIndex, setCurrentImageIndex] = useState({})
-  const [touchStart, setTouchStart] = useState({})
-  const [touchEnd, setTouchEnd] = useState({})
+  const swiperRefs = useRef({})
 
   useEffect(() => {
     const checkDevice = () => {
@@ -82,43 +85,6 @@ const Resorts = () => {
   }
 
 
-  const handleCarouselPrev = (e, resortId, images, currentIndex) => {
-    if (e) e.stopPropagation()
-    const prevIndex = (currentIndex - 1 + images.length) % images.length
-    setCurrentImageIndex({ ...currentImageIndex, [resortId]: prevIndex })
-  }
-
-  const handleCarouselNext = (e, resortId, images, currentIndex) => {
-    if (e) e.stopPropagation()
-    const nextIndex = (currentIndex + 1) % images.length
-    setCurrentImageIndex({ ...currentImageIndex, [resortId]: nextIndex })
-  }
-
-  // Обработка свайпа для мобильных устройств
-  const minSwipeDistance = 50
-
-  const onTouchStart = (e, resortId) => {
-    setTouchEnd({ ...touchEnd, [resortId]: null })
-    setTouchStart({ ...touchStart, [resortId]: e.targetTouches[0].clientX })
-  }
-
-  const onTouchMove = (e, resortId) => {
-    setTouchEnd({ ...touchEnd, [resortId]: e.targetTouches[0].clientX })
-  }
-
-  const onTouchEnd = (resortId, images, currentIndex) => {
-    if (!touchStart[resortId] || !touchEnd[resortId]) return
-    
-    const distance = touchStart[resortId] - touchEnd[resortId]
-    const isLeftSwipe = distance > minSwipeDistance
-    const isRightSwipe = distance < -minSwipeDistance
-
-    if (isLeftSwipe) {
-      handleCarouselNext(null, resortId, images, currentIndex)
-    } else if (isRightSwipe) {
-      handleCarouselPrev(null, resortId, images, currentIndex)
-    }
-  }
 
   // Только три курорта из HTML дизайна
   const resorts = [
@@ -152,11 +118,9 @@ const Resorts = () => {
             {t('resorts.subtitle')}
           </p>
         
-        <div className="resorts-grid flex justify-center gap-[30px] max-w-[1200px] mx-auto flex-wrap px-4 sm:px-6 md:px-6 lg:px-8 xl:px-5" style={{ boxSizing: 'border-box' }}>
+        <div className="resorts-grid flex justify-center gap-[30px] max-w-[1200px] mx-auto flex-wrap px-4 sm:px-6 md:px-6 lg:px-8 xl:px-5" style={{ boxSizing: 'border-box', marginLeft: 'auto', marginRight: 'auto' }}>
           {resorts.map((resort) => {
             const images = getResortImages(resort.folder)
-            const currentIndex = currentImageIndex[resort.id] || 0
-            const currentImage = images[currentIndex] || images[0] || '/images/resorts/piani-di-bobbio/1.jpg'
             
             return (
               <div
@@ -164,65 +128,74 @@ const Resorts = () => {
                 className="resort-card bg-bg-card border border-border-soft rounded-xl w-[350px] min-w-[350px] max-w-[350px] overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.04)] transition-transform duration-300 flex flex-col text-left hover:-translate-y-1 flex-shrink-0 group"
                 style={{ boxSizing: 'border-box' }}
               >
-                <div 
-                  className="resort-img-box h-[240px] w-full overflow-hidden relative touch-pan-y"
-                  onTouchStart={(e) => onTouchStart(e, resort.id)}
-                  onTouchMove={(e) => onTouchMove(e, resort.id)}
-                  onTouchEnd={() => onTouchEnd(resort.id, images, currentIndex)}
-                  style={{ touchAction: 'pan-y pinch-zoom' }}
-                >
-                  <img
-                    src={currentImage}
-                    alt={resort.name}
-                    className="resort-img w-full h-full object-cover transition-transform duration-300 cursor-pointer select-none"
-                    onClick={() => handleImageClick(resort.name, resort.folder, currentIndex)}
-                    loading="lazy"
-                    decoding="async"
-                    draggable="false"
-                    onError={(e) => {
-                      e.target.src = '/images/resorts/piani-di-bobbio/1.jpg'
-                    }}
-                  />
-                  {images.length > 1 && (
-                    <>
-                      <button
-                        onClick={(e) => handleCarouselPrev(e, resort.id, images, currentIndex)}
-                        className={`absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-text-main p-2 rounded-full shadow-lg transition-all duration-300 z-10 ${
-                          (isMobile || isTablet) ? 'opacity-70' : 'opacity-0 group-hover:opacity-100'
-                        }`}
-                        aria-label="Previous image"
-                        style={{ pointerEvents: (isMobile || isTablet) ? 'auto' : 'auto' }}
-                      >
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                        </svg>
-                      </button>
-                      <button
-                        onClick={(e) => handleCarouselNext(e, resort.id, images, currentIndex)}
-                        className={`absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-text-main p-2 rounded-full shadow-lg transition-all duration-300 z-10 ${
-                          (isMobile || isTablet) ? 'opacity-70' : 'opacity-0 group-hover:opacity-100'
-                        }`}
-                        aria-label="Next image"
-                        style={{ pointerEvents: (isMobile || isTablet) ? 'auto' : 'auto' }}
-                      >
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </button>
-                      {/* Индикаторы для мобильных */}
-                      {(isMobile || isTablet) && (
-                        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-10 flex gap-1.5">
-                          {images.map((_, idx) => (
-                            <div
-                              key={idx}
-                              className={`h-1.5 rounded-full transition-all duration-300 ${
-                                idx === currentIndex ? 'bg-white w-6' : 'bg-white/50 w-1.5'
-                              }`}
-                            />
-                          ))}
-                        </div>
-                      )}
-                    </>
+                <div className="resort-img-box h-[240px] w-full overflow-hidden relative">
+                  {images.length > 1 ? (
+                    <Swiper
+                      modules={[Navigation, Pagination]}
+                      navigation={{
+                        nextEl: `.swiper-button-next-${resort.id}`,
+                        prevEl: `.swiper-button-prev-${resort.id}`,
+                      }}
+                      pagination={{
+                        el: `.swiper-pagination-${resort.id}`,
+                        clickable: true,
+                        bulletClass: 'swiper-pagination-bullet',
+                        bulletActiveClass: 'swiper-pagination-bullet-active',
+                      }}
+                      spaceBetween={0}
+                      slidesPerView={1}
+                      loop={true}
+                      onSwiper={(swiper) => {
+                        swiperRefs.current[resort.id] = swiper
+                      }}
+                      onSlideChange={(swiper) => {
+                        // Можно добавить логику если нужно
+                      }}
+                      className="h-full w-full"
+                      style={{ touchAction: 'pan-y' }}
+                      preventInteractionOnTransition={true}
+                      allowTouchMove={true}
+                      touchStartPreventDefault={false}
+                      touchMoveStopPropagation={true}
+                    >
+                      {images.map((image, idx) => (
+                        <SwiperSlide key={idx} className="h-full">
+                          <img
+                            src={image}
+                            alt={`${resort.name} - ${idx + 1}`}
+                            className="resort-img w-full h-full object-cover cursor-pointer select-none"
+                            onClick={() => {
+                              const swiper = swiperRefs.current[resort.id]
+                              handleImageClick(resort.name, resort.folder, swiper?.realIndex || idx)
+                            }}
+                            loading={idx === 0 ? "eager" : "lazy"}
+                            decoding="async"
+                            draggable="false"
+                            onError={(e) => {
+                              e.target.src = '/images/resorts/piani-di-bobbio/1.jpg'
+                            }}
+                          />
+                        </SwiperSlide>
+                      ))}
+                      {/* Навигационные кнопки */}
+                      <div className={`swiper-button-prev swiper-button-prev-${resort.id} ${(isMobile || isTablet) ? 'opacity-70' : 'opacity-0 group-hover:opacity-100'}`}></div>
+                      <div className={`swiper-button-next swiper-button-next-${resort.id} ${(isMobile || isTablet) ? 'opacity-70' : 'opacity-0 group-hover:opacity-100'}`}></div>
+                      {/* Пагинация */}
+                      <div className={`swiper-pagination swiper-pagination-${resort.id} ${(isMobile || isTablet) ? 'block' : 'hidden'}`}></div>
+                    </Swiper>
+                  ) : (
+                    <img
+                      src={images[0] || '/images/resorts/piani-di-bobbio/1.jpg'}
+                      alt={resort.name}
+                      className="resort-img w-full h-full object-cover cursor-pointer select-none"
+                      onClick={() => handleImageClick(resort.name, resort.folder, 0)}
+                      loading="lazy"
+                      decoding="async"
+                      draggable="false"
+                      onError={(e) => {
+                        e.target.src = '/images/resorts/piani-di-bobbio/1.jpg'
+                      }}
+                    />
                   )}
                 </div>
                 
