@@ -88,7 +88,7 @@ const Reviews = () => {
         {t('reviews.subtitle')}
       </p>
       
-      <div className="reviews-video-top w-full max-w-[1100px] mx-auto mb-[60px] text-center px-4 sm:px-6 md:px-6 lg:px-8 xl:px-5">
+      <div className="reviews-video-top w-full max-w-[1100px] mx-auto mb-[60px] text-center px-4">
         <div className="video-wrapper aspect-video relative rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] cursor-pointer bg-black" onClick={handleVideoClick}>
           {!isVideoPlaying ? (
             <>
@@ -122,7 +122,7 @@ const Reviews = () => {
         </div>
       </div>
 
-      <div className="reviews-grid flex justify-center gap-[30px] max-w-[1200px] mx-auto flex-wrap" style={{ boxSizing: 'border-box', width: '100%' }}>
+      <div className="reviews-grid flex justify-center gap-[30px] max-w-[1200px] mx-auto flex-wrap" style={{ boxSizing: 'border-box', width: '100%', paddingLeft: '0', paddingRight: '0', marginLeft: 'auto', marginRight: 'auto' }}>
         {reviews.map((review, idx) => (
           <div key={idx} className="review-card bg-white border border-border-soft rounded-xl p-[35px_30px] w-[350px] min-w-[350px] max-w-[350px] text-left shadow-[0_10px_30px_rgba(0,0,0,0.02)] flex-shrink-0" style={{ boxSizing: 'border-box' }}>
             <div className="review-header flex items-center mb-5">
