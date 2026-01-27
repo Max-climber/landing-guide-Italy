@@ -116,7 +116,7 @@ const Resorts = () => {
             {t('resorts.subtitle')}
           </p>
         
-        <div className="resorts-grid flex justify-center gap-[30px] max-w-[1200px] mx-auto flex-wrap px-4" style={{ boxSizing: 'border-box' }}>
+        <div className="resorts-grid flex justify-center gap-[30px] max-w-[1200px] mx-auto flex-wrap" style={{ boxSizing: 'border-box', width: '100%' }}>
           {resorts.map((resort) => {
             const images = getResortImages(resort.folder)
             
@@ -126,7 +126,7 @@ const Resorts = () => {
                 className="resort-card bg-bg-card border border-border-soft rounded-xl w-[350px] min-w-[350px] max-w-[350px] overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.04)] transition-transform duration-300 flex flex-col text-left hover:-translate-y-1 flex-shrink-0 group"
                 style={{ boxSizing: 'border-box' }}
               >
-                <div className="resort-img-box h-[240px] w-full overflow-hidden relative">
+                <div className="resort-img-box h-[240px] w-full overflow-hidden relative group">
                   {images.length > 1 ? (
                     <>
                       <Swiper
