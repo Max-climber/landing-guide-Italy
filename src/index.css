@@ -623,10 +623,17 @@
     .reviews-grid {
       flex-direction: column;
       align-items: center;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
     }
     .review-card {
       width: 100%;
+      max-width: 350px;
       box-sizing: border-box;
+      margin-left: auto;
+      margin-right: auto;
     }
     .reviews-video-top {
       max-width: 100%;
