@@ -1,10 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Pagination } from 'swiper/modules'
 import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
 import ImageModal from './ImageModal'
 import ContactModal from './ContactModal'
 
@@ -16,6 +13,7 @@ const Resorts = () => {
   const [modalImage, setModalImage] = useState({ isOpen: false, images: [], index: 0, resortName: '' })
   const [isContactModalOpen, setIsContactModalOpen] = useState(false)
   const swiperRefs = useRef({})
+  const [activeSlideIndex, setActiveSlideIndex] = useState({})
 
   useEffect(() => {
     const checkDevice = () => {
@@ -118,7 +116,7 @@ const Resorts = () => {
             {t('resorts.subtitle')}
           </p>
         
-        <div className="resorts-grid flex justify-center gap-[30px] max-w-[1200px] mx-auto flex-wrap px-4 sm:px-6 md:px-6 lg:px-8 xl:px-5" style={{ boxSizing: 'border-box', marginLeft: 'auto', marginRight: 'auto' }}>
+        <div className="resorts-grid flex justify-center gap-[30px] max-w-[1200px] mx-auto flex-wrap px-4" style={{ boxSizing: 'border-box' }}>
           {resorts.map((resort) => {
             const images = getResortImages(resort.folder)
             
@@ -130,59 +128,93 @@ const Resorts = () => {
               >
                 <div className="resort-img-box h-[240px] w-full overflow-hidden relative">
                   {images.length > 1 ? (
-                    <Swiper
-                      modules={[Navigation, Pagination]}
-                      navigation={{
-                        nextEl: `.swiper-button-next-${resort.id}`,
-                        prevEl: `.swiper-button-prev-${resort.id}`,
-                      }}
-                      pagination={{
-                        el: `.swiper-pagination-${resort.id}`,
-                        clickable: true,
-                        bulletClass: 'swiper-pagination-bullet',
-                        bulletActiveClass: 'swiper-pagination-bullet-active',
-                      }}
-                      spaceBetween={0}
-                      slidesPerView={1}
-                      loop={true}
-                      onSwiper={(swiper) => {
-                        swiperRefs.current[resort.id] = swiper
-                      }}
-                      onSlideChange={(swiper) => {
-                        // Можно добавить логику если нужно
-                      }}
-                      className="h-full w-full"
-                      style={{ touchAction: 'pan-y' }}
-                      preventInteractionOnTransition={true}
-                      allowTouchMove={true}
-                      touchStartPreventDefault={false}
-                      touchMoveStopPropagation={true}
-                    >
-                      {images.map((image, idx) => (
-                        <SwiperSlide key={idx} className="h-full">
-                          <img
-                            src={image}
-                            alt={`${resort.name} - ${idx + 1}`}
-                            className="resort-img w-full h-full object-cover cursor-pointer select-none"
-                            onClick={() => {
-                              const swiper = swiperRefs.current[resort.id]
-                              handleImageClick(resort.name, resort.folder, swiper?.realIndex || idx)
-                            }}
-                            loading={idx === 0 ? "eager" : "lazy"}
-                            decoding="async"
-                            draggable="false"
-                            onError={(e) => {
-                              e.target.src = '/images/resorts/piani-di-bobbio/1.jpg'
-                            }}
-                          />
-                        </SwiperSlide>
-                      ))}
-                      {/* Навигационные кнопки */}
-                      <div className={`swiper-button-prev swiper-button-prev-${resort.id} ${(isMobile || isTablet) ? 'opacity-70' : 'opacity-0 group-hover:opacity-100'}`}></div>
-                      <div className={`swiper-button-next swiper-button-next-${resort.id} ${(isMobile || isTablet) ? 'opacity-70' : 'opacity-0 group-hover:opacity-100'}`}></div>
-                      {/* Пагинация */}
-                      <div className={`swiper-pagination swiper-pagination-${resort.id} ${(isMobile || isTablet) ? 'block' : 'hidden'}`}></div>
-                    </Swiper>
+                    <>
+                      <Swiper
+                        modules={[]}
+                        spaceBetween={0}
+                        slidesPerView={1}
+                        loop={true}
+                        onSwiper={(swiper) => {
+                          swiperRefs.current[resort.id] = swiper
+                          setActiveSlideIndex({ ...activeSlideIndex, [resort.id]: 0 })
+                        }}
+                        onSlideChange={(swiper) => {
+                          setActiveSlideIndex({ ...activeSlideIndex, [resort.id]: swiper.realIndex })
+                        }}
+                        className="h-full w-full"
+                        style={{ touchAction: 'pan-y' }}
+                        allowTouchMove={true}
+                        touchStartPreventDefault={false}
+                        touchMoveStopPropagation={true}
+                      >
+                        {images.map((image, idx) => (
+                          <SwiperSlide key={idx} className="h-full">
+                            <img
+                              src={image}
+                              alt={`${resort.name} - ${idx + 1}`}
+                              className="resort-img w-full h-full object-cover cursor-pointer select-none"
+                              onClick={() => {
+                                const swiper = swiperRefs.current[resort.id]
+                                handleImageClick(resort.name, resort.folder, swiper?.realIndex || idx)
+                              }}
+                              loading={idx === 0 ? "eager" : "lazy"}
+                              decoding="async"
+                              draggable="false"
+                              onError={(e) => {
+                                e.target.src = '/images/resorts/piani-di-bobbio/1.jpg'
+                              }}
+                            />
+                          </SwiperSlide>
+                        ))}
+                      </Swiper>
+                      {/* Кастомные навигационные кнопки (как было раньше) */}
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          const swiper = swiperRefs.current[resort.id]
+                          swiper?.slidePrev()
+                        }}
+                        className={`absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-text-main p-2 rounded-full shadow-lg transition-all duration-300 z-10 ${
+                          (isMobile || isTablet) ? 'opacity-70' : 'opacity-0 group-hover:opacity-100'
+                        }`}
+                        aria-label="Previous image"
+                      >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                        </svg>
+                      </button>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          const swiper = swiperRefs.current[resort.id]
+                          swiper?.slideNext()
+                        }}
+                        className={`absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-text-main p-2 rounded-full shadow-lg transition-all duration-300 z-10 ${
+                          (isMobile || isTablet) ? 'opacity-70' : 'opacity-0 group-hover:opacity-100'
+                        }`}
+                        aria-label="Next image"
+                      >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </button>
+                      {/* Индикаторы для мобильных (как было раньше) */}
+                      {(isMobile || isTablet) && (
+                        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-10 flex gap-1.5">
+                          {images.map((_, idx) => {
+                            const activeIndex = activeSlideIndex[resort.id] ?? 0
+                            return (
+                              <div
+                                key={idx}
+                                className={`h-1.5 rounded-full transition-all duration-300 ${
+                                  idx === activeIndex ? 'bg-white w-6' : 'bg-white/50 w-1.5'
+                                }`}
+                              />
+                            )
+                          })}
+                        </div>
+                      )}
+                    </>
                   ) : (
                     <img
                       src={images[0] || '/images/resorts/piani-di-bobbio/1.jpg'}

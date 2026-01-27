@@ -122,7 +122,7 @@ const Reviews = () => {
         </div>
       </div>
 
-      <div className="reviews-grid flex justify-center gap-[30px] max-w-[1200px] mx-auto flex-wrap px-4 sm:px-6 md:px-6 lg:px-8 xl:px-5" style={{ boxSizing: 'border-box', marginLeft: 'auto', marginRight: 'auto' }}>
+      <div className="reviews-grid flex justify-center gap-[30px] max-w-[1200px] mx-auto flex-wrap px-4" style={{ boxSizing: 'border-box' }}>
         {reviews.map((review, idx) => (
           <div key={idx} className="review-card bg-white border border-border-soft rounded-xl p-[35px_30px] w-[350px] min-w-[350px] max-w-[350px] text-left shadow-[0_10px_30px_rgba(0,0,0,0.02)] flex-shrink-0" style={{ boxSizing: 'border-box' }}>
             <div className="review-header flex items-center mb-5">
