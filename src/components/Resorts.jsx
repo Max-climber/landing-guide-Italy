@@ -107,7 +107,7 @@ const Resorts = () => {
     <>
       <section
         id="resorts"
-        className="section-block resorts py-[60px] sm:py-[80px] md:py-[100px] px-4 sm:px-6 md:px-8 lg:px-5 text-center bg-bg-base"
+        className="section-block resorts py-[60px] sm:py-[80px] md:py-[100px] px-4 text-center bg-bg-base"
     >
         <h2 className="section-header-title font-serif text-[42px] text-text-main mb-5 tracking-[0.02em]" style={{ fontWeight: '300' }}>
             {t('resorts.title')}
