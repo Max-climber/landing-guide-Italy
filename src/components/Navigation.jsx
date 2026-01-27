@@ -5,7 +5,6 @@ import LanguageSwitcher from './LanguageSwitcher'
 const Navigation = () => {
   const { t, i18n } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
-<<<<<<< HEAD
   const [navStyle, setNavStyle] = useState({ 
     bgColor: 'transparent', 
     bgClass: '', 
@@ -14,9 +13,6 @@ const Navigation = () => {
   })
   const navRef = useRef(null)
   const headerRef = useRef(null)
-=======
-  const navRef = useRef(null)
->>>>>>> 033120d62b2d23478db4a5acc4631cdf9622de9f
 
   // navItems обновляется автоматически при смене языка через t()
   const navItems = [
@@ -50,7 +46,6 @@ const Navigation = () => {
     }
   }
 
-<<<<<<< HEAD
   // Функция для открытия модального окна контактов
   const handleContactClick = (e) => {
     if (e) {
@@ -157,27 +152,15 @@ const Navigation = () => {
         if (!hamburgerButton) {
           setIsOpen(false)
         }
-=======
-  // Закрытие меню при клике вне области навигации
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (isOpen && navRef.current && !navRef.current.contains(event.target)) {
-        setIsOpen(false)
->>>>>>> 033120d62b2d23478db4a5acc4631cdf9622de9f
       }
     }
 
     if (isOpen) {
-<<<<<<< HEAD
       // Небольшая задержка, чтобы не закрывать меню сразу при открытии
       setTimeout(() => {
         document.addEventListener('mousedown', handleClickOutside)
         document.addEventListener('touchstart', handleClickOutside)
       }, 100)
-=======
-      document.addEventListener('mousedown', handleClickOutside)
-      document.addEventListener('touchstart', handleClickOutside)
->>>>>>> 033120d62b2d23478db4a5acc4631cdf9622de9f
     }
 
     return () => {
@@ -187,7 +170,6 @@ const Navigation = () => {
   }, [isOpen])
 
   return (
-<<<<<<< HEAD
     <>
       <header 
         ref={headerRef}
@@ -198,54 +180,6 @@ const Navigation = () => {
       >
         <div className="flex items-center gap-4 flex-1">
           {/* Гамбургер-меню для мобильной и планшетной версии - слева */}
-=======
-    <nav ref={navRef} className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-color2 backdrop-blur-md shadow-lg">
-      <div className="container-max px-4 md:px-8 lg:px-16">
-        <div className="flex items-center justify-between h-16 sm:h-18 md:h-20">
-          <a
-            className="flex items-center flex-shrink-0 min-w-0 h-full"
-            href="#"
-            aria-label="La Vacanza Bianca"
-            onClick={(e) => {
-              e.preventDefault()
-              window.scrollTo({ top: 0, behavior: 'smooth' })
-            }}
-          >
-            <img
-              src="/logo.jpg"
-              alt="La Vacanza Bianca"
-              className="h-full w-auto object-contain block"
-              loading="lazy"
-            />
-          </a>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-4 lg:gap-6 flex-shrink-0">
-            {navItems
-              .filter((item) => item.href !== '#contact')
-              .map((item) => (
-                <button
-                  key={item.href}
-                  onClick={() => scrollToSection(item.href)}
-                  className="px-4 py-2 text-color1 hover:text-white transition-colors duration-300 font-oswald font-semibold text-base uppercase tracking-wide border border-transparent hover:border-white/40 rounded-none"
-                >
-                  {item.name}
-                </button>
-              ))}
-            <div className="ml-2">
-              <LanguageSwitcher />
-            </div>
-            <a
-              href="#contact"
-              onClick={() => scrollToSection('#contact')}
-              className="px-6 py-2 bg-color1 text-color3 rounded-none font-oswald font-semibold uppercase tracking-wider hover:bg-color1/90 transition-colors ml-2"
-            >
-              {t('nav.connect')}
-            </a>
-          </div>
-
-          {/* Mobile Menu Button */}
->>>>>>> 033120d62b2d23478db4a5acc4631cdf9622de9f
           <button
             className={`lg:hidden ${navStyle.text} relative z-50 flex-shrink-0`}
             onClick={() => setIsOpen(!isOpen)}
@@ -274,7 +208,6 @@ const Navigation = () => {
             LA VACANZA BIANCA
           </div>
         </div>
-<<<<<<< HEAD
         
         <nav className="nav-menu flex items-center gap-[30px]" ref={navRef}>
           {/* Desktop Navigation (только для больших экранов >= 1024px) */}
@@ -291,27 +224,6 @@ const Navigation = () => {
             ))}
             <div className="ml-2 flex items-center" style={{ height: '24px' }}>
               <LanguageSwitcher />
-=======
-
-        {/* Mobile Menu */}
-        {isOpen && (
-          <div className="md:hidden bg-premium-navy/98 backdrop-blur-md border-t border-white/10 pb-4 space-y-1">
-            {navItems
-              .filter((item) => item.href !== '#contact')
-              .map((item) => (
-                <button
-                  key={item.href}
-                  onClick={() => scrollToSection(item.href)}
-                  className="block w-full text-left py-3 px-4 text-color1 hover:text-white hover:bg-white/5 transition-colors rounded-lg mx-2 font-semibold"
-                >
-                  {item.name}
-                </button>
-              ))}
-            <div className="pt-3 mt-2 border-t border-white/20 mx-2">
-              <div className="px-4 py-2">
-                <LanguageSwitcher />
-              </div>
->>>>>>> 033120d62b2d23478db4a5acc4631cdf9622de9f
             </div>
             <button
               onClick={handleContactClick}

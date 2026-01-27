@@ -224,7 +224,6 @@ const Resorts = () => {
                       )}
                     </>
                   )}
-<<<<<<< HEAD
                 </div>
                 
                 <div className="resort-content p-[30px] flex-grow flex flex-col">
@@ -257,16 +256,6 @@ const Resorts = () => {
                       <div className="stat-label text-[11px] text-text-light leading-[1.4]" style={{ fontWeight: '400' }}>
                         Расстояние от аэропорта {resort.airportFrom}
                       </div>
-=======
-
-                  <div className="grid grid-cols-2 gap-3 mb-4">
-                    <div className="bg-premium-gray/30 rounded-lg p-3">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="text-xl">📍</span>
-                        <span className="text-xs text-premium-darkGray font-medium">{t('resorts.distanceFromAirport')}</span>
-                      </div>
-                      <p className="text-premium-navy font-bold text-xs">{resort.distance}</p>
->>>>>>> 033120d62b2d23478db4a5acc4631cdf9622de9f
                     </div>
                     
                     {/* Горы */}
@@ -308,7 +297,6 @@ const Resorts = () => {
                         Уровень катания
                       </div>
                     </div>
-<<<<<<< HEAD
                     
                     {/* Линейка */}
                     <div className="stat-item flex flex-col items-start">
@@ -349,17 +337,6 @@ const Resorts = () => {
                     </ul>
                   </div>
 
-=======
-                    <div className="bg-premium-gray/30 rounded-lg p-3">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="text-xl">📏</span>
-                        <span className="text-xs text-premium-darkGray font-medium">{t('resorts.trails')}</span>
-                      </div>
-                      <p className="text-premium-navy font-bold text-sm">{resort.trails}</p>
-                    </div>
-                  </div>
-
->>>>>>> 033120d62b2d23478db4a5acc4631cdf9622de9f
                   <button
                     onClick={() => setIsContactModalOpen(true)}
                     className="btn w-full px-[30px] py-4 mt-5 font-sans text-[13px] tracking-[0.14em] uppercase text-text-main bg-transparent border border-text-main rounded-[50px] cursor-pointer transition-all duration-300 hover:bg-text-main hover:text-white hover:-translate-y-0.5"
@@ -369,265 +346,8 @@ const Resorts = () => {
                   </button>
                 </div>
               </div>
-<<<<<<< HEAD
             )
           })}
-=======
-            ))}
-            
-            {/* Кнопка "Больше курортов" */}
-            <div className="mt-6">
-              <button
-                onClick={() => setShowAllResorts(true)}
-                className="w-full px-6 py-4 bg-color3 text-color1 rounded-lg font-oswald font-bold text-lg uppercase tracking-wider hover:bg-color3/90 transition-colors shadow-lg"
-              >
-                {t('resorts.moreResorts')}
-              </button>
-            </div>
-          </>
-        ) : (
-          // Десктопный вид или все курорты на мобилке
-          <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'} gap-6 sm:gap-8`}>
-          {resorts.map((resort, index) => (
-            <div
-              key={resort.id}
-              className={`bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all relative flex flex-col ${
-                resort.discount ? 'ring-4 ring-premium-gold ring-opacity-50' : ''
-              } ${resort.isFeatured ? 'border-2 border-premium-gold' : ''} ${
-                  index === resorts.length - 1 && resorts.length % 3 === 1 && !isMobile ? 'lg:col-start-2' : ''
-              }`}
-            >
-                {/* Discount Badge */}
-              {resort.discount && (
-                <div className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 bg-color3 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-none font-oswald font-bold text-sm sm:text-lg uppercase tracking-wider shadow-lg">
-                  {t('resorts.discount', { value: resort.discount })}
-                </div>
-              )}
-
-              {/* Featured Badge */}
-              {resort.isFeatured && !resort.discount && (
-                <div className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 bg-color2 text-color1 px-3 py-1.5 sm:px-4 sm:py-2 rounded-none font-oswald font-bold text-xs sm:text-sm uppercase tracking-wider shadow-lg">
-                  {t('resorts.recommended')}
-                </div>
-              )}
-
-              {/* На мобилке показываем только заголовок и кнопку, на десктопе - все */}
-              {isMobile ? (
-                <>
-                  <div className="relative h-32 overflow-hidden">
-                    <div className="relative w-full h-full">
-                      <ResortImageCarousel
-                        images={getResortImages(resort.folder, resort.image, resort.imageOrder)}
-                        resortName={resort.name}
-                        isMobile={isMobile}
-                        onImageClick={(imageIndex) =>
-                          handleImageClick(resort.id, resort.name, resort.folder, resort.image, resort.imageOrder, imageIndex)
-                        }
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-premium-navy/20 via-transparent to-transparent pointer-events-none z-10" />
-                    </div>
-                  </div>
-                  <div className="p-3">
-                    <h3 className="text-lg font-oswald font-bold text-premium-navy mb-0.5">
-                      {resort.name}
-                    </h3>
-                    <p className="text-premium-darkGray text-xs font-medium mb-3">{resort.region}</p>
-                    <button
-                      onClick={() => setSelectedResort(selectedResort === resort.id ? null : resort.id)}
-                      className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-color2 text-color1 rounded-lg font-semibold text-sm hover:bg-color2/80 transition-colors"
-                    >
-                      <span>{selectedResort === resort.id ? t('resorts.hideFeatures') : t('resorts.showFeatures')}</span>
-                      <svg
-                        className={`w-4 h-4 transition-transform ${selectedResort === resort.id ? 'rotate-180' : ''}`}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    </button>
-                    {selectedResort === resort.id && (
-                      <div className="mt-3 pt-3 border-t-2 border-premium-gray">
-                        <p className="text-premium-darkGray mb-3 leading-relaxed text-xs">
-                          {resort.description}
-                        </p>
-                        {resort.url && (
-                          <a
-                            href={resort.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 text-xs text-color1 hover:text-premium-navy font-semibold mb-3 transition-colors"
-                          >
-                            <span>{t('resorts.learnMore')}</span>
-                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                            </svg>
-                          </a>
-                        )}
-                        <div className="grid grid-cols-2 gap-2 mb-3">
-                          <div className="bg-premium-gray/30 rounded-lg p-2">
-                            <div className="flex items-center gap-1 mb-1">
-                              <span className="text-lg">📍</span>
-                              <span className="text-xs text-premium-darkGray font-medium">{t('resorts.distanceFromAirport')}</span>
-                            </div>
-                            <p className="text-premium-navy font-bold text-xs">{resort.distance}</p>
-                          </div>
-                          <div className="bg-premium-gray/30 rounded-lg p-2">
-                            <div className="flex items-center gap-1 mb-1">
-                              <span className="text-lg">⛰️</span>
-                              <span className="text-xs text-premium-darkGray font-medium">{t('resorts.elevation')}</span>
-                            </div>
-                            <p className="text-premium-navy font-bold text-xs">{resort.elevation}</p>
-                          </div>
-                          <div className="bg-premium-gray/30 rounded-lg p-2">
-                            <div className="flex items-center gap-1 mb-1">
-                              <span className="text-lg">🎿</span>
-                              <span className="text-xs text-premium-darkGray font-medium">{t('resorts.level')}</span>
-                            </div>
-                            <p className="text-premium-navy font-bold text-xs">{resort.difficulty}</p>
-                          </div>
-                          <div className="bg-premium-gray/30 rounded-lg p-2">
-                            <div className="flex items-center gap-1 mb-1">
-                              <span className="text-lg">📏</span>
-                              <span className="text-xs text-premium-darkGray font-medium">{t('resorts.trails')}</span>
-                            </div>
-                            <p className="text-premium-navy font-bold text-xs">{resort.trails}</p>
-                          </div>
-                        </div>
-                        <h4 className="text-base font-oswald font-bold text-premium-navy mb-2">
-                          {t('resorts.features')}
-                        </h4>
-                        <ul className="space-y-1.5">
-                          {resort.highlights.map((highlight, idx) => (
-                            <li key={idx} className="flex items-start gap-2">
-                              <span className="text-color1 text-sm mt-0.5">✓</span>
-                              <span className="text-xs text-premium-darkGray leading-relaxed">{highlight}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="relative h-64 sm:h-72 overflow-hidden">
-                    <div className="relative w-full h-full">
-                      <ResortImageCarousel
-                        images={getResortImages(resort.folder, resort.image, resort.imageOrder)}
-                        resortName={resort.name}
-                        isMobile={isMobile}
-                        onImageClick={(imageIndex) =>
-                          handleImageClick(resort.id, resort.name, resort.folder, resort.image, resort.imageOrder, imageIndex)
-                        }
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-premium-navy/20 via-transparent to-transparent pointer-events-none z-10" />
-                    </div>
-                  </div>
-
-                  <div className="p-4 sm:p-6 flex flex-col flex-grow">
-                    <h3 className="text-2xl sm:text-3xl font-oswald font-bold text-premium-navy mb-1">
-                      {resort.name}
-                    </h3>
-                    <p className="text-premium-darkGray text-sm sm:text-base font-medium mb-4 sm:mb-6">{resort.region}</p>
-                    <p className="text-premium-darkGray mb-4 sm:mb-6 leading-relaxed text-base sm:text-lg">
-                      {resort.description}
-                    </p>
-                    
-                    {resort.url && (
-                      <a
-                        href={resort.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-sm sm:text-base text-color1 hover:text-premium-navy font-semibold mb-4 sm:mb-6 transition-colors"
-                      >
-                        <span>{t('resorts.learnMore')}</span>
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
-                      </a>
-                    )}
-
-                    <div className="grid grid-cols-2 gap-2 sm:gap-4 mb-4 sm:mb-6">
-                      <div className="bg-premium-gray/30 rounded-lg p-2 sm:p-3">
-                        <div className="flex items-center gap-1 sm:gap-2 mb-1">
-                          <span className="text-xl sm:text-2xl">📍</span>
-                          <span className="text-xs text-premium-darkGray font-medium">{t('resorts.distanceFromAirport')}</span>
-                        </div>
-                        <p className="text-premium-navy font-bold text-xs sm:text-sm">{resort.distance}</p>
-                      </div>
-                      <div className="bg-premium-gray/30 rounded-lg p-2 sm:p-3">
-                        <div className="flex items-center gap-1 sm:gap-2 mb-1">
-                          <span className="text-xl sm:text-2xl">⛰️</span>
-                          <span className="text-xs text-premium-darkGray font-medium">{t('resorts.elevation')}</span>
-                        </div>
-                        <p className="text-premium-navy font-bold text-sm sm:text-base">{resort.elevation}</p>
-                      </div>
-                      <div className="bg-premium-gray/30 rounded-lg p-2 sm:p-3">
-                        <div className="flex items-center gap-1 sm:gap-2 mb-1">
-                          <span className="text-xl sm:text-2xl">🎿</span>
-                          <span className="text-xs text-premium-darkGray font-medium">{t('resorts.level')}</span>
-                        </div>
-                        <p className="text-premium-navy font-bold text-xs sm:text-sm">{resort.difficulty}</p>
-                      </div>
-                      <div className="bg-premium-gray/30 rounded-lg p-2 sm:p-3">
-                        <div className="flex items-center gap-1 sm:gap-2 mb-1">
-                          <span className="text-xl sm:text-2xl">📏</span>
-                          <span className="text-xs text-premium-darkGray font-medium">{t('resorts.trails')}</span>
-                        </div>
-                        <p className="text-premium-navy font-bold text-sm sm:text-base">{resort.trails}</p>
-                      </div>
-                    </div>
-
-                    <button
-                      onClick={() => setSelectedResort(selectedResort === resort.id ? null : resort.id)}
-                      className="w-full flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-3 bg-color2 text-color1 rounded-lg font-semibold text-sm sm:text-base hover:bg-color2/80 transition-colors mt-auto"
-                    >
-                      <span>{selectedResort === resort.id ? t('resorts.hideFeatures') : t('resorts.showFeatures')}</span>
-                      <svg
-                        className={`w-4 h-4 sm:w-5 sm:h-5 transition-transform ${selectedResort === resort.id ? 'rotate-180' : ''}`}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    </button>
-
-                    {selectedResort === resort.id && (
-                      <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t-2 border-premium-gray">
-                        <h4 className="text-lg sm:text-xl font-oswald font-bold text-premium-navy mb-3 sm:mb-4">
-                          {t('resorts.features')}
-                        </h4>
-                        <ul className="space-y-2 sm:space-y-3">
-                          {resort.highlights.map((highlight, idx) => (
-                            <li
-                              key={idx}
-                              className="flex items-start gap-2 sm:gap-3"
-                            >
-                              <span className="text-color1 text-lg sm:text-xl mt-0.5">✓</span>
-                              <span className="text-base sm:text-lg text-premium-darkGray leading-relaxed">{highlight}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                  </div>
-                </>
-              )}
-            </div>
-          ))}
->>>>>>> 033120d62b2d23478db4a5acc4631cdf9622de9f
         </div>
       </section>
 
