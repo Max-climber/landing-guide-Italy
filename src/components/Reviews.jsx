@@ -80,7 +80,7 @@ const Reviews = () => {
   ]
 
   return (
-    <section className="reviews-section bg-bg-base py-[60px] sm:py-[80px] md:py-[100px] px-4 sm:px-6 md:px-8 lg:px-[50px]">
+    <section className="reviews-section bg-bg-base py-[60px] sm:py-[80px] md:py-[100px] px-4">
       <h2 className="section-header-title font-serif text-[42px] text-text-main mb-5 tracking-[0.02em] text-center" style={{ fontWeight: '300' }}>
         {t('reviews.title')}
       </h2>
