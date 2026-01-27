@@ -7,6 +7,7 @@ export default defineConfig({
   server: {
     port: 3000, // Можно изменить на любой свободный порт
     open: true
+<<<<<<< HEAD
   },
   build: {
     rollupOptions: {
@@ -23,4 +24,7 @@ export default defineConfig({
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-i18next', 'i18next'],
   },
+=======
+  }
+>>>>>>> 033120d62b2d23478db4a5acc4631cdf9622de9f
 })

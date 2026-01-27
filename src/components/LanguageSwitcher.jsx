@@ -33,9 +33,13 @@ const LanguageSwitcher = () => {
   const currentLang = i18n.language === 'en' ? 'en' : 'ru'
   const nextLang = currentLang === 'ru' ? 'en' : 'ru'
 
+<<<<<<< HEAD
   const toggleLanguage = (e) => {
     e.preventDefault()
     e.stopPropagation()
+=======
+  const toggleLanguage = () => {
+>>>>>>> 033120d62b2d23478db4a5acc4631cdf9622de9f
     i18n.changeLanguage(nextLang)
   }
 
@@ -46,7 +50,10 @@ const LanguageSwitcher = () => {
       whileTap={{ scale: 0.95 }}
       className="cursor-pointer transition-transform"
       aria-label={`Switch to ${nextLang === 'ru' ? 'Russian' : 'English'}`}
+<<<<<<< HEAD
       style={{ zIndex: 10 }}
+=======
+>>>>>>> 033120d62b2d23478db4a5acc4631cdf9622de9f
     >
       <FlagIcon country={currentLang} />
     </motion.button>

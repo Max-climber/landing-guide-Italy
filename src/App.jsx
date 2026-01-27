@@ -14,8 +14,13 @@ import TelegramFloatButton from './components/TelegramFloatButton'
 function App() {
 
   return (
+<<<<<<< HEAD
     <div className="min-h-screen">
       <Navigation />
+=======
+    <div className="min-h-screen bg-white">
+      <Navigation scrollY={scrollY} />
+>>>>>>> 033120d62b2d23478db4a5acc4631cdf9622de9f
       <Hero />
       <WhyUsSection />
       <About />

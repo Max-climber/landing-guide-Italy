@@ -124,4 +124,3 @@ jobs:
 
       - name: Deployment success
         run: echo "✅ Сайт успешно задеплоен на Namecheap!"
-

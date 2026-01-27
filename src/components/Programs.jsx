@@ -91,12 +91,15 @@ const Programs = () => {
       subtitle: t('programs.superComfort.subtitle'),
       description: t('programs.superComfort.description'),
       features: [
+<<<<<<< HEAD
         t('programs.comfortable.features.tickets'),
         t('programs.comfortable.features.planning'),
         t('programs.comfortable.features.hotels'),
         t('programs.comfortable.features.transfers'),
         t('programs.comfortable.features.rental'),
         t('programs.comfortable.features.skipass'),
+=======
+>>>>>>> 033120d62b2d23478db4a5acc4631cdf9622de9f
         t('programs.superComfort.features.individual'),
         t('programs.superComfort.features.restDay'),
       ],
@@ -171,9 +174,40 @@ const Programs = () => {
               }`}
               style={{ boxSizing: 'border-box' }}
             >
+<<<<<<< HEAD
               {program.isRecommended && (
                 <div className="badge absolute top-0 left-0 right-0 bg-btn-graphite text-white text-[11px] uppercase py-3 rounded-t-xl tracking-[1.5px] font-sans" style={{ fontWeight: '600' }}>
                   {t('programs.recommended')}
+=======
+            <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
+              <div>
+                <p className="text-xl sm:text-2xl text-white mb-4 sm:mb-6">{program.subtitle}</p>
+                <p className="text-base sm:text-lg md:text-xl text-white mb-6 sm:mb-8 leading-relaxed">
+                  {program.description}
+                </p>
+
+                <div className="space-y-3 sm:space-y-4">
+                  <h4 className="text-lg sm:text-xl font-semibold text-color1">
+                    {activeProgram === 2 ? (
+                      <>
+                        {t('programs.whatIncluded').replace(':', '')}{' '}
+                        <span className="text-white font-normal text-base sm:text-lg">
+                          ({t('programs.whatIncludedUltra')}):
+                        </span>
+                      </>
+                    ) : (
+                      t('programs.whatIncluded')
+                    )}
+                  </h4>
+                  <ul className="space-y-2 sm:space-y-3">
+                    {program.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-start">
+                        <span className="text-color1 mr-2 sm:mr-3 mt-1 text-sm sm:text-base">✓</span>
+                        <span className="text-base sm:text-lg text-white">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+>>>>>>> 033120d62b2d23478db4a5acc4631cdf9622de9f
                 </div>
               )}
               
@@ -198,6 +232,7 @@ const Programs = () => {
                 ))}
               </ul>
 
+<<<<<<< HEAD
               <div className="expert-price-list text-left mt-auto mb-0 font-sans text-text-main bg-[#f9f9f9] p-[15px] rounded-lg" style={{ fontSize: '11px', lineHeight: '1.4' }}>
                 <h4 className="m-0 mb-[10px] uppercase" style={{ fontSize: '12px', fontWeight: '600' }}>{t('programs.cost')}:</h4>
                 
@@ -270,6 +305,104 @@ const Programs = () => {
             )
           })}
         </div>
+=======
+              <div className="bg-color2 rounded-xl p-4 sm:p-6">
+                <h4 className="text-2xl sm:text-3xl md:text-4xl font-oswald font-bold mb-4 sm:mb-6 text-color1">
+                  {t('programs.cost')}
+                </h4>
+                <div className="space-y-6">
+                  {/* Эксперт: только трансфер */}
+                  {activeProgram === 0 && (
+                    <>
+                      {program.pricing.transfer && (
+                        <div>
+                          <p className="font-semibold text-white mb-3 text-base sm:text-lg md:text-xl">
+                            {t(`programs.${activeProgram === 0 ? 'experienced' : activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.transfer`)}
+                          </p>
+                          <div className="space-y-2">
+                            {program.pricing.transfer.map((item, idx) => (
+                              <div
+                                key={idx}
+                                className="bg-white/10 rounded-lg p-3"
+                              >
+                                <p className="text-white font-medium text-base sm:text-lg md:text-xl">
+                                  {idx === 0 ? `${t(`programs.${activeProgram === 0 ? 'experienced' : activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.transferStart`)} ${item.time}` : item.time}
+                                </p>
+                                <p className="text-color1 text-[1.5em]">
+                                  {item.price}
+                                </p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  )}
+                  
+                  {/* Баланс и Ультракомфорт: планирование, трансфер, отель */}
+                  {(activeProgram === 1 || activeProgram === 2) && (
+                    <>
+                      {program.pricing.planning && (
+                        <div>
+                          <p className="text-white text-base sm:text-lg md:text-xl">
+                            <span className="mr-2">1.</span>
+                            {program.pricing.planning.split(':')[0]}:{' '}
+                            <span className="text-color1 font-semibold">
+                              {program.pricing.planning.split(':')[1]?.trim()}
+                            </span>
+                          </p>
+                        </div>
+                      )}
+                      {program.pricing.transfer && (
+                        <div>
+                          <p className="font-semibold text-white mb-3 text-base sm:text-lg md:text-xl">
+                            <span className="mr-2">2.</span>
+                            {t(`programs.${activeProgram === 0 ? 'experienced' : activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.transfer`)}
+                          </p>
+                          <div className="space-y-2">
+                            {program.pricing.transfer.map((item, idx) => (
+                              <div
+                                key={idx}
+                                className="bg-white/10 rounded-lg p-3"
+                              >
+                                <p className="text-white font-medium text-base sm:text-lg md:text-xl">
+                                  {idx === 0 ? `${t(`programs.${activeProgram === 0 ? 'experienced' : activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.transferStart`)} ${item.time}` : item.time}
+                                </p>
+                                <p className="text-color1 text-[1.5em]">
+                                  {item.price}
+                                </p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      {program.pricing.hotelTransfer && (
+                        <div>
+                          <p className="text-white text-base sm:text-lg md:text-xl font-medium">
+                            <span className="mr-2">3.</span>
+                            {t(`programs.${activeProgram === 1 ? 'comfortable' : 'superComfort'}.pricing.hotelTransfer`)}{' '}
+                            <span className="text-color1 font-semibold">
+                              {program.pricing.hotelTransfer}
+                            </span>
+                          </p>
+                        </div>
+                      )}
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
+            
+            {/* Сноска для всех тарифов - вне блоков */}
+            <div className="mt-6 pt-4">
+              <p className="text-white text-base sm:text-lg">
+                <span className="text-xl sm:text-2xl">*</span>{t('programs.tollRoadsNote').replace('* ', '')}
+              </p>
+            </div>
+            </div>
+          )
+        ))}
+>>>>>>> 033120d62b2d23478db4a5acc4631cdf9622de9f
       </div>
 
       <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
