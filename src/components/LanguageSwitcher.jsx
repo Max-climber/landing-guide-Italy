@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next'
 const LanguageSwitcher = () => {
   const { i18n } = useTranslation()
 
-  // Один флаг: показываем флаг языка, на который переключимся по клику (reverse)
   const FlagIcon = ({ country, size = 'w-6 h-6' }) => {
     if (country === 'ru') {
       return (
@@ -30,13 +29,12 @@ const LanguageSwitcher = () => {
   }
 
   const currentLang = i18n.language === 'en' ? 'en' : 'ru'
-  // Показываем флаг того языка, на который переключимся: русский флаг → клик даст русский, английский → английский
-  const displayFlag = currentLang === 'ru' ? 'en' : 'ru'
+  const nextLang = currentLang === 'ru' ? 'en' : 'ru'
 
   const toggleLanguage = (e) => {
     e.preventDefault()
     e.stopPropagation()
-    i18n.changeLanguage(displayFlag)
+    i18n.changeLanguage(nextLang)
   }
 
   return (
@@ -45,10 +43,10 @@ const LanguageSwitcher = () => {
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
       className="cursor-pointer transition-transform"
-      aria-label={displayFlag === 'ru' ? 'Переключить на русский' : 'Switch to English'}
+      aria-label={`Switch to ${nextLang === 'ru' ? 'Russian' : 'English'}`}
       style={{ zIndex: 10 }}
     >
-      <FlagIcon country={displayFlag} />
+      <FlagIcon country={currentLang} />
     </motion.button>
   )
 }
