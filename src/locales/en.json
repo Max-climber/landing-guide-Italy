@@ -446,6 +446,7 @@
     "ctaPlanTour": "Plan your trip",
     "ctaPlanItaly": "Plan your Italy trip",
     "getProgram": "Get itinerary",
+    "getTour": "Get tour",
     "moreDetails": "Read more",
     "toursHeading": "Our tours",
     "labelGuests": "Guests",
@@ -467,45 +468,45 @@
     "allPagesHeading": "All pages in the Italy section",
     "tours": {
       "lakeComoGarda": {
-        "title": "Lake district: Como & Garda",
-        "route": "The most beautiful spots in Northern Italy: Como, Garda, Menaggio, Bellagio and Sirmione.",
-        "duration": "6 nights",
-        "price": "from 4600 EUR",
+        "title": "Jewels of Lake Como",
+        "route": "Famous villas and gardens, with scenic walks through Bellagio, Varenna and Tremezzo.",
+        "duration": "7 days",
+        "price": "from 1800 €",
         "people": "up to 3 guests"
       },
       "comoVenice": {
-        "title": "From Como to Venice",
-        "route": "Lakes Como & Garda, Venice and the Adriatic. A relaxed route with personal support.",
-        "duration": "9 nights",
-        "price": "from 7300 EUR",
+        "title": "Wine Tour in Tuscany",
+        "route": "Visits to top Chianti wineries, tastings, and hands-on masterclasses.",
+        "duration": "5 days",
+        "price": "from 2200 €",
         "people": "up to 3 guests"
       },
       "peaksDolomites": {
-        "title": "Summit line: Dolomites & St. Moritz",
-        "route": "Trento, Bolzano, St. Moritz and Alpine panoramas. Hiking and signature mountain experiences.",
-        "duration": "9 nights",
-        "price": "from 6600 EUR",
+        "title": "Dolomites Trekking",
+        "route": "Hiking along the iconic Tre Cime di Lavaredo route.",
+        "duration": "5 days",
+        "price": "from 1500 €",
         "people": "up to 3 guests"
       },
       "northArchitecture": {
-        "title": "Architecture of impressions: Northern Italy",
-        "route": "Milan, Venice, Bologna and the lakes—with private tours and a pace that suits you.",
-        "duration": "9 nights",
-        "price": "from 6600 EUR",
+        "title": "Gastro Tour: Bologna",
+        "route": "Italy's culinary capital. Learn the secrets of pasta and Parmigiano.",
+        "duration": "4 days",
+        "price": "from 1350 €",
         "people": "up to 3 guests"
       },
       "riviera": {
-        "title": "Riviera: Liguria and the French Riviera",
-        "route": "The Ligurian Sea, yacht outings, Genoa and a day trip to Sanremo and Nice.",
-        "duration": "9 nights",
-        "price": "from 7600 EUR",
+        "title": "Romance of Venice",
+        "route": "Hidden canals, gondola rides, and visits to Murano and Burano islands.",
+        "duration": "3 days",
+        "price": "from 950 €",
         "people": "up to 3 guests"
       },
       "skiAlps": {
-        "title": "Skiing in the Alps",
-        "route": "A private programme for any level: Italy & Switzerland, transfers and guidance throughout.",
-        "duration": "flexible",
-        "price": "on request",
+        "title": "Treasures of Liguria",
+        "route": "A journey through the storybook towns of Cinque Terre.",
+        "duration": "6 days",
+        "price": "from 1900 €",
         "people": "up to 3 guests"
       }
     },
@@ -592,11 +593,11 @@
       },
       {
         "title": "Premium comfort",
-        "text": "A strong balance of activities, rest and service every day."
+        "text": "We carefully select hotels, transport and restaurants for your perfect holiday."
       },
       {
-        "title": "Clear communication",
-        "text": "Transparent terms, a clear budget and support in messengers."
+        "title": "Hidden gems",
+        "text": "We reveal secret viewpoints and family-run trattorias known mostly to locals."
       }
     ],
     "faq": [

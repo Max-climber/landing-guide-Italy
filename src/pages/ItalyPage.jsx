@@ -16,12 +16,42 @@ const HOME_ABSOLUTE = 'https://vacanzabianca.ru/'
 const HOME_PATH = '/'
 
 const TOUR_BUILDERS = [
-  { key: 'lakeComoGarda', pdfHref: '/files/ozernyy-kray-program.pdf' },
-  { key: 'comoVenice', pdfHref: null },
-  { key: 'peaksDolomites', pdfHref: null },
-  { key: 'northArchitecture', pdfHref: null },
-  { key: 'riviera', pdfHref: null },
-  { key: 'skiAlps', pdfHref: null },
+  {
+    key: 'lakeComoGarda',
+    image: 'https://images.unsplash.com/photo-1542384666-4853558d5118?q=80&w=1200',
+    detailsHref: '/files/ozernyy-kray-program.pdf',
+    detailsDownload: true,
+  },
+  {
+    key: 'comoVenice',
+    image: 'https://images.unsplash.com/photo-1540979388789-67225c354146?q=80&w=1200',
+    detailsHref: '#',
+    detailsDownload: false,
+  },
+  {
+    key: 'peaksDolomites',
+    image: 'https://images.unsplash.com/photo-1617822129592-b3a165a2d711?q=80&w=1200',
+    detailsHref: '#',
+    detailsDownload: false,
+  },
+  {
+    key: 'northArchitecture',
+    image: 'https://images.unsplash.com/photo-1599389713679-370e081827b5?q=80&w=1200',
+    detailsHref: '#',
+    detailsDownload: false,
+  },
+  {
+    key: 'riviera',
+    image: 'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?q=80&w=1200',
+    detailsHref: '#',
+    detailsDownload: false,
+  },
+  {
+    key: 'skiAlps',
+    image: 'https://images.unsplash.com/photo-1510908074128-d89047990499?q=80&w=1200',
+    detailsHref: '#',
+    detailsDownload: false,
+  },
 ]
 
 const DIRECTION_DEFS = [
@@ -64,6 +94,8 @@ const allItalyLinks = [
   '/italy/tury-ozero-como/',
   '/italy/tury-ozero-garda/',
 ]
+
+const UTP_ICON_EMOJIS = ['🧭', '👥', '🛡️', '📍', '💎', '🌿']
 
 const validCountryCodes = [
   '1', '7', '20', '27', '30', '31', '32', '33', '34', '36', '39', '40', '41', '43', '44', '45', '46', '47', '48', '49',
@@ -139,9 +171,11 @@ const ItalyPage = () => {
 
   const italyTours = useMemo(
     () =>
-      TOUR_BUILDERS.map(({ key, pdfHref }) => ({
+      TOUR_BUILDERS.map(({ key, image, detailsHref, detailsDownload }) => ({
         ...(t(`italyPage.tours.${key}`, { returnObjects: true }) || {}),
-        pdfHref,
+        image,
+        detailsHref,
+        detailsDownload,
       })),
     [t],
   )
@@ -513,42 +547,44 @@ const ItalyPage = () => {
             {italyTours.map((tour) => (
               <article
                 key={tour.title}
-                className="flex flex-col rounded-xl border border-border-soft bg-bg-card p-6 shadow-[0_8px_22px_rgba(0,0,0,0.03)]"
+                className="flex flex-col overflow-hidden rounded-xl border border-border-soft bg-bg-card shadow-[0_8px_22px_rgba(0,0,0,0.03)]"
               >
+                <div className="aspect-[16/10] w-full overflow-hidden">
+                  <img
+                    src={tour.image}
+                    alt={tour.title}
+                    className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-6">
                 <h3 className="mb-3 font-serif text-[30px] leading-[1.1] text-text-main" style={{ fontWeight: '300' }}>
                   {tour.title}
                 </h3>
-                <p className="mb-4 text-sm leading-6 text-text-light">{tour.route}</p>
-                <div className="mb-6 text-xs uppercase tracking-[0.08em] text-[#666]">
-                  <div className="grid grid-cols-3 gap-3 text-center">
-                    <p className="text-[10px] text-[#888]">{t('italyPage.labelGuests')}</p>
-                    <p className="text-[10px] text-[#888]">{t('italyPage.labelDuration')}</p>
-                    <p className="text-[10px] text-[#888]">{t('italyPage.labelPrice')}</p>
+                <p className="mb-4 text-sm leading-6 text-text-light">📍 {tour.route}</p>
+                <div className="mt-auto">
+                  <div className="mb-3 flex items-center justify-between gap-3 text-[12px] uppercase tracking-[0.08em] text-[#666]">
+                    <span className="truncate">👤 {tour.people}</span>
+                    <span className="truncate">⏳ {tour.duration}</span>
                   </div>
-                  <div className="mt-1.5 grid grid-cols-3 gap-3 text-center normal-case tracking-normal">
-                    <p className="text-sm font-medium text-text-main">{tour.people}</p>
-                    <p className="text-sm font-medium text-text-main">{tour.duration}</p>
-                    <p className="text-sm font-medium text-text-main">{tour.price}</p>
+                  <p className="mb-4 text-base font-medium text-text-main">{tour.price}</p>
+                  <div className="grid grid-cols-2 gap-2">
+                    <a
+                      href={tour.detailsHref}
+                      download={tour.detailsDownload ? '' : undefined}
+                      className="rounded-[40px] border border-text-main px-3 py-2 text-[11px] uppercase tracking-[0.11em] text-center text-text-main transition-all duration-300 hover:bg-text-main hover:text-white"
+                    >
+                      {t('italyPage.moreDetails')}
+                    </a>
+                    <a
+                      href="#final-cta"
+                      className="rounded-[40px] border border-text-main bg-text-main px-3 py-2 text-[11px] uppercase tracking-[0.11em] text-center text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-text-main/90"
+                    >
+                      {t('italyPage.getTour')}
+                    </a>
                   </div>
                 </div>
-                <div className="mt-auto flex justify-center">
-                  {tour.pdfHref ? (
-                    <a
-                      href={tour.pdfHref}
-                      download
-                      className="rounded-[40px] border border-text-main px-6 py-2 text-[11px] uppercase tracking-[0.11em] text-text-main transition-all duration-300 hover:bg-text-main hover:text-white text-center"
-                    >
-                      {t('italyPage.getProgram')}
-                    </a>
-                  ) : (
-                    <button
-                      type="button"
-                      onClick={() => setIsModalOpen(true)}
-                      className="rounded-[40px] border border-text-main px-6 py-2 text-[11px] uppercase tracking-[0.11em] text-text-main transition-all duration-300 hover:bg-text-main hover:text-white text-center"
-                    >
-                      {t('italyPage.getProgram')}
-                    </button>
-                  )}
                 </div>
               </article>
             ))}
@@ -563,8 +599,8 @@ const ItalyPage = () => {
                 key={`${card.title}-${idx}`}
                 className="rounded-xl border border-border-soft bg-bg-card p-6 shadow-[0_8px_22px_rgba(0,0,0,0.03)]"
               >
-                <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-full border border-text-main text-xs uppercase">
-                  {idx + 1}
+                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-bg-warm text-[22px]">
+                  {UTP_ICON_EMOJIS[idx] || '✦'}
                 </div>
                 <h3 className="mb-3 font-serif text-[26px] leading-[1.15] text-text-main" style={{ fontWeight: '300' }}>
                   {card.title}
