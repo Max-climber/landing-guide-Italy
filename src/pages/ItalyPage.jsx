@@ -13,6 +13,7 @@ const ITALY_CANONICAL = 'https://vacanzabianca.ru/italy/'
 const ITALY_HERO_IMAGE =
   'https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=2200&q=80'
 const HOME_ABSOLUTE = 'https://vacanzabianca.ru/'
+const HOME_PATH = '/'
 
 const TOUR_BUILDERS = [
   { key: 'lakeComoGarda', pdfHref: '/files/ozernyy-kray-program.pdf' },
@@ -500,7 +501,7 @@ const ItalyPage = () => {
         <BreadcrumbOverlay
           ariaLabel={t('italyPage.breadcrumbAria')}
           homeLabel={t('italyPage.breadcrumbHome')}
-          homeHref={HOME_ABSOLUTE}
+          homeHref={HOME_PATH}
           currentLabel={t('italyPage.breadcrumbCurrent')}
         />
       </div>
@@ -649,7 +650,7 @@ const ItalyPage = () => {
         </section>
 
         <section id="final-cta" className="mx-auto mt-20 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
-          <div className="rounded-2xl border border-border-soft p-6 shadow-[0_8px_22px_rgba(0,0,0,0.03)] sm:p-8 md:p-10">
+          <div className="p-0 sm:p-2 md:p-4">
             <h2 className="section-title !mb-4 text-center text-[clamp(28px,4vw,38px)]">{t('italyPage.finalCta.title')}</h2>
             <p className="mx-auto mb-8 max-w-[760px] text-center text-sm leading-7 text-text-light">
               {t('italyPage.finalCta.description')}

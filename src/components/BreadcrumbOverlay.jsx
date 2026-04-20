@@ -1,6 +1,6 @@
 const BreadcrumbOverlay = ({
   homeLabel,
-  homeHref = 'https://vacanzabianca.ru/',
+  homeHref = '/',
   currentLabel,
   ariaLabel = 'Breadcrumb',
 }) => {
