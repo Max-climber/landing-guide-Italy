@@ -479,6 +479,20 @@
     color: #4A4A4A;
   }
 
+  /* Компактные вертикальные интервалы только на странице "Горнолыжные туры в Альпы" */
+  .alps-page-compact #about {
+    padding-bottom: 56px;
+  }
+
+  .alps-page-compact #instructor {
+    padding-top: 48px;
+    padding-bottom: 56px;
+  }
+
+  .alps-page-compact #steps {
+    padding-top: 56px;
+  }
+
   /* Стили для feature-name */
   .feature-name {
     font-family: var(--font-serif);

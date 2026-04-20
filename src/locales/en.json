@@ -65,7 +65,7 @@
     "experienced": {
       "title": "Expert",
       "subtitle": "For skiers who feel confident in the mountains",
-        "description": "If you've already been to the Alps and prefer to choose resorts and skiing format yourself, we'll step in exactly where needed — without unnecessary interference.",
+      "description": "If you've already been to the Alps and prefer to choose resorts and skiing format yourself, we'll step in exactly where needed — without unnecessary interference.",
       "features": {
         "consultation": "Online or offline consultation on options for ski holidays in Italy",
         "airportPickup": "Airport pickup and transfer to the first hotel",
@@ -90,7 +90,7 @@
     "comfortable": {
       "title": "Balance",
       "subtitle": "For skiers who value comfort",
-        "description": "You ski or snowboard, have been to different resorts, and want to have a well-planned, comfortable sports vacation in Italy — without unnecessary worries and organizational questions.",
+      "description": "You ski or snowboard, have been to different resorts, and want to have a well-planned, comfortable sports vacation in Italy — without unnecessary worries and organizational questions.",
       "features": {
         "tickets": "Online or offline consultation on options for ski holidays in Italy",
         "planning": "Creating an individual plan for the entire trip",
@@ -434,6 +434,207 @@
     "deadline": "Valid until December 15",
     "cta": "Submit Request",
     "clickMe": "Click!"
+  },
+  "italyPage": {
+    "metaTitle": "Italy Tours 2026: Custom Routes & Holiday Prices – Vacanza Bianca",
+    "metaDescription": "Bespoke Italy tours 2026: Lake Como & Garda, the Dolomites & Northern Italy. Private itineraries, comfortable programmes and a trip tailored to you. See pricing and available dates.",
+    "breadcrumbAria": "Breadcrumb",
+    "breadcrumbHome": "Home",
+    "breadcrumbCurrent": "Italy tours",
+    "heroTitle": "Italy tours",
+    "heroDescription": "Bespoke routes across Northern Italy, the Alps and the lakes",
+    "ctaPlanTour": "Plan your trip",
+    "ctaPlanItaly": "Plan your Italy trip",
+    "getProgram": "Get itinerary",
+    "moreDetails": "Read more",
+    "toursHeading": "Our tours",
+    "labelGuests": "Guests",
+    "labelDuration": "Duration",
+    "labelPrice": "Price",
+    "whyHeading": "Why travellers choose Vacanza Bianca",
+    "directionsHeading": "Popular destinations in Italy",
+    "formatsHeading": "Choose your travel style",
+    "northHeading": "Discover Northern Italy",
+    "northSubheading": "Why guests return to this style of holiday",
+    "northP1": "Northern Italy combines mountains, lakes, architecture and food in one journey. It is a comfortable option if you want a rich yet relaxed trip without rushing between places.",
+    "northP2": "This page brings together different intents: Lakes Como & Garda, the Dolomites, city breaks and seasonal tours. You pick the format; we adapt the route, hotels and activities to your pace.",
+    "northP3": "That way you can plan budget, logistics and programme early—and move quickly to a request via the form, WhatsApp, Telegram or email.",
+    "northImgAlt": "Northern Italy",
+    "reviewsHeading": "Reviews from our travellers",
+    "faqHeading": "FAQ",
+    "blogHeading": "More about Italy on our blog",
+    "blogHint": "Curated articles—a secondary block after the main page content",
+    "allPagesHeading": "All pages in the Italy section",
+    "tours": {
+      "lakeComoGarda": {
+        "title": "Lake district: Como & Garda",
+        "route": "The most beautiful spots in Northern Italy: Como, Garda, Menaggio, Bellagio and Sirmione.",
+        "duration": "6 nights",
+        "price": "from 4600 EUR",
+        "people": "up to 3 guests"
+      },
+      "comoVenice": {
+        "title": "From Como to Venice",
+        "route": "Lakes Como & Garda, Venice and the Adriatic. A relaxed route with personal support.",
+        "duration": "9 nights",
+        "price": "from 7300 EUR",
+        "people": "up to 3 guests"
+      },
+      "peaksDolomites": {
+        "title": "Summit line: Dolomites & St. Moritz",
+        "route": "Trento, Bolzano, St. Moritz and Alpine panoramas. Hiking and signature mountain experiences.",
+        "duration": "9 nights",
+        "price": "from 6600 EUR",
+        "people": "up to 3 guests"
+      },
+      "northArchitecture": {
+        "title": "Architecture of impressions: Northern Italy",
+        "route": "Milan, Venice, Bologna and the lakes—with private tours and a pace that suits you.",
+        "duration": "9 nights",
+        "price": "from 6600 EUR",
+        "people": "up to 3 guests"
+      },
+      "riviera": {
+        "title": "Riviera: Liguria and the French Riviera",
+        "route": "The Ligurian Sea, yacht outings, Genoa and a day trip to Sanremo and Nice.",
+        "duration": "9 nights",
+        "price": "from 7600 EUR",
+        "people": "up to 3 guests"
+      },
+      "skiAlps": {
+        "title": "Skiing in the Alps",
+        "route": "A private programme for any level: Italy & Switzerland, transfers and guidance throughout.",
+        "duration": "flexible",
+        "price": "on request",
+        "people": "up to 3 guests"
+      }
+    },
+    "directions": {
+      "como": {
+        "title": "Lake Como",
+        "description": "Panoramic routes, villas and time on the water"
+      },
+      "garda": {
+        "title": "Lake Garda",
+        "description": "Beaches, food and an active lakeside stay"
+      },
+      "dolomites": {
+        "title": "Dolomites",
+        "description": "Mountains, trekking and premium Alpine locations"
+      },
+      "north": {
+        "title": "Northern Italy",
+        "description": "Routes through cities, lakes and cultural highlights"
+      }
+    },
+    "formats": {
+      "summer": {
+        "title": "Summer tours",
+        "description": "Lakes, sea, hiking and relaxed bespoke routes"
+      },
+      "ski": {
+        "title": "Ski holidays",
+        "description": "Italy & the Alps with a private skiing programme"
+      },
+      "excursions": {
+        "title": "Sightseeing tours",
+        "description": "Culture, architecture and local routes with a guide"
+      }
+    },
+    "blog": {
+      "whereItaly": {
+        "title": "Where to go in Italy",
+        "description": "Destinations by trip style and season"
+      },
+      "summerItaly": {
+        "title": "Summer in Italy",
+        "description": "When to go and which places to pick"
+      },
+      "comoGuide": {
+        "title": "Lake Como guide",
+        "description": "Routes, activities and the best spots"
+      },
+      "gardaGuide": {
+        "title": "Lake Garda guide",
+        "description": "Beaches, towns and easy-going itineraries"
+      }
+    },
+    "reviews": {
+      "alina": {
+        "title": "Alina & Maksim",
+        "quote": "“Everything was tailored to us: transfers, hotels and full but comfortable days. We would love to return.”"
+      },
+      "katerina": {
+        "title": "Katerina",
+        "quote": "“Vacanza Bianca built a route around our pace and interests—a truly bespoke trip without the rush.”"
+      },
+      "dmitry": {
+        "title": "Dmitry & Anna",
+        "quote": "“Private support, strong local expertise and a very high level of service at every step.”"
+      }
+    },
+    "whyCards": [
+      {
+        "title": "Bespoke routes",
+        "text": "Each trip is designed around your travel style—not a mass-market template."
+      },
+      {
+        "title": "Private format",
+        "text": "Small groups and your own rhythm: no crowds or overload."
+      },
+      {
+        "title": "End-to-end support",
+        "text": "We stay with you from the first call to the airport transfer."
+      },
+      {
+        "title": "Local expertise",
+        "text": "We know the routes, hotels, seasonality and nuances of Northern Italy."
+      },
+      {
+        "title": "Premium comfort",
+        "text": "A strong balance of activities, rest and service every day."
+      },
+      {
+        "title": "Clear communication",
+        "text": "Transparent terms, a clear budget and support in messengers."
+      }
+    ],
+    "faq": [
+      {
+        "question": "How much does a tour to Italy cost?",
+        "answerHtml": "<p>It depends on the route, season and hotel level. Programmes start from <strong>4600 EUR</strong>; we prepare the final quote after a consultation.</p>"
+      },
+      {
+        "question": "What is included in the tour price?",
+        "answerHtml": "<p>The price typically includes:</p><ul><li>hotel with pool and breakfast;</li><li>transfers along the route;</li><li>private guiding;</li><li>boat and kayak outings;</li><li>SPA time;</li><li>safety gear (life jackets, poles, helmets, gloves, etc.).</li></ul>"
+      },
+      {
+        "question": "Do I need a visa for Italy?",
+        "answerHtml": "<p>Yes, you usually need a <strong>Schengen visa</strong>. We help with timelines and documents during preparation.</p>"
+      },
+      {
+        "question": "When is the best time to visit Italy?",
+        "answerHtml": "<p>For <strong>lakes and city trips</strong>, May–October works best.</p><p><strong>Ski programmes</strong> are best in winter and early spring.</p>"
+      },
+      {
+        "question": "Are flights included?",
+        "answerHtml": "<p>No, <strong>flights are not included</strong>.</p><p>We can help you pick convenient flights for your route and dates.</p>"
+      }
+    ],
+    "finalCta": {
+      "title": "Ready for your dream trip?",
+      "description": "Leave your contacts and our Italy travel expert will reach out to select the best tour for you free of charge and answer all your questions.",
+      "namePlaceholder": "Your name",
+      "phonePlaceholder": "Your phone",
+      "emailPlaceholder": "Your e-mail",
+      "submit": "Get consultation",
+      "submitting": "Sending...",
+      "privacyPrefix": "By clicking the button, you agree to the",
+      "privacyLink": "privacy policy",
+      "emailSubject": "Lead from Italy final CTA form",
+      "autoMessage": "Lead submitted via embedded final-cta form on /italy/",
+      "success": "Thank you for your request! A La Vacanza Bianca manager will contact you soon to discuss your trip details.",
+      "error": "An error occurred. Unfortunately, we did not receive your request :( Please try again or contact us using another convenient method."
+    }
   }
 }
-
