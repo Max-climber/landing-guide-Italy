@@ -6,6 +6,18 @@
     "contact": "Contact",
     "connect": "Contact Us"
   },
+  "navHub": {
+    "italy": "Italy",
+    "alps": "Alps",
+    "alpsSki": "Ski tours in the Alps",
+    "about": "About us",
+    "reviews": "Reviews",
+    "pickTour": "Get consultation",
+    "pickTourMobileLine1": "Get",
+    "pickTourMobileLine2": "consultation",
+    "openSubmenu": "Open submenu",
+    "closeMenu": "Close menu"
+  },
   "hero": {
     "title": "LA VACANZA BIANCA",
     "subtitle": "Premium Ski Tours in Italy",
@@ -304,7 +316,7 @@
   },
   "contact": {
     "title": "Contact Us",
-    "subtitle": "Start planning your unforgettable ski vacation",
+    "subtitle": "Tell us what your perfect trip looks like — we will suggest the best solution specifically for you.",
     "conditionsSubtitle": "Transparent terms of cooperation for your comfort",
     "showDetails": "Show Details",
     "hideDetails": "Hide Details",
@@ -321,6 +333,18 @@
       "phonePlaceholder": "+1 (555) 123-4567",
       "program": "Program of Interest",
       "selectProgram": "Select program",
+      "programOptions": [
+        "Bespoke tours in Italy",
+        "Ski tours in the Alps",
+        "Summer tours in Italy",
+        "Sightseeing tours",
+        "Custom itinerary"
+      ],
+      "programPreset": {
+        "italy": "Bespoke tours in Italy",
+        "alps": "Ski tours in the Alps",
+        "custom": "Custom itinerary"
+      },
       "message": "Message",
       "messagePlaceholder": "Tell us about your plans...",
       "submit": "Send Request",
@@ -426,7 +450,19 @@
     "contacts": "Contacts",
     "email": "Email:",
     "phone": "Phone:",
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "colTours": "Tours",
+    "italyLink": "Italy",
+    "switzerland": "Switzerland",
+    "soon": "soon",
+    "alpsLink": "Alps",
+    "colInfo": "Information",
+    "aboutAnchor": "About us",
+    "blog": "Blog",
+    "reviewsAnchor": "Reviews",
+    "faqAnchor": "FAQ",
+    "privacy": "Privacy policy",
+    "bottomLine": "© La Vacanza Bianca, {{year}}. All rights reserved | {{privacy}}"
   },
   "newYear": {
     "title": "New Year Discount!",
@@ -434,6 +470,117 @@
     "deadline": "Valid until December 15",
     "cta": "Submit Request",
     "clickMe": "Click!"
+  },
+  "homePage": {
+    "metaTitle": "🏔️ Bespoke tours to Italy, Switzerland & France 2026 – Vacanza Bianca",
+    "metaDescription": "Bespoke tours across Italy 🇮🇹, Switzerland 🇨🇭 and France 🇫🇷. Unique routes, small groups, personal approach. Ski holidays in the Alps ⛷️, summer lake trips and hiking in Northern Italy 🏔️. We shape the trip around your interests and pace.",
+    "heroTitle": "Bespoke tours to Italy, Switzerland and France",
+    "heroLead": "We craft one-of-a-kind journeys down to the details. You relax—we take care of the rest.",
+    "heroCta": "Plan your trip",
+    "quickSki": "Ski tours in the Alps",
+    "quickItaly": "Italy tours",
+    "directionsHeading": "Our destinations",
+    "dirItalyTitle": "🇮🇹 Italy",
+    "dirItalyCta": "See all tours →",
+    "dirChTitle": "🇨🇭 Switzerland",
+    "dirFrTitle": "🇫🇷 France",
+    "dirAlpsTitle": "⛰️ Alps",
+    "whyHeading": "Why travellers choose Vacanza Bianca",
+    "popularHeading": "Popular tours",
+    "moreDetails": "Read more",
+    "discussTour": "Discuss the tour",
+    "bookingHeading": "How do I book?",
+    "bookingSteps": [
+      "You send a request",
+      "We clarify your wishes",
+      "We design the route",
+      "You pay a deposit",
+      "You travel with peace of mind"
+    ],
+    "aboutHeading": "About us",
+    "aboutText": "Hi, I’m Dmitry, founder of Vacanza Bianca. I’ve lived in Italy for years and I’m in love with the Alps. I don’t sell “packages”—I design experiences I’d love to take myself: calm pacing, smart logistics and routes beyond the usual checklist.",
+    "reviewsHeading": "Reviews from our travellers",
+    "faqHeading": "FAQ",
+    "finalTitle": "We’ll shape the trip around your travel style",
+    "finalDescription": "Leave your contacts and our expert will reach out to suggest the best tour for free and answer every question.",
+    "finalSubmit": "Get consultation",
+    "finalSubmitting": "Sending...",
+    "finalPrivacyPrefix": "By clicking the button, you agree to the",
+    "finalPrivacyLink": "privacy policy",
+    "finalEmailSubject": "Lead from homepage",
+    "finalAutoMessage": "Lead from homepage (final CTA block)",
+    "finalSuccess": "Thank you for your request! A La Vacanza Bianca manager will contact you soon to discuss your trip.",
+    "finalError": "An error occurred. Unfortunately, we did not receive your request :( Please try again or contact us another way.",
+    "blogHeading": "More on our blog",
+    "blogAllArticles": "All blog articles",
+    "popularTours": [
+      {
+        "title": "Lake district: Como & Garda",
+        "route": "Northern Italy: lakes, beaches, boat day and spa on Garda. Hotels with breakfast.",
+        "people": "up to 3",
+        "duration": "6 nights",
+        "price": "from 4600 €",
+        "detailsHref": "/files/ozernyy-kray-program.pdf",
+        "detailsDownload": true,
+        "image": "https://images.unsplash.com/photo-1542384666-4853558d5118?q=80&w=1200"
+      },
+      {
+        "title": "From Como to Venice",
+        "route": "Lakes, sea, yachting and a private Venice tour. Spa in Sirmione.",
+        "people": "up to 3",
+        "duration": "9 nights",
+        "price": "from 7300 €",
+        "detailsHref": "/italy/",
+        "detailsDownload": false,
+        "image": "https://images.unsplash.com/photo-1540979388789-67225c354146?q=80&w=1200"
+      },
+      {
+        "title": "Summit line: Dolomites — St. Moritz",
+        "route": "Hiking, via ferrata, Bernina Express and spa time in the mountains.",
+        "people": "up to 3",
+        "duration": "9 nights",
+        "price": "from 6600 €",
+        "detailsHref": "/italy/",
+        "detailsDownload": false,
+        "image": "https://images.unsplash.com/photo-1617822129592-b3a165a2d711?q=80&w=1200"
+      },
+      {
+        "title": "Skiing in the Alps",
+        "route": "Tailored programme, Italian & Swiss resorts, on-slope support.",
+        "people": "up to 4",
+        "duration": "flexible",
+        "price": "from 4900 €",
+        "detailsHref": "/alps/gornolyzhnye-tury",
+        "detailsDownload": false,
+        "image": "https://images.unsplash.com/photo-1549640376-3ad70f27489b?q=80&w=1200"
+      }
+    ],
+    "faq": [
+      {
+        "question": "How much does a bespoke tour to Italy, Switzerland or the Alps cost?",
+        "answerHtml": "<p>It depends on the route, season and hotel tier. After a short call we send a clear quote—no hidden extras.</p>"
+      },
+      {
+        "question": "What is included in the tour price?",
+        "answerHtml": "<p>Typically the programme, guiding, hotels with breakfast and on-trip logistics. Flights and visas are discussed separately—we help you choose.</p>"
+      },
+      {
+        "question": "Can I cancel or reschedule?",
+        "answerHtml": "<p>Terms are fixed in the agreement upfront. We pick an option that matches your comfort with risk.</p>"
+      },
+      {
+        "question": "Are these group or private tours?",
+        "answerHtml": "<p>We focus on <strong>small groups</strong> and a private pace—no crowds or rigid mass-market schedules.</p>"
+      },
+      {
+        "question": "Can we travel as a couple or with friends?",
+        "answerHtml": "<p>Yes. The route and service adapt to your party—couples, families or a small group of friends.</p>"
+      },
+      {
+        "question": "Do you help with flights and visas?",
+        "answerHtml": "<p>We guide you on documents and convenient flights. Visa applications and ticket purchase stay with you, but we support with practical tips.</p>"
+      }
+    ]
   },
   "italyPage": {
     "metaTitle": "Italy Tours 2026: Custom Routes & Holiday Prices – Vacanza Bianca",
@@ -447,6 +594,7 @@
     "ctaPlanItaly": "Plan your Italy trip",
     "getProgram": "Get itinerary",
     "getTour": "Get tour",
+    "discussTour": "Discuss the tour",
     "moreDetails": "Read more",
     "toursHeading": "Our tours",
     "labelGuests": "Guests",
@@ -464,50 +612,49 @@
     "reviewsHeading": "Reviews from our travellers",
     "faqHeading": "FAQ",
     "blogHeading": "More about Italy on our blog",
-    "blogHint": "Curated articles—a secondary block after the main page content",
-    "allPagesHeading": "All pages in the Italy section",
+    "blogAllArticles": "All blog articles",
     "tours": {
       "lakeComoGarda": {
-        "title": "Jewels of Lake Como",
-        "route": "Famous villas and gardens, with scenic walks through Bellagio, Varenna and Tremezzo.",
-        "duration": "7 days",
-        "price": "from 1800 €",
+        "title": "Lake district:\nComo & Garda",
+        "route": "A journey through the most beautiful places in Northern Italy.\nLake Como and Garda, Menaggio and Bellagio. Beaches, boat and kayak outings. A spa day on the Sirmione peninsula (Lake Garda). Hotels with pools and breakfast.",
+        "duration": "6 nights",
+        "price": "4600 €",
         "people": "up to 3 guests"
       },
       "comoVenice": {
-        "title": "Wine Tour in Tuscany",
-        "route": "Visits to top Chianti wineries, tastings, and hands-on masterclasses.",
-        "duration": "5 days",
-        "price": "from 2200 €",
+        "title": "From Como\nto Venice",
+        "route": "A rich, varied tour with motorboat and yacht cruises. Como, Garda and Venice. Beach time and active days on the lakes and the Adriatic. A spa day on the Sirmione peninsula (Lake Garda). A private Venice tour. Hotels with pools and breakfast.",
+        "duration": "9 nights",
+        "price": "7300 €",
         "people": "up to 3 guests"
       },
       "peaksDolomites": {
-        "title": "Dolomites Trekking",
-        "route": "Hiking along the iconic Tre Cime di Lavaredo route.",
-        "duration": "5 days",
-        "price": "from 1500 €",
+        "title": "Summit line:\nDolomites — St. Moritz",
+        "route": "An unforgettable trip to some of Europe’s most spectacular mountains—for guests who love an active pace. Trento, Bolzano, St. Moritz (Switzerland). Lakes and peaks. Hiking and via ferrata. A spa day in the Dolomites. First class on the legendary Bernina Express. Hotels with pools, breakfast and views you will never forget.",
+        "duration": "9 nights",
+        "price": "6600 €",
         "people": "up to 3 guests"
       },
       "northArchitecture": {
-        "title": "Gastro Tour: Bologna",
-        "route": "Italy's culinary capital. Learn the secrets of pasta and Parmigiano.",
-        "duration": "4 days",
-        "price": "from 1350 €",
+        "title": "Architecture of wonder:\nNorthern Italy",
+        "route": "Milan, Venice and Bologna. A tour with a private guide in each city—for travellers who want to dive deep into culture and history. A spa day on the Sirmione peninsula (Lake Garda). Central hotels with breakfast.",
+        "duration": "9 nights",
+        "price": "6600 €",
         "people": "up to 3 guests"
       },
       "riviera": {
-        "title": "Romance of Venice",
-        "route": "Hidden canals, gondola rides, and visits to Murano and Burano islands.",
-        "duration": "3 days",
-        "price": "from 950 €",
+        "title": "Riviera:\nLiguria & the Côte d’Azur",
+        "route": "Stay in a superb seafront hotel with pool on the Ligurian coast. Yacht trip, SUP and diving. A private Genoa tour. One of Europe’s largest aquariums. A two-day outing to Sanremo and Nice.",
+        "duration": "9 nights",
+        "price": "7600 €",
         "people": "up to 3 guests"
       },
       "skiAlps": {
-        "title": "Treasures of Liguria",
-        "route": "A journey through the storybook towns of Cinque Terre.",
-        "duration": "6 days",
-        "price": "from 1900 €",
-        "people": "up to 3 guests"
+        "title": "Skiing in\nthe Alps",
+        "route": "A bespoke programme for any length and skill level. One or several ski resorts in Italy and Switzerland. Options from airport transfers to full support, including equipment rental and on-slope guiding.",
+        "duration": "flexible",
+        "price": "According to your custom itinerary",
+        "people": "up to 4 guests"
       }
     },
     "directions": {
@@ -560,6 +707,26 @@
         "description": "Beaches, towns and easy-going itineraries"
       }
     },
+    "blogFeatured": [
+      {
+        "category": "Routes",
+        "title": "5 ideas for an unforgettable weekend on Lake Como",
+        "image": "https://images.unsplash.com/photo-1552765578-2207a41aad49?q=80&w=600",
+        "href": "/blog/ozero-como/"
+      },
+      {
+        "category": "Food & wine",
+        "title": "Northern Italy dining guide: from trattorias to Michelin stars",
+        "image": "https://images.unsplash.com/photo-1558307221-5a4843514a44?q=80&w=600",
+        "href": "/blog/kuda-poehat-italy/"
+      },
+      {
+        "category": "Tips",
+        "title": "How to prepare for trekking in the Dolomites: what to pack",
+        "image": "https://images.unsplash.com/photo-1621684346142-2b3a8a3a0d59?q=80&w=600",
+        "href": "/blog/kuda-poehat-italy/"
+      }
+    ],
     "reviews": {
       "alina": {
         "title": "Alina & Maksim",

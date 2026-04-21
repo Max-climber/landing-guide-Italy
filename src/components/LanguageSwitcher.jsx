@@ -29,24 +29,24 @@ const LanguageSwitcher = () => {
   }
 
   const currentLang = i18n.language === 'en' ? 'en' : 'ru'
-  const nextLang = currentLang === 'ru' ? 'en' : 'ru'
+  const targetLang = currentLang === 'ru' ? 'en' : 'ru'
 
-  const toggleLanguage = (e) => {
+  const switchLanguage = (e) => {
     e.preventDefault()
     e.stopPropagation()
-    i18n.changeLanguage(nextLang)
+    i18n.changeLanguage(targetLang)
   }
 
   return (
     <motion.button
-      onClick={toggleLanguage}
+      onClick={switchLanguage}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
       className="cursor-pointer transition-transform"
-      aria-label={`Switch to ${nextLang === 'ru' ? 'Russian' : 'English'}`}
+      aria-label={`Switch to ${targetLang === 'ru' ? 'Russian' : 'English'}`}
       style={{ zIndex: 10 }}
     >
-      <FlagIcon country={currentLang} />
+      <FlagIcon country={targetLang} />
     </motion.button>
   )
 }

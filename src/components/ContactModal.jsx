@@ -4,6 +4,11 @@ import emailjs from '@emailjs/browser'
 
 const ContactModal = ({ isOpen, onClose }) => {
   const { t, i18n } = useTranslation()
+  const resolvedSubtitle = t('contact.subtitle', {
+    defaultValue:
+      'Расскажите, каким вы видите свой идеальный отдых — мы предложим лучшее решение именно для вас.',
+  })
+  const programOptions = t('contact.form.programOptions', { returnObjects: true }) || []
 
   const [formData, setFormData] = useState({
     name: '',
@@ -28,6 +33,25 @@ const ContactModal = ({ isOpen, onClose }) => {
       setFormData(prev => ({ ...prev, program: '' }))
     }
   }, [i18n.language])
+
+  useEffect(() => {
+    if (!isOpen) return
+    const path = window.location.pathname.replace(/\/+$/, '') || '/'
+    let presetProgram = ''
+
+    if (path === '/' || path.startsWith('/italy')) {
+      presetProgram = t('contact.form.programPreset.italy')
+    } else if (path.startsWith('/alps')) {
+      presetProgram = t('contact.form.programPreset.alps')
+    } else {
+      presetProgram = t('contact.form.programPreset.custom')
+    }
+
+    setFormData((prev) => {
+      if (prev.program === presetProgram) return prev
+      return { ...prev, program: presetProgram }
+    })
+  }, [isOpen, t])
 
   // Закрытие по клику вне модального окна
   useEffect(() => {
@@ -259,20 +283,20 @@ const ContactModal = ({ isOpen, onClose }) => {
     if (phoneError || emailError) {
       return
     }
-    
+
     setIsSubmitting(true)
-    
+
     try {
       const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_ieteu8c'
       const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_mgom9am'
       const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'hWDtd1yXUvolBOTS5'
-      
+
       if (!serviceId || serviceId === 'YOUR_SERVICE_ID' || !templateId || templateId === 'YOUR_TEMPLATE_ID' || !publicKey || publicKey === 'YOUR_PUBLIC_KEY') {
         throw new Error('EmailJS параметры не настроены. Проверьте переменные окружения.')
       }
-      
+
       const templateParams = {
-        to_email: 'info@vacanzabianca.com',
+        to_email: 'mail@vacanzabianca.ru',
         from_name: formData.name,
         from_email: formData.email,
         phone: formData.phone,
@@ -280,9 +304,9 @@ const ContactModal = ({ isOpen, onClose }) => {
         message: formData.message || t('contact.form.message') || 'Сообщение не указано',
         subject: t('contact.form.subject')
       }
-      
+
       await emailjs.send(serviceId, templateId, templateParams, publicKey)
-      
+
       try {
         const autoReplyTemplateId = import.meta.env.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID || 'template_auto_reply'
         const autoReplyParams = {
@@ -290,14 +314,14 @@ const ContactModal = ({ isOpen, onClose }) => {
           to_name: formData.name,
           subject: t('contact.form.autoReplySubject')
         }
-        
+
         await emailjs.send(serviceId, autoReplyTemplateId, autoReplyParams, publicKey)
       } catch (error) {
         console.error('Ошибка отправки ответного письма:', error)
       }
-      
+
       setSubmitSuccess(true)
-      
+
       setFormData({
         name: '',
         email: '',
@@ -307,12 +331,12 @@ const ContactModal = ({ isOpen, onClose }) => {
       })
       setPhoneTouched(false)
       setEmailTouched(false)
-      
+
       setTimeout(() => {
         setSubmitSuccess(false)
         onClose()
       }, 2000)
-      
+
     } catch (error) {
       console.error('Ошибка отправки формы:', error)
       setSubmitError(t('contact.form.submitError'))
@@ -362,7 +386,7 @@ const ContactModal = ({ isOpen, onClose }) => {
             {t('contact.title')}
           </h2>
           <p className="text-lg font-sans text-text-light mb-6">
-            {t('contact.subtitle')}
+            {resolvedSubtitle}
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -437,9 +461,11 @@ const ContactModal = ({ isOpen, onClose }) => {
                 style={{ paddingRight: '2.5rem' }}
               >
                 <option value="">{t('contact.form.selectProgram')}</option>
-                <option value={t('programs.buttonNames.expert')}>{t('programs.buttonNames.expert')}</option>
-                <option value={t('programs.buttonNames.balance')}>{t('programs.buttonNames.balance')}</option>
-                <option value={t('programs.buttonNames.ultracomfort')}>{t('programs.buttonNames.ultracomfort')}</option>
+                {programOptions.map((program) => (
+                  <option key={program} value={program}>
+                    {program}
+                  </option>
+                ))}
               </select>
             </div>
 
@@ -460,7 +486,7 @@ const ContactModal = ({ isOpen, onClose }) => {
                 <p className="text-green-800 text-sm">{t('contact.form.submitSuccess')}</p>
               </div>
             )}
-            
+
             {submitError && (
               <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
                 <p className="text-red-800 text-sm">{submitError}</p>

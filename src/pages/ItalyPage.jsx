@@ -16,62 +16,34 @@ const HOME_ABSOLUTE = 'https://vacanzabianca.ru/'
 const HOME_PATH = '/'
 
 const TOUR_BUILDERS = [
-  {
-    key: 'lakeComoGarda',
-    image: 'https://images.unsplash.com/photo-1542384666-4853558d5118?q=80&w=1200',
-    detailsHref: '/files/ozernyy-kray-program.pdf',
-    detailsDownload: true,
-  },
-  {
-    key: 'comoVenice',
-    image: 'https://images.unsplash.com/photo-1540979388789-67225c354146?q=80&w=1200',
-    detailsHref: '#',
-    detailsDownload: false,
-  },
-  {
-    key: 'peaksDolomites',
-    image: 'https://images.unsplash.com/photo-1617822129592-b3a165a2d711?q=80&w=1200',
-    detailsHref: '#',
-    detailsDownload: false,
-  },
-  {
-    key: 'northArchitecture',
-    image: 'https://images.unsplash.com/photo-1599389713679-370e081827b5?q=80&w=1200',
-    detailsHref: '#',
-    detailsDownload: false,
-  },
-  {
-    key: 'riviera',
-    image: 'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?q=80&w=1200',
-    detailsHref: '#',
-    detailsDownload: false,
-  },
-  {
-    key: 'skiAlps',
-    image: 'https://images.unsplash.com/photo-1510908074128-d89047990499?q=80&w=1200',
-    detailsHref: '#',
-    detailsDownload: false,
-  },
+  { key: 'lakeComoGarda', image: 'https://images.unsplash.com/photo-1542384666-4853558d5118?q=80&w=1200' },
+  { key: 'comoVenice', image: 'https://images.unsplash.com/photo-1540979388789-67225c354146?q=80&w=1200' },
+  { key: 'peaksDolomites', image: 'https://images.unsplash.com/photo-1617822129592-b3a165a2d711?q=80&w=1200' },
+  { key: 'northArchitecture', image: 'https://images.unsplash.com/photo-1599389713679-370e081827b5?q=80&w=1200' },
+  { key: 'riviera', image: 'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?q=80&w=1200' },
+  { key: 'skiAlps', image: 'https://images.unsplash.com/photo-1549640376-3ad70f27489b?q=80&w=1200' },
 ]
 
 const DIRECTION_DEFS = [
-  { key: 'como', href: '/italy/tury-ozero-como/', image: 'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?auto=format&fit=crop&w=1200&q=80' },
-  { key: 'garda', href: '/italy/tury-ozero-garda/', image: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=80' },
-  { key: 'dolomites', href: '/italy/dolomity-alps/', image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80' },
-  { key: 'north', href: '/italy/tury-sever/', image: 'https://images.unsplash.com/photo-1526129318478-62ed807ebdf9?auto=format&fit=crop&w=1200&q=80' },
+  { key: 'como', href: '/italy/tury-ozero-como/', image: 'https://images.unsplash.com/photo-1588623744358-04def0a7f1df?q=80&w=1200' },
+  { key: 'garda', href: '/italy/tury-ozero-garda/', image: 'https://images.unsplash.com/photo-1568282361099-27027d1a2f69?q=80&w=1200' },
+  { key: 'dolomites', href: '/italy/dolomity-alps/', image: 'https://images.unsplash.com/photo-1590244793822-261162434685?q=80&w=1200' },
+  { key: 'north', href: '/italy/tury-sever/', image: 'https://images.unsplash.com/photo-1518844390315-99c51c88824f?q=80&w=1200' },
 ]
 
 const FORMAT_DEFS = [
   { key: 'summer', href: '/italy/tury-letom/', image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=80' },
-  { key: 'ski', href: '/italy/gornolyzhnye-tury/', image: 'https://images.unsplash.com/photo-1549640376-3ad70f27489b?auto=format&fit=crop&w=1200&q=80' },
+  { key: 'ski', href: '/alps/gornolyzhnye-tury', image: 'https://images.unsplash.com/photo-1549640376-3ad70f27489b?auto=format&fit=crop&w=1200&q=80' },
   { key: 'excursions', href: '/italy/excursions/', image: 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=80' },
 ]
 
-const BLOG_DEFS = [
-  { key: 'whereItaly', href: '/blog/kuda-poehat-italy/', image: 'https://images.unsplash.com/photo-1533658925622-ef0ea7e0b3b1?auto=format&fit=crop&w=1200&q=80' },
-  { key: 'summerItaly', href: '/blog/otdyh-v-italy-letom/', image: 'https://images.unsplash.com/photo-1491555103944-7c647fd857e6?auto=format&fit=crop&w=1200&q=80' },
-  { key: 'comoGuide', href: '/blog/ozero-como/', image: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80' },
-  { key: 'gardaGuide', href: '/blog/ozero-garda/', image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80' },
+const WHY_INFOGRAPHIC_FILES = [
+  'авторские маршруты.png',
+  'индивидуальный формат.png',
+  'полное сопровождение.png',
+  'локальная экспертиза.png',
+  'Премиальный комфорт.png',
+  'скрытые жемчужины.png',
 ]
 
 const REVIEW_DEFS = [
@@ -79,23 +51,6 @@ const REVIEW_DEFS = [
   { key: 'katerina', image: '/images/reviews/olga.png' },
   { key: 'dmitry', image: '/images/reviews/vardan.png' },
 ]
-
-const allItalyLinks = [
-  '/italy/tury-letom/',
-  '/italy/gornolyzhnye-tury/',
-  '/italy/gornolyzhnye-tury/dolomiti-superski/',
-  '/italy/dolomity-alps/',
-  '/italy/excursions/',
-  '/italy/tury-na-dvoih/',
-  '/italy/tury-sever/',
-  '/italy/tury-march/',
-  '/italy/tury-may/',
-  '/italy/7-days/',
-  '/italy/tury-ozero-como/',
-  '/italy/tury-ozero-garda/',
-]
-
-const UTP_ICON_EMOJIS = ['🧭', '👥', '🛡️', '📍', '💎', '🌿']
 
 const validCountryCodes = [
   '1', '7', '20', '27', '30', '31', '32', '33', '34', '36', '39', '40', '41', '43', '44', '45', '46', '47', '48', '49',
@@ -110,57 +65,40 @@ const validCountryCodes = [
   '970', '971', '972', '973', '974', '975', '976', '977', '992', '993', '994', '995', '996', '998',
 ]
 
-const UnifiedCard = ({ item, buttonLabel }) => {
-  const cardBody = (
-    <>
-      <div className="aspect-[4/3] overflow-hidden">
-        <img
-          src={item.image}
-          alt={item.title}
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
-      <div className="flex min-h-[230px] flex-col p-6">
-        {item.meta ? (
-          <p className="mb-2 text-xs uppercase tracking-[0.08em] text-[#777]">{item.meta}</p>
-        ) : null}
-        <h3 className="mb-2 font-serif text-[30px] leading-[1.1] text-text-main" style={{ fontWeight: '300' }}>
-          {item.title}
-        </h3>
-        <p className="mb-5 flex-1 text-sm leading-6 text-text-light">{item.description}</p>
-        <div className="mt-auto flex justify-center">
-          <span className="inline-flex w-fit items-center rounded-[40px] border border-text-main px-5 py-2 text-[12px] uppercase tracking-[0.12em] transition-all duration-300 group-hover:bg-text-main group-hover:text-white">
-            {buttonLabel}
-          </span>
-        </div>
-      </div>
-    </>
-  )
-
-  if (item.href) {
-    return (
-      <a
-        href={item.href}
-        className="group overflow-hidden rounded-xl border border-border-soft bg-bg-card shadow-[0_10px_28px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(0,0,0,0.08)]"
+const PromoImageCard = ({ href, image, title, moreLabel, aspectClassName = 'aspect-[3/4]' }) => (
+  <a
+    href={href}
+    className={`group relative block w-full overflow-hidden rounded-xl border border-border-soft shadow-[0_10px_28px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(0,0,0,0.1)] ${aspectClassName}`}
+  >
+    <img
+      src={image}
+      alt=""
+      className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+      loading="lazy"
+      decoding="async"
+    />
+    <div
+      className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/10 transition-opacity duration-300 group-hover:from-black/85 group-hover:via-black/45"
+      aria-hidden
+    />
+    <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-5">
+      <h3
+        className="font-serif text-[clamp(18px,2.2vw,24px)] leading-snug text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.45)]"
+        style={{ fontWeight: 300 }}
       >
-        {cardBody}
-      </a>
-    )
-  }
-
-  return (
-    <article className="group overflow-hidden rounded-xl border border-border-soft bg-bg-card shadow-[0_10px_28px_rgba(0,0,0,0.03)]">
-      {cardBody}
-    </article>
-  )
-}
+        {title}
+      </h3>
+      <span className="mt-2 inline-flex translate-y-2 font-sans text-[11px] uppercase tracking-[0.12em] text-white/90 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+        {moreLabel} →
+      </span>
+    </div>
+  </a>
+)
 
 const ItalyPage = () => {
   const { t } = useTranslation()
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [openedFaq, setOpenedFaq] = useState(0)
+  const [openedFaq, setOpenedFaq] = useState(-1)
   const [isFinalSubmitting, setIsFinalSubmitting] = useState(false)
   const [finalStatus, setFinalStatus] = useState(null)
   const [finalFormData, setFinalFormData] = useState({ name: '', phone: '', email: '' })
@@ -171,11 +109,12 @@ const ItalyPage = () => {
 
   const italyTours = useMemo(
     () =>
-      TOUR_BUILDERS.map(({ key, image, detailsHref, detailsDownload }) => ({
+      TOUR_BUILDERS.map(({ key, image }) => ({
         ...(t(`italyPage.tours.${key}`, { returnObjects: true }) || {}),
+        tourKey: key,
         image,
-        detailsHref,
-        detailsDownload,
+        showDetails: key === 'skiAlps',
+        detailsHref: key === 'skiAlps' ? '/alps/gornolyzhnye-tury' : undefined,
       })),
     [t],
   )
@@ -184,7 +123,7 @@ const ItalyPage = () => {
     () =>
       DIRECTION_DEFS.map(({ key, href, image }) => {
         const tr = t(`italyPage.directions.${key}`, { returnObjects: true }) || {}
-        return { title: tr.title, description: tr.description, href, image }
+        return { title: tr.title, href, image }
       }),
     [t],
   )
@@ -193,18 +132,16 @@ const ItalyPage = () => {
     () =>
       FORMAT_DEFS.map(({ key, href, image }) => {
         const tr = t(`italyPage.formats.${key}`, { returnObjects: true }) || {}
-        return { title: tr.title, description: tr.description, href, image }
+        return { title: tr.title, href, image }
       }),
     [t],
   )
 
-  const blogCards = useMemo(
-    () =>
-      BLOG_DEFS.map(({ key, href, image }) => {
-        const tr = t(`italyPage.blog.${key}`, { returnObjects: true }) || {}
-        return { title: tr.title, description: tr.description, href, image }
-      }),
-    [t],
+  const blogFeatured = useMemo(() => t('italyPage.blogFeatured', { returnObjects: true }) || [], [t])
+
+  const whyIconSrcs = useMemo(
+    () => WHY_INFOGRAPHIC_FILES.map((file) => `/images/infographics/${encodeURIComponent(file)}`),
+    [],
   )
 
   const reviewCards = useMemo(
@@ -278,6 +215,12 @@ const ItalyPage = () => {
     const unmount = mountJsonLd('italy-jsonld', schemaData)
     return () => unmount()
   }, [schemaData, t])
+
+  useEffect(() => {
+    const onOpen = () => setIsModalOpen(true)
+    window.addEventListener('openContactModal', onOpen)
+    return () => window.removeEventListener('openContactModal', onOpen)
+  }, [])
 
   const moreLabel = t('italyPage.moreDetails')
   const finalToast = finalStatus === 'success' ? t('italyPage.finalCta.success') : t('italyPage.finalCta.error')
@@ -527,10 +470,10 @@ const ItalyPage = () => {
           subtitle=""
           description={t('italyPage.heroDescription')}
           ctaLabel={t('italyPage.ctaPlanTour')}
+          ctaHref="#tours"
           showStructureLink={false}
           backgroundImage={ITALY_HERO_IMAGE}
           imageOverlayClassName="bg-[rgba(255,255,255,0.42)]"
-          onCtaClick={() => setIsModalOpen(true)}
         />
         <BreadcrumbOverlay
           ariaLabel={t('italyPage.breadcrumbAria')}
@@ -546,7 +489,7 @@ const ItalyPage = () => {
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {italyTours.map((tour) => (
               <article
-                key={tour.title}
+                key={tour.tourKey}
                 className="flex flex-col overflow-hidden rounded-xl border border-border-soft bg-bg-card shadow-[0_8px_22px_rgba(0,0,0,0.03)]"
               >
                 <div className="aspect-[16/10] w-full overflow-hidden">
@@ -559,32 +502,60 @@ const ItalyPage = () => {
                   />
                 </div>
                 <div className="flex flex-1 flex-col p-6">
-                <h3 className="mb-3 font-serif text-[30px] leading-[1.1] text-text-main" style={{ fontWeight: '300' }}>
-                  {tour.title}
-                </h3>
-                <p className="mb-4 text-sm leading-6 text-text-light">📍 {tour.route}</p>
-                <div className="mt-auto">
-                  <div className="mb-3 flex items-center justify-between gap-3 text-[12px] uppercase tracking-[0.08em] text-[#666]">
-                    <span className="truncate">👤 {tour.people}</span>
-                    <span className="truncate">⏳ {tour.duration}</span>
-                  </div>
-                  <p className="mb-4 text-base font-medium text-text-main">{tour.price}</p>
-                  <div className="grid grid-cols-2 gap-2">
-                    <a
-                      href={tour.detailsHref}
-                      download={tour.detailsDownload ? '' : undefined}
-                      className="rounded-[40px] border border-text-main px-3 py-2 text-[11px] uppercase tracking-[0.11em] text-center text-text-main transition-all duration-300 hover:bg-text-main hover:text-white"
+                  <h3
+                    className="mb-3 whitespace-pre-line font-serif text-[30px] leading-[1.1] text-text-main"
+                    style={{ fontWeight: '300' }}
+                  >
+                    {tour.title}
+                  </h3>
+                  <p className="mb-5 whitespace-pre-line text-sm leading-6 text-text-light">{tour.route}</p>
+                  <div className="mt-auto">
+                    <div className="mb-4 grid grid-cols-2 gap-4 border-y border-border-soft py-4">
+                      <div>
+                        <p className="mb-1 text-[10px] uppercase tracking-[0.1em] text-[#888]">{t('italyPage.labelGuests')}</p>
+                        <p className="text-sm font-medium text-text-main">{tour.people}</p>
+                      </div>
+                      <div>
+                        <p className="mb-1 text-[10px] uppercase tracking-[0.1em] text-[#888]">{t('italyPage.labelDuration')}</p>
+                        <p className="text-sm font-medium text-text-main">{tour.duration}</p>
+                      </div>
+                    </div>
+                    <p
+                      className={`mb-5 font-serif leading-tight text-text-main ${
+                        tour.tourKey === 'skiAlps'
+                          ? 'text-[clamp(15px,1.9vw,20px)]'
+                          : 'text-[clamp(22px,2.6vw,28px)]'
+                      }`}
+                      style={{ fontWeight: 400 }}
                     >
-                      {t('italyPage.moreDetails')}
-                    </a>
-                    <a
-                      href="#final-cta"
-                      className="rounded-[40px] border border-text-main bg-text-main px-3 py-2 text-[11px] uppercase tracking-[0.11em] text-center text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-text-main/90"
-                    >
-                      {t('italyPage.getTour')}
-                    </a>
+                      {tour.price}
+                    </p>
+                    {tour.showDetails ? (
+                      <div className="grid grid-cols-2 gap-2">
+                        <a
+                          href={tour.detailsHref}
+                          className="rounded-[40px] border border-text-main px-3 py-2.5 text-center text-[11px] uppercase tracking-[0.11em] text-text-main transition-all duration-300 hover:bg-text-main hover:text-white"
+                        >
+                          {t('italyPage.moreDetails')}
+                        </a>
+                        <button
+                          type="button"
+                          onClick={() => setIsModalOpen(true)}
+                          className="rounded-[40px] border border-text-main bg-text-main px-3 py-2.5 text-center text-[11px] uppercase tracking-[0.11em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-text-main/90"
+                        >
+                          {t('italyPage.discussTour')}
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => setIsModalOpen(true)}
+                        className="w-full rounded-[40px] border border-text-main bg-text-main px-3 py-2.5 text-[11px] uppercase tracking-[0.11em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-text-main/90"
+                      >
+                        {t('italyPage.discussTour')}
+                      </button>
+                    )}
                   </div>
-                </div>
                 </div>
               </article>
             ))}
@@ -593,19 +564,22 @@ const ItalyPage = () => {
 
         <section className="mx-auto mt-20 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
           <h2 className="section-title !mb-10 text-center">{t('italyPage.whyHeading')}</h2>
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
             {whyCards.map((card, idx) => (
-              <article
-                key={`${card.title}-${idx}`}
-                className="rounded-xl border border-border-soft bg-bg-card p-6 shadow-[0_8px_22px_rgba(0,0,0,0.03)]"
-              >
-                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-bg-warm text-[22px]">
-                  {UTP_ICON_EMOJIS[idx] || '✦'}
+              <article key={`${card.title}-${idx}`} className="flex flex-col items-center p-1 text-center sm:p-2">
+                <div className="mb-4 flex w-full justify-center">
+                  <img
+                    src={whyIconSrcs[idx]}
+                    alt=""
+                    className="h-12 w-12 object-contain brightness-0"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
                 <h3 className="mb-3 font-serif text-[26px] leading-[1.15] text-text-main" style={{ fontWeight: '300' }}>
                   {card.title}
                 </h3>
-                <p className="text-sm leading-6 text-text-light">{card.text}</p>
+                <p className="max-w-md text-sm leading-6 text-text-light">{card.text}</p>
               </article>
             ))}
           </div>
@@ -613,18 +587,25 @@ const ItalyPage = () => {
 
         <section id="directions" className="mx-auto mt-20 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
           <h2 className="section-title !mb-10 text-center">{t('italyPage.directionsHeading')}</h2>
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
             {directionCards.map((item) => (
-              <UnifiedCard key={item.href} item={item} buttonLabel={moreLabel} />
+              <PromoImageCard key={item.href} href={item.href} image={item.image} title={item.title} moreLabel={moreLabel} />
             ))}
           </div>
         </section>
 
         <section className="mx-auto mt-20 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
           <h2 className="section-title !mb-10 text-center">{t('italyPage.formatsHeading')}</h2>
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             {formatCards.map((item) => (
-              <UnifiedCard key={item.href} item={item} buttonLabel={moreLabel} />
+              <PromoImageCard
+                key={item.href}
+                href={item.href}
+                image={item.image}
+                title={item.title}
+                moreLabel={moreLabel}
+                aspectClassName="aspect-[4/5] min-h-[240px]"
+              />
             ))}
           </div>
         </section>
@@ -651,9 +632,29 @@ const ItalyPage = () => {
 
         <section className="mx-auto mt-20 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
           <h2 className="section-title !mb-10 text-center">{t('italyPage.reviewsHeading')}</h2>
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-5 md:grid-cols-3">
             {reviewCards.map((item) => (
-              <UnifiedCard key={item.title} item={item} buttonLabel={moreLabel} />
+              <article
+                key={item.title}
+                className="rounded-xl border border-border-soft bg-bg-card p-5 shadow-[0_8px_22px_rgba(0,0,0,0.03)] sm:p-6"
+              >
+                <div className="mb-2 font-serif text-3xl leading-none text-text-main/25" aria-hidden>
+                  ”
+                </div>
+                <blockquote className="mb-5 text-sm leading-7 text-text-light">{item.description}</blockquote>
+                <div className="flex items-center gap-3">
+                  <img
+                    src={item.image}
+                    alt=""
+                    className="h-11 w-11 flex-shrink-0 rounded-full object-cover ring-1 ring-border-soft"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span className="font-serif text-base text-text-main" style={{ fontWeight: 400 }}>
+                    {item.title}
+                  </span>
+                </div>
+              </article>
             ))}
           </div>
         </section>
@@ -746,59 +747,39 @@ const ItalyPage = () => {
         </section>
 
         <section className="mx-auto mt-16 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
-          <h2 className="section-title !mb-2 text-center text-[clamp(28px,4vw,38px)]">{t('italyPage.blogHeading')}</h2>
-          <p className="mx-auto mb-8 max-w-lg text-center font-sans text-[11px] uppercase tracking-[0.14em] text-[#9a9a9a]">
-            {t('italyPage.blogHint')}
-          </p>
-          <ul className="mx-auto max-w-[640px] divide-y divide-border-soft rounded-xl border border-border-soft bg-bg-card/80 px-2 py-1 sm:px-3">
-            {blogCards.map((item) => (
-              <li key={item.href}>
-                <a
-                  href={item.href}
-                  className="group flex gap-3 py-3.5 pl-2 pr-2 transition-colors hover:bg-bg-base/60 sm:gap-4 sm:py-4 sm:pl-3 sm:pr-3"
-                >
-                  <div className="relative h-14 w-[5.25rem] flex-shrink-0 overflow-hidden rounded-lg border border-border-soft sm:h-[4.5rem] sm:w-24">
-                    <img
-                      src={item.image}
-                      alt=""
-                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <h3
-                      className="font-serif text-[17px] leading-snug text-text-main transition-colors group-hover:text-text-main sm:text-[18px]"
-                      style={{ fontWeight: '400' }}
-                    >
-                      {item.title}
-                    </h3>
-                    <p className="mt-0.5 line-clamp-2 text-[13px] leading-snug text-text-light">{item.description}</p>
-                  </div>
-                  <span
-                    className="hidden flex-shrink-0 self-center font-sans text-[11px] text-[#bbb] transition-colors group-hover:text-text-main sm:inline"
-                    aria-hidden
-                  >
-                    →
-                  </span>
-                </a>
-              </li>
+          <h2 className="section-title !mb-10 text-center text-[clamp(28px,4vw,38px)]">{t('italyPage.blogHeading')}</h2>
+          <div className="grid gap-6 md:grid-cols-3">
+            {blogFeatured.map((post, idx) => (
+              <a
+                key={`${post.href}-${idx}`}
+                href={post.href}
+                className="group flex flex-col overflow-hidden rounded-xl border border-border-soft bg-bg-card shadow-[0_8px_22px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(0,0,0,0.08)]"
+              >
+                <div className="aspect-[16/11] w-full overflow-hidden">
+                  <img
+                    src={post.image}
+                    alt=""
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-5">
+                  <p className="mb-2 font-sans text-[11px] uppercase tracking-[0.12em] text-[#888]">{post.category}</p>
+                  <h3 className="font-serif text-[20px] leading-snug text-text-main" style={{ fontWeight: 300 }}>
+                    {post.title}
+                  </h3>
+                </div>
+              </a>
             ))}
-          </ul>
-        </section>
-
-        <section className="mx-auto mt-20 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
-          <h2 className="section-title !mb-10 text-center">{t('italyPage.allPagesHeading')}</h2>
-          <div className="rounded-xl border border-border-soft bg-bg-card p-6">
-            <ul className="grid gap-2 md:grid-cols-2">
-              {allItalyLinks.map((href) => (
-                <li key={href}>
-                  <a href={href} className="text-sm leading-6 text-text-main underline-offset-4 hover:underline">
-                    {href}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          </div>
+          <div className="mt-10 flex justify-center">
+            <a
+              href="/blog"
+              className="inline-flex rounded-[40px] border border-text-main px-8 py-3 text-[12px] uppercase tracking-[0.12em] text-text-main transition-all duration-300 hover:bg-text-main hover:text-white"
+            >
+              {t('italyPage.blogAllArticles')}
+            </a>
           </div>
         </section>
       </main>
