@@ -37,6 +37,13 @@ const FORMAT_DEFS = [
   { key: 'excursions', href: '/italy/excursions/', image: 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=80' },
 ]
 
+const BLOG_DEFS = [
+  { key: 'whereItaly', href: '/blog/kuda-poehat-italy/', image: 'https://images.unsplash.com/photo-1533658925622-ef0ea7e0b3b1?auto=format&fit=crop&w=1200&q=80' },
+  { key: 'summerItaly', href: '/blog/otdyh-v-italy-letom/', image: 'https://images.unsplash.com/photo-1491555103944-7c647fd857e6?auto=format&fit=crop&w=1200&q=80' },
+  { key: 'comoGuide', href: '/blog/ozero-como/', image: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80' },
+  { key: 'gardaGuide', href: '/blog/ozero-garda/', image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80' },
+]
+
 const WHY_INFOGRAPHIC_FILES = [
   'авторские маршруты.png',
   'индивидуальный формат.png',
@@ -137,7 +144,14 @@ const ItalyPage = () => {
     [t],
   )
 
-  const blogFeatured = useMemo(() => t('italyPage.blogFeatured', { returnObjects: true }) || [], [t])
+  const blogCards = useMemo(
+    () =>
+      BLOG_DEFS.map(({ key, href, image }) => {
+        const tr = t(`italyPage.blog.${key}`, { returnObjects: true }) || {}
+        return { title: tr.title, description: tr.description, href, image }
+      }),
+    [t],
+  )
 
   const whyIconSrcs = useMemo(
     () => WHY_INFOGRAPHIC_FILES.map((file) => `/images/infographics/${encodeURIComponent(file)}`),
@@ -748,31 +762,41 @@ const ItalyPage = () => {
 
         <section className="mx-auto mt-16 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
           <h2 className="section-title !mb-10 text-center text-[clamp(28px,4vw,38px)]">{t('italyPage.blogHeading')}</h2>
-          <div className="grid gap-6 md:grid-cols-3">
-            {blogFeatured.map((post, idx) => (
-              <a
-                key={`${post.href}-${idx}`}
-                href={post.href}
-                className="group flex flex-col overflow-hidden rounded-xl border border-border-soft bg-bg-card shadow-[0_8px_22px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(0,0,0,0.08)]"
-              >
-                <div className="aspect-[16/11] w-full overflow-hidden">
-                  <img
-                    src={post.image}
-                    alt=""
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-                <div className="flex flex-1 flex-col p-5">
-                  <p className="mb-2 font-sans text-[11px] uppercase tracking-[0.12em] text-[#888]">{post.category}</p>
-                  <h3 className="font-serif text-[20px] leading-snug text-text-main" style={{ fontWeight: 300 }}>
-                    {post.title}
-                  </h3>
-                </div>
-              </a>
+          <ul className="mx-auto max-w-[640px] divide-y divide-border-soft rounded-xl border border-border-soft bg-bg-card/80 px-2 py-1 sm:px-3">
+            {blogCards.map((item) => (
+              <li key={item.href}>
+                <a
+                  href={item.href}
+                  className="group flex gap-3 py-3.5 pl-2 pr-2 transition-colors hover:bg-bg-base/60 sm:gap-4 sm:py-4 sm:pl-3 sm:pr-3"
+                >
+                  <div className="relative h-14 w-[5.25rem] flex-shrink-0 overflow-hidden rounded-lg border border-border-soft sm:h-[4.5rem] sm:w-24">
+                    <img
+                      src={item.image}
+                      alt=""
+                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <h3
+                      className="font-serif text-[17px] leading-snug text-text-main transition-colors group-hover:text-text-main sm:text-[18px]"
+                      style={{ fontWeight: '400' }}
+                    >
+                      {item.title}
+                    </h3>
+                    <p className="mt-0.5 line-clamp-2 text-[13px] leading-snug text-text-light">{item.description}</p>
+                  </div>
+                  <span
+                    className="hidden flex-shrink-0 self-center font-sans text-[11px] text-[#bbb] transition-colors group-hover:text-text-main sm:inline"
+                    aria-hidden
+                  >
+                    →
+                  </span>
+                </a>
+              </li>
             ))}
-          </div>
+          </ul>
           <div className="mt-10 flex justify-center">
             <a
               href="/blog"
