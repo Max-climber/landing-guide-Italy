@@ -43,39 +43,51 @@ const DIR_IMAGES = {
   alps: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1400&q=80',
 }
 
-const CountryCardLink = ({ href, image, title, cta }) => (
-  <a
-    href={href}
-    className="group relative block aspect-[4/5] w-full min-h-[220px] overflow-hidden rounded-2xl border border-border-soft shadow-[0_12px_36px_rgba(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_48px_rgba(0,0,0,0.12)]"
-  >
-    <img
-      src={image}
-      alt=""
-      className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-      loading="lazy"
-    />
-    <div className="absolute inset-0 bg-gradient-to-t from-black/82 via-black/35 to-black/15" aria-hidden />
-    <div className="absolute inset-0 flex flex-col justify-end p-5 sm:p-6">
-      <h3 className="font-serif text-[clamp(22px,3vw,30px)] leading-tight text-white drop-shadow-md" style={{ fontWeight: 300 }}>
-        {title}
-      </h3>
-      <span className="mt-3 inline-flex font-sans text-[11px] uppercase tracking-[0.14em] text-white/90">{cta}</span>
-    </div>
-  </a>
-)
+const DirectionCard = ({ href, image, title, moreLabel }) => {
+  const body = (
+    <>
+      <img
+        src={image}
+        alt=""
+        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        loading="lazy"
+        decoding="async"
+      />
+      <div
+        className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/10 transition-opacity duration-300 group-hover:from-black/85 group-hover:via-black/45"
+        aria-hidden
+      />
+      <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-5">
+        <h3
+          className="font-serif text-[clamp(18px,2.2vw,24px)] leading-snug text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.45)]"
+          style={{ fontWeight: 300 }}
+        >
+          {title}
+        </h3>
+        <span className="mt-2 inline-flex translate-y-2 font-sans text-[11px] uppercase tracking-[0.12em] text-white/90 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+          {moreLabel} →
+        </span>
+      </div>
+    </>
+  )
 
-const CountryCardSoon = ({ image, title, soonLabel }) => (
-  <div className="relative aspect-[4/5] w-full min-h-[220px] overflow-hidden rounded-2xl border border-border-soft shadow-[0_12px_36px_rgba(0,0,0,0.06)]">
-    <img src={image} alt="" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
-    <div className="absolute inset-0 bg-gradient-to-t from-black/78 via-black/40 to-black/20" aria-hidden />
-    <div className="absolute inset-0 flex flex-col justify-end p-5 sm:p-6">
-      <h3 className="font-serif text-[clamp(22px,3vw,30px)] leading-tight text-white drop-shadow-md" style={{ fontWeight: 300 }}>
-        {title}
-      </h3>
-      <p className="mt-3 font-sans text-[12px] uppercase tracking-[0.12em] text-white/65">{soonLabel}</p>
-    </div>
-  </div>
-)
+  if (href) {
+    return (
+      <a
+        href={href}
+        className="group relative block w-full overflow-hidden rounded-xl border border-border-soft shadow-[0_10px_28px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(0,0,0,0.1)] aspect-[4/5] min-h-[240px]"
+      >
+        {body}
+      </a>
+    )
+  }
+
+  return (
+    <article className="group relative block w-full overflow-hidden rounded-xl border border-border-soft shadow-[0_10px_28px_rgba(0,0,0,0.06)] aspect-[4/5] min-h-[240px]">
+      {body}
+    </article>
+  )
+}
 
 const HomeHubPage = () => {
   const { t } = useTranslation()
@@ -98,6 +110,7 @@ const HomeHubPage = () => {
   const bookingSteps = useMemo(() => t('homePage.bookingSteps', { returnObjects: true }) || [], [t])
   const faqItems = useMemo(() => t('homePage.faq', { returnObjects: true }) || [], [t])
   const blogFeatured = useMemo(() => t('italyPage.blogFeatured', { returnObjects: true }) || [], [t])
+  const detailsLabel = t('italyPage.moreDetails')
   const reviewCards = useMemo(
     () =>
       REVIEW_DEFS.map(({ key, image }) => {
@@ -288,15 +301,10 @@ const HomeHubPage = () => {
         <section className="mx-auto mt-20 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
           <h2 className="section-title !mb-12 text-center">{t('homePage.directionsHeading')}</h2>
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            <CountryCardLink
-              href="/italy/"
-              image={DIR_IMAGES.italy}
-              title={t('homePage.dirItalyTitle')}
-              cta={t('homePage.dirItalyCta')}
-            />
-            <CountryCardSoon image={DIR_IMAGES.ch} title={t('homePage.dirChTitle')} soonLabel={t('footer.soon')} />
-            <CountryCardSoon image={DIR_IMAGES.fr} title={t('homePage.dirFrTitle')} soonLabel={t('footer.soon')} />
-            <CountryCardSoon image={DIR_IMAGES.alps} title={t('homePage.dirAlpsTitle')} soonLabel={t('footer.soon')} />
+            <DirectionCard href="/italy/" image={DIR_IMAGES.italy} title={t('homePage.dirItalyTitle')} moreLabel={detailsLabel} />
+            <DirectionCard image={DIR_IMAGES.ch} title={t('homePage.dirChTitle')} moreLabel={detailsLabel} />
+            <DirectionCard image={DIR_IMAGES.fr} title={t('homePage.dirFrTitle')} moreLabel={detailsLabel} />
+            <DirectionCard image={DIR_IMAGES.alps} title={t('homePage.dirAlpsTitle')} moreLabel={detailsLabel} />
           </div>
         </section>
 

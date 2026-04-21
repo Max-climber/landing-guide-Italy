@@ -15,6 +15,8 @@ const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [alpsOpen, setAlpsOpen] = useState(false)
   const [mobileAlpsOpen, setMobileAlpsOpen] = useState(false)
+  const [isNarrow575, setIsNarrow575] = useState(false)
+  const [isVeryNarrow475, setIsVeryNarrow475] = useState(false)
   const [headerHeight, setHeaderHeight] = useState(88)
   const [navStyle, setNavStyle] = useState({
     bgColor: 'transparent',
@@ -54,11 +56,18 @@ const Navigation = () => {
   const syncHeaderHeight = () => {
     const h = Math.round(headerRef.current?.getBoundingClientRect().height || 88)
     setHeaderHeight(h > 0 ? h : 88)
+    document.documentElement.style.setProperty('--site-header-height', `${h > 0 ? h : 88}px`)
   }
 
   useEffect(() => {
     const handleScroll = () => setNavStyle(getNavStyle())
+    const handleViewport = () => {
+      const width = window.innerWidth || 0
+      setIsNarrow575(width < 575)
+      setIsVeryNarrow475(width < 475)
+    }
     syncHeaderHeight()
+    handleViewport()
     handleScroll()
     let ticking = false
     const throttled = () => {
@@ -72,9 +81,11 @@ const Navigation = () => {
     }
     window.addEventListener('scroll', throttled, { passive: true })
     window.addEventListener('resize', handleScroll, { passive: true })
+    window.addEventListener('resize', handleViewport, { passive: true })
     return () => {
       window.removeEventListener('scroll', throttled)
       window.removeEventListener('resize', handleScroll)
+      window.removeEventListener('resize', handleViewport)
     }
   }, [])
 
@@ -152,10 +163,10 @@ const Navigation = () => {
     <>
       <header
         ref={headerRef}
-        className={`header flex w-full items-center justify-between gap-3 px-4 py-4 sm:px-6 md:px-8 lg:gap-6 lg:px-[50px] lg:py-[26px] z-[70] transition-all duration-300 ${activeNavStyle.bgClass} ${activeNavStyle.backdrop || ''}`}
+        className={`header flex w-full items-center justify-between gap-3 px-4 py-4 sm:px-6 md:px-8 lg:gap-6 lg:px-[50px] lg:py-[26px] z-[70] transition-all duration-300 ${isVeryNarrow475 ? 'flex-wrap items-start' : ''} ${activeNavStyle.bgClass} ${activeNavStyle.backdrop || ''}`}
         style={{ backgroundColor: activeNavStyle.bgColor, zIndex: 100 }}
       >
-        <div className="flex min-w-0 flex-1 items-center gap-3 lg:flex-none">
+        <div className={`flex min-w-0 flex-1 items-center gap-3 lg:flex-none ${isVeryNarrow475 ? 'w-full' : ''}`}>
           <button
             type="button"
             data-nav-toggle="true"
@@ -228,7 +239,9 @@ const Navigation = () => {
           </a>
         </nav>
 
-        <div className="flex flex-shrink-0 items-center gap-2 sm:gap-3 md:gap-4">
+        <div
+          className={`flex flex-shrink-0 items-center gap-2 sm:gap-3 md:gap-4 ${isVeryNarrow475 ? 'w-full justify-start pl-[2.65rem] pt-2' : ''}`}
+        >
           <a
             href={`tel:${PHONE_E164}`}
             className={`hidden font-sans text-[13px] md:inline ${activeNavStyle.text} no-underline transition-opacity hover:opacity-70`}
@@ -242,15 +255,20 @@ const Navigation = () => {
           <button
             type="button"
             onClick={handleContactClick}
-            className={`header-btn inline-flex min-w-[156px] justify-center rounded-[50px] border border-text-main px-4 py-2.5 font-sans text-[11px] uppercase tracking-[0.08em] transition-all duration-300 hover:bg-text-main hover:text-white ${activeNavStyle.text} min-[575px]:min-w-[144px] min-[575px]:px-4 min-[575px]:py-2.5 lg:min-w-0 lg:px-7 lg:py-3 lg:text-[13px]`}
+            className={`header-btn inline-flex min-w-[156px] justify-center rounded-[50px] border border-text-main px-4 py-2.5 font-sans text-[11px] uppercase tracking-[0.08em] transition-all duration-300 hover:bg-text-main hover:text-white ${activeNavStyle.text} ${isVeryNarrow475 ? 'min-w-[210px] px-6 py-3 text-[12px]' : ''} lg:min-w-0 lg:px-7 lg:py-3 lg:text-[13px]`}
             style={{ fontWeight: 500 }}
           >
-            <span className="max-[574px]:hidden">{t('navHub.pickTour')}</span>
-            <span className="text-center leading-[1.2] min-[575px]:hidden">
-              {t('navHub.pickTourMobileLine1')}
-              <br />
-              {t('navHub.pickTourMobileLine2')}
-            </span>
+            {isVeryNarrow475 ? (
+              <span>{t('navHub.pickTour')}</span>
+            ) : isNarrow575 ? (
+              <span className="text-center leading-[1.2]">
+                {t('navHub.pickTourMobileLine1')}
+                <br />
+                {t('navHub.pickTourMobileLine2')}
+              </span>
+            ) : (
+              <span>{t('navHub.pickTour')}</span>
+            )}
           </button>
         </div>
       </header>

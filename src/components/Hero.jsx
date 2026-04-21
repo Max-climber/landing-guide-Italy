@@ -32,19 +32,50 @@ const Hero = ({
     }
     return [backgroundImage ?? '/images/main-photo.png']
   }, [backgroundImage, backgroundImages])
+  const [readyImages, setReadyImages] = useState(() => heroImages.slice(0, 1))
   const [activeSlide, setActiveSlide] = useState(0)
 
   useEffect(() => {
+    setReadyImages(heroImages.slice(0, 1))
     setActiveSlide(0)
   }, [heroImages])
 
   useEffect(() => {
     if (heroImages.length <= 1) return undefined
+    let cancelled = false
+    const preloaders = heroImages.slice(1).map((src) => {
+      const img = new Image()
+      img.decoding = 'async'
+      img.loading = 'eager'
+      img.src = src
+      img.onload = () => {
+        if (cancelled) return
+        setReadyImages((prev) => (prev.includes(src) ? prev : [...prev, src]))
+      }
+      return img
+    })
+
+    return () => {
+      cancelled = true
+      preloaders.forEach((img) => {
+        img.onload = null
+      })
+    }
+  }, [heroImages])
+
+  useEffect(() => {
+    if (readyImages.length <= 1) return undefined
     const interval = window.setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % heroImages.length)
+      setActiveSlide((prev) => (prev + 1) % readyImages.length)
     }, 5500)
     return () => window.clearInterval(interval)
-  }, [heroImages])
+  }, [readyImages])
+
+  useEffect(() => {
+    if (activeSlide > readyImages.length - 1) {
+      setActiveSlide(0)
+    }
+  }, [activeSlide, readyImages.length])
 
   return (
     <section
@@ -53,7 +84,7 @@ const Hero = ({
     >
       {/* Background Image - начинается с самого верха */}
       <div className="absolute top-0 left-0 right-0 bottom-0 w-full h-full overflow-hidden" style={{ top: 0 }}>
-        {heroImages.map((image, index) => (
+        {readyImages.map((image, index) => (
           <img
             key={`${image}-${index}`}
             src={image}
