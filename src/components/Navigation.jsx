@@ -240,7 +240,9 @@ const Navigation = () => {
         </nav>
 
         <div
-          className={`flex flex-shrink-0 items-center gap-2 sm:gap-3 md:gap-4 ${isVeryNarrow475 ? 'w-full justify-start pl-[2.65rem] pt-2' : ''}`}
+          className={`flex flex-shrink-0 items-center gap-2 sm:gap-3 md:gap-4 ${
+            isVeryNarrow475 ? 'w-full justify-center pt-1' : ''
+          }`}
         >
           <a
             href={`tel:${PHONE_E164}`}
