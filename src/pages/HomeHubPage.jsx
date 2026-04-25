@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import emailjs from '@emailjs/browser'
 import Navigation from '../components/Navigation'
@@ -95,11 +95,17 @@ const HomeHubPage = () => {
   const [openedFaq, setOpenedFaq] = useState(-1)
   const [isFinalSubmitting, setIsFinalSubmitting] = useState(false)
   const [finalStatus, setFinalStatus] = useState(null)
+  const [bookingProgress, setBookingProgress] = useState(0)
+  const [viewportWidth, setViewportWidth] = useState(1280)
+  const [finalCtaParallax, setFinalCtaParallax] = useState(0)
+  const [finalCtaUnlocked, setFinalCtaUnlocked] = useState(false)
   const [finalFormData, setFinalFormData] = useState({ name: '', phone: '', email: '' })
   const [phoneError, setPhoneError] = useState('')
   const [phoneTouched, setPhoneTouched] = useState(false)
   const [emailError, setEmailError] = useState('')
   const [emailTouched, setEmailTouched] = useState(false)
+  const bookingSectionRef = useRef(null)
+  const finalCtaRef = useRef(null)
 
   const whyIconSrcs = useMemo(
     () => WHY_INFOGRAPHIC_FILES.map((file) => `/images/infographics/${encodeURIComponent(file)}`),
@@ -109,7 +115,6 @@ const HomeHubPage = () => {
   const popularTours = useMemo(() => t('homePage.popularTours', { returnObjects: true }) || [], [t])
   const bookingSteps = useMemo(() => t('homePage.bookingSteps', { returnObjects: true }) || [], [t])
   const faqItems = useMemo(() => t('homePage.faq', { returnObjects: true }) || [], [t])
-  const blogFeatured = useMemo(() => t('italyPage.blogFeatured', { returnObjects: true }) || [], [t])
   const detailsLabel = t('italyPage.moreDetails')
   const reviewCards = useMemo(
     () =>
@@ -167,6 +172,37 @@ const HomeHubPage = () => {
   }, [])
 
   useEffect(() => {
+    const updateFinalCtaParallax = () => {
+      const section = finalCtaRef.current
+      if (!section) return
+
+      const rect = section.getBoundingClientRect()
+      const viewportHeight = window.innerHeight || 1
+      const start = viewportHeight
+      const end = -rect.height
+      const raw = (start - rect.top) / (start - end)
+      const next = Math.max(0, Math.min(1, raw))
+      setFinalCtaParallax(next)
+
+      const isFullyOutOfView = rect.bottom <= 0 || rect.top >= viewportHeight
+      if (isFullyOutOfView) {
+        setFinalCtaUnlocked(false)
+      } else if (next >= 0.78) {
+        setFinalCtaUnlocked(true)
+      }
+    }
+
+    updateFinalCtaParallax()
+    window.addEventListener('scroll', updateFinalCtaParallax, { passive: true })
+    window.addEventListener('resize', updateFinalCtaParallax, { passive: true })
+
+    return () => {
+      window.removeEventListener('scroll', updateFinalCtaParallax)
+      window.removeEventListener('resize', updateFinalCtaParallax)
+    }
+  }, [])
+
+  useEffect(() => {
     const hash = window.location.hash?.replace(/^#/, '')
     if (!hash) return
     const el = document.getElementById(hash)
@@ -181,6 +217,67 @@ const HomeHubPage = () => {
   }, [])
 
   const finalToast = finalStatus === 'success' ? t('homePage.finalSuccess') : t('homePage.finalError')
+  const bookingPins = useMemo(() => {
+    if (viewportWidth < 640) {
+      return [
+        { top: '20%', left: '50%' },
+        { top: '33%', left: '53%' },
+        { top: '47%', left: '49%' },
+        { top: '61%', left: '52%' },
+        { top: '76%', left: '48%' },
+      ]
+    }
+
+    if (viewportWidth < 1024) {
+      return [
+        { top: '20%', left: '50%' },
+        { top: '33%', left: '53%' },
+        { top: '47%', left: '49%' },
+        { top: '61%', left: '52%' },
+        { top: '76%', left: '48%' },
+      ]
+    }
+
+    return [
+      { top: '20%', left: '50%' },
+      { top: '33%', left: '53%' },
+      { top: '47%', left: '49%' },
+      { top: '61%', left: '52%' },
+      { top: '76%', left: '48%' },
+    ]
+  }, [viewportWidth])
+
+  useEffect(() => {
+    const syncViewportWidth = () => setViewportWidth(window.innerWidth || 1280)
+
+    const updateBookingProgress = () => {
+      const section = bookingSectionRef.current
+      if (!section) return
+
+      const rect = section.getBoundingClientRect()
+      const viewportHeight = window.innerHeight || 1
+      const start = viewportHeight * 0.9
+      const end = -rect.height * 0.8
+      const raw = (start - rect.top) / (start - end)
+      const next = Math.max(0, Math.min(1, raw))
+      setBookingProgress(next)
+    }
+
+    const handleResize = () => {
+      syncViewportWidth()
+      updateBookingProgress()
+    }
+
+    syncViewportWidth()
+    updateBookingProgress()
+    window.addEventListener('scroll', updateBookingProgress, { passive: true })
+    window.addEventListener('resize', handleResize, { passive: true })
+
+    return () => {
+      window.removeEventListener('scroll', updateBookingProgress)
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
 
   const handleFinalPhoneChange = (event) => {
     const formatted = formatPhone(event.target.value)
@@ -202,6 +299,15 @@ const HomeHubPage = () => {
   const handleFinalEmailBlur = () => {
     setEmailTouched(true)
     setEmailError(validateEmail(finalFormData.email))
+  }
+
+  const getFinalCtaRevealProgress = (index) => {
+    if (finalCtaUnlocked) return 1
+
+    const start = 0.16 + index * 0.12
+    const duration = 0.2
+    const raw = (finalCtaParallax - start) / duration
+    return Math.max(0, Math.min(1, raw))
   }
 
   const handleFinalCtaSubmit = async (event) => {
@@ -332,45 +438,51 @@ const HomeHubPage = () => {
 
         <section id="popular-tours" className="mx-auto mt-24 w-full max-w-[1200px] scroll-mt-28 px-4 sm:px-6 md:px-8 lg:px-5">
           <h2 className="section-title !mb-12 text-center">{t('homePage.popularHeading')}</h2>
-          <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-2">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {popularTours.map((tour, idx) => (
               <article
                 key={`${tour.title}-${idx}`}
-                className="flex flex-col overflow-hidden rounded-2xl border border-border-soft bg-bg-card shadow-[0_10px_32px_rgba(0,0,0,0.05)] transition-shadow duration-300 hover:shadow-[0_16px_40px_rgba(0,0,0,0.08)]"
+                className="flex flex-col overflow-hidden rounded-xl border border-border-soft bg-bg-card shadow-[0_8px_22px_rgba(0,0,0,0.03)]"
               >
-                <div className="aspect-[16/10] w-full overflow-hidden">
+                <div className="aspect-[16/9] w-full overflow-hidden">
                   <img
                     src={tour.image}
                     alt={tour.title}
-                    className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.03]"
+                    className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                     loading="lazy"
                   />
                 </div>
-                <div className="flex flex-1 flex-col p-6 sm:p-7">
-                  <h3 className="mb-3 font-serif text-[28px] leading-tight text-text-main" style={{ fontWeight: 300 }}>
+                <div className="flex flex-1 flex-col p-4 sm:p-5">
+                  <h3 className="mb-2 font-serif text-[24px] leading-[1.1] text-text-main" style={{ fontWeight: 300 }}>
                     {tour.title}
                   </h3>
-                  <p className="mb-5 text-sm leading-7 text-text-light">{tour.route}</p>
+                  <p className="mb-4 text-sm leading-6 text-text-light">{tour.route}</p>
                   <div className="mt-auto">
-                    <div className="mb-4 flex flex-wrap items-end justify-between gap-3 border-y border-border-soft py-4 text-[12px] uppercase tracking-[0.08em] text-[#666]">
-                      <span>👤 {tour.people}</span>
-                      <span>⏳ {tour.duration}</span>
+                    <div className="mb-3 grid grid-cols-2 gap-3 border-y border-border-soft py-3">
+                      <div>
+                        <p className="mb-1 text-[10px] uppercase tracking-[0.1em] text-[#888]">Гости</p>
+                        <p className="text-sm font-medium text-text-main">{tour.people}</p>
+                      </div>
+                      <div>
+                        <p className="mb-1 text-[10px] uppercase tracking-[0.1em] text-[#888]">Длительность</p>
+                        <p className="text-sm font-medium text-text-main">{tour.duration}</p>
+                      </div>
                     </div>
-                    <p className="mb-5 font-serif text-[clamp(22px,2.8vw,30px)] text-text-main" style={{ fontWeight: 400 }}>
+                    <p className="mb-4 font-serif text-[clamp(20px,2.2vw,26px)] text-text-main" style={{ fontWeight: 400 }}>
                       {tour.price}
                     </p>
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-2 gap-2">
                       <a
                         href={tour.detailsHref}
                         download={tour.detailsDownload ? '' : undefined}
-                        className="rounded-[40px] border border-text-main py-2.5 text-center text-[11px] uppercase tracking-[0.11em] text-text-main transition-all hover:bg-text-main hover:text-white"
+                        className="rounded-[40px] border border-text-main px-3 py-2 text-center text-[10px] uppercase tracking-[0.11em] text-text-main transition-all duration-300 hover:bg-text-main hover:text-white"
                       >
                         {t('homePage.moreDetails')}
                       </a>
                       <button
                         type="button"
                         onClick={() => setIsModalOpen(true)}
-                        className="rounded-[40px] border border-text-main bg-text-main py-2.5 text-center text-[11px] uppercase tracking-[0.11em] text-white transition-all hover:bg-text-main/90"
+                        className="rounded-[40px] border border-text-main bg-text-main px-3 py-2 text-center text-[10px] uppercase tracking-[0.11em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-text-main/90"
                       >
                         {t('homePage.discussTour')}
                       </button>
@@ -384,21 +496,87 @@ const HomeHubPage = () => {
 
         <section className="mx-auto mt-24 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
           <h2 className="section-title !mb-12 text-center">{t('homePage.bookingHeading')}</h2>
-          <ol className="mx-auto grid max-w-[900px] gap-6 sm:grid-cols-2 lg:grid-cols-5">
-            {bookingSteps.map((step, i) => (
-              <li
-                key={i}
-                className="relative rounded-2xl border border-border-soft bg-bg-card/80 px-5 py-6 text-center shadow-[0_8px_24px_rgba(0,0,0,0.04)]"
+          <div ref={bookingSectionRef} className="relative left-1/2 h-[460vh] w-screen -translate-x-1/2 bg-bg-base">
+            <div className="sticky top-0 h-screen overflow-hidden">
+              <div
+                className="absolute inset-0"
+                style={{
+                  transform: `translateY(${(bookingProgress - 0.5) * -6}%) scale(1.01)`,
+                  transition: 'transform 100ms linear',
+                }}
               >
-                <span className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-full border border-text-main font-serif text-lg text-text-main">
-                  {i + 1}
-                </span>
-                <p className="font-sans text-sm leading-6 text-text-main" style={{ fontWeight: 500 }}>
-                  {step}
-                </p>
-              </li>
-            ))}
-          </ol>
+                <div className="h-full w-full bg-bg-base" />
+              </div>
+              <div className="pointer-events-none absolute inset-0">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="h-full w-full opacity-60">
+                  <path
+                    d="M50 20 C54 26 55 30 53 33 C50 39 47 43 49 47 C53 53 55 57 52 61 C49 67 46 71 48 76"
+                    fill="none"
+                    stroke="#d8cdc1"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </div>
+
+              <ol className="pointer-events-none absolute inset-0 mx-auto w-full max-w-[1320px]">
+              {bookingSteps.map((step, index) => {
+                const timelineStart = 0.1
+                const stepSpan = 0.17
+                const stepStart = timelineStart + index * stepSpan
+                const localProgress = Math.max(0, Math.min(1, (bookingProgress - stepStart) / stepSpan))
+                const circleProgress = Math.max(0, Math.min(1, localProgress / 0.52))
+                const textProgress = Math.max(0, Math.min(1, (localProgress - 0.52) / 0.48))
+                const pinScale = 0.7 + circleProgress * 0.42
+                const pinOpacity = 0.25 + circleProgress * 0.75
+
+                return (
+                  <li
+                    key={`booking-pin-${index}`}
+                    className="absolute"
+                    style={{
+                      top: bookingPins[index].top,
+                      left: bookingPins[index].left,
+                      transform: 'translate(-50%, -50%)',
+                    }}
+                  >
+                    <div className="flex items-center gap-0 transition-all duration-300" style={{ opacity: pinOpacity }}>
+                      <span
+                        className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/85 bg-text-main text-base font-semibold text-white shadow-[0_8px_18px_rgba(0,0,0,0.28)]"
+                        style={{
+                          transform: `scale(${pinScale})`,
+                          transition: 'transform 280ms ease-out',
+                        }}
+                      >
+                        {index + 1}
+                      </span>
+                      <span
+                        className="h-[2px] bg-[#e7dfd7]"
+                        style={{
+                          width: `${Math.max(0, textProgress * 16)}px`,
+                          opacity: textProgress,
+                          transition: 'width 280ms ease-out, opacity 280ms ease-out',
+                        }}
+                      />
+                      <div
+                        className="min-w-[178px] rounded-r-xl rounded-l-[6px] border border-[#e7dfd7] bg-bg-base px-3 py-2 text-xs text-text-main shadow-[0_8px_18px_rgba(0,0,0,0.12)] sm:text-sm"
+                        style={{
+                          opacity: textProgress,
+                          transform: `translateX(${12 - textProgress * 12}px) scale(${0.95 + textProgress * 0.05})`,
+                          transition: 'opacity 280ms ease-out, transform 280ms ease-out',
+                        }}
+                      >
+                        <p className="font-sans leading-5" style={{ fontWeight: 600 }}>
+                          {step}
+                        </p>
+                      </div>
+                    </div>
+                  </li>
+                )
+              })}
+              </ol>
+            </div>
+          </div>
         </section>
 
         <section id="about-us" className="mx-auto mt-24 w-full max-w-[1200px] scroll-mt-28 px-4 sm:px-6 md:px-8 lg:px-5">
@@ -471,10 +649,37 @@ const HomeHubPage = () => {
           </div>
         </section>
 
-        <section id="final-cta" className="mx-auto mt-24 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
-          <h2 className="section-title !mb-4 text-center text-[clamp(28px,4vw,38px)]">{t('homePage.finalTitle')}</h2>
-          <p className="mx-auto mb-8 max-w-[720px] text-center text-sm leading-7 text-text-light">{t('homePage.finalDescription')}</p>
-          <form onSubmit={handleFinalCtaSubmit} className="mx-auto flex w-full max-w-[640px] flex-col gap-4">
+        <section id="final-cta" ref={finalCtaRef} className="mx-auto mt-24 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
+          <div className="overflow-hidden bg-bg-base">
+            <div className="relative z-10 px-4 pb-4 pt-8 sm:px-8 sm:pb-6 sm:pt-10">
+              <h2 className="section-title !mb-4 text-center text-[clamp(28px,4vw,38px)]">{t('homePage.finalTitle')}</h2>
+              <p className="mx-auto mb-8 max-w-[720px] text-center text-sm leading-7 text-text-light">{t('homePage.finalDescription')}</p>
+            </div>
+          </div>
+
+          <div className="relative left-1/2 mt-5 w-screen -translate-x-1/2 overflow-hidden">
+            <img
+              src="/images/infographics/for%20form%20parallax.png"
+              alt=""
+              className="pointer-events-none absolute inset-0 h-[128%] w-full max-w-none object-cover"
+              style={{
+                transform: `translateY(${(finalCtaParallax - 0.5) * 8}px) scale(1.1)`,
+                transition: 'transform 120ms linear',
+              }}
+              loading="lazy"
+              decoding="async"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-bg-base/68" />
+            <div className="relative z-10 mx-auto w-full max-w-[760px] px-5 py-10 sm:px-6 sm:py-12">
+              <form onSubmit={handleFinalCtaSubmit} className="mx-auto flex w-full max-w-[640px] flex-col gap-4">
+            <div
+              style={{
+                opacity: getFinalCtaRevealProgress(0),
+                transform: `translateY(${-18 + getFinalCtaRevealProgress(0) * 18}px)`,
+                clipPath: `inset(0 0 ${(1 - getFinalCtaRevealProgress(0)) * 100}% 0)`,
+                transition: 'opacity 240ms ease-out, transform 240ms ease-out, clip-path 240ms ease-out',
+              }}
+            >
             <input
               type="text"
               name="name"
@@ -484,6 +689,15 @@ const HomeHubPage = () => {
               placeholder={t('italyPage.finalCta.namePlaceholder')}
               className="w-full rounded-[14px] border border-border-soft bg-white px-4 py-3 text-sm text-text-main outline-none transition-colors placeholder:text-[#9c9c9c] focus:border-text-main"
             />
+            </div>
+            <div
+              style={{
+                opacity: getFinalCtaRevealProgress(1),
+                transform: `translateY(${-18 + getFinalCtaRevealProgress(1) * 18}px)`,
+                clipPath: `inset(0 0 ${(1 - getFinalCtaRevealProgress(1)) * 100}% 0)`,
+                transition: 'opacity 240ms ease-out, transform 240ms ease-out, clip-path 240ms ease-out',
+              }}
+            >
             <input
               type="tel"
               name="phone"
@@ -496,7 +710,16 @@ const HomeHubPage = () => {
                 phoneTouched && phoneError ? 'border-red-400 focus:border-red-400' : 'border-border-soft focus:border-text-main'
               }`}
             />
+            </div>
             {phoneTouched && phoneError ? <p className="mt-1 text-xs text-red-400">{phoneError}</p> : null}
+            <div
+              style={{
+                opacity: getFinalCtaRevealProgress(2),
+                transform: `translateY(${-18 + getFinalCtaRevealProgress(2) * 18}px)`,
+                clipPath: `inset(0 0 ${(1 - getFinalCtaRevealProgress(2)) * 100}% 0)`,
+                transition: 'opacity 240ms ease-out, transform 240ms ease-out, clip-path 240ms ease-out',
+              }}
+            >
             <input
               type="email"
               name="email"
@@ -509,23 +732,45 @@ const HomeHubPage = () => {
                 emailTouched && emailError ? 'border-red-400 focus:border-red-400' : 'border-border-soft focus:border-text-main'
               }`}
             />
+            </div>
             {emailTouched && emailError ? <p className="mt-1 text-xs text-red-400">{emailError}</p> : null}
+            <div
+              style={{
+                opacity: getFinalCtaRevealProgress(3),
+                transform: `translateY(${-18 + getFinalCtaRevealProgress(3) * 18}px)`,
+                clipPath: `inset(0 0 ${(1 - getFinalCtaRevealProgress(3)) * 100}% 0)`,
+                transition: 'opacity 240ms ease-out, transform 240ms ease-out, clip-path 240ms ease-out',
+              }}
+            >
             <button
               type="submit"
               disabled={isFinalSubmitting}
-              className="main-btn w-full rounded-[50px] border border-text-main bg-transparent px-6 py-4 text-[13px] uppercase tracking-[0.14em] text-text-main transition-all duration-300 hover:-translate-y-0.5 hover:bg-text-main hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+              className="main-btn w-full rounded-[50px] border border-text-main bg-text-main px-6 py-4 text-[13px] uppercase tracking-[0.14em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-text-main/90 disabled:cursor-not-allowed disabled:opacity-50"
               style={{ fontWeight: 500 }}
             >
               {isFinalSubmitting ? t('homePage.finalSubmitting') : t('homePage.finalSubmit')}
             </button>
+            </div>
+            <div
+              style={{
+                opacity: getFinalCtaRevealProgress(4),
+                transform: `translateY(${-18 + getFinalCtaRevealProgress(4) * 18}px)`,
+                clipPath: `inset(0 0 ${(1 - getFinalCtaRevealProgress(4)) * 100}% 0)`,
+                transition: 'opacity 240ms ease-out, transform 240ms ease-out, clip-path 240ms ease-out',
+              }}
+            >
             <p className="text-center text-xs leading-6 text-[#8a8a8a]">
               {t('homePage.finalPrivacyPrefix')}{' '}
               <span className="underline-offset-4 hover:underline">{t('homePage.finalPrivacyLink')}</span>
             </p>
-          </form>
+            </div>
+              </form>
+            </div>
+          </div>
         </section>
 
-        <section className="mx-auto mt-20 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
+        {/* BLOG BLOCK TEMPORARILY HIDDEN
+          <section className="mx-auto mt-20 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
           <h2 className="section-title !mb-10 text-center">{t('homePage.blogHeading')}</h2>
           <ul className="mx-auto max-w-[640px] divide-y divide-border-soft rounded-xl border border-border-soft bg-bg-card/80 px-2 py-1 sm:px-3">
             {blogFeatured.map((post, idx) => (
@@ -570,7 +815,8 @@ const HomeHubPage = () => {
               {t('homePage.blogAllArticles')}
             </a>
           </div>
-        </section>
+          </section>
+        */}
       </main>
 
       <Footer />
