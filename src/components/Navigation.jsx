@@ -146,14 +146,9 @@ const Navigation = () => {
 
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden'
       syncHeaderHeight()
     } else {
-      document.body.style.overflow = ''
       setMobileAlpsOpen(false)
-    }
-    return () => {
-      document.body.style.overflow = ''
     }
   }, [isOpen])
 
@@ -251,13 +246,10 @@ const Navigation = () => {
           >
             {PHONE_DISPLAY}
           </a>
-          <div className="hidden items-center md:flex" style={{ height: 24 }}>
-            <LanguageSwitcher />
-          </div>
           <button
             type="button"
             onClick={handleContactClick}
-            className={`header-btn inline-flex min-w-[156px] justify-center rounded-[50px] border border-text-main px-4 py-2.5 font-sans text-[11px] uppercase tracking-[0.08em] transition-all duration-300 hover:bg-text-main hover:text-white ${activeNavStyle.text} ${isVeryNarrow475 ? 'min-w-[210px] px-6 py-3 text-[12px]' : ''} lg:min-w-0 lg:px-7 lg:py-3 lg:text-[13px]`}
+            className={`header-btn inline-flex min-w-[156px] justify-center rounded-[50px] border border-text-main bg-text-main px-4 py-2.5 font-sans text-[11px] uppercase tracking-[0.08em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-text-main/90 ${isVeryNarrow475 ? 'min-w-[210px] px-6 py-3 text-[12px]' : ''} lg:min-w-0 lg:px-7 lg:py-3 lg:text-[13px]`}
             style={{ fontWeight: 500 }}
           >
             {isVeryNarrow475 ? (
@@ -272,6 +264,9 @@ const Navigation = () => {
               <span>{t('navHub.pickTour')}</span>
             )}
           </button>
+          <div className="hidden items-center md:ml-2 md:flex" style={{ height: 24 }}>
+            <LanguageSwitcher />
+          </div>
         </div>
       </header>
 

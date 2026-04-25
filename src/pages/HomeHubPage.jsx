@@ -218,59 +218,16 @@ const HomeHubPage = () => {
 
   const finalToast = finalStatus === 'success' ? t('homePage.finalSuccess') : t('homePage.finalError')
   const bookingPins = useMemo(() => {
-    if (viewportWidth < 640) {
-      return [
-        { top: '20%', left: '56%' },
-        { top: '33%', left: '53%' },
-        { top: '47%', left: '51%' },
-        { top: '61%', left: '54%' },
-        { top: '76%', left: '49%' },
-      ]
-    }
-
-    if (viewportWidth < 1024) {
-      return [
-        { top: '20%', left: '56%' },
-        { top: '33%', left: '53%' },
-        { top: '47%', left: '51%' },
-        { top: '61%', left: '54%' },
-        { top: '76%', left: '49%' },
-      ]
-    }
-
     return [
-      { top: '20%', left: '56%' },
-      { top: '33%', left: '53%' },
-      { top: '47%', left: '51%' },
-      { top: '61%', left: '54%' },
-      { top: '76%', left: '49%' },
+      { top: '20%' },
+      { top: '34%' },
+      { top: '48%' },
+      { top: '62%' },
+      { top: '76%' },
     ]
-  }, [viewportWidth])
-
-  const bookingSnakePath = useMemo(() => {
-    const points = bookingPins.map((pin) => ({
-      x: Number.parseFloat(pin.left),
-      y: Number.parseFloat(pin.top),
-    }))
-
-    if (points.length < 2) return ''
-
-    const [first, ...rest] = points
-    let path = `M ${first.x} ${first.y}`
-    let prev = first
-
-    rest.forEach((point) => {
-      const midY = (prev.y + point.y) / 2
-      path += ` C ${prev.x} ${midY}, ${point.x} ${midY}, ${point.x} ${point.y}`
-      prev = point
-    })
-
-    return path
-  }, [bookingPins])
+  }, [])
 
   useEffect(() => {
-    const syncViewportWidth = () => setViewportWidth(window.innerWidth || 1280)
-
     const updateBookingProgress = () => {
       const section = bookingSectionRef.current
       if (!section) return
@@ -284,19 +241,13 @@ const HomeHubPage = () => {
       setBookingProgress(next)
     }
 
-    const handleResize = () => {
-      syncViewportWidth()
-      updateBookingProgress()
-    }
-
-    syncViewportWidth()
     updateBookingProgress()
     window.addEventListener('scroll', updateBookingProgress, { passive: true })
-    window.addEventListener('resize', handleResize, { passive: true })
+    window.addEventListener('resize', updateBookingProgress, { passive: true })
 
     return () => {
       window.removeEventListener('scroll', updateBookingProgress)
-      window.removeEventListener('resize', handleResize)
+      window.removeEventListener('resize', updateBookingProgress)
     }
   }, [])
 
@@ -519,18 +470,6 @@ const HomeHubPage = () => {
           <h2 className="section-title !mb-12 text-center">{t('homePage.bookingHeading')}</h2>
           <div ref={bookingSectionRef} className="relative left-1/2 h-[460vh] w-screen -translate-x-1/2 bg-bg-base">
             <div className="sticky top-0 h-screen overflow-hidden">
-              <div className="pointer-events-none absolute inset-0">
-                <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="h-full w-full opacity-60">
-                  <path
-                    d={bookingSnakePath}
-                    fill="none"
-                    stroke="#d8cdc1"
-                    strokeWidth="1.35"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </div>
-
               <ol className="pointer-events-none absolute inset-0 w-full">
               {bookingSteps.map((step, index) => {
                 const timelineStart = 0.1
@@ -548,11 +487,11 @@ const HomeHubPage = () => {
                     className="absolute"
                     style={{
                       top: bookingPins[index].top,
-                      left: bookingPins[index].left,
+                      left: '43%',
                       transform: 'translate(-50%, -50%)',
                     }}
                   >
-                    <div className="flex items-center gap-0 transition-all duration-300" style={{ opacity: pinOpacity }}>
+                    <div className="relative h-11 w-11 transition-all duration-300" style={{ opacity: pinOpacity }}>
                       <span
                         className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/85 bg-text-main text-base font-semibold text-white shadow-[0_8px_18px_rgba(0,0,0,0.28)]"
                         style={{
@@ -562,6 +501,8 @@ const HomeHubPage = () => {
                       >
                         {index + 1}
                       </span>
+                    </div>
+                    <div className="absolute left-[calc(100%+8px)] top-1/2 flex -translate-y-1/2 items-center gap-0">
                       <span
                         className="h-[2px] bg-[#e7dfd7]"
                         style={{
@@ -594,15 +535,20 @@ const HomeHubPage = () => {
         <section id="about-us" className="mx-auto mt-24 w-full max-w-[1200px] scroll-mt-28 px-4 sm:px-6 md:px-8 lg:px-5">
           <h2 className="section-title !mb-10 text-center">{t('homePage.aboutHeading')}</h2>
           <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
-            <div className="overflow-hidden rounded-2xl border border-border-soft shadow-[0_12px_36px_rgba(0,0,0,0.06)]">
-              <img
-                src="/images/about/hero-composite.jpg"
-                alt=""
-                className="h-full min-h-[280px] w-full object-cover"
-                loading="lazy"
+            <p className="order-1 text-base leading-8 text-text-light sm:text-[17px] sm:leading-8">{t('homePage.aboutText')}</p>
+            <div className="order-2 w-full max-w-[360px] justify-self-center overflow-hidden rounded-2xl border border-border-soft bg-black shadow-[0_12px_36px_rgba(0,0,0,0.06)] lg:justify-self-end">
+              <video
+                src="/videos/На главную_сжато.mp4"
+                poster="/videos/заставка.png"
+                className="aspect-[9/16] w-full object-contain"
+                controls
+                loop
+                muted
+                playsInline
+                autoPlay
+                preload="metadata"
               />
             </div>
-            <p className="text-base leading-8 text-text-light sm:text-[17px] sm:leading-8">{t('homePage.aboutText')}</p>
           </div>
         </section>
 
