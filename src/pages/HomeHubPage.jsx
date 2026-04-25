@@ -184,10 +184,10 @@ const HomeHubPage = () => {
       const next = Math.max(0, Math.min(1, raw))
       setFinalCtaParallax(next)
 
-      const isFullyOutOfView = rect.bottom <= 0 || rect.top >= viewportHeight
+      const isFullyOutOfView = rect.bottom < -120 || rect.top > viewportHeight + 120
       if (isFullyOutOfView) {
         setFinalCtaUnlocked(false)
-      } else if (next >= 0.78) {
+      } else if (next >= 0.58) {
         setFinalCtaUnlocked(true)
       }
     }
@@ -220,32 +220,53 @@ const HomeHubPage = () => {
   const bookingPins = useMemo(() => {
     if (viewportWidth < 640) {
       return [
-        { top: '20%', left: '50%' },
+        { top: '20%', left: '56%' },
         { top: '33%', left: '53%' },
-        { top: '47%', left: '49%' },
-        { top: '61%', left: '52%' },
-        { top: '76%', left: '48%' },
+        { top: '47%', left: '51%' },
+        { top: '61%', left: '54%' },
+        { top: '76%', left: '49%' },
       ]
     }
 
     if (viewportWidth < 1024) {
       return [
-        { top: '20%', left: '50%' },
+        { top: '20%', left: '56%' },
         { top: '33%', left: '53%' },
-        { top: '47%', left: '49%' },
-        { top: '61%', left: '52%' },
-        { top: '76%', left: '48%' },
+        { top: '47%', left: '51%' },
+        { top: '61%', left: '54%' },
+        { top: '76%', left: '49%' },
       ]
     }
 
     return [
-      { top: '20%', left: '50%' },
+      { top: '20%', left: '56%' },
       { top: '33%', left: '53%' },
-      { top: '47%', left: '49%' },
-      { top: '61%', left: '52%' },
-      { top: '76%', left: '48%' },
+      { top: '47%', left: '51%' },
+      { top: '61%', left: '54%' },
+      { top: '76%', left: '49%' },
     ]
   }, [viewportWidth])
+
+  const bookingSnakePath = useMemo(() => {
+    const points = bookingPins.map((pin) => ({
+      x: Number.parseFloat(pin.left),
+      y: Number.parseFloat(pin.top),
+    }))
+
+    if (points.length < 2) return ''
+
+    const [first, ...rest] = points
+    let path = `M ${first.x} ${first.y}`
+    let prev = first
+
+    rest.forEach((point) => {
+      const midY = (prev.y + point.y) / 2
+      path += ` C ${prev.x} ${midY}, ${point.x} ${midY}, ${point.x} ${point.y}`
+      prev = point
+    })
+
+    return path
+  }, [bookingPins])
 
   useEffect(() => {
     const syncViewportWidth = () => setViewportWidth(window.innerWidth || 1280)
@@ -498,28 +519,19 @@ const HomeHubPage = () => {
           <h2 className="section-title !mb-12 text-center">{t('homePage.bookingHeading')}</h2>
           <div ref={bookingSectionRef} className="relative left-1/2 h-[460vh] w-screen -translate-x-1/2 bg-bg-base">
             <div className="sticky top-0 h-screen overflow-hidden">
-              <div
-                className="absolute inset-0"
-                style={{
-                  transform: `translateY(${(bookingProgress - 0.5) * -6}%) scale(1.01)`,
-                  transition: 'transform 100ms linear',
-                }}
-              >
-                <div className="h-full w-full bg-bg-base" />
-              </div>
               <div className="pointer-events-none absolute inset-0">
                 <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="h-full w-full opacity-60">
                   <path
-                    d="M50 20 C54 26 55 30 53 33 C50 39 47 43 49 47 C53 53 55 57 52 61 C49 67 46 71 48 76"
+                    d={bookingSnakePath}
                     fill="none"
                     stroke="#d8cdc1"
-                    strokeWidth="1.2"
+                    strokeWidth="1.35"
                     strokeLinecap="round"
                   />
                 </svg>
               </div>
 
-              <ol className="pointer-events-none absolute inset-0 mx-auto w-full max-w-[1320px]">
+              <ol className="pointer-events-none absolute inset-0 w-full">
               {bookingSteps.map((step, index) => {
                 const timelineStart = 0.1
                 const stepSpan = 0.17
