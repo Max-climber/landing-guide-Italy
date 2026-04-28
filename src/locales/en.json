@@ -353,8 +353,8 @@
       "phoneValid": "Phone entered correctly",
       "emailExample": "Example: skilover@email.com",
       "phoneFormat": "Format: +1 (555) 123-4567, +39 123 456 7890, or 8 (999) 123-45-67",
-      "submitSuccess": "Request sent successfully! We will contact you shortly.",
-      "submitError": "An error occurred while sending the request. Please try again later or contact us directly.",
+      "submitSuccess": "Thank you for your request! A La Vacanza Bianca manager will contact you soon to discuss your trip details.",
+      "submitError": "An error occurred. Unfortunately, we did not receive your request :( Please try again or contact us using another convenient method.",
       "sending": "Sending...",
       "subject": "New Request!",
       "autoReplySubject": "Your request received - La Vacanza Bianca"
@@ -520,9 +520,9 @@
         "people": "up to 3",
         "duration": "6 nights",
         "price": "from 4600 €",
-        "detailsHref": "/files/ozernyy-kray-program.pdf",
-        "detailsDownload": true,
-        "image": "https://images.unsplash.com/photo-1542384666-4853558d5118?q=80&w=1200"
+        "detailsHref": "/italy/tury-ozero-como/",
+        "detailsDownload": false,
+        "image": "/images/infographics/main-carusel-1.1.png"
       },
       {
         "title": "From Como to Venice",

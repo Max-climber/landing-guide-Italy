@@ -16,7 +16,7 @@ const HOME_ABSOLUTE = 'https://vacanzabianca.ru/'
 const HOME_PATH = '/'
 
 const TOUR_BUILDERS = [
-  { key: 'lakeComoGarda', image: 'https://images.unsplash.com/photo-1542384666-4853558d5118?q=80&w=1200' },
+  { key: 'lakeComoGarda', image: '/images/infographics/main-carusel-1.1.png' },
   { key: 'comoVenice', image: 'https://images.unsplash.com/photo-1540979388789-67225c354146?q=80&w=1200' },
   { key: 'peaksDolomites', image: 'https://images.unsplash.com/photo-1617822129592-b3a165a2d711?q=80&w=1200' },
   { key: 'northArchitecture', image: 'https://images.unsplash.com/photo-1599389713679-370e081827b5?q=80&w=1200' },
@@ -25,23 +25,16 @@ const TOUR_BUILDERS = [
 ]
 
 const DIRECTION_DEFS = [
-  { key: 'como', href: '/italy/tury-ozero-como/', image: 'https://images.unsplash.com/photo-1588623744358-04def0a7f1df?q=80&w=1200' },
-  { key: 'garda', href: '/italy/tury-ozero-garda/', image: 'https://images.unsplash.com/photo-1568282361099-27027d1a2f69?q=80&w=1200' },
-  { key: 'dolomites', href: '/italy/dolomity-alps/', image: 'https://images.unsplash.com/photo-1590244793822-261162434685?q=80&w=1200' },
-  { key: 'north', href: '/italy/tury-sever/', image: 'https://images.unsplash.com/photo-1518844390315-99c51c88824f?q=80&w=1200' },
+  { key: 'como', image: 'https://images.unsplash.com/photo-1588623744358-04def0a7f1df?q=80&w=1200' },
+  { key: 'garda', image: 'https://images.unsplash.com/photo-1568282361099-27027d1a2f69?q=80&w=1200' },
+  { key: 'dolomites', image: 'https://images.unsplash.com/photo-1590244793822-261162434685?q=80&w=1200' },
+  { key: 'north', image: 'https://images.unsplash.com/photo-1518844390315-99c51c88824f?q=80&w=1200' },
 ]
 
 const FORMAT_DEFS = [
-  { key: 'summer', href: '/italy/tury-letom/', image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=80' },
+  { key: 'summer', image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=80' },
   { key: 'ski', href: '/alps/gornolyzhnye-tury', image: 'https://images.unsplash.com/photo-1549640376-3ad70f27489b?auto=format&fit=crop&w=1200&q=80' },
-  { key: 'excursions', href: '/italy/excursions/', image: 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=80' },
-]
-
-const BLOG_DEFS = [
-  { key: 'whereItaly', href: '/blog/kuda-poehat-italy/', image: 'https://images.unsplash.com/photo-1533658925622-ef0ea7e0b3b1?auto=format&fit=crop&w=1200&q=80' },
-  { key: 'summerItaly', href: '/blog/otdyh-v-italy-letom/', image: 'https://images.unsplash.com/photo-1491555103944-7c647fd857e6?auto=format&fit=crop&w=1200&q=80' },
-  { key: 'comoGuide', href: '/blog/ozero-como/', image: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80' },
-  { key: 'gardaGuide', href: '/blog/ozero-garda/', image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80' },
+  { key: 'excursions', image: 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=80' },
 ]
 
 const WHY_INFOGRAPHIC_FILES = [
@@ -72,35 +65,54 @@ const validCountryCodes = [
   '970', '971', '972', '973', '974', '975', '976', '977', '992', '993', '994', '995', '996', '998',
 ]
 
-const PromoImageCard = ({ href, image, title, moreLabel, aspectClassName = 'aspect-[3/4]' }) => (
-  <a
-    href={href}
-    className={`group relative block w-full overflow-hidden rounded-xl border border-border-soft shadow-[0_10px_28px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(0,0,0,0.1)] ${aspectClassName}`}
-  >
-    <img
-      src={image}
-      alt=""
-      className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-      loading="lazy"
-      decoding="async"
-    />
-    <div
-      className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/10 transition-opacity duration-300 group-hover:from-black/85 group-hover:via-black/45"
-      aria-hidden
-    />
-    <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-5">
-      <h3
-        className="font-serif text-[clamp(18px,2.2vw,24px)] leading-snug text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.45)]"
-        style={{ fontWeight: 300 }}
-      >
-        {title}
-      </h3>
-      <span className="mt-2 inline-flex translate-y-2 font-sans text-[11px] uppercase tracking-[0.12em] text-white/90 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-        {moreLabel} →
-      </span>
-    </div>
-  </a>
-)
+const PromoImageCard = ({ href, image, title, moreLabel, aspectClassName = 'aspect-[3/4]' }) => {
+  const baseClassName = `group relative block w-full overflow-hidden rounded-xl border border-border-soft shadow-[0_10px_28px_rgba(0,0,0,0.06)] ${aspectClassName}`
+  const interactiveClassName = 'transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(0,0,0,0.1)]'
+
+  const content = (
+    <>
+      <img
+        src={image}
+        alt=""
+        className={`absolute inset-0 h-full w-full object-cover transition-transform duration-500 ${href ? 'group-hover:scale-105' : ''}`}
+        loading="lazy"
+        decoding="async"
+        onError={(event) => {
+          event.currentTarget.src = '/images/main-photo.jpg'
+        }}
+      />
+      <div
+        className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/10 transition-opacity duration-300 ${
+          href ? 'group-hover:from-black/85 group-hover:via-black/45' : ''
+        }`}
+        aria-hidden
+      />
+      <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-5">
+        <h3
+          className="font-serif text-[clamp(18px,2.2vw,24px)] leading-snug text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.45)]"
+          style={{ fontWeight: 300 }}
+        >
+          {title}
+        </h3>
+        {href ? (
+          <span className="mt-2 inline-flex translate-y-2 font-sans text-[11px] uppercase tracking-[0.12em] text-white/90 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+            {moreLabel} →
+          </span>
+        ) : null}
+      </div>
+    </>
+  )
+
+  if (!href) {
+    return <article className={baseClassName}>{content}</article>
+  }
+
+  return (
+    <a href={href} className={`${baseClassName} ${interactiveClassName}`}>
+      {content}
+    </a>
+  )
+}
 
 const ItalyPage = () => {
   const { t } = useTranslation()
@@ -120,8 +132,13 @@ const ItalyPage = () => {
         ...(t(`italyPage.tours.${key}`, { returnObjects: true }) || {}),
         tourKey: key,
         image,
-        showDetails: key === 'skiAlps',
-        detailsHref: key === 'skiAlps' ? '/alps/gornolyzhnye-tury' : undefined,
+        showDetails: key === 'skiAlps' || key === 'lakeComoGarda',
+        detailsHref:
+          key === 'skiAlps'
+            ? '/alps/gornolyzhnye-tury'
+            : key === 'lakeComoGarda'
+              ? '/italy/tury-ozero-como/'
+              : undefined,
       })),
     [t],
   )
@@ -130,7 +147,7 @@ const ItalyPage = () => {
     () =>
       DIRECTION_DEFS.map(({ key, href, image }) => {
         const tr = t(`italyPage.directions.${key}`, { returnObjects: true }) || {}
-        return { title: tr.title, href, image }
+        return { cardKey: key, title: tr.title, href, image }
       }),
     [t],
   )
@@ -139,16 +156,7 @@ const ItalyPage = () => {
     () =>
       FORMAT_DEFS.map(({ key, href, image }) => {
         const tr = t(`italyPage.formats.${key}`, { returnObjects: true }) || {}
-        return { title: tr.title, href, image }
-      }),
-    [t],
-  )
-
-  const blogCards = useMemo(
-    () =>
-      BLOG_DEFS.map(({ key, href, image }) => {
-        const tr = t(`italyPage.blog.${key}`, { returnObjects: true }) || {}
-        return { title: tr.title, description: tr.description, href, image }
+        return { cardKey: key, title: tr.title, href, image }
       }),
     [t],
   )
@@ -513,6 +521,9 @@ const ItalyPage = () => {
                     className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                     loading="lazy"
                     decoding="async"
+                    onError={(event) => {
+                      event.currentTarget.src = '/images/main-photo.jpg'
+                    }}
                   />
                 </div>
                 <div className="flex flex-1 flex-col p-6">
@@ -603,7 +614,7 @@ const ItalyPage = () => {
           <h2 className="section-title !mb-10 text-center">{t('italyPage.directionsHeading')}</h2>
           <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
             {directionCards.map((item) => (
-              <PromoImageCard key={item.href} href={item.href} image={item.image} title={item.title} moreLabel={moreLabel} />
+              <PromoImageCard key={item.cardKey} href={item.href} image={item.image} title={item.title} moreLabel={moreLabel} />
             ))}
           </div>
         </section>
@@ -613,7 +624,7 @@ const ItalyPage = () => {
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             {formatCards.map((item) => (
               <PromoImageCard
-                key={item.href}
+                key={item.cardKey}
                 href={item.href}
                 image={item.image}
                 title={item.title}
@@ -639,6 +650,9 @@ const ItalyPage = () => {
                 alt={t('italyPage.northImgAlt')}
                 className="h-full min-h-[380px] w-full object-cover"
                 loading="lazy"
+                onError={(event) => {
+                  event.currentTarget.src = '/images/main-photo.jpg'
+                }}
               />
             </div>
           </div>
@@ -745,7 +759,7 @@ const ItalyPage = () => {
               <button
                 type="submit"
                 disabled={isFinalSubmitting}
-                className="main-btn w-full rounded-[50px] border border-text-main bg-transparent px-6 py-4 text-[13px] uppercase tracking-[0.14em] text-text-main transition-all duration-300 hover:-translate-y-0.5 hover:bg-text-main hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+                className="main-btn w-full rounded-[50px] border border-text-main bg-text-main px-6 py-4 text-[13px] uppercase tracking-[0.14em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-text-main/90 disabled:cursor-not-allowed disabled:opacity-50"
                 style={{ fontWeight: '500' }}
               >
                 {isFinalSubmitting ? t('italyPage.finalCta.submitting') : t('italyPage.finalCta.submit')}
@@ -760,7 +774,8 @@ const ItalyPage = () => {
           </div>
         </section>
 
-        <section className="mx-auto mt-16 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
+        {/* BLOG BLOCK TEMPORARILY HIDDEN
+          <section className="mx-auto mt-16 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
           <h2 className="section-title !mb-10 text-center text-[clamp(28px,4vw,38px)]">{t('italyPage.blogHeading')}</h2>
           <ul className="mx-auto max-w-[640px] divide-y divide-border-soft rounded-xl border border-border-soft bg-bg-card/80 px-2 py-1 sm:px-3">
             {blogCards.map((item) => (
@@ -805,7 +820,8 @@ const ItalyPage = () => {
               {t('italyPage.blogAllArticles')}
             </a>
           </div>
-        </section>
+          </section>
+        */}
       </main>
 
       <Footer />

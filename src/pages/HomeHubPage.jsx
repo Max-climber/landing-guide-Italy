@@ -14,11 +14,9 @@ const HOME_OG_IMAGE =
   'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2200&q=80'
 const HERO_BG = HOME_OG_IMAGE
 const HERO_SLIDES = [
-  '/images/infographics/main-carusel-1.png',
-  '/images/infographics/main-carusel-2.png',
-  '/images/infographics/main-carusel-3.png',
-  '/images/infographics/main-carusel-4.png',
-  '/images/infographics/main-carusel-5.png',
+  '/images/infographics/main-carusel-1.1.png',
+  '/images/infographics/main-carusel-2.1.png',
+  '/images/infographics/main-carusel-3.1.png',
 ]
 
 const WHY_INFOGRAPHIC_FILES = [
