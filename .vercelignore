@@ -1,0 +1,12 @@
+.git
+.cursor
+node_modules
+dist
+dist-ssr
+site
+site.zip
+*.log
+
+# Heavy static archives not used by app runtime
+public/example of 3d animation
+public/images/infographics/app
