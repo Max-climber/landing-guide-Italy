@@ -11,7 +11,7 @@ const ORG = {
   name: 'Vacanza Bianca',
   url: 'https://vacanzabianca.ru/',
   logo: 'https://vacanzabianca.ru/images/icons/favicon.png',
-  sameAs: ['https://t.me/la_vacanza_bianca', 'https://wa.me/393331430647'],
+  sameAs: ['https://t.me/la_vacanza_bianca', 'https://wa.me/393520014647'],
 }
 
 function buildBreadcrumbs(items) {

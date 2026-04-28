@@ -62,7 +62,7 @@ const DirectionCard = ({ href, image, title, moreLabel }) => {
         >
           {title}
         </h3>
-        <span className="mt-2 inline-flex translate-y-2 font-sans text-[11px] uppercase tracking-[0.12em] text-white/90 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+        <span className="mt-2 inline-flex translate-y-2 font-serif text-[13px] uppercase tracking-[0.08em] text-white/90 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
           {moreLabel} →
         </span>
       </div>
@@ -343,15 +343,17 @@ const HomeHubPage = () => {
     <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
       <a
         href="/alps/gornolyzhnye-tury"
-        className="inline-flex min-h-[48px] items-center rounded-full border border-white/70 bg-white/15 px-5 py-2.5 font-sans text-[12px] uppercase tracking-[0.1em] text-white no-underline backdrop-blur-sm transition-all hover:bg-white/25"
+        className="inline-flex min-h-[48px] items-center rounded-[50px] border border-text-main bg-transparent px-[55px] py-[22px] font-sans text-[13px] uppercase tracking-[0.14em] text-text-main no-underline transition-all duration-300 hover:-translate-y-0.5 hover:bg-text-main hover:text-white"
+        style={{ fontWeight: 500 }}
       >
-        ⛷️ {t('homePage.quickSki')}
+        {t('homePage.quickSki')}
       </a>
       <a
         href="/italy/"
-        className="inline-flex min-h-[48px] items-center rounded-full border border-white/70 bg-white/15 px-5 py-2.5 font-sans text-[12px] uppercase tracking-[0.1em] text-white no-underline backdrop-blur-sm transition-all hover:bg-white/25"
+        className="inline-flex min-h-[48px] items-center rounded-[50px] border border-text-main bg-transparent px-[55px] py-[22px] font-sans text-[13px] uppercase tracking-[0.14em] text-text-main no-underline transition-all duration-300 hover:-translate-y-0.5 hover:bg-text-main hover:text-white"
+        style={{ fontWeight: 500 }}
       >
-        🇮🇹 {t('homePage.quickItaly')}
+        {t('homePage.quickItaly')}
       </a>
     </div>
   )
@@ -367,7 +369,7 @@ const HomeHubPage = () => {
         ctaHref="#popular-tours"
         backgroundImage={HERO_BG}
         backgroundImages={HERO_SLIDES}
-        imageOverlayClassName="bg-[rgba(241,236,235,0.45)]"
+        imageOverlayClassName="bg-[rgba(241,236,235,0.52)]"
         showStructureLink={false}
         titleUppercase={false}
         belowCta={quickFilters}
@@ -393,7 +395,8 @@ const HomeHubPage = () => {
                   <img
                     src={whyIconSrcs[idx]}
                     alt=""
-                    className="h-12 w-12 object-contain brightness-0"
+                    className="h-12 w-12 object-contain"
+                    style={{ mixBlendMode: 'multiply' }}
                     loading="lazy"
                   />
                 </div>

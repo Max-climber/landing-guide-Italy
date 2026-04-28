@@ -121,11 +121,11 @@ const Hero = ({
           {resolvedTitle}
         </h1>
         {resolvedSubtitle ? (
-          <h2 className="hero-subtitle font-sans text-[#4A4A4A] mb-4 px-2 sm:px-4 drop-shadow-lg" style={{ fontSize: 'clamp(18px, 2.2vw, 22px)', letterSpacing: '0.02em', fontWeight: '400' }}>
+          <h2 className="hero-subtitle font-sans text-text-main mb-4 px-2 sm:px-4 drop-shadow-lg" style={{ fontSize: 'clamp(18px, 2.2vw, 22px)', letterSpacing: '0.02em', fontWeight: '400' }}>
             {resolvedSubtitle}
           </h2>
         ) : null}
-        <p className="hero-desc font-sans text-[#666666] mb-9 px-2 sm:px-4 max-w-[680px] mx-auto" style={{ fontSize: '18px', lineHeight: '1.45', fontWeight: '300' }}>
+        <p className="hero-desc font-sans text-text-main mb-9 px-2 sm:px-4 max-w-[680px] mx-auto" style={{ fontSize: '18px', lineHeight: '1.45', fontWeight: '300' }}>
           {resolvedDescription.replace('<br/>', '\n').split('\n').map((line, idx, arr) => (
             <span key={idx}>
               {line}

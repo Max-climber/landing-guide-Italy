@@ -2,8 +2,8 @@ import { useTranslation } from 'react-i18next'
 
 const INSTAGRAM_URL =
   'https://www.instagram.com/it.tours.mountains.transfer?igsh=MWF6bHR1M3k4YzJpag=='
-const PHONE_E164 = '+393331430647'
-const PHONE_DISPLAY = '+39 333 143 0647'
+const PHONE_E164 = '+393520014647'
+const PHONE_DISPLAY = '+39 352 001 4647'
 const EMAIL = 'mail@vacanzabianca.ru'
 
 const Footer = () => {
@@ -87,7 +87,7 @@ const Footer = () => {
                 </svg>
               </a>
               <a
-                href="https://wa.me/393331430647"
+                href="https://wa.me/393520014647"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex text-text-main"

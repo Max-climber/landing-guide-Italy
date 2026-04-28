@@ -2,8 +2,8 @@ import { useState, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import LanguageSwitcher from './LanguageSwitcher'
 
-const PHONE_E164 = '+393331430647'
-const PHONE_DISPLAY = '+39 333 143 0647'
+const PHONE_E164 = '+393520014647'
+const PHONE_DISPLAY = '+39 352 001 4647'
 
 const normalizePath = (pathname) => {
   const p = (pathname || '/').replace(/\/+$/, '')

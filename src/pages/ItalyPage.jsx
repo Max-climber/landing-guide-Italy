@@ -596,7 +596,8 @@ const ItalyPage = () => {
                   <img
                     src={whyIconSrcs[idx]}
                     alt=""
-                    className="h-12 w-12 object-contain brightness-0"
+                    className="h-12 w-12 object-contain"
+                    style={{ mixBlendMode: 'multiply' }}
                     loading="lazy"
                     decoding="async"
                   />

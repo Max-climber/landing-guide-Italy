@@ -36,6 +36,7 @@ const AlpsSkiToursPage = () => {
           description={heroDescription}
           ctaLabel={heroCta}
           backgroundImage={HERO_IMAGE}
+          imageOverlayClassName="bg-[rgba(241,236,235,0.38)]"
           showStructureLink={false}
         />
         <BreadcrumbOverlay
