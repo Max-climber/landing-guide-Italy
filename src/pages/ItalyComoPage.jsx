@@ -1,10 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import Navigation from '../components/Navigation'
-import Hero from '../components/Hero'
 import Footer from '../components/Footer'
 import ContactModal from '../components/ContactModal'
 import TelegramFloatButton from '../components/TelegramFloatButton'
-import BreadcrumbOverlay from '../components/BreadcrumbOverlay'
 import { mountJsonLd, upsertMeta } from './seo/pageMeta'
 
 const CANONICAL = 'https://vacanzabianca.ru/italy/tury-ozero-como/'
@@ -98,26 +96,13 @@ const ItalyComoPage = () => {
   return (
     <div className="min-h-screen bg-bg-base">
       <Navigation />
-      <div className="relative">
-        <Hero
-          title="Озёрный Край: Комо и Гарда. 6 ночей"
-          subtitle=""
-          description="Программа по дням для вашего маршрута Комо и Гарда. Никаких аккордеонов — всё сразу видно."
-          ctaLabel="Подобрать тур"
-          showStructureLink={false}
-          backgroundImage={heroImage}
-          onCtaClick={() => setIsModalOpen(true)}
-        />
-        <BreadcrumbOverlay
-          ariaLabel="Хлебные крошки"
-          homeLabel="Главная"
-          currentLabel="Туры на озеро Комо"
-        />
-      </div>
-
-      <main className="pb-12">
-        <section className="mx-auto mt-16 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
-          <h2 className="section-title !mb-10">Программа по дням</h2>
+      <main className="pb-12 pt-24 sm:pt-28 md:pt-32">
+        <section className="mx-auto w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
+          <h1 className="section-title !mb-4 text-center">Озёрный край: Комо и Гарда</h1>
+          <p className="mx-auto mb-10 max-w-[760px] text-center font-sans text-sm leading-7 text-text-light sm:text-base">
+            Авторская программа на 6 ночей
+          </p>
+          <h2 className="section-title !mb-10 text-center">Программа по дням</h2>
           <div className="space-y-4">
             {programDays.map((item, index) => (
               <article key={item.day} className="rounded-xl border border-border-soft bg-bg-card p-6">
@@ -144,60 +129,15 @@ const ItalyComoPage = () => {
         </section>
 
         <section className="mx-auto mt-16 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
-          <h2 className="section-title !mb-10">Далее</h2>
-          <div className="grid gap-6 lg:grid-cols-3">
-            <article className="rounded-xl border border-border-soft bg-bg-card p-6">
-              <h3 className="mb-4 font-serif text-[28px] leading-[1.1] text-text-main" style={{ fontWeight: '300' }}>
-                Что входит в стоимость тура
-              </h3>
-              <ul className="space-y-2 text-sm leading-6 text-text-light">
-                <li>Проживание в отеле с бассейном и завтраком</li>
-                <li>Трансфер - полностью в течение всего тура, включая бензин, парковки, платные дороги и т.д.</li>
-                <li>Индивидуальное сопровождение в течение всего времени активного отдыха</li>
-                <li>Прогулка на катере</li>
-                <li>Прогулка на каяке</li>
-                <li>Отдых в СПА</li>
-                <li>Необходимое снаряжение – спас жилеты, палки для ходьбы, страховочная система, страховочное устройство, каски, перчатки</li>
-              </ul>
-            </article>
-
-            <article className="rounded-xl border border-border-soft bg-bg-card p-6">
-              <h3 className="mb-4 font-serif text-[28px] leading-[1.1] text-text-main" style={{ fontWeight: '300' }}>
-                Что НЕ входит в стоимость тура
-              </h3>
-              <ul className="space-y-2 text-sm leading-6 text-text-light">
-                <li>Авиабилеты</li>
-                <li>Питание (кроме завтрака в отеле)</li>
-                <li>Входные билеты на платный пляж (при выборе платного пляжа)</li>
-                <li>Входные билеты в музеи, виллы, платные парки и т.п.</li>
-                <li>Любые дополнительные виды отдыха – полеты на гидроплане, параплане, планере, дополнительные прогулки на катерах и яхтах, дополнительный отдых в СПА, массажи, процедуры и т.д.</li>
-              </ul>
-            </article>
-
-            <article className="rounded-xl border border-border-soft bg-bg-card p-6">
-              <h3 className="mb-4 font-serif text-[28px] leading-[1.1] text-text-main" style={{ fontWeight: '300' }}>
-                Условия бронирования и оплаты тура
-              </h3>
-              <ul className="space-y-2 text-sm leading-6 text-text-light">
-                <li>Первая консультация онлайн, до 40 минут – бесплатно</li>
-                <li>Предоплата - 300 евро. Бронируется время путешествия. В случае отказа менее, чем за 1,5 месяца – не возвращаются</li>
-                <li>Бронировании отелей с аккаунта компании - после перевода полной стоимости бронирования</li>
-                <li>Оплата 50% оставшейся стоимости тура в первый день тура</li>
-                <li>Оставшаяся часть – в последний день тура, перед трансфером в аэропорт</li>
-              </ul>
-            </article>
-          </div>
-        </section>
-
-        <section className="mx-auto mt-16 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
           <div className="rounded-2xl border border-border-soft bg-bg-card px-6 py-10 text-center md:px-10 md:py-14">
             <h2 className="section-title !mb-10">Подобрать тур на Комо</h2>
             <p className="mx-auto mb-8 max-w-[760px] text-sm leading-7 text-text-light">
               Оставьте заявку — подберем маршрут, уровень активности и варианты отелей. Ответим в WhatsApp/Telegram и на почту.
             </p>
             <button
+              type="button"
               onClick={() => setIsModalOpen(true)}
-              className="rounded-[50px] border border-text-main px-8 py-3 text-[12px] uppercase tracking-[0.12em] text-text-main transition-all duration-300 hover:bg-text-main hover:text-white"
+              className="rounded-[50px] border border-text-main bg-text-main px-8 py-3 text-[12px] uppercase tracking-[0.12em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-text-main/90"
             >
               Подобрать тур
             </button>

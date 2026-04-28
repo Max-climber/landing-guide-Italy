@@ -480,22 +480,37 @@
     "quickSki": "Ski tours in the Alps",
     "quickItaly": "Italy tours",
     "directionsHeading": "Our destinations",
-    "dirItalyTitle": "🇮🇹 Italy",
+    "dirItalyTitle": "Italy",
     "dirItalyCta": "See all tours →",
-    "dirChTitle": "🇨🇭 Switzerland",
-    "dirFrTitle": "🇫🇷 France",
-    "dirAlpsTitle": "⛰️ Alps",
+    "dirChTitle": "Switzerland",
+    "dirFrTitle": "France",
+    "dirAlpsTitle": "Alps",
     "whyHeading": "Why travellers choose Vacanza Bianca",
     "popularHeading": "Popular tours",
     "moreDetails": "Read more",
     "discussTour": "Discuss the tour",
-    "bookingHeading": "How do I book?",
+    "bookingHeading": "How to book your spot",
     "bookingSteps": [
-      "You send a request",
-      "We clarify your wishes",
-      "We design the route",
-      "You pay a deposit",
-      "You travel with peace of mind"
+      {
+        "title": "Submit your request",
+        "text": "Fill out the form or message us in a chat app"
+      },
+      {
+        "title": "We discuss the details",
+        "text": "We shape the route and answer your questions"
+      },
+      {
+        "title": "You pay a deposit",
+        "text": "We confirm your spot on the tour"
+      },
+      {
+        "title": "Prepare for the trip",
+        "text": "You get recommendations and checklists"
+      },
+      {
+        "title": "We set off on the journey",
+        "text": "Enjoy the experience"
+      }
     ],
     "aboutHeading": "About us",
     "aboutText": "Hi, I’m Dmitry, founder of Vacanza Bianca. I’ve lived in Italy for years and I’m in love with the Alps. I don’t sell “packages”—I design experiences I’d love to take myself: calm pacing, smart logistics and routes beyond the usual checklist.",

@@ -136,7 +136,7 @@ const Hero = ({
         {ctaHref ? (
           <a
             href={ctaHref}
-            className="main-btn inline-block font-sans text-[13px] tracking-[0.14em] uppercase text-text-main bg-transparent border border-text-main px-[55px] py-[22px] rounded-[50px] cursor-pointer transition-all duration-300 hover:bg-text-main hover:text-white hover:-translate-y-0.5 no-underline mx-4 sm:mx-0"
+            className="main-btn inline-flex min-h-[48px] items-center justify-center rounded-[50px] border border-text-main bg-text-main px-[55px] py-[22px] font-sans text-[13px] uppercase tracking-[0.14em] text-white no-underline transition-all duration-300 hover:-translate-y-0.5 hover:bg-text-main/90 mx-4 sm:mx-0"
             style={{ fontWeight: '500' }}
           >
             {resolvedCtaLabel}
@@ -152,7 +152,7 @@ const Hero = ({
               }
               window.dispatchEvent(new Event('openContactModal'))
             }}
-            className="main-btn inline-block font-sans text-[13px] tracking-[0.14em] uppercase text-text-main bg-transparent border border-text-main px-[55px] py-[22px] rounded-[50px] cursor-pointer transition-all duration-300 hover:bg-text-main hover:text-white hover:-translate-y-0.5 no-underline mx-4 sm:mx-0"
+            className="main-btn inline-flex min-h-[48px] items-center justify-center rounded-[50px] border border-text-main bg-text-main px-[55px] py-[22px] font-sans text-[13px] uppercase tracking-[0.14em] text-white no-underline transition-all duration-300 hover:-translate-y-0.5 hover:bg-text-main/90 mx-4 sm:mx-0"
             style={{ fontWeight: '500' }}
           >
             {resolvedCtaLabel}

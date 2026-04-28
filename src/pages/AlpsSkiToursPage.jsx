@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import Navigation from '../components/Navigation'
 import Hero from '../components/Hero'
-import WhyUsSection from '../components/WhyUsSection'
 import About from '../components/About'
 import Steps from '../components/Steps'
 import Programs from '../components/Programs'
@@ -45,7 +44,6 @@ const AlpsSkiToursPage = () => {
           currentLabel={currentLabel}
         />
       </div>
-      <WhyUsSection />
       <About />
       <Steps />
       <Programs />

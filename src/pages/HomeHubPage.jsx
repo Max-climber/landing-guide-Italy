@@ -93,8 +93,6 @@ const HomeHubPage = () => {
   const [openedFaq, setOpenedFaq] = useState(-1)
   const [isFinalSubmitting, setIsFinalSubmitting] = useState(false)
   const [finalStatus, setFinalStatus] = useState(null)
-  const [bookingProgress, setBookingProgress] = useState(0)
-  const [viewportWidth, setViewportWidth] = useState(1280)
   const [finalCtaParallax, setFinalCtaParallax] = useState(0)
   const [finalCtaUnlocked, setFinalCtaUnlocked] = useState(false)
   const [finalFormData, setFinalFormData] = useState({ name: '', phone: '', email: '' })
@@ -102,7 +100,6 @@ const HomeHubPage = () => {
   const [phoneTouched, setPhoneTouched] = useState(false)
   const [emailError, setEmailError] = useState('')
   const [emailTouched, setEmailTouched] = useState(false)
-  const bookingSectionRef = useRef(null)
   const finalCtaRef = useRef(null)
 
   const whyIconSrcs = useMemo(
@@ -111,7 +108,12 @@ const HomeHubPage = () => {
   )
   const whyCards = useMemo(() => t('italyPage.whyCards', { returnObjects: true }) || [], [t])
   const popularTours = useMemo(() => t('homePage.popularTours', { returnObjects: true }) || [], [t])
-  const bookingSteps = useMemo(() => t('homePage.bookingSteps', { returnObjects: true }) || [], [t])
+  const bookingSteps = useMemo(() => {
+    const raw = t('homePage.bookingSteps', { returnObjects: true }) || []
+    return raw.map((item) =>
+      typeof item === 'string' ? { title: item, text: '' } : { title: item.title, text: item.text || '' },
+    )
+  }, [t])
   const faqItems = useMemo(() => t('homePage.faq', { returnObjects: true }) || [], [t])
   const detailsLabel = t('italyPage.moreDetails')
   const reviewCards = useMemo(
@@ -215,39 +217,6 @@ const HomeHubPage = () => {
   }, [])
 
   const finalToast = finalStatus === 'success' ? t('homePage.finalSuccess') : t('homePage.finalError')
-  const bookingPins = useMemo(() => {
-    return [
-      { top: '20%' },
-      { top: '34%' },
-      { top: '48%' },
-      { top: '62%' },
-      { top: '76%' },
-    ]
-  }, [])
-
-  useEffect(() => {
-    const updateBookingProgress = () => {
-      const section = bookingSectionRef.current
-      if (!section) return
-
-      const rect = section.getBoundingClientRect()
-      const viewportHeight = window.innerHeight || 1
-      const start = viewportHeight * 0.9
-      const end = -rect.height * 0.8
-      const raw = (start - rect.top) / (start - end)
-      const next = Math.max(0, Math.min(1, raw))
-      setBookingProgress(next)
-    }
-
-    updateBookingProgress()
-    window.addEventListener('scroll', updateBookingProgress, { passive: true })
-    window.addEventListener('resize', updateBookingProgress, { passive: true })
-
-    return () => {
-      window.removeEventListener('scroll', updateBookingProgress)
-      window.removeEventListener('resize', updateBookingProgress)
-    }
-  }, [])
 
   const handleFinalPhoneChange = (event) => {
     const formatted = formatPhone(event.target.value)
@@ -396,7 +365,7 @@ const HomeHubPage = () => {
                     src={whyIconSrcs[idx]}
                     alt=""
                     className="h-12 w-12 object-contain"
-                    style={{ mixBlendMode: 'multiply' }}
+                    style={{ filter: 'grayscale(1)', opacity: 0.72 }}
                     loading="lazy"
                   />
                 </div>
@@ -467,67 +436,39 @@ const HomeHubPage = () => {
           </div>
         </section>
 
-        <section className="mx-auto mt-24 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
-          <h2 className="section-title !mb-12 text-center">{t('homePage.bookingHeading')}</h2>
-          <div ref={bookingSectionRef} className="relative left-1/2 h-[460vh] w-screen -translate-x-1/2 bg-bg-base">
-            <div className="sticky top-0 h-screen overflow-hidden">
-              <ol className="pointer-events-none absolute inset-0 w-full">
-              {bookingSteps.map((step, index) => {
-                const timelineStart = 0.1
-                const stepSpan = 0.17
-                const stepStart = timelineStart + index * stepSpan
-                const localProgress = Math.max(0, Math.min(1, (bookingProgress - stepStart) / stepSpan))
-                const circleProgress = Math.max(0, Math.min(1, localProgress / 0.52))
-                const textProgress = Math.max(0, Math.min(1, (localProgress - 0.52) / 0.48))
-                const pinScale = 0.7 + circleProgress * 0.42
-                const pinOpacity = 0.25 + circleProgress * 0.75
+        <section
+          id="booking-steps"
+          className="mx-auto mt-24 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5"
+          aria-labelledby="booking-steps-heading"
+        >
+          <h2 id="booking-steps-heading" className="section-title mb-10 text-center md:mb-14">
+            {t('homePage.bookingHeading')}
+          </h2>
+          <div className="px-2 py-4 sm:px-4 md:px-6 lg:px-8">
+            <div className="relative mx-auto max-w-[1080px]">
+              <div className="pointer-events-none absolute left-0 right-0 top-[32px] z-[1] hidden h-[2px] bg-[#d3ccc6] md:block" aria-hidden />
 
-                return (
-                  <li
-                    key={`booking-pin-${index}`}
-                    className="absolute"
-                    style={{
-                      top: bookingPins[index].top,
-                      left: '43%',
-                      transform: 'translate(-50%, -50%)',
-                    }}
-                  >
-                    <div className="relative h-11 w-11 transition-all duration-300" style={{ opacity: pinOpacity }}>
+              <ol className="relative z-[2] m-0 grid list-none gap-10 p-0 md:grid-cols-5 md:gap-4">
+                {bookingSteps.map((step, index) => (
+                  <li key={`booking-step-${index}`} className="flex flex-col items-center text-center md:min-w-0">
+                    <div className="mb-4 grid h-[64px] w-[64px] shrink-0 place-items-center rounded-full border border-[#e1dad4] bg-bg-base text-text-main">
                       <span
-                        className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/85 bg-text-main text-base font-semibold text-white shadow-[0_8px_18px_rgba(0,0,0,0.28)]"
-                        style={{
-                          transform: `scale(${pinScale})`,
-                          transition: 'transform 280ms ease-out',
-                        }}
+                        className="block font-serif text-[30px] leading-none"
+                        style={{ fontVariantNumeric: 'lining-nums tabular-nums' }}
                       >
                         {index + 1}
                       </span>
                     </div>
-                    <div className="absolute left-[calc(100%+8px)] top-1/2 flex -translate-y-1/2 items-center gap-0">
-                      <span
-                        className="h-[2px] bg-[#e7dfd7]"
-                        style={{
-                          width: `${Math.max(0, textProgress * 16)}px`,
-                          opacity: textProgress,
-                          transition: 'width 280ms ease-out, opacity 280ms ease-out',
-                        }}
-                      />
-                      <div
-                        className="min-w-[178px] rounded-r-xl rounded-l-[6px] border border-[#e7dfd7] bg-bg-base px-3 py-2 text-xs text-text-main shadow-[0_8px_18px_rgba(0,0,0,0.12)] sm:text-sm"
-                        style={{
-                          opacity: textProgress,
-                          transform: `translateX(${12 - textProgress * 12}px) scale(${0.95 + textProgress * 0.05})`,
-                          transition: 'opacity 280ms ease-out, transform 280ms ease-out',
-                        }}
-                      >
-                        <p className="font-sans leading-5" style={{ fontWeight: 600 }}>
-                          {step}
-                        </p>
-                      </div>
-                    </div>
+                    <h3 className="mb-2 max-w-[260px] font-serif text-[24px] leading-[1.1] text-text-main">
+                      {step.title}
+                    </h3>
+                    {step.text ? (
+                      <p className="max-w-[260px] font-serif text-[18px] leading-[1.2] text-text-light">
+                        {step.text}
+                      </p>
+                    ) : null}
                   </li>
-                )
-              })}
+                ))}
               </ol>
             </div>
           </div>

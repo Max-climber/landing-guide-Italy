@@ -76,6 +76,10 @@ const About = () => {
     >
       {/* Блок 2: Текст и карточки преимуществ */}
       <div className="container max-w-[1200px] mx-auto px-4 sm:px-6 md:px-6 lg:px-8 xl:px-[50px] py-[60px] sm:py-[80px]" style={{ boxSizing: 'border-box' }}>
+        <h2 className="section-title text-center !mb-8 sm:!mb-10">
+          <span className="block">Почему выбирают</span>
+          <span className="block brand-name">LA VACANZA BIANCA</span>
+        </h2>
         <p className="section-subtitle font-sans text-[20px] leading-[1.6] text-[#4A4A4A] max-w-[800px] mx-auto mb-[80px]" style={{ fontWeight: '400' }}>
           {t('about.subtitle')}
         </p>
