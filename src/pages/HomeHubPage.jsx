@@ -446,12 +446,18 @@ const HomeHubPage = () => {
           </h2>
           <div className="px-2 py-4 sm:px-4 md:px-6 lg:px-8">
             <div className="relative mx-auto max-w-[1080px]">
-              <div className="pointer-events-none absolute left-0 right-0 top-[32px] z-[1] hidden h-[2px] bg-[#d3ccc6] md:block" aria-hidden />
+              <div className="pointer-events-none absolute left-0 right-0 top-1/2 z-[1] hidden h-[2px] -translate-y-1/2 bg-[#d3ccc6] md:block" aria-hidden />
 
               <ol className="relative z-[2] m-0 grid list-none gap-10 p-0 md:grid-cols-5 md:gap-4">
-                {bookingSteps.map((step, index) => (
-                  <li key={`booking-step-${index}`} className="flex flex-col items-center text-center md:min-w-0">
-                    <div className="mb-4 grid h-[64px] w-[64px] shrink-0 place-items-center rounded-full border border-[#e1dad4] bg-bg-base text-text-main">
+                {bookingSteps.map((step, index) => {
+                  const isCardAbove = index % 2 === 0
+                  return (
+                  <li key={`booking-step-${index}`} className="flex flex-col items-center text-center md:relative md:min-h-[320px] md:min-w-0">
+                    <div
+                      className={`grid h-[64px] w-[64px] shrink-0 place-items-center rounded-full border border-[#e1dad4] bg-bg-base text-text-main ${
+                        isCardAbove ? 'order-2 mt-4 md:order-none md:mt-0' : 'order-1 mb-4 md:order-none md:mb-0'
+                      } md:absolute md:left-1/2 md:top-1/2 md:z-[3] md:-translate-x-1/2 md:-translate-y-1/2`}
+                    >
                       <span
                         className="block font-serif text-[30px] leading-none"
                         style={{ fontVariantNumeric: 'lining-nums tabular-nums' }}
@@ -459,16 +465,20 @@ const HomeHubPage = () => {
                         {index + 1}
                       </span>
                     </div>
-                    <h3 className="mb-2 max-w-[260px] font-serif text-[24px] leading-[1.1] text-text-main">
-                      {step.title}
-                    </h3>
-                    {step.text ? (
-                      <p className="max-w-[260px] font-serif text-[18px] leading-[1.2] text-text-light">
-                        {step.text}
-                      </p>
-                    ) : null}
+                    <div
+                      className={`w-full rounded-2xl border border-border-soft bg-bg-card p-4 shadow-[0_8px_22px_rgba(0,0,0,0.04)] sm:p-5 ${
+                        isCardAbove ? 'order-1 md:order-none' : 'order-2 md:order-none'
+                      } md:absolute md:left-1/2 md:w-[calc(100%-8px)] md:max-w-[260px] md:-translate-x-1/2 ${
+                        isCardAbove ? 'md:bottom-[calc(50%+42px)]' : 'md:top-[calc(50%+42px)]'
+                      }`}
+                    >
+                      <h3 className="mb-2 font-serif text-[24px] leading-[1.1] text-text-main">{step.title}</h3>
+                      {step.text ? (
+                        <p className="font-serif text-[18px] leading-[1.2] text-text-light">{step.text}</p>
+                      ) : null}
+                    </div>
                   </li>
-                ))}
+                )})}
               </ol>
             </div>
           </div>
