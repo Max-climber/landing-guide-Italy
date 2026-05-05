@@ -179,6 +179,11 @@ const ItalyPage = () => {
 
   const faqItems = useMemo(() => t('italyPage.faq', { returnObjects: true }) || [], [t])
 
+  const northParagraphs = useMemo(
+    () => t('italyPage.northParagraphs', { returnObjects: true }) || [],
+    [t],
+  )
+
   const schemaData = useMemo(
     () => [
       {
@@ -596,8 +601,8 @@ const ItalyPage = () => {
                   <img
                     src={whyIconSrcs[idx]}
                     alt=""
-                    className="h-12 w-12 object-contain"
-                    style={{ mixBlendMode: 'multiply' }}
+                    className="object-contain"
+                    style={{ mixBlendMode: 'multiply', maxWidth: '70px', maxHeight: '70px' }}
                     loading="lazy"
                     decoding="async"
                   />
@@ -639,11 +644,12 @@ const ItalyPage = () => {
         <section className="mx-auto mt-20 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
           <h2 className="section-title !mb-10 text-center">{t('italyPage.northHeading')}</h2>
           <div className="grid gap-10 md:grid-cols-2">
-            <div>
-              <h3 className="mb-5 font-sans text-lg font-medium text-text-main">{t('italyPage.northSubheading')}</h3>
-              <p className="mb-4 text-sm leading-7 text-text-light">{t('italyPage.northP1')}</p>
-              <p className="mb-4 text-sm leading-7 text-text-light">{t('italyPage.northP2')}</p>
-              <p className="text-sm leading-7 text-text-light">{t('italyPage.northP3')}</p>
+            <div className="space-y-4">
+              {northParagraphs.map((paragraph, idx) => (
+                <p key={idx} className="text-sm leading-7 text-text-light">
+                  {paragraph}
+                </p>
+              ))}
             </div>
             <div className="overflow-hidden rounded-xl border border-border-soft bg-bg-card">
               <img
