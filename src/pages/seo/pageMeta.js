@@ -1,4 +1,4 @@
-export function upsertMeta({ title, description, canonical, ogImage }) {
+export function upsertMeta({ title, description, canonical, ogImage, robots }) {
   if (title) document.title = title
 
   const setMeta = (attr, key, value) => {
@@ -23,7 +23,12 @@ export function upsertMeta({ title, description, canonical, ogImage }) {
     link.setAttribute('href', href)
   }
 
+  document.head.querySelectorAll('meta[name="robots"]').forEach((el) => el.remove())
+  document.head.querySelectorAll('meta[name="keywords"]').forEach((el) => el.remove())
+  setMeta('name', 'robots', robots || 'index, follow')
+
   if (description) setMeta('name', 'description', description)
+  if (title) setMeta('name', 'title', title)
   if (canonical) setCanonical(canonical)
 
   setMeta('property', 'og:title', title)
@@ -33,6 +38,7 @@ export function upsertMeta({ title, description, canonical, ogImage }) {
 
   setMeta('property', 'twitter:title', title)
   setMeta('property', 'twitter:description', description)
+  setMeta('property', 'twitter:url', canonical)
   setMeta('property', 'twitter:image', ogImage)
 }
 
@@ -56,6 +62,39 @@ export function mountJsonLd(idPrefix, entries) {
       const script = document.getElementById(`${idPrefix}-${index}`)
       if (script) script.remove()
     })
+  }
+}
+
+/** Один блок JSON-LD с фиксированным id (например home-jsonld-faq). */
+export function upsertLinkRel(rel, href) {
+  document.head.querySelectorAll(`link[rel="${rel}"]`).forEach((el) => el.remove())
+  if (!href) return
+  const link = document.createElement('link')
+  link.setAttribute('rel', rel)
+  link.setAttribute('href', href)
+  document.head.appendChild(link)
+}
+
+export function upsertPaginationLinks({ prev, next }) {
+  upsertLinkRel('prev', prev)
+  upsertLinkRel('next', next)
+}
+
+export function mountJsonLdScript(scriptId, data) {
+  if (!data) return () => {}
+
+  let script = document.getElementById(scriptId)
+  if (!script) {
+    script = document.createElement('script')
+    script.id = scriptId
+    script.type = 'application/ld+json'
+    document.head.appendChild(script)
+  }
+  script.textContent = JSON.stringify(data)
+
+  return () => {
+    const el = document.getElementById(scriptId)
+    if (el) el.remove()
   }
 }
 

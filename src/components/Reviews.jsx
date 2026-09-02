@@ -1,5 +1,9 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+
+const REVIEW_VARDAN_IMG = '/images/reviews/vardan.webp'
+const REVIEW_KSENIA_IMG = '/images/reviews/ksenia.webp'
+const REVIEW_OLGA_IMG = '/images/reviews/olga.webp'
 
 const Reviews = () => {
   const { t } = useTranslation()
@@ -13,7 +17,7 @@ const Reviews = () => {
 
     const createPoster = () => {
       if (video.poster) return // Превью уже создано
-      
+
       if (video.readyState >= 2) {
         // Видео готово, создаем превью
         video.currentTime = 0.1
@@ -58,43 +62,47 @@ const Reviews = () => {
     setIsVideoPlaying(false)
   }
 
-  const reviews = [
-    {
-      name: t('reviews.review1.name'),
-      tour: t('reviews.review1.tour'),
-      photo: '/images/reviews/vardan.png',
-      text: t('reviews.review1.text')
-    },
-    {
-      name: t('reviews.review2.name'),
-      tour: t('reviews.review2.tour'),
-      photo: '/images/reviews/ksenia.jpeg',
-      text: t('reviews.review2.text')
-    },
-    {
-      name: t('reviews.review3.name'),
-      tour: t('reviews.review3.tour'),
-      photo: '/images/reviews/olga.png',
-      text: t('reviews.review3.text')
-    }
-  ]
+  const reviews = useMemo(
+    () => [
+      {
+        name: t('reviews.review1.name'),
+        tour: t('reviews.review1.tour'),
+        photo: REVIEW_VARDAN_IMG,
+        text: t('reviews.review1.text'),
+      },
+      {
+        name: t('reviews.review2.name'),
+        tour: t('reviews.review2.tour'),
+        photo: REVIEW_KSENIA_IMG,
+        text: t('reviews.review2.text'),
+      },
+      {
+        name: t('reviews.review3.name'),
+        tour: t('reviews.review3.tour'),
+        photo: REVIEW_OLGA_IMG,
+        text: t('reviews.review3.text'),
+      },
+    ],
+    [t],
+  )
 
   return (
-    <section className="reviews-section bg-bg-base py-[60px] sm:py-[80px] md:py-[100px] px-4">
+    <section id="reviews" className="reviews-section scroll-mt-28 bg-bg-base py-[60px] sm:py-[80px] md:py-[100px] px-4">
       <h2 className="section-header-title font-serif text-[42px] text-text-main mb-5 tracking-[0.02em] text-center" style={{ fontWeight: '300' }}>
         {t('reviews.title')}
       </h2>
       <p className="section-header-desc text-lg font-sans text-text-light mb-[70px] text-center" style={{ fontWeight: '400' }}>
         {t('reviews.subtitle')}
       </p>
-      
+
       <div className="reviews-video-top w-full max-w-[1100px] mx-auto mb-[60px] text-center px-4">
-        <div className="video-wrapper aspect-video relative rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] cursor-pointer bg-black" onClick={handleVideoClick}>
+        <div className="video-wrapper aspect-video relative rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] cursor-pointer bg-bg-card" onClick={handleVideoClick}>
           {!isVideoPlaying ? (
             <>
               <video
                 ref={videoRef}
-                src="/videos/reviews/elena-review.mp4"
+                src="/videos/reviews/elena-review.optimized.mov"
+                poster="/images/infographics/заставка-видео-отзыв.webp"
                 className="video-cover w-full h-full object-cover opacity-90 transition-all duration-500"
                 onEnded={handleVideoEnd}
                 preload="none"
@@ -109,10 +117,12 @@ const Reviews = () => {
           ) : (
             <video
               ref={videoRef}
-              src="/videos/reviews/elena-review.mp4"
+              src="/videos/reviews/elena-review.optimized.mov"
+              poster="/images/infographics/заставка-видео-отзыв.webp"
               className="w-full h-full object-cover"
               controls
               autoPlay
+              preload="metadata"
               onEnded={handleVideoEnd}
             />
           )}
@@ -132,8 +142,7 @@ const Reviews = () => {
                 className="client-photo w-[60px] h-[60px] rounded-full object-cover mr-[15px]"
                 loading="lazy"
                 onError={(e) => {
-                  // Fallback на placeholder если фото не загрузилось
-                  e.target.src = '/images/reviews/placeholder.png'
+                  e.target.src = '/images/main-photo.webp'
                 }}
               />
               <div className="client-info">

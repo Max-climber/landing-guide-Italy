@@ -18,6 +18,10 @@ i18n
       },
     },
     fallbackLng: 'ru',
+    /** Иначе `en-US` из браузера не находит файл `en` и уходит в fallbackLng → весь UI на русском. */
+    supportedLngs: ['ru', 'en'],
+    load: 'languageOnly',
+    nonExplicitSupportedLngs: true,
     debug: false,
     interpolation: {
       escapeValue: false,

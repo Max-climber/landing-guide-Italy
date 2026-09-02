@@ -6,17 +6,72 @@
     "contact": "Contact",
     "connect": "Contact Us"
   },
+  "notFound": {
+    "metaTitle": "Page not found — Vacanza Bianca",
+    "metaDescription": "The page you requested does not exist or has been removed.",
+    "heading": "Page not found",
+    "description": "Check the URL or return to the homepage for our current tours and destinations.",
+    "homeLink": "Back to home"
+  },
   "navHub": {
     "italy": "Italy",
+    "switzerland": "Switzerland",
+    "switzerlandTours": "Tours in Switzerland",
+    "stMoritz": "St. Moritz",
     "alps": "Alps",
     "alpsSki": "Ski tours in the Alps",
     "about": "About us",
     "reviews": "Reviews",
+    "faq": "FAQ",
+    "blog": "Blog",
     "pickTour": "Get consultation",
+    "pickTourShort": "Consultation",
     "pickTourMobileLine1": "Get",
     "pickTourMobileLine2": "consultation",
     "openSubmenu": "Open submenu",
     "closeMenu": "Close menu"
+  },
+  "blogPage": {
+    "breadcrumbAria": "Site navigation",
+    "home": "Home",
+    "blog": "Blog",
+    "backToBlog": "← Blog",
+    "page": "Page {{n}}",
+    "allArticles": "All articles",
+    "categoriesAria": "Blog categories",
+    "paginationAria": "Blog pagination",
+    "emptyCategory": "There are no published articles in this category yet. New posts coming soon.",
+    "emptyBlog": "No published articles yet. New posts coming soon.",
+    "published": "Published",
+    "updated": "Updated",
+    "minRead": "{{n}} min read",
+    "toc": "Contents",
+    "tocAria": "Article contents",
+    "faqHeading": "Frequently asked questions (FAQ)",
+    "relatedHeading": "Related articles",
+    "source": "Attribution",
+    "callouts": {
+      "important": "Important",
+      "tip": "Tip",
+      "attention": "Please note",
+      "route-idea": "Route idea",
+      "tour-fit": "Great for a tour",
+      "seasonality": "Seasonality",
+      "default": "Note"
+    }
+  },
+  "underDevelopment": {
+    "homeLink": "Back to home",
+    "heading": "This section is under development",
+    "subheading": "Contact us for more details",
+    "cta": "Get consultation",
+    "metaTitleSuffix": " — under construction | Vacanza Bianca",
+    "pages": {
+      "france": {
+        "title": "France",
+        "description": "The France section is under construction."
+      }
+    }
   },
   "hero": {
     "title": "LA VACANZA BIANCA",
@@ -25,7 +80,7 @@
     "cta": "Get a Personal Offer"
   },
   "about": {
-    "title": "Why Choose\nLA VACANZA BIANCA",
+    "title": "Why choose\nLA VACANZA BIANCA",
     "subtitle": "We live in Italy and help organize ski holidays —\nprofessionally and with quality.",
     "features": {
       "experience": {
@@ -164,6 +219,7 @@
   },
   "resorts": {
     "selectTourButton": "Select Tour",
+    "stMoritzLandingLink": "Read more",
     "title": "Best Ski Resorts in Italy",
     "subtitle": "We work at the most prestigious Alpine resorts",
     "trails": "Trails",
@@ -177,6 +233,10 @@
     "moreResorts": "More Resorts",
     "discount": "-{{value}}%",
     "recommended": "⭐ Recommended",
+    "statLabelDistance": "Distance from {{airport}} airport",
+    "statLabelElevation": "Resort elevation",
+    "statLabelDifficulty": "Ski level",
+    "statLabelTrails": "Total piste length",
     "resorts": {
       "pianiDiBobbio": {
         "name": "Piani di Bobbio",
@@ -330,11 +390,12 @@
       "email": "Email",
       "emailPlaceholder": "your@email.com",
       "phone": "Phone",
-      "phonePlaceholder": "+1 (555) 123-4567",
+      "phonePlaceholder": "+7 (999) 123-45-67 or +39 123 456 7890",
       "program": "Program of Interest",
       "selectProgram": "Select program",
       "programOptions": [
         "Bespoke tours in Italy",
+        "Bespoke tours in Switzerland",
         "Ski tours in the Alps",
         "Summer tours in Italy",
         "Sightseeing tours",
@@ -342,6 +403,7 @@
       ],
       "programPreset": {
         "italy": "Bespoke tours in Italy",
+        "switzerland": "Bespoke tours in Switzerland",
         "alps": "Ski tours in the Alps",
         "custom": "Custom itinerary"
       },
@@ -456,6 +518,8 @@
     "switzerland": "Switzerland",
     "soon": "soon",
     "alpsLink": "Alps",
+    "colResorts": "Resorts",
+    "stMoritz": "St. Moritz",
     "colInfo": "Information",
     "aboutAnchor": "About us",
     "blog": "Blog",
@@ -526,8 +590,16 @@
     "finalAutoMessage": "Lead from homepage (final CTA block)",
     "finalSuccess": "Thank you for your request! A La Vacanza Bianca manager will contact you soon to discuss your trip.",
     "finalError": "An error occurred. Unfortunately, we did not receive your request :( Please try again or contact us another way.",
-    "blogHeading": "More on our blog",
+    "blogHeading": "Travel blog",
     "blogAllArticles": "All blog articles",
+    "blogFeatured": [
+      {
+        "title": "Lake Como: what to see and how to plan your trip",
+        "description": "Planning a trip to Lake Como? A practical guide to towns and villas: what to see, when to go and how to plan your stay.",
+        "image": "/images/Italy-page/blog-como-01.webp",
+        "href": "/blog/ozero-komo-italiya/"
+      }
+    ],
     "popularTours": [
       {
         "title": "Lake district: Como & Garda",
@@ -537,7 +609,7 @@
         "price": "from 4600 €",
         "detailsHref": "/italy/tury-ozero-como/",
         "detailsDownload": false,
-        "image": "/images/infographics/main-carusel-1.1.png"
+        "image": "/images/infographics/main-carusel-1.1.webp"
       },
       {
         "title": "From Como to Venice",
@@ -545,7 +617,7 @@
         "people": "up to 3",
         "duration": "9 nights",
         "price": "from 7300 €",
-        "detailsHref": "/italy/",
+        "detailsHref": "/italy/tury-como-venezia/",
         "detailsDownload": false,
         "image": "https://images.unsplash.com/photo-1540979388789-67225c354146?q=80&w=1200"
       },
@@ -554,10 +626,30 @@
         "route": "Hiking, via ferrata, Bernina Express and spa time in the mountains.",
         "people": "up to 3",
         "duration": "9 nights",
-        "price": "from 6600 €",
-        "detailsHref": "/italy/",
+        "price": "from 6900 €",
+        "detailsHref": "/italy/tury-liniya-vershin-dolomity/",
         "detailsDownload": false,
         "image": "https://images.unsplash.com/photo-1617822129592-b3a165a2d711?q=80&w=1200"
+      },
+      {
+        "title": "Architecture of Wonder: Northern Italy",
+        "route": "Milan, Venice and Bologna with private tours, culture, food and a spa day on Lake Garda.",
+        "people": "up to 3",
+        "duration": "9 nights",
+        "price": "from 6600 €",
+        "detailsHref": "/italy/tury-arhitektura-sever-italii/",
+        "detailsDownload": false,
+        "image": "/images/Italy-page/tours/tours-Архитектура-впечатлений-север-Италии.webp"
+      },
+      {
+        "title": "Riviera: Liguria & the French Riviera",
+        "route": "Seafront hotel, yachting, Genoa, Camogli–Portofino hike, Sanremo and Nice.",
+        "people": "up to 3",
+        "duration": "9 nights",
+        "price": "from 7600 €",
+        "detailsHref": "/italy/tury-riviera-liguria/",
+        "detailsDownload": false,
+        "image": "/images/Italy-page/tours/tours-Riviera.webp"
       },
       {
         "title": "Skiing in the Alps",
@@ -565,7 +657,7 @@
         "people": "up to 4",
         "duration": "flexible",
         "price": "from 4900 €",
-        "detailsHref": "/alps/gornolyzhnye-tury",
+        "detailsHref": "/alps/gornolyzhnye-tury/",
         "detailsDownload": false,
         "image": "https://images.unsplash.com/photo-1549640376-3ad70f27489b?q=80&w=1200"
       }
@@ -611,6 +703,10 @@
     "getTour": "Get tour",
     "discussTour": "Discuss the tour",
     "moreDetails": "Read more",
+    "lakesModal": {
+      "title": "Choose a tour",
+      "closeAria": "Close"
+    },
     "toursHeading": "Our tours",
     "labelGuests": "Guests",
     "labelDuration": "Duration",
@@ -652,7 +748,7 @@
         "title": "Summit line:\nDolomites — St. Moritz",
         "route": "An unforgettable trip to some of Europe’s most spectacular mountains—for guests who love an active pace. Trento, Bolzano, St. Moritz (Switzerland). Lakes and peaks. Hiking and via ferrata. A spa day in the Dolomites. First class on the legendary Bernina Express. Hotels with pools, breakfast and views you will never forget.",
         "duration": "9 nights",
-        "price": "6600 €",
+        "price": "6900 €",
         "people": "up to 3 guests"
       },
       "northArchitecture": {
@@ -729,35 +825,27 @@
     },
     "blogFeatured": [
       {
-        "category": "Routes",
-        "title": "5 ideas for an unforgettable weekend on Lake Como",
-        "image": "https://images.unsplash.com/photo-1552765578-2207a41aad49?q=80&w=600",
-        "href": "/blog/ozero-como/"
-      },
-      {
-        "category": "Food & wine",
-        "title": "Northern Italy dining guide: from trattorias to Michelin stars",
-        "image": "https://images.unsplash.com/photo-1558307221-5a4843514a44?q=80&w=600",
-        "href": "/blog/kuda-poehat-italy/"
-      },
-      {
-        "category": "Tips",
-        "title": "How to prepare for trekking in the Dolomites: what to pack",
-        "image": "https://images.unsplash.com/photo-1621684346142-2b3a8a3a0d59?q=80&w=600",
-        "href": "/blog/kuda-poehat-italy/"
+        "title": "Lake Como: what to see and how to plan your trip",
+        "description": "Planning a trip to Lake Como? A practical guide to towns and villas: what to see, when to go and how to plan your stay.",
+        "image": "/images/Italy-page/blog-como-01.webp",
+        "href": "/blog/ozero-komo-italiya/"
       }
     ],
     "reviews": {
-      "alina": {
-        "title": "Alina & Maksim",
+      "ilyaMaria": {
+        "title": "Ilya & Maria",
+        "quote": "An unforgettable trip! With Dmitry we saw the best of everything: cozy Bergamo and Trento, Lake Garda panoramas and relaxation at the thermal baths. And the boat on Como is pure magic! Everything was thoughtful, easy and heartfelt. Huge thanks for the atmosphere—we will definitely come back!"
+      },
+      "anastasiaMikhail": {
+        "title": "Anastasia & Mikhail",
         "quote": "“Everything was tailored to us: transfers, hotels and full but comfortable days. We would love to return.”"
       },
-      "katerina": {
-        "title": "Katerina",
+      "nadezhda": {
+        "title": "Nadezhda",
         "quote": "“Vacanza Bianca built a route around our pace and interests—a truly bespoke trip without the rush.”"
       },
       "dmitry": {
-        "title": "Dmitry & Anna",
+        "title": "Dmitry",
         "quote": "“Private support, strong local expertise and a very high level of service at every step.”"
       }
     },
@@ -813,7 +901,7 @@
       "title": "Ready for your dream trip?",
       "description": "Leave your contacts and our Italy travel expert will reach out to select the best tour for you free of charge and answer all your questions.",
       "namePlaceholder": "Your name",
-      "phonePlaceholder": "Your phone",
+      "phonePlaceholder": "+7 (999) 123-45-67 or +39 123 456 7890",
       "emailPlaceholder": "Your e-mail",
       "submit": "Get consultation",
       "submitting": "Sending...",
@@ -823,6 +911,386 @@
       "autoMessage": "Lead submitted via embedded final-cta form on /italy/",
       "success": "Thank you for your request! A La Vacanza Bianca manager will contact you soon to discuss your trip details.",
       "error": "An error occurred. Unfortunately, we did not receive your request :( Please try again or contact us using another convenient method."
+    }
+  },
+  "switzerlandPage": {
+    "metaTitle": "Switzerland Tours 2026: Skiing, SPA & Hiking – Vacanza Bianca",
+    "metaDescription": "Bespoke Switzerland tours: St. Moritz ski resort, the Alps, SPA, hiking and panoramic routes. We organise a private trip for your dates and travel style.",
+    "breadcrumbAria": "Breadcrumb",
+    "breadcrumbHome": "Home",
+    "breadcrumbCurrent": "Switzerland tours",
+    "heroTitle": "Bespoke tours in Switzerland",
+    "heroDescription": "Private Switzerland itineraries: from St. Moritz and SPA hotels to hiking and ski resorts.",
+    "ctaOffer": "Get a personal offer",
+    "ctaPickTour": "Choose a tour",
+    "discussTour": "Discuss the tour",
+    "moreDetails": "Details",
+    "introHeading": "Switzerland with Vacanza Bianca is not a package tour",
+    "introText": "We do not sell ready-made package tours to Switzerland. Instead, we build a private itinerary around your dates, group, season and travel style. You tell us how you want the trip to feel — we turn the idea into a considered programme with a logical route, comfortable transfers, beautiful hotels and seasonal activities.",
+    "toursHeading": "Tours in Switzerland and the Alps",
+    "labelGuests": "Guests",
+    "labelDuration": "Duration",
+    "labelPrice": "Price",
+    "directionsHeading": "Where to go in Switzerland",
+    "directionsIntro": "Switzerland suits different holiday formats: ski trips, SPA breaks, hiking, panoramic routes and Alpine journeys that continue into Italy.",
+    "bookingHeading": "How we prepare your trip",
+    "reviewsHeading": "Traveller reviews",
+    "reviewsReadMore": "Read full review",
+    "reviewsCollapse": "Show less",
+    "faqHeading": "Frequently asked questions",
+    "tours": {
+      "peaksDolomites": {
+        "title": "Summit Line:\nDolomites — St. Moritz",
+        "route": "An unforgettable journey through Europe’s most beautiful mountains. For active travellers. Trento, Bolzano, St. Moritz (Switzerland). Lakes and peaks. Hiking and via ferrata. A SPA day in the Dolomites. First class on the legendary Bernina Express. Hotels with pools, breakfasts and views you will never forget.",
+        "duration": "9 nights",
+        "price": "6900 €",
+        "people": "up to 3 guests",
+        "imageAlt": "Dolomites — St. Moritz route"
+      },
+      "skiAlps": {
+        "title": "Skiing in\nthe Alps",
+        "route": "A private programme of any length for any skiing level. One or several ski resorts in Italy and Switzerland. Options from airport transfer to full support, including equipment rental and on-slope guiding.",
+        "duration": "flexible",
+        "price": "According to the custom tour programme",
+        "people": "up to 4 guests",
+        "imageAlt": "Ski tour in Switzerland"
+      }
+    },
+    "directions": {
+      "stMoritz": {
+        "title": "St. Moritz",
+        "alt": "St. Moritz in Switzerland"
+      },
+      "zermatt": {
+        "title": "Zermatt",
+        "alt": "Zermatt in the Swiss Alps"
+      },
+      "verbier": {
+        "title": "Verbier",
+        "alt": "Verbier in Switzerland"
+      },
+      "laax": {
+        "title": "Laax",
+        "alt": "Laax in Switzerland"
+      },
+      "cransMontana": {
+        "title": "Crans-Montana",
+        "alt": "Crans-Montana in Switzerland"
+      }
+    },
+    "whyCards": [
+      {
+        "title": "An itinerary for your travel style",
+        "text": "We build the programme for a specific trip: SPA, skiing, hiking or a calm journey through the Alps."
+      },
+      {
+        "title": "Switzerland and Italy in one trip",
+        "text": "We help combine St. Moritz, the Dolomites, Como and other Northern Italy points into one logical route."
+      },
+      {
+        "title": "Full support",
+        "text": "We plan every stage: route, logistics, hotels, transfers and key organisational details."
+      },
+      {
+        "title": "A personal programme, not a mass tour",
+        "text": "We design the route around your wishes: season, group size, comfort level and travel pace."
+      }
+    ],
+    "bookingSteps": [
+      {
+        "title": "Send a request",
+        "text": "Fill in the form on the site or message us."
+      },
+      {
+        "title": "We propose a route",
+        "text": "We share a programme and answer your questions."
+      },
+      {
+        "title": "We discuss the details",
+        "text": "We align hotels, transfers and activities."
+      },
+      {
+        "title": "You make a deposit",
+        "text": "We confirm your place and start trip preparation."
+      },
+      {
+        "title": "You prepare for the trip",
+        "text": "You receive recommendations, checklists and route details."
+      },
+      {
+        "title": "We travel",
+        "text": "You enjoy your journey through Switzerland."
+      }
+    ],
+    "reviews": {
+      "trentino": {
+        "title": "Slava",
+        "quote": "We had an amazing experience exploring Trentino with our guide, Dmitry. During just a few days we went kayaking on beautiful lakes and canyons, completed several fantastic hikes, and climbed via ferratas.\n\nOne of the biggest advantages was that Dmitry picked us up by car and had all the necessary equipment ready for every activity, so we didn't have to worry about renting or organizing anything ourselves.\n\nHis knowledge of the local area, infrastructure, and the Italian language saved us a lot of time and unnecessary stress. We were able to focus on enjoying nature instead of dealing with logistics.\n\nIf you want to discover Trentino in an active, comfortable, and well-organized way, we can highly recommend this tour. Thank you, Dmitry, for an unforgettable adventure!"
+      },
+      "anastasiaMikhail": {
+        "title": "Anastasia & Mikhail",
+        "quote": "“Everything was organised around us: transfers, hotels and full but comfortable days. We want to come back again.”"
+      },
+      "nadezhda": {
+        "title": "Nadezhda",
+        "quote": "“Vacanza Bianca built a route around our pace and interests. It felt like a true bespoke trip without rush.”"
+      },
+      "dmitry": {
+        "title": "Dmitry",
+        "quote": "“Private guiding, strong local expertise and a very high level of service at every step.”"
+      }
+    },
+    "faq": [
+      {
+        "question": "How much does a Switzerland tour cost?",
+        "answerHtml": "<p>The price of a Switzerland tour is calculated individually and depends on season, length, route, hotel level and group size. For example, the Dolomites — St. Moritz route starts from 6900 €. The price of an Alps ski tour depends on the resort, trip length, hotel, transfers and support format. We confirm the exact price after a consultation.</p>"
+      },
+      {
+        "question": "What is included in a Switzerland tour?",
+        "answerHtml": "<p>The contents depend on the programme. A bespoke tour usually includes full trip organisation: hotel stays, transfers and complete support at every location.</p>"
+      },
+      {
+        "question": "When is the best time to visit Switzerland?",
+        "answerHtml": "<p>In winter Switzerland suits skiing, SPA and Alpine stays. In summer and early autumn it is ideal for hiking, panoramic routes, lakes and calm mountain travel. The best season depends on the format you prefer.</p>"
+      },
+      {
+        "question": "Can Switzerland and Italy be combined in one tour?",
+        "answerHtml": "<p>Yes. We can build a private Switzerland and Italy tour — for example combining the Dolomites, St. Moritz, Lake Como, Milan and other Northern Italy points in one trip. We plan the route so the journey feels logical and comfortable.</p>"
+      },
+      {
+        "question": "Do you help with tickets and visas?",
+        "answerHtml": "<p>Flights and consular fees are usually not included in the base tour price, but we help with flight recommendations, entry route, visa questions and document preparation.</p>"
+      }
+    ],
+    "finalCta": {
+      "title": "Ready for a trip to Switzerland?",
+      "description": "Leave a request — we will discuss dates, group size, preferred pace and prepare a personal offer.",
+      "namePlaceholder": "Your name",
+      "phonePlaceholder": "+7 (999) 123-45-67 or +39 123 456 7890",
+      "emailPlaceholder": "Your e-mail",
+      "submit": "Get consultation",
+      "submitting": "Sending...",
+      "privacyPrefix": "By clicking the button, you agree to the",
+      "privacyLink": "privacy policy",
+      "emailSubject": "Lead from Switzerland page",
+      "autoMessage": "Lead submitted via embedded final-cta form on /switzerland/",
+      "success": "Thank you for your request! A La Vacanza Bianca manager will contact you soon to discuss your trip details.",
+      "error": "An error occurred. Unfortunately, we did not receive your request :( Please try again or contact us using another convenient method."
+    }
+  },
+  "stMoritzPage": {
+    "metaTitle": "Bespoke St. Moritz tours 2026: Swiss Alpine resort – Vacanza Bianca",
+    "metaDescription": "Bespoke St. Moritz tours: skiing, spa, hotels, panoramic routes and the Bernina Express. A personal Switzerland itinerary for your dates and travel style.",
+    "breadcrumbAria": "Breadcrumb",
+    "breadcrumbHome": "Home",
+    "breadcrumbSwitzerland": "Switzerland",
+    "breadcrumbAlps": "Alpine ski tours",
+    "breadcrumbCurrent": "St. Moritz",
+    "schemaHome": "Home",
+    "schemaSwitzerland": "Tours in Switzerland",
+    "schemaAlps": "Alpine ski tours",
+    "schemaCurrent": "St. Moritz",
+    "heroTitle": "Bespoke tours to St. Moritz",
+    "heroDescription": "Individual St. Moritz trips: skiing, spa, beautiful hotels, panoramic transfers and rest in the Swiss Alps. We shape the journey around your dates, activity level and preferred pace.",
+    "ctaOffer": "Get a personal offer",
+    "ctaTours": "See tour options",
+    "discussTour": "Discuss the tour",
+    "moreDetails": "Read more",
+    "labelGuests": "Guests",
+    "labelDuration": "Duration",
+    "labelPrice": "Price",
+    "whyHeading": "Why visit St. Moritz",
+    "whyIntro": "St. Moritz is one of the best-known resorts in the Swiss Alps. Guests come for skiing, spa, panoramic views, beautiful hotels and a distinctive Alpine atmosphere. It works for winter skiing, a calmer mountain break, or a combined Switzerland and Northern Italy route.",
+    "whyCards": [
+      {
+        "title": "Skiing in the Swiss Alps",
+        "text": "We match the resort, ski area, hotel, transfers, equipment rental and guiding format to your level."
+      },
+      {
+        "title": "Spa and premium rest",
+        "text": "We can add spa, beautiful hotels, restaurants and quieter days without an overloaded programme."
+      },
+      {
+        "title": "Panoramic routes",
+        "text": "St. Moritz pairs well with the Bernina Express, the Dolomites, Lake Como and Northern Italy."
+      },
+      {
+        "title": "Summer hiking",
+        "text": "In the warm season St. Moritz is ideal for walks, hiking, lakes, scenic routes and mountain rest."
+      },
+      {
+        "title": "Your own pace",
+        "text": "The programme is built around your dates, group, activity level and comfort preferences."
+      }
+    ],
+    "formatsHeading": "What a St. Moritz trip can look like",
+    "formatCards": [
+      {
+        "title": "Ski trip to St. Moritz",
+        "text": "For guests who want to ski in the Swiss Alps without organising everything themselves. We arrange the resort, hotel, transfers, ski passes, rentals and guiding."
+      },
+      {
+        "title": "Spa and Alpine rest",
+        "text": "A calmer format with beautiful hotels, spa, restaurants, walks and panoramic views. Ideal for a couple, family or small group."
+      },
+      {
+        "title": "St. Moritz + Dolomites",
+        "text": "A combined Italy and Switzerland route: Dolomites, St. Moritz, Bernina Express, hiking, spa and Lake Como."
+      },
+      {
+        "title": "Summer St. Moritz",
+        "text": "A warm-season itinerary: lakes, mountain walks, panoramic lifts, hiking, scenery and an unhurried pace."
+      }
+    ],
+    "toursHeading": "St. Moritz tours",
+    "tours": {
+      "skiAlps": {
+        "title": "Skiing in\nthe Alps",
+        "route": "An individual programme of any length for any skiing level. One or several ski resorts in Italy and Switzerland. Options from airport transfer to full guiding, including equipment rental and on-slope accompaniment.",
+        "duration": "flexible",
+        "price": "According to the tailored programme",
+        "people": "up to 4 guests",
+        "imageAlt": "Ski tour in the Alps"
+      },
+      "peaksDolomites": {
+        "title": "Summit Line:\nDolomites — St. Moritz",
+        "route": "A journey through Europe’s most beautiful mountains: Trento, Bolzano, St. Moritz. Hiking, via ferrata, spa in the Dolomites and the legendary Bernina Express.",
+        "duration": "9 nights",
+        "price": "6900 €",
+        "people": "up to 3 guests",
+        "imageAlt": "Dolomites — St. Moritz tour"
+      },
+      "individual": {
+        "title": "Individual tour\nto St. Moritz",
+        "route": "We design a St. Moritz trip around your dates: skiing, spa, hotels, restaurants, panoramic routes, transfers and guiding.",
+        "duration": "from 3 nights",
+        "price": "Quoted after consultation",
+        "people": "tailored",
+        "imageAlt": "Individual St. Moritz tour"
+      }
+    },
+    "guide": {
+      "heading": "Your guide to St. Moritz and the Alps",
+      "photoAlt": "Dmitry, founder of Vacanza Bianca",
+      "text": "Hi, I’m Dmitry, founder of Vacanza Bianca. I live in Italy and personally design and lead tours so the journey is not about “more places”, but about more pleasure and real emotions. We create trips around your rhythm: without rush, with thoughtful logistics, comfortable hotels and attention to detail. You get not a template tour, but a personal experience where every day is planned ahead and there is still room for freedom. Our goal is for you to rest, not solve organisational questions during the trip. If you like a beautiful, calm and meaningful journey through Italy and the Alps, I’ll be glad to create your personal holiday in one of the most beautiful regions in the world."
+    },
+    "atmosphere": {
+      "heading": "The atmosphere of our trips",
+      "alt1": "St. Moritz panorama in the Swiss Alps",
+      "caption1": "St. Moritz panoramas",
+      "alt2": "Mountain landscape around St. Moritz",
+      "caption2": "Mountain routes",
+      "alt3": "Alpine scenery near St. Moritz",
+      "caption3": "Alpine atmosphere",
+      "alt4": "Lake and resort of St. Moritz",
+      "caption4": "Resort by the lake",
+      "alt5": "St. Moritz: view of the Alpine resort",
+      "caption5": "Swiss resort",
+      "alt6": "Family skiing in the Alps with Vacanza Bianca",
+      "caption6": "Skiing in the mountains",
+      "alt7": "Après-ski after a day on the slopes",
+      "caption7": "Rest after skiing",
+      "alt8": "Vacanza Bianca ski tour in the Alps",
+      "caption8": "Our ski trips"
+    },
+    "bookingHeading": "How trip preparation works",
+    "bookingSteps": [
+      { "title": "Leave a request", "text": "Fill in the form on the site or message us." },
+      { "title": "Discuss the format", "text": "We clarify dates, group size, budget and hotel preferences." },
+      { "title": "Shape the route", "text": "We propose a St. Moritz programme or a Switzerland + Italy itinerary." },
+      { "title": "Confirm the programme", "text": "We agree the details and reserve your place for the chosen dates." },
+      { "title": "Start the journey", "text": "You receive the itinerary and recommendations — then follow a prepared programme." }
+    ],
+    "reviewsHeading": "Traveller reviews",
+    "reviewsReadMore": "Read more",
+    "reviewsCollapse": "Show less",
+    "reviews": {
+      "trentino": {
+        "title": "Slava",
+        "quote": "We had an amazing experience discovering Trentino with our guide Dmitry. In just a few days we kayaked on beautiful lakes and canyons and completed fantastic hikes and via ferratas.\n\nOne of the biggest advantages was that Dmitry picked us up by car and prepared all the gear for each activity in advance — we did not have to worry about rentals or organisation.\n\nHis knowledge of the area, infrastructure and Italian language saved us a lot of time and stress. We could focus on nature instead of logistics.\n\nIf you want to explore Trentino actively, comfortably and without organisational headaches — we warmly recommend this tour. Thank you, Dmitry, for an unforgettable adventure!"
+      },
+      "anastasiaMikhail": {
+        "title": "Anastasia & Mikhail",
+        "quote": "“Everything was organised for us: transfers, hotels and full yet very comfortable days. We want to come back again.”"
+      },
+      "nadezhda": {
+        "title": "Nadezhda",
+        "quote": "“Vacanza Bianca built the route around our pace and interests. It felt like a true bespoke format without rush.”"
+      },
+      "dmitry": {
+        "title": "Dmitry",
+        "quote": "“Individual guiding, strong local expertise and a very high level of service at every step.”"
+      }
+    },
+    "faqHeading": "Frequently asked questions",
+    "faq": [
+      {
+        "question": "How much does a St. Moritz tour cost?",
+        "answerHtml": "<p>The price of a St. Moritz tour is calculated individually and depends on the season, duration, hotel level, route, transfers and guiding format. If you choose the combined “Dolomites – St. Moritz” route, prices start from 6900 €. The final offer is prepared after a consultation.</p>"
+      },
+      {
+        "question": "Where is St. Moritz?",
+        "answerHtml": "<p>St. Moritz is in the Swiss Alps, in the Upper Engadin region. The resort suits winter skiing, spa stays, summer walks, hiking and panoramic routes.</p>"
+      },
+      {
+        "question": "When is the best time to visit St. Moritz?",
+        "answerHtml": "<p>In winter guests choose St. Moritz for skiing, spa and Alpine rest. In summer and early autumn it works well for hiking, lakes, panoramic routes and a quieter mountain break.</p>"
+      },
+      {
+        "question": "Can we combine St. Moritz with Italy?",
+        "answerHtml": "<p>Yes. We can build a Switzerland + Italy route: St. Moritz, the Dolomites, Lake Como, Milan and the Bernina Express. Logistics, hotels, transfers and activities are planned in advance.</p>"
+      },
+      {
+        "question": "Is this only a ski trip?",
+        "answerHtml": "<p>No. St. Moritz can be part of a ski trip, a spa holiday, a summer hiking itinerary or a combined Switzerland and Northern Italy journey.</p>"
+      },
+      {
+        "question": "What is included in the tour organisation?",
+        "answerHtml": "<p>The exact package depends on the programme. We usually help with the route, hotels, transfers, activities, restaurants, spa and guiding. The final list of services is confirmed before booking.</p>"
+      }
+    ],
+    "finalCta": {
+      "title": "Want to go to St. Moritz?",
+      "description": "Leave a request — we will discuss dates, travel style, group size and prepare a personal offer for your St. Moritz trip.",
+      "namePlaceholder": "Your name",
+      "phonePlaceholder": "+7 (999) 123-45-67 or +39 123 456 7890",
+      "emailPlaceholder": "Your e-mail",
+      "submit": "Get consultation",
+      "submitting": "Sending...",
+      "emailSubject": "Lead from St. Moritz page",
+      "autoMessage": "Lead submitted via form on /switzerland/st-moritz/",
+      "success": "Thank you for your request! A La Vacanza Bianca manager will contact you soon.",
+      "error": "Something went wrong. Please try again or contact us another way."
+    }
+  },
+  "italyTourPages": {
+    "breadcrumbAria": "Breadcrumb",
+    "breadcrumbItaly": "Italy",
+    "breadcrumbSwitzerland": "Tours in Switzerland",
+    "schemaHome": "Home",
+    "schemaItaly": "Italy",
+    "schemaSwitzerland": "Tours in Switzerland",
+    "downloadPdf": "Download PDF",
+    "programHeading": "Day-by-day programme",
+    "includedHeading": "Included in the tour price:",
+    "excludedHeading": "Not included:",
+    "bookingHeading": "Booking & payment terms:",
+    "ctaButton": "Plan your trip",
+    "comoLake": {
+      "metaTitle": "Lake Como tours: bespoke routes & holidays – Vacanza Bianca",
+      "metaDescription": "Lake district: Como & Garda — 6 nights, up to 3 guests. Day-by-day: Como, Garda, activities, water & spa.",
+      "h1": "Lake district: Como & Garda",
+      "breadcrumbCurrent": "Lake district: Como & Garda",
+      "ctaTitle": "Plan your Como & Garda trip",
+      "ctaBody": "Leave a request — we’ll tailor the route, activity level and hotel options. We reply on WhatsApp/Telegram and by email."
+    },
+    "comoVenice": {
+      "metaTitle": "From Como to Venice: bespoke tour — Como, Garda, Venice – Vacanza Bianca",
+      "metaDescription": "From Como to Venice — 9 nights, up to 3 guests. Lakes, Bergamo, spa on Garda, Venice, lagoon yacht day.",
+      "h1": "From Como to Venice",
+      "breadcrumbCurrent": "From Como to Venice",
+      "ctaTitle": "Plan your Como to Venice tour",
+      "ctaBody": "Leave a request — we’ll align dates, hotels and pace. We reply on WhatsApp/Telegram and by email."
     }
   }
 }

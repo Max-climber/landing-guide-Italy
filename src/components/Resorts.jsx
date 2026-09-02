@@ -43,9 +43,9 @@ const Resorts = () => {
   const getResortImages = (resortFolder) => {
     // Для новых изображений из папки "Изображения по курортам"
     const imageMap = {
-      'piani-di-bobbio': ['Заставка.jpg', '2.jpg', '3.jpg', '4.jpg'],
-      'sankt-moritz': ['Заставка.jpg', '2.jpg', '3.jpg', '4.jpg'],
-      'valmalenco': ['Заствака.jpg', '2.jpg', '3.jpg', '4.jpg'], // Опечатка в оригинале
+      'piani-di-bobbio': ['Заставка.webp', '2.webp', '3.webp', '4.webp'],
+      'sankt-moritz': ['Заставка.webp', '2.webp', '3.webp', '4.webp'],
+      'valmalenco': ['Заствака.webp', '2.webp', '3.webp', '4.webp'], // Опечатка в оригинале
     }
     
     if (imageMap[resortFolder]) {
@@ -63,12 +63,8 @@ const Resorts = () => {
     const count = imageCounts[resortFolder] || 0
     const images = []
     for (let i = 1; i <= count; i++) {
-        if (resortFolder === 'livigno' && i === 2) {
-          images.push(`/images/resorts/${resortFolder}/${i}.webp`)
-        } else {
-          images.push(`/images/resorts/${resortFolder}/${i}.jpg`)
-        }
-      }
+      images.push(`/images/resorts/${resortFolder}/${i}.webp`)
+    }
     return images
   }
 
@@ -116,14 +112,14 @@ const Resorts = () => {
             {t('resorts.subtitle')}
           </p>
         
-        <div className="resorts-grid flex justify-center gap-[30px] max-w-[1200px] mx-auto flex-wrap" style={{ boxSizing: 'border-box', width: '100%' }}>
+        <div className="resorts-grid flex items-stretch justify-center gap-[30px] max-w-[1200px] mx-auto flex-wrap" style={{ boxSizing: 'border-box', width: '100%' }}>
           {resorts.map((resort) => {
             const images = getResortImages(resort.folder)
             
             return (
               <div
                 key={resort.id}
-                className="resort-card bg-bg-card border border-border-soft rounded-xl w-[350px] min-w-[350px] max-w-[350px] overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.04)] transition-transform duration-300 flex flex-col text-left hover:-translate-y-1 flex-shrink-0 group"
+                className="resort-card bg-bg-card border border-border-soft rounded-xl w-[350px] min-w-[350px] max-w-[350px] overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.04)] transition-transform duration-300 flex h-auto flex-col text-left hover:-translate-y-1 flex-shrink-0 group self-stretch"
                 style={{ boxSizing: 'border-box' }}
               >
                 <div className="resort-img-box h-[240px] w-full overflow-hidden relative group">
@@ -161,7 +157,7 @@ const Resorts = () => {
                               decoding="async"
                               draggable="false"
                               onError={(e) => {
-                                e.target.src = '/images/resorts/piani-di-bobbio/1.jpg'
+                                e.target.src = '/images/resorts/piani-di-bobbio/2.webp'
                               }}
                             />
                           </SwiperSlide>
@@ -217,7 +213,7 @@ const Resorts = () => {
                     </>
                   ) : (
                     <img
-                      src={images[0] || '/images/resorts/piani-di-bobbio/1.jpg'}
+                      src={images[0] || '/images/resorts/piani-di-bobbio/2.webp'}
                       alt={resort.name}
                       className="resort-img w-full h-full object-cover cursor-pointer select-none"
                       onClick={() => handleImageClick(resort.name, resort.folder, 0)}
@@ -225,7 +221,7 @@ const Resorts = () => {
                       decoding="async"
                       draggable="false"
                       onError={(e) => {
-                        e.target.src = '/images/resorts/piani-di-bobbio/1.jpg'
+                        e.target.src = '/images/resorts/piani-di-bobbio/2.webp'
                       }}
                     />
                   )}
@@ -233,7 +229,7 @@ const Resorts = () => {
                 
                 <div className="resort-content p-[30px] flex-grow flex flex-col">
                   <div className="resort-title text-[28px] font-serif mb-1 text-text-main" style={{ fontWeight: '300' }}>
-                    {resort.nameEn || resort.name}
+                    {resort.name}
                   </div>
                   <div className="resort-subtitle text-[22px] font-serif text-text-main mb-[15px]" style={{ fontWeight: '400' }}>
                     {resort.region}
@@ -247,7 +243,7 @@ const Resorts = () => {
                     <div className="stat-item flex flex-col items-start">
                       <div className="stat-icon-wrapper mb-2">
                         <img 
-                          src="/images/infographics/resort-distance.png" 
+                          src="/images/infographics/resort-distance.webp" 
                           alt="Расстояние" 
                           className="w-6 h-6 object-contain"
                           style={{ mixBlendMode: 'multiply' }}
@@ -259,7 +255,7 @@ const Resorts = () => {
                         {resort.distance}
                       </div>
                       <div className="stat-label text-[11px] text-text-light leading-[1.4]" style={{ fontWeight: '400' }}>
-                        Расстояние от аэропорта {resort.airportFrom}
+                        {t('resorts.statLabelDistance', { airport: resort.airportFrom })}
                       </div>
                     </div>
                     
@@ -267,7 +263,7 @@ const Resorts = () => {
                     <div className="stat-item flex flex-col items-start">
                       <div className="stat-icon-wrapper mb-2">
                         <img 
-                          src="/images/infographics/resort-altitude.png" 
+                          src="/images/infographics/resort-altitude.webp" 
                           alt="Высота" 
                           className="w-6 h-6 object-contain"
                           style={{ mixBlendMode: 'multiply' }}
@@ -279,7 +275,7 @@ const Resorts = () => {
                         {resort.elevation}
                       </div>
                       <div className="stat-label text-[11px] text-text-light leading-[1.4]" style={{ fontWeight: '400' }}>
-                        Высота курорта
+                        {t('resorts.statLabelElevation')}
                       </div>
                     </div>
                     
@@ -287,7 +283,7 @@ const Resorts = () => {
                     <div className="stat-item flex flex-col items-start">
                       <div className="stat-icon-wrapper mb-2">
                         <img 
-                          src="/images/infographics/resort-level.png" 
+                          src="/images/infographics/resort-level.webp" 
                           alt="Уровень" 
                           className="w-6 h-6 object-contain"
                           style={{ mixBlendMode: 'multiply' }}
@@ -299,7 +295,7 @@ const Resorts = () => {
                         {resort.difficulty}
                       </div>
                       <div className="stat-label text-[11px] text-text-light leading-[1.4]" style={{ fontWeight: '400' }}>
-                        Уровень катания
+                        {t('resorts.statLabelDifficulty')}
                       </div>
                     </div>
                     
@@ -307,7 +303,7 @@ const Resorts = () => {
                     <div className="stat-item flex flex-col items-start">
                       <div className="stat-icon-wrapper mb-2">
                         <img 
-                          src="/images/infographics/resort-pistes.png" 
+                          src="/images/infographics/resort-pistes.webp" 
                           alt="Трассы" 
                           className="w-6 h-6 object-contain"
                           style={{ mixBlendMode: 'multiply' }}
@@ -319,7 +315,7 @@ const Resorts = () => {
                         {resort.trails}
                       </div>
                       <div className="stat-label text-[11px] text-text-light leading-[1.4]" style={{ fontWeight: '400' }}>
-                        Общая протяженность трасс
+                        {t('resorts.statLabelTrails')}
                       </div>
                     </div>
                   </div>
@@ -342,13 +338,39 @@ const Resorts = () => {
                     </ul>
                   </div>
 
-                  <button
-                    onClick={() => setIsContactModalOpen(true)}
-                    className="btn w-full px-[30px] py-4 mt-5 font-sans text-[13px] tracking-[0.14em] uppercase text-text-main bg-transparent border border-text-main rounded-[50px] cursor-pointer transition-all duration-300 hover:bg-text-main hover:text-white hover:-translate-y-0.5"
-                    style={{ fontWeight: '500' }}
-                  >
-                    {t('resorts.selectTourButton')}
-                  </button>
+                  <div className="mt-auto flex flex-col">
+                    <button
+                      onClick={() => setIsContactModalOpen(true)}
+                      className="btn w-full px-[30px] py-4 font-sans text-[13px] tracking-[0.14em] uppercase text-text-main bg-transparent border border-text-main rounded-[50px] cursor-pointer transition-all duration-300 hover:bg-text-main hover:text-white hover:-translate-y-0.5"
+                      style={{ fontWeight: '500' }}
+                    >
+                      {t('resorts.selectTourButton')}
+                    </button>
+                    {resort.folder === 'sankt-moritz' ? (
+                      <a
+                        href="/switzerland/st-moritz/"
+                        onClick={() => {
+                          try {
+                            window.sessionStorage.setItem('vb:breadcrumb-parent', 'alps')
+                          } catch {
+                            /* ignore */
+                          }
+                        }}
+                        className="mt-3 inline-flex min-h-[44px] w-full items-center justify-center rounded-[50px] border border-text-main bg-text-main px-4 py-3 text-center font-sans text-[12px] uppercase tracking-[0.12em] text-white no-underline transition-all duration-300 hover:-translate-y-0.5 hover:bg-text-main/90"
+                      >
+                        {t('resorts.stMoritzLandingLink')}
+                      </a>
+                    ) : (
+                      <button
+                        type="button"
+                        disabled
+                        aria-disabled="true"
+                        className="mt-3 inline-flex min-h-[44px] w-full cursor-default items-center justify-center rounded-[50px] border border-text-main bg-text-main px-4 py-3 text-center font-sans text-[12px] uppercase tracking-[0.12em] text-white disabled:opacity-100"
+                      >
+                        {t('resorts.stMoritzLandingLink')}
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
             )

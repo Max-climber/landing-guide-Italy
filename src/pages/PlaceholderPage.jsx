@@ -1,18 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
+import Navigation from '../components/Navigation'
 import Footer from '../components/Footer'
 import ContactModal from '../components/ContactModal'
 import TelegramFloatButton from '../components/TelegramFloatButton'
 import BreadcrumbOverlay from '../components/BreadcrumbOverlay'
 import { mountJsonLd, upsertMeta } from './seo/pageMeta'
-
-const ORG = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'Vacanza Bianca',
-  url: 'https://vacanzabianca.ru/',
-  logo: 'https://vacanzabianca.ru/images/icons/favicon.png',
-  sameAs: ['https://t.me/la_vacanza_bianca', 'https://wa.me/393520014647'],
-}
 
 function buildBreadcrumbs(items) {
   return {
@@ -42,8 +34,14 @@ const PlaceholderPage = ({
 
   const jsonLd = useMemo(() => {
     const crumbs = breadcrumbs?.length ? buildBreadcrumbs(breadcrumbs) : null
-    return [ORG, crumbs].filter(Boolean)
+    return crumbs ? [crumbs] : []
   }, [breadcrumbs])
+
+  useEffect(() => {
+    const onOpen = () => setIsModalOpen(true)
+    window.addEventListener('openContactModal', onOpen)
+    return () => window.removeEventListener('openContactModal', onOpen)
+  }, [])
 
   useEffect(() => {
     const origin =
@@ -51,12 +49,13 @@ const PlaceholderPage = ({
         ? window.location.origin
         : 'https://vacanzabianca.ru'
     const og =
-      heroImage && heroImage.startsWith('/') ? `${origin}${heroImage}` : heroImage || `${origin}/images/about/hero-composite.jpg`
+      heroImage && heroImage.startsWith('/') ? `${origin}${heroImage}` : heroImage || `${origin}/images/about/hero-composite.webp`
     upsertMeta({
       title,
       description,
       canonical,
       ogImage: og,
+      robots: 'noindex, follow',
     })
 
     const unmount = mountJsonLd(`jsonld-${canonical || title}`.replace(/[^a-zA-Z0-9-_]/g, ''), jsonLd)
@@ -65,34 +64,12 @@ const PlaceholderPage = ({
 
   return (
     <div className="min-h-screen bg-bg-base">
-      <header className="header relative z-20 flex items-center justify-between bg-bg-base px-4 py-4 sm:px-6 md:px-8 lg:px-[50px] lg:py-[26px]">
-        <a
-          href="/"
-          className="logo font-serif text-[24px] uppercase tracking-[0.05em] text-text-main transition-opacity hover:opacity-70"
-          style={{ fontWeight: '300' }}
-        >
-          LA VACANZA BIANCA
-        </a>
-        <div className="flex items-center gap-3">
-          <a
-            href="/sitemap/"
-            className="rounded-[50px] border border-border-soft px-4 py-2 text-[10px] uppercase tracking-[0.12em] text-text-main transition-colors hover:border-text-main"
-          >
-            Все страницы
-          </a>
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className="rounded-[50px] border border-text-main px-4 py-2 text-[10px] uppercase tracking-[0.12em] text-text-main transition-all duration-300 hover:bg-text-main hover:text-white"
-          >
-            Подобрать тур
-          </button>
-        </div>
-      </header>
+      <Navigation />
 
       <main className="pb-12">
         <section className="relative min-h-[60vh] overflow-hidden">
           <img
-            src={heroImage || '/images/about/hero-composite.jpg'}
+            src={heroImage || '/images/about/hero-composite.webp'}
             alt={h1}
             className="absolute inset-0 h-full w-full object-cover"
             loading="eager"

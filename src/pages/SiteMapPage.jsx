@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import Navigation from '../components/Navigation'
 import Footer from '../components/Footer'
 import ContactModal from '../components/ContactModal'
 import TelegramFloatButton from '../components/TelegramFloatButton'
@@ -33,6 +34,10 @@ const structure = [
       { name: 'Туры в Италию на май', href: '/italy/tury-may/' },
       { name: 'Туры в Италию на 7 дней', href: '/italy/7-days/' },
       { name: 'Туры на озеро Комо', href: '/italy/tury-ozero-como/' },
+      { name: 'От Комо до Венеции', href: '/italy/tury-como-venezia/' },
+      { name: 'Линия вершин: Доломиты — Санкт-Мориц', href: '/italy/tury-liniya-vershin-dolomity/' },
+      { name: 'Архитектура впечатлений: Север Италии', href: '/italy/tury-arhitektura-sever-italii/' },
+      { name: 'Ривьера: Лигурия и Лазурный берег', href: '/italy/tury-riviera-liguria/' },
       { name: 'Туры на озеро Гарда', href: '/italy/tury-ozero-garda/' },
     ],
   },
@@ -68,7 +73,7 @@ const structure = [
       { name: 'Отдых в Италии на море', href: '/blog/otdyh-v-italy-na-more/' },
       { name: 'Сколько стоит поездка в Италию', href: '/blog/skolko-stoit-poyezdka-v-italy/' },
       { name: 'Озеро Комо vs Гарда', href: '/blog/como-vs-garda/' },
-      { name: 'Озеро Комо гид', href: '/blog/ozero-como/' },
+      { name: 'Озеро Комо в Италии', href: '/blog/ozero-komo-italiya/' },
       { name: 'Озеро Комо за 1 день', href: '/blog/ozero-como-1-day/' },
       { name: 'Озеро Гарда гид', href: '/blog/ozero-garda/' },
       { name: 'Озеро Маджоре гид', href: '/blog/ozero-maggiore/' },
@@ -112,6 +117,12 @@ const SiteMapPage = () => {
   )
 
   useEffect(() => {
+    const onOpen = () => setIsModalOpen(true)
+    window.addEventListener('openContactModal', onOpen)
+    return () => window.removeEventListener('openContactModal', onOpen)
+  }, [])
+
+  useEffect(() => {
     upsertMeta({
       title: TITLE,
       description: DESCRIPTION,
@@ -123,24 +134,10 @@ const SiteMapPage = () => {
 
   return (
     <div className="min-h-screen bg-bg-base">
-      <header className="header relative z-20 flex items-center justify-between bg-bg-base px-4 py-4 sm:px-6 md:px-8 lg:px-[50px] lg:py-[26px]">
-        <a
-          href="/"
-          className="logo font-serif text-[24px] uppercase tracking-[0.05em] text-text-main transition-opacity hover:opacity-70"
-          style={{ fontWeight: '300' }}
-        >
-          LA VACANZA BIANCA
-        </a>
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="rounded-[50px] border border-text-main px-4 py-2 text-[10px] uppercase tracking-[0.12em] text-text-main transition-all duration-300 hover:bg-text-main hover:text-white"
-        >
-          Подобрать тур
-        </button>
-      </header>
+      <Navigation />
 
-      <main className="pb-12">
-        <section className="mx-auto mt-10 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
+      <main className="pb-12 pt-8 sm:pt-10 md:pt-12">
+        <section className="mx-auto w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
           <h1 className="section-title !mb-10">Карта сайта</h1>
           <p className="section-subtitle !mb-10 max-w-[860px]">
             Быстрый доступ ко всем страницам из согласованной структуры. Сейчас часть страниц — заглушки, но URL и перелинковка уже

@@ -1,15 +1,15 @@
 import { getRouteComponent } from './pages/routes.jsx'
-import HomeHubPage from './pages/HomeHubPage'
+import NotFoundPage from './pages/NotFoundPage'
 
 function App() {
   const route = getRouteComponent(window.location.pathname)
 
-  if (route?.Component) {
-    const Page = route.Component
-    return <Page />
+  if (!route?.Component) {
+    return <NotFoundPage />
   }
 
-  return <HomeHubPage />
+  const Page = route.Component
+  return <Page />
 }
 
 export default App

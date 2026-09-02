@@ -77,8 +77,13 @@ const About = () => {
       {/* Блок 2: Текст и карточки преимуществ */}
       <div className="container max-w-[1200px] mx-auto px-4 sm:px-6 md:px-6 lg:px-8 xl:px-[50px] py-[60px] sm:py-[80px]" style={{ boxSizing: 'border-box' }}>
         <h2 className="section-title text-center !mb-8 sm:!mb-10">
-          <span className="block">Почему выбирают</span>
-          <span className="block brand-name">LA VACANZA BIANCA</span>
+          {t('about.title')
+            .split('\n')
+            .map((line, idx) => (
+              <span key={idx} className={idx === 0 ? 'block' : 'block brand-name'}>
+                {line}
+              </span>
+            ))}
         </h2>
         <p className="section-subtitle font-sans text-[20px] leading-[1.6] text-[#4A4A4A] max-w-[800px] mx-auto mb-[80px]" style={{ fontWeight: '400' }}>
           {t('about.subtitle')}
@@ -87,22 +92,22 @@ const About = () => {
         <div className="features-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch mb-20">
           {[
             {
-              image: '/images/infographics/experience.png',
+              image: '/images/infographics/experience.webp',
               name: t('about.features.experience.title'),
               desc: t('about.features.experience.desc')
             },
             {
-              image: '/images/infographics/individual.png',
+              image: '/images/infographics/individual.webp',
               name: t('about.features.individual.title'),
               desc: t('about.features.individual.desc')
             },
             {
-              image: '/images/infographics/logistics.png',
+              image: '/images/infographics/logistics.webp',
               name: t('about.features.logistics.title'),
               desc: t('about.features.logistics.desc')
             },
             {
-              image: '/images/infographics/comfort.png',
+              image: '/images/infographics/comfort.webp',
               name: t('about.features.comfort.title'),
               desc: t('about.features.comfort.desc')
             }
@@ -132,7 +137,7 @@ const About = () => {
       {/* Блок 3: Фото семьи на лыжах (без размытия) */}
       <div className="feature-image-wrapper-full about-image-transparent-nav w-full relative overflow-hidden" style={{ marginTop: 0, marginBottom: 0, height: isMobile ? '50vh' : '100vh', minHeight: isMobile ? '50vh' : '100vh' }}>
         <img
-          src="/images/about/family-skiing.jpeg"
+          src="/images/about/family-skiing.webp"
           alt="Семья на лыжах в Альпах"
           className="w-full h-full object-cover block"
           style={{ width: '100%', height: '100%', objectPosition: 'center bottom', display: 'block' }}
@@ -154,12 +159,13 @@ const About = () => {
               </p>
             </div>
           </div>
-          <div className="video-wrapper instructor-video flex-1 aspect-video relative rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] cursor-pointer bg-black" onClick={handleVideoClick}>
+          <div className="video-wrapper instructor-video flex-1 aspect-video relative rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] cursor-pointer bg-bg-card" onClick={handleVideoClick}>
             {!isPlaying ? (
               <>
                 <video
                   ref={videoRef}
-                  src="/videos/guide-section.mp4"
+                  src="/videos/guide-section.optimized.mov"
+                  poster="/images/infographics/заставка-видео-альпы.webp"
                   className="video-cover w-full h-full object-cover opacity-90 transition-all duration-500"
                   onEnded={handleVideoEnd}
                   preload="none"
@@ -174,10 +180,12 @@ const About = () => {
             ) : (
               <video
                 ref={videoRef}
-                src="/videos/guide-section.mp4"
+                src="/videos/guide-section.optimized.mov"
+                poster="/images/infographics/заставка-видео-альпы.webp"
                 className="w-full h-full object-cover"
                 controls
                 autoPlay
+                preload="metadata"
                 onEnded={handleVideoEnd}
               />
             )}

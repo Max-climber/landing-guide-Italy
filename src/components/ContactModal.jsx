@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import emailjs from '@emailjs/browser'
+import { trackFormSubmit, trackFormSuccess } from '../utils/analytics'
 
 const ContactModal = ({ isOpen, onClose }) => {
   const { t, i18n } = useTranslation()
@@ -41,6 +42,8 @@ const ContactModal = ({ isOpen, onClose }) => {
 
     if (path === '/' || path.startsWith('/italy')) {
       presetProgram = t('contact.form.programPreset.italy')
+    } else if (path.startsWith('/switzerland')) {
+      presetProgram = t('contact.form.programPreset.switzerland')
     } else if (path.startsWith('/alps')) {
       presetProgram = t('contact.form.programPreset.alps')
     } else {
@@ -262,6 +265,9 @@ const ContactModal = ({ isOpen, onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    const submitLabel = t('contact.form.submit')
+    trackFormSubmit({ ctaText: submitLabel, ctaPosition: 'intro' })
     
     setSubmitSuccess(false)
     setSubmitError('')
@@ -321,6 +327,7 @@ const ContactModal = ({ isOpen, onClose }) => {
       }
 
       setSubmitSuccess(true)
+      trackFormSuccess({ ctaText: submitLabel, ctaPosition: 'intro' })
 
       setFormData({
         name: '',
@@ -356,7 +363,8 @@ const ContactModal = ({ isOpen, onClose }) => {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      className="fixed left-0 right-0 bottom-0 z-[90] flex items-center justify-center p-3 sm:p-4 max-md:items-start max-md:pt-3 max-md:pb-[max(0.75rem,env(safe-area-inset-bottom))]"
+      style={{ top: 'var(--site-header-height, 88px)' }}
       onClick={(e) => {
         // Закрываем модальное окно при клике на backdrop или вне модального контента
         const modalContent = e.currentTarget.querySelector('.modal-content')
@@ -368,8 +376,8 @@ const ContactModal = ({ isOpen, onClose }) => {
       {/* Backdrop */}
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
       
-      {/* Modal Content */}
-      <div className="modal-content relative bg-bg-card rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto z-10">
+      {/* Modal Content — высота под область ниже фиксированной шапки (--site-header-height) */}
+      <div className="modal-content relative z-10 max-h-[calc(100dvh-var(--site-header-height,88px)-1.5rem)] w-full max-w-2xl overflow-y-auto overscroll-contain rounded-lg bg-bg-card shadow-2xl sm:max-h-[min(90vh,calc(100dvh-var(--site-header-height,88px)-2rem))]">
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -381,30 +389,30 @@ const ContactModal = ({ isOpen, onClose }) => {
           </svg>
         </button>
 
-        <div className="p-6 sm:p-8">
-          <h2 className="text-2xl sm:text-3xl font-serif font-medium text-text-main mb-2">
+        <div className="p-4 sm:p-8">
+          <h2 className="mb-1 font-serif text-xl font-medium text-text-main sm:mb-2 sm:text-2xl md:text-3xl">
             {t('contact.title')}
           </h2>
-          <p className="text-lg font-sans text-text-light mb-6">
+          <p className="mb-4 font-sans text-sm leading-snug text-text-light sm:mb-6 sm:text-lg">
             {resolvedSubtitle}
           </p>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
             <div>
-              <label className="block text-text-main mb-2 text-sm font-sans">{t('contact.form.name')} *</label>
+              <label className="mb-1 block font-sans text-xs text-text-main sm:mb-2 sm:text-sm">{t('contact.form.name')} *</label>
               <input
                 type="text"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 bg-white border border-border-soft rounded-lg text-text-main text-sm font-sans placeholder-text-light/50 focus:outline-none focus:border-text-main transition-colors"
+                className="w-full rounded-lg border border-border-soft bg-white px-3 py-2 font-sans text-sm text-text-main placeholder-text-light/50 transition-colors focus:border-text-main focus:outline-none sm:px-4 sm:py-3"
                 placeholder={t('contact.form.namePlaceholder')}
               />
             </div>
 
             <div>
-              <label className="block text-text-main mb-2 text-sm font-sans">
+              <label className="mb-1 block font-sans text-xs text-text-main sm:mb-2 sm:text-sm">
                 {t('contact.form.email')}
               </label>
               <input
@@ -413,7 +421,7 @@ const ContactModal = ({ isOpen, onClose }) => {
                 value={formData.email}
                 onChange={handleEmailChange}
                 onBlur={handleEmailBlur}
-                className={`w-full px-4 py-3 bg-white border rounded-lg text-text-main text-sm font-sans placeholder-text-light/50 focus:outline-none transition-colors ${
+                className={`w-full rounded-lg border bg-white px-3 py-2 font-sans text-sm text-text-main placeholder-text-light/50 transition-colors focus:outline-none sm:px-4 sm:py-3 ${
                   emailError && emailTouched
                     ? 'border-red-400 focus:border-red-400'
                     : 'border-border-soft focus:border-text-main'
@@ -426,7 +434,7 @@ const ContactModal = ({ isOpen, onClose }) => {
             </div>
 
             <div>
-              <label className="block text-text-main mb-2 text-sm font-sans">
+              <label className="mb-1 block font-sans text-xs text-text-main sm:mb-2 sm:text-sm">
                 {t('contact.form.phone')} *
               </label>
               <input
@@ -436,12 +444,12 @@ const ContactModal = ({ isOpen, onClose }) => {
                 onChange={handlePhoneChange}
                 onBlur={handlePhoneBlur}
                 required
-                className={`w-full px-4 py-3 bg-white border rounded-lg text-text-main text-sm font-sans placeholder-text-light/50 focus:outline-none transition-colors ${
+                className={`w-full rounded-lg border bg-white px-3 py-2 font-sans text-sm text-text-main placeholder-text-light/50 transition-colors focus:outline-none sm:px-4 sm:py-3 ${
                   phoneError && phoneTouched
                     ? 'border-red-400 focus:border-red-400'
                     : 'border-border-soft focus:border-text-main'
                 }`}
-                placeholder="+7 (999) 123-45-67 или +39 123 456 7890"
+                placeholder={t('contact.form.phonePlaceholder')}
               />
               {phoneTouched && phoneError && (
                 <p className="mt-1 text-xs text-red-400">{phoneError}</p>
@@ -449,7 +457,7 @@ const ContactModal = ({ isOpen, onClose }) => {
             </div>
 
             <div>
-              <label className="block text-text-main mb-2 text-sm font-sans">
+              <label className="mb-1 block font-sans text-xs text-text-main sm:mb-2 sm:text-sm">
                 {t('contact.form.program')}
               </label>
               <select
@@ -457,7 +465,7 @@ const ContactModal = ({ isOpen, onClose }) => {
                 name="program"
                 value={formData.program}
                 onChange={handleChange}
-                className="w-full px-4 py-3 pr-10 bg-white border border-border-soft rounded-lg text-text-main text-sm font-sans focus:outline-none focus:border-text-main transition-colors appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpath%20fill%3D%22%232f3035%22%20d%3D%22M6%209L1%204h10z%22%2F%3E%3C%2Fsvg%3E')] bg-no-repeat bg-[length:12px_12px] bg-[right_1rem_center]"
+                className="w-full appearance-none rounded-lg border border-border-soft bg-white bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpath%20fill%3D%22%232f3035%22%20d%3D%22M6%209L1%204h10z%22%2F%3E%3C%2Fsvg%3E')] bg-[length:12px_12px] bg-[right_1rem_center] bg-no-repeat px-3 py-2 pr-10 font-sans text-sm text-text-main transition-colors focus:border-text-main focus:outline-none sm:px-4 sm:py-3"
                 style={{ paddingRight: '2.5rem' }}
               >
                 <option value="">{t('contact.form.selectProgram')}</option>
@@ -470,13 +478,13 @@ const ContactModal = ({ isOpen, onClose }) => {
             </div>
 
             <div>
-              <label className="block text-text-main mb-2 text-sm font-sans">{t('contact.form.message')}</label>
+              <label className="mb-1 block font-sans text-xs text-text-main sm:mb-2 sm:text-sm">{t('contact.form.message')}</label>
               <textarea
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
-                rows="4"
-                className="w-full px-4 py-3 bg-white border border-border-soft rounded-lg text-text-main text-sm font-sans placeholder-text-light/50 focus:outline-none focus:border-text-main transition-colors resize-none"
+                rows={4}
+                className="max-md:min-h-[72px] w-full resize-none rounded-lg border border-border-soft bg-white px-3 py-2 font-sans text-sm text-text-main placeholder-text-light/50 transition-colors focus:border-text-main focus:outline-none sm:px-4 sm:py-3 md:min-h-[100px]"
                 placeholder={t('contact.form.messagePlaceholder')}
               />
             </div>
@@ -496,7 +504,7 @@ const ContactModal = ({ isOpen, onClose }) => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full px-6 py-4 bg-text-main text-white rounded-[50px] font-sans font-medium text-[13px] uppercase tracking-[0.14em] hover:bg-text-main/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full rounded-[50px] bg-text-main px-4 py-3 font-sans text-[11px] font-medium uppercase tracking-[0.12em] text-white transition-colors hover:bg-text-main/90 disabled:cursor-not-allowed disabled:opacity-50 sm:px-6 sm:py-4 sm:text-[13px] sm:tracking-[0.14em]"
             >
               {isSubmitting ? t('contact.form.sending') : t('contact.form.submit')}
             </button>

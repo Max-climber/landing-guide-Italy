@@ -1,0 +1,50 @@
+RewriteEngine On
+
+SetEnvIf X-Forwarded-Proto "https" HTTPS=on
+
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css application/javascript application/json image/svg+xml
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/avif "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+</IfModule>
+
+ErrorDocument 404 /404.html
+
+DirectoryIndex index.html
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+RewriteRule ^italy/?$ italy/index.html [L]
+RewriteRule ^switzerland/?$ switzerland/index.html [L]
+RewriteRule ^switzerland/st-moritz/?$ switzerland/st-moritz/index.html [L]
+RewriteRule ^france/?$ france/index.html [L]
+RewriteRule ^alps/gornolyzhnye-tury/?$ alps/gornolyzhnye-tury/index.html [L]
+RewriteRule ^italy/tury-ozero-como/?$ italy/tury-ozero-como/index.html [L]
+RewriteRule ^italy/tury-como-venezia/?$ italy/tury-como-venezia/index.html [L]
+RewriteRule ^italy/tury-liniya-vershin-dolomity/?$ italy/tury-liniya-vershin-dolomity/index.html [L]
+RewriteRule ^italy/tury-arhitektura-sever-italii/?$ italy/tury-arhitektura-sever-italii/index.html [L]
+RewriteRule ^italy/tury-riviera-liguria/?$ italy/tury-riviera-liguria/index.html [L]
+RewriteRule ^blog/?$ blog/index.html [L]
+RewriteRule ^blog/page/([0-9]+)/?$ blog/page/$1/index.html [L]
+RewriteRule ^blog/(italy|switzerland|france)/?$ blog/$1/index.html [L]
+RewriteRule ^blog/(italy|switzerland|france)/page/([0-9]+)/?$ blog/$1/page/$2/index.html [L]
+RewriteRule ^blog/([a-z0-9-]+)/?$ blog/$1/index.html [L]
+RewriteRule ^$ index.html [L]

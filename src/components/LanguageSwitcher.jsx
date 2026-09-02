@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
+import { isEnglishLocale } from '../utils/isEnglishLocale'
 
 const LanguageSwitcher = () => {
   const { i18n } = useTranslation()
@@ -28,7 +29,7 @@ const LanguageSwitcher = () => {
     return null
   }
 
-  const currentLang = i18n.language === 'en' ? 'en' : 'ru'
+  const currentLang = isEnglishLocale(i18n.language) ? 'en' : 'ru'
   const targetLang = currentLang === 'ru' ? 'en' : 'ru'
 
   const switchLanguage = (e) => {

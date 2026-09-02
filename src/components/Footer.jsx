@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next'
+import { trackPhoneClick, trackMessengerClick } from '../utils/analytics'
 
 const INSTAGRAM_URL =
   'https://www.instagram.com/it.tours.mountains.transfer?igsh=MWF6bHR1M3k4YzJpag=='
@@ -12,12 +13,11 @@ const Footer = () => {
 
   const colTitle = 'font-serif text-[18px] text-text-main mb-4 tracking-[0.03em]'
   const linkClass = 'block font-sans text-sm text-text-light leading-7 no-underline transition-colors hover:text-text-main'
-  const muted = 'block font-sans text-sm text-[#aaa] leading-7'
 
   return (
     <footer className="footer border-t border-black/6 bg-bg-base px-4 pb-10 pt-16 sm:px-6 md:px-8 lg:px-[50px]">
       <div className="mx-auto max-w-[1200px]">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3 lg:gap-10">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4 lg:gap-10">
           <div>
             <div className={colTitle} style={{ fontWeight: 500 }}>
               {t('footer.colTours')}
@@ -25,24 +25,33 @@ const Footer = () => {
             <a href="/italy/" className={linkClass}>
               {t('footer.italyLink')}
             </a>
-            <span className={muted}>
-              {t('footer.switzerland')} — {t('footer.soon')}
-            </span>
-            <span className={muted}>
-              {t('footer.alpsLink')} — {t('footer.soon')}
-            </span>
+            <a href="/switzerland/" className={linkClass}>
+              {t('footer.switzerland')}
+            </a>
+            <a href="/alps/gornolyzhnye-tury/" className={linkClass}>
+              {t('footer.alpsLink')}
+            </a>
+          </div>
+
+          <div>
+            <div className={colTitle} style={{ fontWeight: 500 }}>
+              {t('footer.colResorts')}
+            </div>
+            <a href="/switzerland/st-moritz/" className={linkClass}>
+              {t('footer.stMoritz')}
+            </a>
           </div>
 
           <div>
             <div className={colTitle} style={{ fontWeight: 500 }}>
               {t('footer.colInfo')}
             </div>
-            <a href="/#about-us" className={linkClass}>
+            <a href="/#about" className={linkClass}>
               {t('footer.aboutAnchor')}
             </a>
-            <span className={muted}>
-              {t('footer.blog')} — {t('footer.soon')}
-            </span>
+            <a href="/blog/" className={linkClass}>
+              {t('footer.blog')}
+            </a>
             <a href="/#reviews" className={linkClass}>
               {t('footer.reviewsAnchor')}
             </a>
@@ -55,7 +64,11 @@ const Footer = () => {
             <div className={colTitle} style={{ fontWeight: 500 }}>
               {t('footer.contacts')}
             </div>
-            <a href={`tel:${PHONE_E164}`} className={`${linkClass} text-text-main`}>
+            <a
+              href={`tel:${PHONE_E164}`}
+              className={`${linkClass} text-text-main`}
+              onClick={() => trackPhoneClick({ ctaText: PHONE_DISPLAY, ctaPosition: 'footer' })}
+            >
               {PHONE_DISPLAY}
             </a>
             <a href={`mailto:${EMAIL}`} className={linkClass}>
@@ -80,6 +93,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="inline-flex text-text-main"
                 title="Telegram"
+                onClick={() => trackMessengerClick({ ctaText: 'Telegram', ctaPosition: 'footer' })}
               >
                 <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
                   <line x1="22" y1="2" x2="11" y2="13" stroke="currentColor" strokeWidth="1.5" />
@@ -92,6 +106,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="inline-flex text-text-main"
                 title="WhatsApp"
+                onClick={() => trackMessengerClick({ ctaText: 'WhatsApp', ctaPosition: 'footer' })}
               >
                 <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
                   <path

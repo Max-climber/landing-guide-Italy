@@ -8,27 +8,27 @@ const Steps = () => {
 
   const steps = [
     {
-      image: '/images/infographics/step-1.png',
+      image: '/images/infographics/step-1.webp',
       title: t('steps.step1.title'),
       desc: t('steps.step1.desc')
     },
     {
-      image: '/images/infographics/step-2.png',
+      image: '/images/infographics/step-2.webp',
       title: t('steps.step2.title'),
       desc: t('steps.step2.desc')
     },
     {
-      image: '/images/infographics/step-3.png',
+      image: '/images/infographics/step-3.webp',
       title: t('steps.step3.title'),
       desc: t('steps.step3.desc')
     },
     {
-      image: '/images/infographics/step-4.png',
+      image: '/images/infographics/step-4.webp',
       title: t('steps.step4.title'),
       desc: t('steps.step4.desc')
     },
     {
-      image: '/images/infographics/step-5.png',
+      image: '/images/infographics/step-5.webp',
       title: t('steps.step5.title'),
       desc: t('steps.step5.desc')
     }
@@ -61,140 +61,26 @@ const Steps = () => {
         </p>
         
         <div className="steps-wrapper max-w-[1200px] mx-auto w-full overflow-x-hidden px-4 sm:px-6 md:px-6 lg:px-8 xl:px-5" style={{ boxSizing: 'border-box' }}>
-          {/* Мобильная версия: 1 карточка в столбик (до 768px) */}
-          <div className="flex flex-col items-center gap-4 md:hidden">
+          <div className="flex flex-col items-center gap-4 md:flex-row md:flex-wrap md:justify-center md:gap-3 xl:flex-nowrap xl:justify-center xl:gap-4">
             {steps.map((step, idx) => (
-              <div 
-                key={idx} 
-                className="step-item card bg-bg-card border border-border-soft rounded-xl p-10 shadow-[0_10px_40px_rgba(0,0,0,0.03)] flex flex-col items-center relative" 
-                style={{ 
-                  width: CARD_WIDTH, 
+              <div
+                key={idx}
+                className="step-item card bg-bg-card border border-border-soft rounded-xl p-10 shadow-[0_10px_40px_rgba(0,0,0,0.03)] flex flex-col items-center relative"
+                style={{
+                  width: CARD_WIDTH,
                   minWidth: CARD_WIDTH,
                   maxWidth: CARD_WIDTH,
-                  minHeight: CARD_HEIGHT, 
+                  minHeight: CARD_HEIGHT,
                   height: CARD_HEIGHT,
-                  flexShrink: 0
+                  flexShrink: 0,
                 }}
               >
                 <div className="w-full flex justify-center" style={NUMBER_STYLE}>
                   {idx + 1}
                 </div>
                 <div className="step-icon-box flex items-center justify-center mb-5 flex-shrink-0" style={{ width: 'auto', height: 'auto' }}>
-                  <img 
-                    src={step.image} 
-                    alt={step.title}
-                    className="object-contain"
-                    style={{ mixBlendMode: 'multiply', maxWidth: '70px', maxHeight: '70px' }}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-                <div className="step-title font-serif text-[22px] mb-[10px] text-text-main text-center flex-shrink-0" style={{ fontWeight: '300' }}>
-                  {step.title}
-                </div>
-                <div className="step-desc font-sans text-sm text-text-light leading-[1.5] text-center flex-grow overflow-y-auto" style={{ fontWeight: '400' }}>
-                  {step.desc}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Планшетная версия: 3+2 карточки (768px - 1279px) */}
-          <div className="hidden md:flex xl:hidden flex-col items-center gap-0">
-            {/* Первая строка: 3 карточки */}
-            <div className="flex justify-center gap-3 mb-16" style={{ maxWidth: '100%', width: '100%', flexWrap: 'nowrap' }}>
-              {steps.slice(0, 3).map((step, idx) => (
-                <div 
-                  key={idx} 
-                  className="step-item card bg-bg-card border border-border-soft rounded-xl p-10 shadow-[0_10px_40px_rgba(0,0,0,0.03)] flex flex-col items-center relative" 
-                  style={{ 
-                    width: CARD_WIDTH, 
-                    minWidth: CARD_WIDTH,
-                    maxWidth: CARD_WIDTH,
-                    minHeight: CARD_HEIGHT, 
-                    height: CARD_HEIGHT,
-                    flexShrink: 0
-                  }}
-                >
-                  <div className="w-full flex justify-center" style={NUMBER_STYLE}>
-                    {idx + 1}
-                  </div>
-                  <div className="step-icon-box flex items-center justify-center mb-5 flex-shrink-0" style={{ width: 'auto', height: 'auto' }}>
-                    <img 
-                      src={step.image} 
-                      alt={step.title}
-                      className="object-contain"
-                      style={{ mixBlendMode: 'multiply', maxWidth: '70px', maxHeight: '70px' }}
-                    />
-                  </div>
-                  <div className="step-title font-serif text-[22px] mb-[10px] text-text-main text-center flex-shrink-0" style={{ fontWeight: '300' }}>
-                    {step.title}
-                  </div>
-                  <div className="step-desc font-sans text-sm text-text-light leading-[1.5] text-center flex-grow overflow-y-auto" style={{ fontWeight: '400' }}>
-                    {step.desc}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Вторая строка: 2 карточки по центру */}
-            <div className="flex justify-center gap-3" style={{ maxWidth: '100%', width: '100%', flexWrap: 'nowrap' }}>
-              {steps.slice(3, 5).map((step, idx) => (
-                <div 
-                  key={idx + 3} 
-                  className="step-item card bg-bg-card border border-border-soft rounded-xl p-10 shadow-[0_10px_40px_rgba(0,0,0,0.03)] flex flex-col items-center relative" 
-                  style={{ 
-                    width: CARD_WIDTH, 
-                    minWidth: CARD_WIDTH,
-                    maxWidth: CARD_WIDTH,
-                    minHeight: CARD_HEIGHT, 
-                    height: CARD_HEIGHT,
-                    flexShrink: 0
-                  }}
-                >
-                  <div className="w-full flex justify-center" style={NUMBER_STYLE}>
-                    {idx + 4}
-                  </div>
-                  <div className="step-icon-box flex items-center justify-center mb-5 flex-shrink-0" style={{ width: 'auto', height: 'auto' }}>
-                    <img 
-                      src={step.image} 
-                      alt={step.title}
-                      className="object-contain"
-                      style={{ mixBlendMode: 'multiply', maxWidth: '70px', maxHeight: '70px' }}
-                    />
-                  </div>
-                  <div className="step-title font-serif text-[22px] mb-[10px] text-text-main text-center flex-shrink-0" style={{ fontWeight: '300' }}>
-                    {step.title}
-                  </div>
-                  <div className="step-desc font-sans text-sm text-text-light leading-[1.5] text-center flex-grow overflow-y-auto" style={{ fontWeight: '400' }}>
-                    {step.desc}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Десктопная версия: 5 карточек в одну строку (1280px+) */}
-          <div className="hidden xl:flex justify-center gap-4" style={{ maxWidth: '100%', width: '100%', flexWrap: 'nowrap' }}>
-            {steps.map((step, idx) => (
-              <div 
-                key={idx} 
-                className="step-item card bg-bg-card border border-border-soft rounded-xl p-10 shadow-[0_10px_40px_rgba(0,0,0,0.03)] flex flex-col items-center relative" 
-                style={{ 
-                  width: CARD_WIDTH, 
-                  minWidth: CARD_WIDTH,
-                  maxWidth: CARD_WIDTH,
-                  minHeight: CARD_HEIGHT, 
-                  height: CARD_HEIGHT, 
-                  flexShrink: 0
-                }}
-              >
-                <div className="w-full flex justify-center" style={NUMBER_STYLE}>
-                  {idx + 1}
-                </div>
-                <div className="step-icon-box flex items-center justify-center mb-5 flex-shrink-0" style={{ width: 'auto', height: 'auto' }}>
-                  <img 
-                    src={step.image} 
+                  <img
+                    src={step.image}
                     alt={step.title}
                     className="object-contain"
                     style={{ mixBlendMode: 'multiply', maxWidth: '70px', maxHeight: '70px' }}

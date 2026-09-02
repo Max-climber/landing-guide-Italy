@@ -2,54 +2,105 @@ import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import emailjs from '@emailjs/browser'
 import Navigation from '../components/Navigation'
+import FaqSection from '../components/FaqSection'
 import Hero from '../components/Hero'
 import Footer from '../components/Footer'
 import ContactModal from '../components/ContactModal'
 import TelegramFloatButton from '../components/TelegramFloatButton'
 import BreadcrumbOverlay from '../components/BreadcrumbOverlay'
-import { mountJsonLd, upsertMeta } from './seo/pageMeta'
+import { mountJsonLd, mountJsonLdScript, upsertMeta } from './seo/pageMeta'
+import { buildFaqPageJsonLd } from './seo/faqSchema'
+import { buildOrganizationSchema } from './seo/organizationSchema'
+import {
+  EqualHeightTourCard,
+  EqualHeightTourCardGrid,
+  TourCardProgramDetails,
+  TourCardProgramActionsPlaceholder,
+} from '../components/EqualHeightTourCardGrid'
+import ItalyLakesTourChoiceModal from '../components/ItalyLakesTourChoiceModal'
+import BlogFeaturedSection from '../components/BlogFeaturedSection'
+import { ITALY_DETAIL_ROUTE } from '../data/italyStandaloneTourConfigs'
+import { ITALY_TOUR_CARD_BUNDLES } from '../data/italyTourCardBundles'
+import { ITALY_TOUR_CARD_BUNDLES_EN } from '../data/italyTourCardBundles.en'
+import { isEnglishLocale } from '../utils/isEnglishLocale'
+import { BREADCRUMB_PARENT, setBreadcrumbParent } from '../utils/breadcrumbContext'
 
 const ITALY_CANONICAL = 'https://vacanzabianca.ru/italy/'
-const ITALY_HERO_IMAGE =
-  'https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=2200&q=80'
+const ITALY_HERO_IMAGE = '/images/infographics/main-Italy-page.webp'
 const HOME_ABSOLUTE = 'https://vacanzabianca.ru/'
 const HOME_PATH = '/'
+const ITALY_RETURN_SCROLL_KEY = 'italy:return-scroll-y'
+const COMO_TOUR_PATH = '/italy/tury-ozero-como/'
+const COMO_VENICE_TOUR_PATH = '/italy/tury-como-venezia/'
+const ALPS_SKI_TOUR_PATH = '/alps/gornolyzhnye-tury/'
+
+const stripTrailingSlash = (path) => (path || '').replace(/\/+$/, '') || '/'
+
+/** Страницы тура: перед переходом сохраняем скролл списка туров для возврата с «Подробнее». */
+const ITALY_TOUR_DETAIL_SCROLL_SAVE = new Set(
+  [
+    COMO_TOUR_PATH,
+    COMO_VENICE_TOUR_PATH,
+    ITALY_DETAIL_ROUTE.peaksDolomites,
+    ITALY_DETAIL_ROUTE.northArchitecture,
+    ITALY_DETAIL_ROUTE.riviera,
+    ALPS_SKI_TOUR_PATH,
+  ].map(stripTrailingSlash),
+)
+
+function saveItalyTourScrollForHref(href) {
+  setBreadcrumbParent(BREADCRUMB_PARENT.italy)
+  const hrefNorm = stripTrailingSlash(href)
+  if (ITALY_TOUR_DETAIL_SCROLL_SAVE.has(hrefNorm)) {
+    window.sessionStorage.setItem(ITALY_RETURN_SCROLL_KEY, String(window.scrollY))
+  }
+}
+
+/** Карточки туров: единая папка `public/images/Italy-page/tours/` */
+const ITALY_TOURS_BASE = '/images/Italy-page/tours'
+const ITALY_TOUR_ARCH_IMAGE = `${ITALY_TOURS_BASE}/${encodeURIComponent('tours-Архитектура-впечатлений-север-Италии.webp')}`
 
 const TOUR_BUILDERS = [
-  { key: 'lakeComoGarda', image: '/images/infographics/main-carusel-1.1.png' },
-  { key: 'comoVenice', image: 'https://images.unsplash.com/photo-1540979388789-67225c354146?q=80&w=1200' },
-  { key: 'peaksDolomites', image: 'https://images.unsplash.com/photo-1617822129592-b3a165a2d711?q=80&w=1200' },
-  { key: 'northArchitecture', image: 'https://images.unsplash.com/photo-1599389713679-370e081827b5?q=80&w=1200' },
-  { key: 'riviera', image: 'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?q=80&w=1200' },
-  { key: 'skiAlps', image: 'https://images.unsplash.com/photo-1549640376-3ad70f27489b?q=80&w=1200' },
+  { key: 'lakeComoGarda', image: `${ITALY_TOURS_BASE}/tours-Lakes.webp` },
+  { key: 'comoVenice', image: `${ITALY_TOURS_BASE}/tours-from-Como-to-Venezia.webp` },
+  { key: 'peaksDolomites', image: `${ITALY_TOURS_BASE}/tours-Dolomity1.0.webp` },
+  { key: 'northArchitecture', image: ITALY_TOUR_ARCH_IMAGE },
+  { key: 'riviera', image: `${ITALY_TOURS_BASE}/tours-Riviera.webp` },
+  { key: 'skiAlps', image: `${ITALY_TOURS_BASE}/tours-Alps.webp` },
 ]
 
 const DIRECTION_DEFS = [
-  { key: 'como', image: 'https://images.unsplash.com/photo-1588623744358-04def0a7f1df?q=80&w=1200' },
-  { key: 'garda', image: 'https://images.unsplash.com/photo-1568282361099-27027d1a2f69?q=80&w=1200' },
-  { key: 'dolomites', image: 'https://images.unsplash.com/photo-1590244793822-261162434685?q=80&w=1200' },
-  { key: 'north', image: 'https://images.unsplash.com/photo-1518844390315-99c51c88824f?q=80&w=1200' },
+  { key: 'como', image: '/images/Italy-page/directions/como-direction.webp' },
+  { key: 'garda', image: '/images/Italy-page/directions/garda-direction.webp' },
+  { key: 'dolomites', image: '/images/Italy-page/directions/dolomity-direction.webp' },
+  { key: 'north', image: '/images/Italy-page/directions/north-italy-direction.webp' },
 ]
 
 const FORMAT_DEFS = [
-  { key: 'summer', image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=80' },
-  { key: 'ski', href: '/alps/gornolyzhnye-tury', image: 'https://images.unsplash.com/photo-1549640376-3ad70f27489b?auto=format&fit=crop&w=1200&q=80' },
-  { key: 'excursions', image: 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=80' },
+  { key: 'summer', image: '/images/infographics/summer-tours-for-ItalyPage.webp' },
+  { key: 'ski', href: '/alps/gornolyzhnye-tury', image: '/images/infographics/ski-tours-for-ItalyPage.webp' },
+  { key: 'excursions', image: '/images/infographics/excursion-tours-for-ItalyPage.webp' },
 ]
 
-const WHY_INFOGRAPHIC_FILES = [
-  'авторские маршруты.png',
-  'индивидуальный формат.png',
-  'полное сопровождение.png',
-  'локальная экспертиза.png',
-  'Премиальный комфорт.png',
-  'скрытые жемчужины.png',
+const WHY_ICON_FILES = [
+  'авторские маршруты.webp',
+  'individual.webp',
+  'полное сопровождение.webp',
+  'локальная экспертиза.webp',
+  'premium-comfort.webp',
+  'скрытые жемчужины.webp',
 ]
+
+const REVIEW_ANASTASIA_IMG = `/images/reviews/${encodeURIComponent('Анастасия и Михаил.webp')}`
+const REVIEW_DMITRY_IMG = '/images/reviews/dmitry.webp'
+const REVIEW_ILYA_MARIA_IMG = `/images/reviews/${encodeURIComponent('Илья и Мария.webp')}`
+const REVIEW_AVATAR_FALLBACK = '/images/icons/favicon.png'
 
 const REVIEW_DEFS = [
-  { key: 'alina', image: '/images/reviews/ksenia.jpeg' },
-  { key: 'katerina', image: '/images/reviews/olga.png' },
-  { key: 'dmitry', image: '/images/reviews/vardan.png' },
+  { key: 'ilyaMaria', image: REVIEW_ILYA_MARIA_IMG },
+  { key: 'anastasiaMikhail', image: REVIEW_ANASTASIA_IMG },
+  { key: 'nadezhda', image: '/images/reviews/Nadezhda.webp' },
+  { key: 'dmitry', image: REVIEW_DMITRY_IMG },
 ]
 
 const validCountryCodes = [
@@ -65,37 +116,40 @@ const validCountryCodes = [
   '970', '971', '972', '973', '974', '975', '976', '977', '992', '993', '994', '995', '996', '998',
 ]
 
-const PromoImageCard = ({ href, image, title, moreLabel, aspectClassName = 'aspect-[3/4]' }) => {
+const PromoImageCard = ({ href, image, title, moreLabel, aspectClassName = 'aspect-[3/4]', onActivate, onBeforeNavigate }) => {
   const baseClassName = `group relative block w-full overflow-hidden rounded-xl border border-border-soft shadow-[0_10px_28px_rgba(0,0,0,0.06)] ${aspectClassName}`
   const interactiveClassName = 'transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(0,0,0,0.1)]'
+  const isInteractive = Boolean(href || onActivate)
 
   const content = (
     <>
       <img
         src={image}
         alt=""
-        className={`absolute inset-0 h-full w-full object-cover transition-transform duration-500 ${href ? 'group-hover:scale-105' : ''}`}
+        className={`absolute inset-0 h-full w-full object-cover transition-transform duration-500 ${isInteractive ? 'group-hover:scale-105' : ''}`}
         loading="lazy"
         decoding="async"
         onError={(event) => {
-          event.currentTarget.src = '/images/main-photo.jpg'
+          event.currentTarget.src = '/images/main-photo.webp'
         }}
       />
       <div
         className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/10 transition-opacity duration-300 ${
-          href ? 'group-hover:from-black/85 group-hover:via-black/45' : ''
+          isInteractive ? 'group-hover:from-black/85 group-hover:via-black/45' : ''
         }`}
         aria-hidden
       />
       <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-5">
         <h3
-          className="font-serif text-[clamp(18px,2.2vw,24px)] leading-snug text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.45)]"
+          className={`font-serif text-[clamp(18px,2.2vw,24px)] leading-snug text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.45)] transition-transform duration-300 ${
+            isInteractive ? 'group-hover:-translate-y-5' : ''
+          }`}
           style={{ fontWeight: 300 }}
         >
           {title}
         </h3>
-        {href ? (
-          <span className="mt-2 inline-flex translate-y-2 font-sans text-[11px] uppercase tracking-[0.12em] text-white/90 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+        {isInteractive ? (
+          <span className="pointer-events-none absolute bottom-4 left-4 inline-flex translate-y-2 font-sans text-[11px] uppercase tracking-[0.12em] text-white/90 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 sm:bottom-5 sm:left-5">
             {moreLabel} →
           </span>
         ) : null}
@@ -103,21 +157,33 @@ const PromoImageCard = ({ href, image, title, moreLabel, aspectClassName = 'aspe
     </>
   )
 
-  if (!href) {
-    return <article className={baseClassName}>{content}</article>
+  if (onActivate) {
+    return (
+      <button
+        type="button"
+        onClick={onActivate}
+        className={`${baseClassName} ${interactiveClassName} cursor-pointer p-0 text-left`}
+      >
+        {content}
+      </button>
+    )
   }
 
-  return (
-    <a href={href} className={`${baseClassName} ${interactiveClassName}`}>
-      {content}
-    </a>
-  )
+  if (href) {
+    return (
+      <a href={href} onClick={onBeforeNavigate} className={`${baseClassName} ${interactiveClassName}`}>
+        {content}
+      </a>
+    )
+  }
+
+  return <article className={baseClassName}>{content}</article>
 }
 
 const ItalyPage = () => {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [openedFaq, setOpenedFaq] = useState(-1)
+  const [lakesTourModalOpen, setLakesTourModalOpen] = useState(false)
   const [isFinalSubmitting, setIsFinalSubmitting] = useState(false)
   const [finalStatus, setFinalStatus] = useState(null)
   const [finalFormData, setFinalFormData] = useState({ name: '', phone: '', email: '' })
@@ -128,25 +194,42 @@ const ItalyPage = () => {
 
   const italyTours = useMemo(
     () =>
-      TOUR_BUILDERS.map(({ key, image }) => ({
-        ...(t(`italyPage.tours.${key}`, { returnObjects: true }) || {}),
-        tourKey: key,
-        image,
-        showDetails: key === 'skiAlps' || key === 'lakeComoGarda',
-        detailsHref:
-          key === 'skiAlps'
-            ? '/alps/gornolyzhnye-tury'
-            : key === 'lakeComoGarda'
-              ? '/italy/tury-ozero-como/'
-              : undefined,
-      })),
-    [t],
+      TOUR_BUILDERS.map(({ key, image }) => {
+        const tr = t(`italyPage.tours.${key}`, { returnObjects: true }) || {}
+        const bundles = isEnglishLocale(i18n.language) ? ITALY_TOUR_CARD_BUNDLES_EN : ITALY_TOUR_CARD_BUNDLES
+        const programBundle = bundles[key]
+        return {
+          ...tr,
+          tourKey: key,
+          image,
+          showDetails: true,
+          detailsHref:
+            key === 'skiAlps'
+              ? ALPS_SKI_TOUR_PATH
+              : key === 'lakeComoGarda'
+                ? COMO_TOUR_PATH
+                : key === 'comoVenice'
+                  ? COMO_VENICE_TOUR_PATH
+                  : key === 'peaksDolomites'
+                    ? ITALY_DETAIL_ROUTE.peaksDolomites
+                    : key === 'northArchitecture'
+                      ? ITALY_DETAIL_ROUTE.northArchitecture
+                      : key === 'riviera'
+                        ? ITALY_DETAIL_ROUTE.riviera
+                        : '/italy/',
+          programBundle,
+        }
+      }),
+    [t, i18n.language],
   )
 
   const directionCards = useMemo(
     () =>
-      DIRECTION_DEFS.map(({ key, href, image }) => {
+      DIRECTION_DEFS.map(({ key, image }) => {
         const tr = t(`italyPage.directions.${key}`, { returnObjects: true }) || {}
+        let href
+        if (key === 'dolomites') href = ITALY_DETAIL_ROUTE.peaksDolomites
+        if (key === 'north') href = ITALY_DETAIL_ROUTE.northArchitecture
         return { cardKey: key, title: tr.title, href, image }
       }),
     [t],
@@ -162,7 +245,7 @@ const ItalyPage = () => {
   )
 
   const whyIconSrcs = useMemo(
-    () => WHY_INFOGRAPHIC_FILES.map((file) => `/images/infographics/${encodeURIComponent(file)}`),
+    () => WHY_ICON_FILES.map((file) => `/images/infographics/${encodeURIComponent(file)}`),
     [],
   )
 
@@ -184,19 +267,11 @@ const ItalyPage = () => {
     [t],
   )
 
+  const blogFeatured = useMemo(() => t('italyPage.blogFeatured', { returnObjects: true }) || [], [t])
+
   const schemaData = useMemo(
     () => [
-      {
-        '@context': 'https://schema.org',
-        '@type': 'Organization',
-        name: 'Vacanza Bianca',
-        url: 'https://vacanzabianca.ru/',
-        logo: 'https://vacanzabianca.ru/images/icons/favicon.png',
-        sameAs: [
-          'https://www.instagram.com/it.tours.mountains.transfer?igsh=MWF6bHR1M3k4YzJpag==',
-          'https://t.me/la_vacanza_bianca',
-        ],
-      },
+      buildOrganizationSchema(),
       {
         '@context': 'https://schema.org',
         '@type': 'BreadcrumbList',
@@ -215,33 +290,27 @@ const ItalyPage = () => {
           },
         ],
       },
-      {
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        mainEntity: faqItems.map((item) => ({
-          '@type': 'Question',
-          name: item.question,
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: item.answerHtml,
-          },
-        })),
-      },
     ],
-    [t, faqItems],
+    [t],
   )
+
+  const faqSchema = useMemo(() => buildFaqPageJsonLd(faqItems), [faqItems])
 
   useEffect(() => {
     upsertMeta({
       title: t('italyPage.metaTitle'),
       description: t('italyPage.metaDescription'),
       canonical: ITALY_CANONICAL,
-      ogImage: ITALY_HERO_IMAGE,
+      ogImage: `https://vacanzabianca.ru${ITALY_HERO_IMAGE}`,
     })
 
-    const unmount = mountJsonLd('italy-jsonld', schemaData)
-    return () => unmount()
-  }, [schemaData, t])
+    const unmountBase = mountJsonLd('italy-jsonld', schemaData)
+    const unmountFaq = mountJsonLdScript('italy-jsonld-faq', faqSchema)
+    return () => {
+      unmountBase()
+      unmountFaq()
+    }
+  }, [faqSchema, schemaData, t])
 
   useEffect(() => {
     const onOpen = () => setIsModalOpen(true)
@@ -249,8 +318,24 @@ const ItalyPage = () => {
     return () => window.removeEventListener('openContactModal', onOpen)
   }, [])
 
+  useEffect(() => {
+    const savedScroll = window.sessionStorage.getItem(ITALY_RETURN_SCROLL_KEY)
+    if (!savedScroll) return
+    window.sessionStorage.removeItem(ITALY_RETURN_SCROLL_KEY)
+    const scrollY = Number(savedScroll)
+    if (!Number.isFinite(scrollY) || scrollY < 0) return
+    window.requestAnimationFrame(() => {
+      window.scrollTo({ top: scrollY, behavior: 'auto' })
+    })
+  }, [])
+
   const moreLabel = t('italyPage.moreDetails')
   const finalToast = finalStatus === 'success' ? t('italyPage.finalCta.success') : t('italyPage.finalCta.error')
+
+  const handleTourMoreDetailsClick = (tour) => {
+    setBreadcrumbParent(BREADCRUMB_PARENT.italy)
+    saveItalyTourScrollForHref(tour.detailsHref)
+  }
 
   const validatePhone = (phone) => {
     if (!phone || !phone.trim()) {
@@ -513,10 +598,15 @@ const ItalyPage = () => {
       <main className="pb-12">
         <section id="tours" className="mx-auto mt-20 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
           <h2 className="section-title !mb-10 text-center">{t('italyPage.toursHeading')}</h2>
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <EqualHeightTourCardGrid
+            measureKey={italyTours.map((tour) => tour.tourKey).join('|')}
+            className="md:grid-cols-2 xl:grid-cols-3"
+          >
             {italyTours.map((tour) => (
-              <article
+              <EqualHeightTourCard
+                id={`tour-${tour.tourKey}`}
                 key={tour.tourKey}
+                cardKey={tour.tourKey}
                 className="flex flex-col overflow-hidden rounded-xl border border-border-soft bg-bg-card shadow-[0_8px_22px_rgba(0,0,0,0.03)]"
               >
                 <div className="aspect-[16/10] w-full overflow-hidden">
@@ -527,7 +617,7 @@ const ItalyPage = () => {
                     loading="lazy"
                     decoding="async"
                     onError={(event) => {
-                      event.currentTarget.src = '/images/main-photo.jpg'
+                      event.currentTarget.src = '/images/main-photo.webp'
                     }}
                   />
                 </div>
@@ -538,20 +628,16 @@ const ItalyPage = () => {
                   >
                     {tour.title}
                   </h3>
-                  <p className="mb-5 whitespace-pre-line text-sm leading-6 text-text-light">{tour.route}</p>
-                  <div className="mt-auto">
-                    <div className="mb-4 grid grid-cols-2 gap-4 border-y border-border-soft py-4">
-                      <div>
-                        <p className="mb-1 text-[10px] uppercase tracking-[0.1em] text-[#888]">{t('italyPage.labelGuests')}</p>
-                        <p className="text-sm font-medium text-text-main">{tour.people}</p>
-                      </div>
-                      <div>
-                        <p className="mb-1 text-[10px] uppercase tracking-[0.1em] text-[#888]">{t('italyPage.labelDuration')}</p>
-                        <p className="text-sm font-medium text-text-main">{tour.duration}</p>
-                      </div>
-                    </div>
-                    <p
-                      className={`mb-5 font-serif leading-tight text-text-main ${
+                  {/* flex-1 на route: лишняя высота НАД meta — верхняя линия dl совпадает */}
+                  <p className="mb-5 flex-1 whitespace-pre-line text-sm leading-6 text-text-light">{tour.route}</p>
+                  <dl className="mb-4 grid grid-cols-2 gap-x-4 gap-y-3 border-y border-border-soft py-4">
+                    <dt className="mb-1 text-[10px] uppercase tracking-[0.1em] text-[#888]">{t('italyPage.labelGuests')}</dt>
+                    <dt className="mb-1 text-[10px] uppercase tracking-[0.1em] text-[#888]">{t('italyPage.labelDuration')}</dt>
+                    <dd className="m-0 text-sm font-medium text-text-main">{tour.people}</dd>
+                    <dd className="m-0 text-sm font-medium text-text-main">{tour.duration}</dd>
+                    <dt className="col-span-2 mb-1 text-[10px] uppercase tracking-[0.1em] text-[#888]">{t('italyPage.labelPrice')}</dt>
+                    <dd
+                      className={`col-span-2 m-0 font-serif leading-tight text-text-main ${
                         tour.tourKey === 'skiAlps'
                           ? 'text-[clamp(15px,1.9vw,20px)]'
                           : 'text-[clamp(22px,2.6vw,28px)]'
@@ -559,11 +645,19 @@ const ItalyPage = () => {
                       style={{ fontWeight: 400 }}
                     >
                       {tour.price}
-                    </p>
+                    </dd>
+                  </dl>
+                  <div>
+                    {tour.programBundle ? (
+                      <TourCardProgramDetails cardKey={tour.tourKey} bundle={tour.programBundle} />
+                    ) : (
+                      <TourCardProgramActionsPlaceholder />
+                    )}
                     {tour.showDetails ? (
                       <div className="grid grid-cols-2 gap-2">
                         <a
                           href={tour.detailsHref}
+                          onClick={() => handleTourMoreDetailsClick(tour)}
                           className="rounded-[40px] border border-text-main px-3 py-2.5 text-center text-[11px] uppercase tracking-[0.11em] text-text-main transition-all duration-300 hover:bg-text-main hover:text-white"
                         >
                           {t('italyPage.moreDetails')}
@@ -587,9 +681,9 @@ const ItalyPage = () => {
                     )}
                   </div>
                 </div>
-              </article>
+              </EqualHeightTourCard>
             ))}
-          </div>
+          </EqualHeightTourCardGrid>
         </section>
 
         <section className="mx-auto mt-20 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
@@ -602,7 +696,12 @@ const ItalyPage = () => {
                     src={whyIconSrcs[idx]}
                     alt=""
                     className="object-contain"
-                    style={{ mixBlendMode: 'multiply', maxWidth: '70px', maxHeight: '70px' }}
+                    style={{
+                      maxWidth: '70px',
+                      maxHeight: '70px',
+                      filter: 'grayscale(1)',
+                      opacity: 0.72,
+                    }}
                     loading="lazy"
                     decoding="async"
                   />
@@ -619,9 +718,20 @@ const ItalyPage = () => {
         <section id="directions" className="mx-auto mt-20 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
           <h2 className="section-title !mb-10 text-center">{t('italyPage.directionsHeading')}</h2>
           <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-            {directionCards.map((item) => (
-              <PromoImageCard key={item.cardKey} href={item.href} image={item.image} title={item.title} moreLabel={moreLabel} />
-            ))}
+            {directionCards.map((item) => {
+              const openLakesChoice = item.cardKey === 'como' || item.cardKey === 'garda'
+              return (
+                <PromoImageCard
+                  key={item.cardKey}
+                  href={openLakesChoice ? undefined : item.href}
+                  onActivate={openLakesChoice ? () => setLakesTourModalOpen(true) : undefined}
+                  onBeforeNavigate={item.href ? () => saveItalyTourScrollForHref(item.href) : undefined}
+                  image={item.image}
+                  title={item.title}
+                  moreLabel={moreLabel}
+                />
+              )
+            })}
           </div>
         </section>
 
@@ -653,12 +763,12 @@ const ItalyPage = () => {
             </div>
             <div className="overflow-hidden rounded-xl border border-border-soft bg-bg-card">
               <img
-                src="https://images.unsplash.com/photo-1529911194206-4f3fdb4fef72?auto=format&fit=crop&w=1400&q=80"
+                src="/images/infographics/italy-vibe-last.webp"
                 alt={t('italyPage.northImgAlt')}
                 className="h-full min-h-[380px] w-full object-cover"
                 loading="lazy"
                 onError={(event) => {
-                  event.currentTarget.src = '/images/main-photo.jpg'
+                  event.currentTarget.src = '/images/main-photo.webp'
                 }}
               />
             </div>
@@ -667,23 +777,31 @@ const ItalyPage = () => {
 
         <section className="mx-auto mt-20 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
           <h2 className="section-title !mb-10 text-center">{t('italyPage.reviewsHeading')}</h2>
-          <div className="grid gap-5 md:grid-cols-3">
-            {reviewCards.map((item) => (
+          <div className="-mx-4 flex gap-5 overflow-x-auto px-4 pb-3 pt-1 [-webkit-overflow-scrolling:touch] [scrollbar-width:thin] snap-x snap-mandatory md:mx-0 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:px-0 md:snap-none lg:grid-cols-4">
+            {reviewCards.map((item, idx) => (
               <article
-                key={item.title}
-                className="rounded-xl border border-border-soft bg-bg-card p-5 shadow-[0_8px_22px_rgba(0,0,0,0.03)] sm:p-6"
+                key={`${item.title}-${idx}`}
+                className="flex min-h-0 w-[min(100%,340px)] flex-shrink-0 snap-center flex-col rounded-xl border border-border-soft bg-bg-card p-5 shadow-[0_8px_22px_rgba(0,0,0,0.03)] sm:p-6 md:w-auto md:min-w-0 md:flex-1 md:snap-none"
               >
                 <div className="mb-2 font-serif text-3xl leading-none text-text-main/25" aria-hidden>
                   ”
                 </div>
-                <blockquote className="mb-5 text-sm leading-7 text-text-light">{item.description}</blockquote>
-                <div className="flex items-center gap-3">
+                <blockquote className="mb-0 min-h-0 flex-1 text-sm leading-7 text-text-light">{item.description}</blockquote>
+                <div className="mt-4 flex shrink-0 items-center gap-3">
                   <img
                     src={item.image}
                     alt=""
-                    className="h-11 w-11 flex-shrink-0 rounded-full object-cover ring-1 ring-border-soft"
+                    width={44}
+                    height={44}
+                    className="h-11 w-11 flex-shrink-0 rounded-full bg-[#e8e4df] object-cover ring-1 ring-border-soft"
                     loading="lazy"
                     decoding="async"
+                    onError={(event) => {
+                      const el = event.currentTarget
+                      if (el.dataset.fallbackApplied === '1') return
+                      el.dataset.fallbackApplied = '1'
+                      el.src = REVIEW_AVATAR_FALLBACK
+                    }}
                   />
                   <span className="font-serif text-base text-text-main" style={{ fontWeight: 400 }}>
                     {item.title}
@@ -694,32 +812,11 @@ const ItalyPage = () => {
           </div>
         </section>
 
-        <section id="faq" className="mx-auto mt-20 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
-          <h2 className="section-title !mb-10 text-center">{t('italyPage.faqHeading')}</h2>
-          <div className="space-y-4">
-            {faqItems.map((item, index) => {
-              const isOpen = openedFaq === index
-              return (
-                <article key={`faq-${index}`} className="overflow-hidden rounded-xl border border-border-soft bg-bg-card">
-                  <button
-                    type="button"
-                    className="flex w-full items-center justify-between px-6 py-5 text-left"
-                    onClick={() => setOpenedFaq((prev) => (prev === index ? -1 : index))}
-                  >
-                    <h3 className="pr-4 font-sans text-base font-medium text-text-main">{item.question}</h3>
-                    <span className="text-xl text-text-main">{isOpen ? '−' : '+'}</span>
-                  </button>
-                  {isOpen ? (
-                    <div
-                      className="border-t border-border-soft px-6 py-5 text-sm leading-7 text-text-light [&_p+p]:mt-3 [&_strong]:font-medium [&_strong]:text-text-main [&_ul]:mt-2 [&_ul]:list-disc [&_ul]:space-y-1 [&_ul]:pl-5 [&_ul]:text-text-light"
-                      dangerouslySetInnerHTML={{ __html: item.answerHtml }}
-                    />
-                  ) : null}
-                </article>
-              )
-            })}
-          </div>
-        </section>
+        <FaqSection
+          heading={t('italyPage.faqHeading')}
+          items={faqItems}
+          className="mx-auto mt-20 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5"
+        />
 
         <section id="final-cta" className="mx-auto mt-20 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
           <div className="p-0 sm:p-2 md:p-4">
@@ -727,14 +824,19 @@ const ItalyPage = () => {
             <p className="mx-auto mb-8 max-w-[760px] text-center text-sm leading-7 text-text-light">
               {t('italyPage.finalCta.description')}
             </p>
-            <form id="cta-form" onSubmit={handleFinalCtaSubmit} className="mx-auto flex w-full max-w-[760px] flex-col gap-4">
+            <form
+              id="cta-form"
+              key={i18n.language}
+              onSubmit={handleFinalCtaSubmit}
+              className="mx-auto flex w-full max-w-[760px] flex-col gap-4"
+            >
               <input
                 type="text"
                 name="name"
                 required
                 value={finalFormData.name}
                 onChange={handleFinalNameChange}
-                placeholder="Ваше имя"
+                placeholder={t('italyPage.finalCta.namePlaceholder')}
                 className="w-full rounded-[14px] border border-border-soft bg-white px-4 py-3 text-sm text-text-main outline-none transition-colors placeholder:text-[#9c9c9c] focus:border-text-main"
               />
               <input
@@ -744,7 +846,7 @@ const ItalyPage = () => {
                 value={finalFormData.phone}
                 onChange={handleFinalPhoneChange}
                 onBlur={handleFinalPhoneBlur}
-                placeholder="+7 (999) 123-45-67 или +39 123 456 7890"
+                placeholder={t('italyPage.finalCta.phonePlaceholder')}
                 className={`w-full rounded-[14px] border bg-white px-4 py-3 text-sm text-text-main outline-none transition-colors placeholder:text-[#9c9c9c] ${
                   phoneTouched && phoneError ? 'border-red-400 focus:border-red-400' : 'border-border-soft focus:border-text-main'
                 }`}
@@ -757,7 +859,7 @@ const ItalyPage = () => {
                 value={finalFormData.email}
                 onChange={handleFinalEmailChange}
                 onBlur={handleFinalEmailBlur}
-                placeholder="your@email.com"
+                placeholder={t('italyPage.finalCta.emailPlaceholder')}
                 className={`w-full rounded-[14px] border bg-white px-4 py-3 text-sm text-text-main outline-none transition-colors placeholder:text-[#9c9c9c] ${
                   emailTouched && emailError ? 'border-red-400 focus:border-red-400' : 'border-border-soft focus:border-text-main'
                 }`}
@@ -781,59 +883,22 @@ const ItalyPage = () => {
           </div>
         </section>
 
-        {/* BLOG BLOCK TEMPORARILY HIDDEN
-          <section className="mx-auto mt-16 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
-          <h2 className="section-title !mb-10 text-center text-[clamp(28px,4vw,38px)]">{t('italyPage.blogHeading')}</h2>
-          <ul className="mx-auto max-w-[640px] divide-y divide-border-soft rounded-xl border border-border-soft bg-bg-card/80 px-2 py-1 sm:px-3">
-            {blogCards.map((item) => (
-              <li key={item.href}>
-                <a
-                  href={item.href}
-                  className="group flex gap-3 py-3.5 pl-2 pr-2 transition-colors hover:bg-bg-base/60 sm:gap-4 sm:py-4 sm:pl-3 sm:pr-3"
-                >
-                  <div className="relative h-14 w-[5.25rem] flex-shrink-0 overflow-hidden rounded-lg border border-border-soft sm:h-[4.5rem] sm:w-24">
-                    <img
-                      src={item.image}
-                      alt=""
-                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <h3
-                      className="font-serif text-[17px] leading-snug text-text-main transition-colors group-hover:text-text-main sm:text-[18px]"
-                      style={{ fontWeight: '400' }}
-                    >
-                      {item.title}
-                    </h3>
-                    <p className="mt-0.5 line-clamp-2 text-[13px] leading-snug text-text-light">{item.description}</p>
-                  </div>
-                  <span
-                    className="hidden flex-shrink-0 self-center font-sans text-[11px] text-[#bbb] transition-colors group-hover:text-text-main sm:inline"
-                    aria-hidden
-                  >
-                    →
-                  </span>
-                </a>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-10 flex justify-center">
-            <a
-              href="/blog"
-              className="inline-flex rounded-[40px] border border-text-main px-8 py-3 text-[12px] uppercase tracking-[0.12em] text-text-main transition-all duration-300 hover:bg-text-main hover:text-white"
-            >
-              {t('italyPage.blogAllArticles')}
-            </a>
-          </div>
-          </section>
-        */}
+        <BlogFeaturedSection
+          heading={t('italyPage.blogHeading')}
+          items={blogFeatured}
+          allArticlesLabel={t('italyPage.blogAllArticles')}
+          className="mt-20"
+        />
       </main>
 
       <Footer />
       <TelegramFloatButton />
       <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <ItalyLakesTourChoiceModal
+        isOpen={lakesTourModalOpen}
+        onClose={() => setLakesTourModalOpen(false)}
+        onBeforeTourNavigate={saveItalyTourScrollForHref}
+      />
       {finalStatus ? (
         <div className="fixed bottom-5 left-1/2 z-[70] w-[min(92vw,560px)] -translate-x-1/2 rounded-xl border border-border-soft bg-bg-card p-4 shadow-[0_10px_28px_rgba(0,0,0,0.2)]">
           <p className="text-sm leading-7 text-text-main">{finalToast}</p>

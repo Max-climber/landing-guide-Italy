@@ -76,7 +76,7 @@ const Instructor = () => {
             <>
               <video
                 ref={videoRef}
-                src="/videos/guide-section.mp4"
+                src="/videos/guide-section.optimized.mov"
                 className="video-cover w-full h-full object-cover opacity-90 transition-all duration-500"
                 onEnded={handleVideoEnd}
                 preload="metadata"
@@ -90,7 +90,7 @@ const Instructor = () => {
           ) : (
             <video
               ref={videoRef}
-              src="/videos/guide-section.mp4"
+              src="/videos/guide-section.optimized.mov"
               className="w-full h-full object-cover"
               controls
               autoPlay

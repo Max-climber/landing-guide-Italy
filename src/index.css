@@ -1,5 +1,4 @@
-/* Подключение шрифтов из Google Fonts как в шаблоне HTML2.0.html */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap');
+/* Шрифты подключаются в index.html (<link>), не через @import — иначе vite build может зависать на сети */
 
 @tailwind base;
 @tailwind components;
@@ -83,10 +82,9 @@
     font-family: var(--font-sans);
   }
 
+  /* Только семейство шрифта; размер и начертание задаются в компонентах (навигация — semibold 600) */
   .logo {
     font-family: var(--font-serif);
-    font-size: 24px;
-    font-weight: 300 !important;
   }
 }
 
@@ -360,15 +358,115 @@
     color: var(--text-light);
   }
 
-  /* Стили для Header/Navigation */
+  /* Header: позиционирование и z-index; фон задаётся только в Navigation (Tailwind) */
   .header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    background: transparent;
-    z-index: 50;
-    backdrop-filter: none;
+    z-index: 100;
+  }
+
+  .header .logo {
+    font-weight: 600 !important;
+    font-family: var(--font-serif);
+  }
+
+  /* Шапка: центрированное меню + адаптивные отступы (все браузеры) */
+  .site-header-shell {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(0.75rem, 2vw, 1.5rem);
+    width: 100%;
+  }
+
+  .site-header-brand {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .site-header-nav {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    display: none;
+    width: max-content;
+    max-width: min(72vw, 52rem);
+    align-items: center;
+    justify-content: center;
+    gap: clamp(1rem, 1.85vw, 2.25rem);
+    transform: translate(-50%, -50%);
+  }
+
+  @media (min-width: 1024px) {
+    .site-header-nav {
+      display: flex;
+    }
+  }
+
+  .site-header-nav a,
+  .site-header-nav button {
+    flex-shrink: 0;
+  }
+
+  .site-header-actions {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: clamp(0.5rem, 1.2vw, 1.25rem);
+  }
+
+  .site-header-link {
+    font-family: var(--font-sans);
+    font-size: clamp(0.6875rem, 0.2rem + 0.48vw, 0.8125rem);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+  }
+
+  .site-header-link:hover {
+    opacity: 0.7;
+  }
+
+  .site-header-btn {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    border: 1px solid var(--text-main);
+    background: var(--text-main);
+    padding: 0.625rem clamp(1rem, 1.2vw, 1.75rem);
+    font-family: var(--font-sans);
+    font-size: clamp(0.5625rem, 0.15rem + 0.4vw, 0.75rem);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    transition: transform 0.25s ease, background-color 0.25s ease;
+  }
+
+  .site-header-btn:hover {
+    transform: translateY(-2px);
+    background: color-mix(in srgb, var(--text-main) 90%, transparent);
+  }
+
+  @media (max-width: 1023px) {
+    .site-header-nav {
+      display: none !important;
+    }
   }
 
   /* Стили для Hero секции */
@@ -421,37 +519,44 @@
     width: 100%;
   }
 
+  @media (max-width: 425px) {
+    .hero-content {
+      justify-content: flex-start;
+      padding-top: calc(var(--site-header-height, 88px) + 18px);
+    }
+  }
+
   .hero-title {
     margin: 0 0 10px 0;
-    font-weight: 300 !important;
+    font-weight: 600 !important;
     font-family: 'Cormorant Garamond', serif !important;
   }
   
   h1.hero-title {
-    font-weight: 300 !important;
+    font-weight: 600 !important;
     font-family: 'Cormorant Garamond', serif !important;
   }
   
   section.hero-section h1.hero-title {
-    font-weight: 300 !important;
+    font-weight: 600 !important;
     font-family: 'Cormorant Garamond', serif !important;
   }
 
   .hero-subtitle {
     margin-bottom: 16px;
     text-transform: none;
-    font-weight: 400 !important;
+    font-weight: 600 !important;
   }
 
   .hero-desc {
     margin: 0 auto 36px auto;
-    font-weight: 400 !important;
+    font-weight: 600 !important;
   }
 
   .main-btn {
     box-sizing: border-box;
     text-align: center;
-    font-weight: 500 !important;
+    font-weight: 600 !important;
   }
 
   /* Стили для section-title */
@@ -679,7 +784,7 @@
     }
     h1.hero-title {
       font-size: 34px;
-      font-weight: 300 !important;
+      font-weight: 600 !important;
     }
     .hero-content {
       padding-bottom: 15vh;
@@ -789,5 +894,60 @@ html {
 
 body {
   overflow-x: hidden; /* Убираем горизонтальный скролл */
+}
+
+/* --- Блог: врезки в статьях --- */
+.article-callout {
+  @apply my-6 rounded-xl border border-border-soft px-5 py-4 sm:px-6 sm:py-5;
+}
+
+.article-callout__label {
+  @apply mb-2 font-sans text-[11px] font-semibold uppercase tracking-[0.1em];
+}
+
+.article-callout__body {
+  @apply font-sans text-sm leading-7 text-text-main [&_a]:text-text-main [&_a]:underline [&_strong]:font-medium;
+}
+
+.article-callout--important {
+  @apply border-l-4 border-l-[#c45c4a] bg-[#fdf6f4];
+}
+.article-callout--important .article-callout__label {
+  @apply text-[#c45c4a];
+}
+
+.article-callout--tip {
+  @apply border-l-4 border-l-[#5a8f6e] bg-[#f4faf6];
+}
+.article-callout--tip .article-callout__label {
+  @apply text-[#5a8f6e];
+}
+
+.article-callout--attention {
+  @apply border-l-4 border-l-[#c9a227] bg-[#fdfaf0];
+}
+.article-callout--attention .article-callout__label {
+  @apply text-[#9a7b1a];
+}
+
+.article-callout--route-idea {
+  @apply border-l-4 border-l-[#4a7ba7] bg-[#f4f8fc];
+}
+.article-callout--route-idea .article-callout__label {
+  @apply text-[#4a7ba7];
+}
+
+.article-callout--tour-fit {
+  @apply border-l-4 border-l-text-main bg-bg-warm;
+}
+.article-callout--tour-fit .article-callout__label {
+  @apply text-text-main;
+}
+
+.article-callout--seasonality {
+  @apply border-l-4 border-l-[#7a6b9e] bg-[#f8f6fc];
+}
+.article-callout--seasonality .article-callout__label {
+  @apply text-[#7a6b9e];
 }
 

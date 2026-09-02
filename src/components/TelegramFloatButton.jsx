@@ -1,8 +1,6 @@
-import { useTranslation } from 'react-i18next'
+import { trackMessengerClick } from '../utils/analytics'
 
 const TelegramFloatButton = () => {
-  const { t } = useTranslation()
-
   return (
     <a
       href="https://t.me/Listtain"
@@ -11,6 +9,7 @@ const TelegramFloatButton = () => {
       className="fixed bottom-6 right-6 z-50 w-14 h-14 flex items-center justify-center transition-all duration-300 hover:scale-110"
       aria-label="Написать в Telegram"
       title="Написать в Telegram"
+      onClick={() => trackMessengerClick({ ctaText: 'Telegram', ctaPosition: 'sticky' })}
     >
       <svg 
         className="w-14 h-14" 

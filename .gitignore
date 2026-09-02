@@ -15,8 +15,10 @@ dist-ssr
 .env.local
 .env.production
 
-# Large archive files
+# Large archive files and stale deploy copies (use dist/ + npm run pack-site)
 site.zip
+site/
+site-lite/
 
 # Editor directories and files
 .vscode/*
@@ -28,3 +30,15 @@ site.zip
 *.njsproj
 *.sln
 *.sw?
+
+# Local deploy archives (too large for GitHub)
+site.zip
+site-lite.zip
+*.zip
+~$*
+
+# Local deploy archives (too large for GitHub)
+site.zip
+site-lite.zip
+*.zip
+~$*

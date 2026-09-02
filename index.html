@@ -20,11 +20,10 @@
     <meta name="msapplication-TileImage" content="/images/icons/favicon.png" />
     <meta name="msapplication-TileColor" content="#33363B" />
     
-    <!-- Primary Meta Tags -->
-    <title>Премиальные горнолыжные туры в Италию: La Vacanza Bianca</title>
-    <meta name="title" content="Премиальные горнолыжные туры в Италию: La Vacanza Bianca" />
-    <meta name="description" content="Премиальные горнолыжные туры в Италию. Лучшие курорты Альп: Ливиньо, Санкт-Мориц, Пьяни ди Боббио. Vip. Бронирование отелей. Трасфер. Сопровождение. Профессиональные гиды и лыжные инструкторы." />
-    <meta name="keywords" content="горнолыжный, тур, отдых, курорт, италия, вип" />
+    <!-- Primary Meta Tags (дефолты; главная переопределяет через React после загрузки — строки как в ru.json homePage) -->
+    <title>🏔️ Авторские туры в Италию, Швейцарию и Францию 2026 – Vacanza Bianca</title>
+    <meta name="title" content="🏔️ Авторские туры в Италию, Швейцарию и Францию 2026 – Vacanza Bianca" />
+    <meta name="description" content="Авторские туры по Италии 🇮🇹, Швейцарии 🇨🇭 и Франции 🇫🇷. Уникальные маршруты, маленькие группы, индивидуальный подход. Горнолыжный отдых в Альпах ⛷️, летние туры на озера и хайкинг по северу Италии 🏔️. Подбор тура под ваши интересы и стиль отдыха!" />
     <meta name="author" content="La Vacanza Bianca" />
     <meta name="robots" content="index, follow" />
     <meta name="language" content="Russian" />
@@ -32,44 +31,51 @@
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://vacanzabianca.com/" />
-    <meta property="og:title" content="Премиальные горнолыжные туры в Италию: La Vacanza Bianca" />
-    <meta property="og:description" content="Премиальные горнолыжные туры в Италию. Лучшие курорты Альп: Ливиньо, Санкт-Мориц, Пьяни ди Боббио. Vip. Бронирование отелей. Трасфер. Сопровождение. Профессиональные гиды и лыжные инструкторы." />
-    <meta property="og:image" content="https://vacanzabianca.com/images/about_Us.jpg" />
+    <meta property="og:url" content="https://vacanzabianca.ru/" />
+    <meta property="og:title" content="🏔️ Авторские туры в Италию, Швейцарию и Францию 2026 – Vacanza Bianca" />
+    <meta property="og:description" content="Авторские туры по Италии 🇮🇹, Швейцарии 🇨🇭 и Франции 🇫🇷. Уникальные маршруты, маленькие группы, индивидуальный подход. Горнолыжный отдых в Альпах ⛷️, летние туры на озера и хайкинг по северу Италии 🏔️. Подбор тура под ваши интересы и стиль отдыха!" />
+    <meta property="og:image" content="https://vacanzabianca.ru/images/main-photo.webp" />
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://vacanzabianca.com/" />
-    <meta property="twitter:title" content="Премиальные горнолыжные туры в Италию: La Vacanza Bianca" />
-    <meta property="twitter:description" content="Премиальные горнолыжные туры в Италию. Лучшие курорты Альп: Ливиньо, Санкт-Мориц, Пьяни ди Боббио. Vip. Бронирование отелей. Трасфер. Сопровождение. Профессиональные гиды и лыжные инструкторы." />
-    <meta property="twitter:image" content="https://vacanzabianca.com/images/about_Us.jpg" />
+    <meta property="twitter:url" content="https://vacanzabianca.ru/" />
+    <meta property="twitter:title" content="🏔️ Авторские туры в Италию, Швейцарию и Францию 2026 – Vacanza Bianca" />
+    <meta property="twitter:description" content="Авторские туры по Италии 🇮🇹, Швейцарии 🇨🇭 и Франции 🇫🇷. Уникальные маршруты, маленькие группы, индивидуальный подход. Горнолыжный отдых в Альпах ⛷️, летние туры на озера и хайкинг по северу Италии 🏔️. Подбор тура под ваши интересы и стиль отдыха!" />
+    <meta property="twitter:image" content="https://vacanzabianca.ru/images/main-photo.webp" />
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://vacanzabianca.com/" />
+    <link rel="canonical" href="https://vacanzabianca.ru/" />
     
-    <!-- Альтернативные домены -->
     <link rel="alternate" hreflang="ru" href="https://vacanzabianca.ru/" />
-    <link rel="alternate" hreflang="x-default" href="https://vacanzabianca.com/" />
+    <link rel="alternate" hreflang="x-default" href="https://vacanzabianca.ru/" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap"
+    />
     
     <!-- Schema.org разметка для SEO -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "TravelAgency",
-      "name": "La Vacanza Bianca",
-      "description": "Премиальные горнолыжные туры в Италию. Лучшие курорты Альп: Ливиньо, Санкт-Мориц, Пьяни ди Боббио.",
-      "url": "https://vacanzabianca.com",
-      "logo": "https://vacanzabianca.com/logo.jpg",
-      "image": "https://vacanzabianca.com/images/about_Us.jpg",
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "IT"
-      },
-      "areaServed": {
-        "@type": "Country",
-        "name": "Italy"
-      },
-      "serviceType": "Горнолыжные туры",
+      "@id": "https://vacanzabianca.ru/#organization",
+      "name": "Vacanza Bianca",
+      "alternateName": "La Vacanza Bianca",
+      "description": "Авторские туры по Италии, Швейцарии и Франции: горнолыжный отдых в Альпах, летние программы на озёрах и хайкинг на севере Италии. Индивидуальный подбор маршрутов.",
+      "url": "https://vacanzabianca.ru",
+      "logo": "https://vacanzabianca.ru/images/icons/favicon.png",
+      "image": "https://vacanzabianca.ru/images/main-photo.webp",
+      "telephone": "+393520014647",
+      "email": "mail@vacanzabianca.ru",
+      "areaServed": [
+        { "@type": "Country", "name": "Italy" },
+        { "@type": "Country", "name": "Switzerland" },
+        { "@type": "Country", "name": "France" }
+      ],
+      "serviceType": ["Авторские туры", "Горнолыжные туры", "Летние и озёрные программы"],
       "priceRange": "$$$"
     }
     </script>

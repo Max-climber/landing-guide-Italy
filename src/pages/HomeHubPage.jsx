@@ -1,44 +1,65 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import emailjs from '@emailjs/browser'
 import Navigation from '../components/Navigation'
+import FaqSection from '../components/FaqSection'
 import Hero from '../components/Hero'
 import Footer from '../components/Footer'
 import ContactModal from '../components/ContactModal'
 import TelegramFloatButton from '../components/TelegramFloatButton'
-import { mountJsonLd, upsertMeta } from './seo/pageMeta'
+import BlogFeaturedSection from '../components/BlogFeaturedSection'
+import { mountJsonLd, mountJsonLdScript, upsertMeta } from './seo/pageMeta'
+import { buildFaqPageJsonLd } from './seo/faqSchema'
+import { buildOrganizationSchema } from './seo/organizationSchema'
 import { validatePhone, validateEmail, formatPhone } from '../utils/leadFormValidation'
 
 const HOME_CANONICAL = 'https://vacanzabianca.ru/'
-const HOME_OG_IMAGE =
-  'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2200&q=80'
-const HERO_BG = HOME_OG_IMAGE
+const HOME_OG_IMAGE = 'https://vacanzabianca.ru/images/main-photo.webp'
+const HERO_BG = '/images/infographics/main-carusel-2.1.webp'
 const HERO_SLIDES = [
-  '/images/infographics/main-carusel-1.1.png',
-  '/images/infographics/main-carusel-2.1.png',
-  '/images/infographics/main-carusel-3.1.png',
+  '/images/infographics/main-carusel-2.1.webp',
+  '/images/infographics/main-carusel-1.1.webp',
+  '/images/infographics/main-carusel-3.1.webp',
 ]
 
 const WHY_INFOGRAPHIC_FILES = [
-  'авторские маршруты.png',
-  'индивидуальный формат.png',
-  'полное сопровождение.png',
-  'локальная экспертиза.png',
-  'Премиальный комфорт.png',
-  'скрытые жемчужины.png',
+  'авторские маршруты.webp',
+  'individual.webp',
+  'полное сопровождение.webp',
+  'локальная экспертиза.webp',
+  'premium-comfort.webp',
+  'скрытые жемчужины.webp',
 ]
+
+const REVIEW_ANASTASIA_IMG = `/images/reviews/${encodeURIComponent('Анастасия и Михаил.webp')}`
+const REVIEW_DMITRY_IMG = '/images/reviews/dmitry.webp'
+const REVIEW_ILYA_MARIA_IMG = `/images/reviews/${encodeURIComponent('Илья и Мария.webp')}`
+const REVIEW_AVATAR_FALLBACK = '/images/icons/favicon.png'
 
 const REVIEW_DEFS = [
-  { key: 'alina', image: '/images/reviews/ksenia.jpeg' },
-  { key: 'katerina', image: '/images/reviews/olga.png' },
-  { key: 'dmitry', image: '/images/reviews/vardan.png' },
+  { key: 'ilyaMaria', image: REVIEW_ILYA_MARIA_IMG },
+  { key: 'anastasiaMikhail', image: REVIEW_ANASTASIA_IMG },
+  { key: 'nadezhda', image: '/images/reviews/Nadezhda.webp' },
+  { key: 'dmitry', image: REVIEW_DMITRY_IMG },
 ]
 
+const ITALY_TOURS_BASE = '/images/Italy-page/tours'
+const ITALY_TOUR_ARCH_IMAGE = `${ITALY_TOURS_BASE}/${encodeURIComponent('tours-Архитектура-впечатлений-север-Италии.webp')}`
+const POPULAR_TOUR_IMAGES = [
+  `${ITALY_TOURS_BASE}/tours-Lakes.webp`,
+  `${ITALY_TOURS_BASE}/tours-from-Como-to-Venezia.webp`,
+  `${ITALY_TOURS_BASE}/tours-Dolomity1.0.webp`,
+  ITALY_TOUR_ARCH_IMAGE,
+  `${ITALY_TOURS_BASE}/tours-Riviera.webp`,
+  `${ITALY_TOURS_BASE}/tours-Alps.webp`,
+]
+
+/** Фоны карточек направлений — `public/images/infographics/` */
 const DIR_IMAGES = {
-  italy: 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1400&q=80',
-  ch: 'https://images.unsplash.com/photo-1530122037265-a5f1f91d763b?auto=format&fit=crop&w=1400&q=80',
-  fr: 'https://images.unsplash.com/photo-1431274172761-fca41d930114?auto=format&fit=crop&w=1400&q=80',
-  alps: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1400&q=80',
+  italy: '/images/infographics/path-Italy.webp',
+  ch: '/images/infographics/path-Switzerlend.webp',
+  fr: '/images/infographics/path-france.webp',
+  alps: '/images/infographics/path-Alps.webp',
 }
 
 const DirectionCard = ({ href, image, title, moreLabel }) => {
@@ -57,14 +78,18 @@ const DirectionCard = ({ href, image, title, moreLabel }) => {
       />
       <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-5">
         <h3
-          className="font-serif text-[clamp(18px,2.2vw,24px)] leading-snug text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.45)]"
+          className={`font-serif text-[clamp(18px,2.2vw,24px)] leading-snug text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.45)] transition-transform duration-300 ${
+            href ? 'group-hover:-translate-y-5' : ''
+          }`}
           style={{ fontWeight: 300 }}
         >
           {title}
         </h3>
-        <span className="mt-2 inline-flex translate-y-2 font-serif text-[13px] uppercase tracking-[0.08em] text-white/90 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-          {moreLabel} →
-        </span>
+        {href ? (
+          <span className="pointer-events-none absolute bottom-4 left-4 inline-flex translate-y-2 font-serif text-[13px] uppercase tracking-[0.08em] text-white/90 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 sm:bottom-5 sm:left-5">
+            {moreLabel} →
+          </span>
+        ) : null}
       </div>
     </>
   )
@@ -73,7 +98,7 @@ const DirectionCard = ({ href, image, title, moreLabel }) => {
     return (
       <a
         href={href}
-        className="group relative block w-full overflow-hidden rounded-xl border border-border-soft shadow-[0_10px_28px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(0,0,0,0.1)] aspect-[4/5] min-h-[240px]"
+        className="group relative block w-full overflow-hidden rounded-xl border border-border-soft shadow-[0_10px_28px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(0,0,0,0.1)] aspect-[16/10] min-h-[180px] sm:min-h-[200px] md:aspect-[4/3] md:min-h-0"
       >
         {body}
       </a>
@@ -81,7 +106,7 @@ const DirectionCard = ({ href, image, title, moreLabel }) => {
   }
 
   return (
-    <article className="group relative block w-full overflow-hidden rounded-xl border border-border-soft shadow-[0_10px_28px_rgba(0,0,0,0.06)] aspect-[4/5] min-h-[240px]">
+    <article className="group relative block w-full overflow-hidden rounded-xl border border-border-soft shadow-[0_10px_28px_rgba(0,0,0,0.06)] aspect-[16/10] min-h-[180px] sm:min-h-[200px] md:aspect-[4/3] md:min-h-0">
       {body}
     </article>
   )
@@ -90,24 +115,27 @@ const DirectionCard = ({ href, image, title, moreLabel }) => {
 const HomeHubPage = () => {
   const { t } = useTranslation()
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [openedFaq, setOpenedFaq] = useState(-1)
   const [isFinalSubmitting, setIsFinalSubmitting] = useState(false)
   const [finalStatus, setFinalStatus] = useState(null)
-  const [finalCtaParallax, setFinalCtaParallax] = useState(0)
-  const [finalCtaUnlocked, setFinalCtaUnlocked] = useState(false)
   const [finalFormData, setFinalFormData] = useState({ name: '', phone: '', email: '' })
   const [phoneError, setPhoneError] = useState('')
   const [phoneTouched, setPhoneTouched] = useState(false)
   const [emailError, setEmailError] = useState('')
   const [emailTouched, setEmailTouched] = useState(false)
-  const finalCtaRef = useRef(null)
 
   const whyIconSrcs = useMemo(
     () => WHY_INFOGRAPHIC_FILES.map((file) => `/images/infographics/${encodeURIComponent(file)}`),
     [],
   )
   const whyCards = useMemo(() => t('italyPage.whyCards', { returnObjects: true }) || [], [t])
-  const popularTours = useMemo(() => t('homePage.popularTours', { returnObjects: true }) || [], [t])
+  const popularTours = useMemo(
+    () =>
+      (t('homePage.popularTours', { returnObjects: true }) || []).map((tour, idx) => ({
+        ...tour,
+        image: POPULAR_TOUR_IMAGES[idx] || tour.image,
+      })),
+    [t],
+  )
   const bookingSteps = useMemo(() => {
     const raw = t('homePage.bookingSteps', { returnObjects: true }) || []
     return raw.map((item) =>
@@ -125,34 +153,11 @@ const HomeHubPage = () => {
     [t],
   )
 
-  const schemaData = useMemo(
-    () => [
-      {
-        '@context': 'https://schema.org',
-        '@type': 'Organization',
-        name: 'Vacanza Bianca',
-        url: HOME_CANONICAL,
-        logo: 'https://vacanzabianca.ru/images/icons/favicon.png',
-        sameAs: [
-          'https://www.instagram.com/it.tours.mountains.transfer?igsh=MWF6bHR1M3k4YzJpag==',
-          'https://t.me/la_vacanza_bianca',
-        ],
-      },
-      {
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        mainEntity: faqItems.map((item) => ({
-          '@type': 'Question',
-          name: item.question,
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: item.answerHtml,
-          },
-        })),
-      },
-    ],
-    [faqItems],
-  )
+  const orgSchema = useMemo(() => buildOrganizationSchema(), [])
+
+  const blogFeatured = useMemo(() => t('homePage.blogFeatured', { returnObjects: true }) || [], [t])
+
+  const faqSchema = useMemo(() => buildFaqPageJsonLd(faqItems), [faqItems])
 
   useEffect(() => {
     upsertMeta({
@@ -161,45 +166,18 @@ const HomeHubPage = () => {
       canonical: HOME_CANONICAL,
       ogImage: HOME_OG_IMAGE,
     })
-    const unmount = mountJsonLd('home-jsonld', schemaData)
-    return () => unmount()
-  }, [schemaData, t])
+    const unmountOrg = mountJsonLd('home-jsonld', [orgSchema])
+    const unmountFaq = mountJsonLdScript('home-jsonld-faq', faqSchema)
+    return () => {
+      unmountOrg()
+      unmountFaq()
+    }
+  }, [faqSchema, orgSchema, t])
 
   useEffect(() => {
     const onOpen = () => setIsModalOpen(true)
     window.addEventListener('openContactModal', onOpen)
     return () => window.removeEventListener('openContactModal', onOpen)
-  }, [])
-
-  useEffect(() => {
-    const updateFinalCtaParallax = () => {
-      const section = finalCtaRef.current
-      if (!section) return
-
-      const rect = section.getBoundingClientRect()
-      const viewportHeight = window.innerHeight || 1
-      const start = viewportHeight
-      const end = -rect.height
-      const raw = (start - rect.top) / (start - end)
-      const next = Math.max(0, Math.min(1, raw))
-      setFinalCtaParallax(next)
-
-      const isFullyOutOfView = rect.bottom < -120 || rect.top > viewportHeight + 120
-      if (isFullyOutOfView) {
-        setFinalCtaUnlocked(false)
-      } else if (next >= 0.58) {
-        setFinalCtaUnlocked(true)
-      }
-    }
-
-    updateFinalCtaParallax()
-    window.addEventListener('scroll', updateFinalCtaParallax, { passive: true })
-    window.addEventListener('resize', updateFinalCtaParallax, { passive: true })
-
-    return () => {
-      window.removeEventListener('scroll', updateFinalCtaParallax)
-      window.removeEventListener('resize', updateFinalCtaParallax)
-    }
   }, [])
 
   useEffect(() => {
@@ -238,15 +216,6 @@ const HomeHubPage = () => {
   const handleFinalEmailBlur = () => {
     setEmailTouched(true)
     setEmailError(validateEmail(finalFormData.email))
-  }
-
-  const getFinalCtaRevealProgress = (index) => {
-    if (finalCtaUnlocked) return 1
-
-    const start = 0.16 + index * 0.12
-    const duration = 0.2
-    const raw = (finalCtaParallax - start) / duration
-    return Math.max(0, Math.min(1, raw))
   }
 
   const handleFinalCtaSubmit = async (event) => {
@@ -309,18 +278,18 @@ const HomeHubPage = () => {
   }
 
   const quickFilters = (
-    <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+    <div className="flex flex-wrap items-center justify-center gap-3 sm:flex-nowrap sm:gap-4">
       <a
         href="/alps/gornolyzhnye-tury"
-        className="inline-flex min-h-[48px] items-center rounded-[50px] border border-text-main bg-transparent px-[55px] py-[22px] font-sans text-[13px] uppercase tracking-[0.14em] text-text-main no-underline transition-all duration-300 hover:-translate-y-0.5 hover:bg-text-main hover:text-white"
-        style={{ fontWeight: 500 }}
+        className="inline-flex w-full min-h-[48px] items-center justify-center rounded-[50px] border border-text-main bg-bg-base/30 px-5 py-4 font-sans text-[12px] uppercase tracking-[0.12em] text-text-main no-underline backdrop-blur-[2px] transition-all duration-300 hover:-translate-y-0.5 hover:bg-text-main hover:text-white sm:w-auto sm:whitespace-nowrap sm:px-[55px] sm:py-[22px] sm:text-[14px] sm:tracking-[0.14em]"
+        style={{ fontWeight: 600 }}
       >
         {t('homePage.quickSki')}
       </a>
       <a
         href="/italy/"
-        className="inline-flex min-h-[48px] items-center rounded-[50px] border border-text-main bg-transparent px-[55px] py-[22px] font-sans text-[13px] uppercase tracking-[0.14em] text-text-main no-underline transition-all duration-300 hover:-translate-y-0.5 hover:bg-text-main hover:text-white"
-        style={{ fontWeight: 500 }}
+        className="inline-flex w-full min-h-[48px] items-center justify-center rounded-[50px] border border-text-main bg-bg-base/30 px-5 py-4 font-sans text-[12px] uppercase tracking-[0.12em] text-text-main no-underline backdrop-blur-[2px] transition-all duration-300 hover:-translate-y-0.5 hover:bg-text-main hover:text-white sm:w-auto sm:whitespace-nowrap sm:px-[55px] sm:py-[22px] sm:text-[14px] sm:tracking-[0.14em]"
+        style={{ fontWeight: 600 }}
       >
         {t('homePage.quickItaly')}
       </a>
@@ -347,11 +316,11 @@ const HomeHubPage = () => {
       <main className="pb-16">
         <section className="mx-auto mt-20 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
           <h2 className="section-title !mb-12 text-center">{t('homePage.directionsHeading')}</h2>
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             <DirectionCard href="/italy/" image={DIR_IMAGES.italy} title={t('homePage.dirItalyTitle')} moreLabel={detailsLabel} />
-            <DirectionCard image={DIR_IMAGES.ch} title={t('homePage.dirChTitle')} moreLabel={detailsLabel} />
-            <DirectionCard image={DIR_IMAGES.fr} title={t('homePage.dirFrTitle')} moreLabel={detailsLabel} />
-            <DirectionCard image={DIR_IMAGES.alps} title={t('homePage.dirAlpsTitle')} moreLabel={detailsLabel} />
+            <DirectionCard href="/switzerland/" image={DIR_IMAGES.ch} title={t('homePage.dirChTitle')} moreLabel={detailsLabel} />
+            <DirectionCard href="/france/" image={DIR_IMAGES.fr} title={t('homePage.dirFrTitle')} moreLabel={detailsLabel} />
+            <DirectionCard href="/alps/gornolyzhnye-tury" image={DIR_IMAGES.alps} title={t('homePage.dirAlpsTitle')} moreLabel={detailsLabel} />
           </div>
         </section>
 
@@ -380,11 +349,11 @@ const HomeHubPage = () => {
 
         <section id="popular-tours" className="mx-auto mt-24 w-full max-w-[1200px] scroll-mt-28 px-4 sm:px-6 md:px-8 lg:px-5">
           <h2 className="section-title !mb-12 text-center">{t('homePage.popularHeading')}</h2>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid items-stretch gap-4 md:grid-cols-2 lg:grid-cols-3">
             {popularTours.map((tour, idx) => (
               <article
                 key={`${tour.title}-${idx}`}
-                className="flex flex-col overflow-hidden rounded-xl border border-border-soft bg-bg-card shadow-[0_8px_22px_rgba(0,0,0,0.03)]"
+                className="flex h-full flex-col overflow-hidden rounded-xl border border-border-soft bg-bg-card shadow-[0_8px_22px_rgba(0,0,0,0.03)]"
               >
                 <div className="aspect-[16/9] w-full overflow-hidden">
                   <img
@@ -398,37 +367,32 @@ const HomeHubPage = () => {
                   <h3 className="mb-2 font-serif text-[24px] leading-[1.1] text-text-main" style={{ fontWeight: 300 }}>
                     {tour.title}
                   </h3>
-                  <p className="mb-4 text-sm leading-6 text-text-light">{tour.route}</p>
-                  <div className="mt-auto">
-                    <div className="mb-3 grid grid-cols-2 gap-3 border-y border-border-soft py-3">
-                      <div>
-                        <p className="mb-1 text-[10px] uppercase tracking-[0.1em] text-[#888]">Гости</p>
-                        <p className="text-sm font-medium text-text-main">{tour.people}</p>
-                      </div>
-                      <div>
-                        <p className="mb-1 text-[10px] uppercase tracking-[0.1em] text-[#888]">Длительность</p>
-                        <p className="text-sm font-medium text-text-main">{tour.duration}</p>
-                      </div>
-                    </div>
-                    <p className="mb-4 font-serif text-[clamp(20px,2.2vw,26px)] text-text-main" style={{ fontWeight: 400 }}>
+                  <p className="mb-4 flex-1 text-sm leading-6 text-text-light">{tour.route}</p>
+                  <dl className="mb-3 grid grid-cols-2 gap-x-3 gap-y-2 border-y border-border-soft py-3">
+                    <dt className="mb-1 text-[10px] uppercase tracking-[0.1em] text-[#888]">{t('italyPage.labelGuests')}</dt>
+                    <dt className="mb-1 text-[10px] uppercase tracking-[0.1em] text-[#888]">{t('italyPage.labelDuration')}</dt>
+                    <dd className="m-0 text-sm font-medium text-text-main">{tour.people}</dd>
+                    <dd className="m-0 text-sm font-medium text-text-main">{tour.duration}</dd>
+                    <dt className="col-span-2 mb-1 text-[10px] uppercase tracking-[0.1em] text-[#888]">{t('italyPage.labelPrice')}</dt>
+                    <dd className="col-span-2 m-0 mb-1 font-serif text-[clamp(20px,2.2vw,26px)] text-text-main" style={{ fontWeight: 400 }}>
                       {tour.price}
-                    </p>
-                    <div className="grid grid-cols-2 gap-2">
-                      <a
-                        href={tour.detailsHref}
-                        download={tour.detailsDownload ? '' : undefined}
-                        className="rounded-[40px] border border-text-main px-3 py-2 text-center text-[10px] uppercase tracking-[0.11em] text-text-main transition-all duration-300 hover:bg-text-main hover:text-white"
-                      >
-                        {t('homePage.moreDetails')}
-                      </a>
-                      <button
-                        type="button"
-                        onClick={() => setIsModalOpen(true)}
-                        className="rounded-[40px] border border-text-main bg-text-main px-3 py-2 text-center text-[10px] uppercase tracking-[0.11em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-text-main/90"
-                      >
-                        {t('homePage.discussTour')}
-                      </button>
-                    </div>
+                    </dd>
+                  </dl>
+                  <div className="grid grid-cols-2 gap-2">
+                    <a
+                      href={tour.detailsHref}
+                      download={tour.detailsDownload ? '' : undefined}
+                      className="rounded-[40px] border border-text-main px-3 py-2 text-center text-[10px] uppercase tracking-[0.11em] text-text-main transition-all duration-300 hover:bg-text-main hover:text-white"
+                    >
+                      {t('homePage.moreDetails')}
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => setIsModalOpen(true)}
+                      className="rounded-[40px] border border-text-main bg-text-main px-3 py-2 text-center text-[10px] uppercase tracking-[0.11em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-text-main/90"
+                    >
+                      {t('homePage.discussTour')}
+                    </button>
                   </div>
                 </div>
               </article>
@@ -441,22 +405,18 @@ const HomeHubPage = () => {
           className="mx-auto mt-24 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5"
           aria-labelledby="booking-steps-heading"
         >
-          <h2 id="booking-steps-heading" className="section-title mb-10 text-center md:mb-14">
+          <h2 id="booking-steps-heading" className="section-title mb-8 text-center md:mb-8">
             {t('homePage.bookingHeading')}
           </h2>
-          <div className="px-2 py-4 sm:px-4 md:px-6 lg:px-8">
+          <div className="px-2 py-2 sm:px-4 md:px-6 lg:px-8">
             <div className="relative mx-auto max-w-[1080px]">
-              <div className="pointer-events-none absolute left-0 right-0 top-1/2 z-[1] hidden h-[2px] -translate-y-1/2 bg-[#d3ccc6] md:block" aria-hidden />
+              <div className="pointer-events-none absolute left-0 right-0 top-8 z-[1] hidden h-[2px] bg-[#d3ccc6] md:block" aria-hidden />
 
-              <ol className="relative z-[2] m-0 grid list-none gap-10 p-0 md:grid-cols-5 md:gap-4">
-                {bookingSteps.map((step, index) => {
-                  const isCardAbove = index % 2 === 0
-                  return (
-                  <li key={`booking-step-${index}`} className="flex flex-col items-center text-center md:relative md:min-h-[320px] md:min-w-0">
+              <ol className="relative z-[2] m-0 grid list-none gap-10 p-0 md:grid-cols-5 md:items-stretch md:gap-4">
+                {bookingSteps.map((step, index) => (
+                  <li key={`booking-step-${index}`} className="flex min-w-0 flex-col items-center text-center md:h-full">
                     <div
-                      className={`grid h-[64px] w-[64px] shrink-0 place-items-center rounded-full border border-[#e1dad4] bg-bg-base text-text-main ${
-                        isCardAbove ? 'order-2 mt-4 md:order-none md:mt-0' : 'order-1 mb-4 md:order-none md:mb-0'
-                      } md:absolute md:left-1/2 md:top-1/2 md:z-[3] md:-translate-x-1/2 md:-translate-y-1/2`}
+                      className="order-1 mb-4 grid h-[64px] w-[64px] shrink-0 place-items-center rounded-full border border-[#e1dad4] bg-bg-base text-text-main"
                     >
                       <span
                         className="block font-serif text-[30px] leading-none"
@@ -466,39 +426,38 @@ const HomeHubPage = () => {
                       </span>
                     </div>
                     <div
-                      className={`w-full rounded-2xl border border-border-soft bg-bg-card p-4 shadow-[0_8px_22px_rgba(0,0,0,0.04)] sm:p-5 ${
-                        isCardAbove ? 'order-1 md:order-none' : 'order-2 md:order-none'
-                      } md:absolute md:left-1/2 md:w-[calc(100%-8px)] md:max-w-[260px] md:-translate-x-1/2 ${
-                        isCardAbove ? 'md:bottom-[calc(50%+42px)]' : 'md:top-[calc(50%+42px)]'
-                      }`}
+                      className="order-2 flex w-full flex-col rounded-2xl border border-border-soft bg-bg-card p-4 shadow-[0_8px_22px_rgba(0,0,0,0.04)] sm:p-5 md:h-full md:min-h-[190px]"
                     >
-                      <h3 className="mb-2 font-serif text-[24px] leading-[1.1] text-text-main">{step.title}</h3>
+                      <h3 className="mb-2 font-serif text-[22px] leading-[1.15] text-text-main break-words">
+                        {step.title}
+                      </h3>
                       {step.text ? (
-                        <p className="font-serif text-[18px] leading-[1.2] text-text-light">{step.text}</p>
+                        <p className="font-serif text-[15px] leading-[1.25] text-text-light break-words">
+                          {step.text}
+                        </p>
                       ) : null}
                     </div>
                   </li>
-                )})}
+                ))}
               </ol>
             </div>
           </div>
         </section>
 
-        <section id="about-us" className="mx-auto mt-24 w-full max-w-[1200px] scroll-mt-28 px-4 sm:px-6 md:px-8 lg:px-5">
+        <section id="about" className="mx-auto mt-24 w-full max-w-[1200px] scroll-mt-28 px-4 sm:px-6 md:px-8 lg:px-5">
           <h2 className="section-title !mb-10 text-center">{t('homePage.aboutHeading')}</h2>
           <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
             <p className="order-1 text-base leading-8 text-text-light sm:text-[17px] sm:leading-8">{t('homePage.aboutText')}</p>
             <div className="order-2 w-full max-w-[360px] justify-self-center overflow-hidden rounded-2xl border border-border-soft bg-black shadow-[0_12px_36px_rgba(0,0,0,0.06)] lg:justify-self-end">
               <video
-                src="/videos/На главную_сжато.mp4"
+                src="/videos/main-home.optimized.mov"
                 poster="/videos/заставка.png"
                 className="aspect-[9/16] w-full object-contain"
                 controls
                 loop
                 muted
                 playsInline
-                autoPlay
-                preload="metadata"
+                preload="none"
               />
             </div>
           </div>
@@ -506,22 +465,31 @@ const HomeHubPage = () => {
 
         <section id="reviews" className="mx-auto mt-24 w-full max-w-[1200px] scroll-mt-28 px-4 sm:px-6 md:px-8 lg:px-5">
           <h2 className="section-title !mb-12 text-center">{t('homePage.reviewsHeading')}</h2>
-          <div className="grid gap-6 md:grid-cols-3">
-            {reviewCards.map((item) => (
+          <div className="-mx-4 flex gap-5 overflow-x-auto px-4 pb-3 pt-1 [-webkit-overflow-scrolling:touch] [scrollbar-width:thin] snap-x snap-mandatory md:mx-0 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:px-0 md:snap-none lg:grid-cols-4">
+            {reviewCards.map((item, idx) => (
               <article
-                key={item.title}
-                className="rounded-2xl border border-border-soft bg-bg-card p-5 shadow-[0_8px_22px_rgba(0,0,0,0.04)] sm:p-6"
+                key={`${item.title}-${idx}`}
+                className="flex min-h-0 w-[min(100%,340px)] flex-shrink-0 snap-center flex-col rounded-xl border border-border-soft bg-bg-card p-5 shadow-[0_8px_22px_rgba(0,0,0,0.03)] sm:p-6 md:w-auto md:min-w-0 md:flex-1 md:snap-none"
               >
                 <div className="mb-2 font-serif text-3xl leading-none text-text-main/25" aria-hidden>
                   ”
                 </div>
-                <blockquote className="mb-5 text-sm leading-7 text-text-light">{item.description}</blockquote>
-                <div className="flex items-center gap-3">
+                <blockquote className="mb-0 min-h-0 flex-1 text-sm leading-7 text-text-light">{item.description}</blockquote>
+                <div className="mt-4 flex shrink-0 items-center gap-3">
                   <img
                     src={item.image}
                     alt=""
-                    className="h-11 w-11 flex-shrink-0 rounded-full object-cover ring-1 ring-border-soft"
+                    width={44}
+                    height={44}
+                    className="h-11 w-11 flex-shrink-0 rounded-full bg-[#e8e4df] object-cover ring-1 ring-border-soft"
                     loading="lazy"
+                    decoding="async"
+                    onError={(event) => {
+                      const el = event.currentTarget
+                      if (el.dataset.fallbackApplied === '1') return
+                      el.dataset.fallbackApplied = '1'
+                      el.src = REVIEW_AVATAR_FALLBACK
+                    }}
                   />
                   <span className="font-serif text-base text-text-main" style={{ fontWeight: 400 }}>
                     {item.title}
@@ -532,201 +500,80 @@ const HomeHubPage = () => {
           </div>
         </section>
 
-        <section id="faq" className="mx-auto mt-24 w-full max-w-[1200px] scroll-mt-28 px-4 sm:px-6 md:px-8 lg:px-5">
-          <h2 className="section-title !mb-10 text-center">{t('homePage.faqHeading')}</h2>
-          <div className="space-y-3">
-            {faqItems.map((item, index) => {
-              const isOpen = openedFaq === index
-              return (
-                <article key={`faq-${index}`} className="overflow-hidden rounded-xl border border-border-soft bg-bg-card">
-                  <button
-                    type="button"
-                    className="flex w-full items-center justify-between px-5 py-4 text-left sm:px-6 sm:py-5"
-                    onClick={() => setOpenedFaq((prev) => (prev === index ? -1 : index))}
-                  >
-                    <span className="pr-4 font-sans text-[15px] font-medium text-text-main">{item.question}</span>
-                    <span className="text-xl text-text-main">{isOpen ? '−' : '+'}</span>
-                  </button>
-                  {isOpen ? (
-                    <div
-                      className="border-t border-border-soft px-5 py-4 text-sm leading-7 text-text-light sm:px-6 [&_p+p]:mt-3 [&_strong]:font-medium [&_strong]:text-text-main [&_ul]:mt-2 [&_ul]:list-disc [&_ul]:space-y-1 [&_ul]:pl-5"
-                      dangerouslySetInnerHTML={{ __html: item.answerHtml }}
-                    />
-                  ) : null}
-                </article>
-              )
-            })}
-          </div>
-        </section>
+        <FaqSection
+          heading={t('homePage.faqHeading')}
+          items={faqItems}
+          className="mx-auto mt-24 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5"
+        />
 
-        <section id="final-cta" ref={finalCtaRef} className="mx-auto mt-24 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
+        <section id="final-cta" className="mx-auto mt-24 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
           <div className="overflow-hidden bg-bg-base">
-            <div className="relative z-10 px-4 pb-4 pt-8 sm:px-8 sm:pb-6 sm:pt-10">
-              <h2 className="section-title !mb-4 text-center text-[clamp(28px,4vw,38px)]">{t('homePage.finalTitle')}</h2>
-              <p className="mx-auto mb-8 max-w-[720px] text-center text-sm leading-7 text-text-light">{t('homePage.finalDescription')}</p>
+            <div className="relative z-10 px-4 pb-2 pt-6 sm:px-8 sm:pb-3 sm:pt-8">
+              <h2 className="section-title !mb-3 text-center text-[clamp(28px,4vw,38px)]">{t('homePage.finalTitle')}</h2>
+              <p className="mx-auto mb-0 max-w-[720px] text-center text-sm leading-7 text-text-light">{t('homePage.finalDescription')}</p>
             </div>
           </div>
 
-          <div className="relative left-1/2 mt-5 w-screen -translate-x-1/2 overflow-hidden">
-            <img
-              src="/images/infographics/for%20form%20parallax.png"
-              alt=""
-              className="pointer-events-none absolute inset-0 h-[128%] w-full max-w-none object-cover"
-              style={{
-                transform: `translateY(${(finalCtaParallax - 0.5) * 8}px) scale(1.1)`,
-                transition: 'transform 120ms linear',
-              }}
-              loading="lazy"
-              decoding="async"
-            />
-            <div className="pointer-events-none absolute inset-0 bg-bg-base/68" />
-            <div className="relative z-10 mx-auto w-full max-w-[760px] px-5 py-10 sm:px-6 sm:py-12">
+          <div className="mt-2 sm:mt-3">
+            <div className="relative z-10 mx-auto w-full max-w-[760px] px-5 py-5 sm:px-6 sm:py-6">
               <form onSubmit={handleFinalCtaSubmit} className="mx-auto flex w-full max-w-[640px] flex-col gap-4">
-            <div
-              style={{
-                opacity: getFinalCtaRevealProgress(0),
-                transform: `translateY(${-18 + getFinalCtaRevealProgress(0) * 18}px)`,
-                clipPath: `inset(0 0 ${(1 - getFinalCtaRevealProgress(0)) * 100}% 0)`,
-                transition: 'opacity 240ms ease-out, transform 240ms ease-out, clip-path 240ms ease-out',
-              }}
-            >
-            <input
-              type="text"
-              name="name"
-              required
-              value={finalFormData.name}
-              onChange={(e) => setFinalFormData((p) => ({ ...p, name: e.target.value }))}
-              placeholder={t('italyPage.finalCta.namePlaceholder')}
-              className="w-full rounded-[14px] border border-border-soft bg-white px-4 py-3 text-sm text-text-main outline-none transition-colors placeholder:text-[#9c9c9c] focus:border-text-main"
-            />
-            </div>
-            <div
-              style={{
-                opacity: getFinalCtaRevealProgress(1),
-                transform: `translateY(${-18 + getFinalCtaRevealProgress(1) * 18}px)`,
-                clipPath: `inset(0 0 ${(1 - getFinalCtaRevealProgress(1)) * 100}% 0)`,
-                transition: 'opacity 240ms ease-out, transform 240ms ease-out, clip-path 240ms ease-out',
-              }}
-            >
-            <input
-              type="tel"
-              name="phone"
-              required
-              value={finalFormData.phone}
-              onChange={handleFinalPhoneChange}
-              onBlur={handleFinalPhoneBlur}
-              placeholder="+7 (999) 123-45-67 или +39 123 456 7890"
-              className={`w-full rounded-[14px] border bg-white px-4 py-3 text-sm text-text-main outline-none transition-colors placeholder:text-[#9c9c9c] ${
-                phoneTouched && phoneError ? 'border-red-400 focus:border-red-400' : 'border-border-soft focus:border-text-main'
-              }`}
-            />
-            </div>
-            {phoneTouched && phoneError ? <p className="mt-1 text-xs text-red-400">{phoneError}</p> : null}
-            <div
-              style={{
-                opacity: getFinalCtaRevealProgress(2),
-                transform: `translateY(${-18 + getFinalCtaRevealProgress(2) * 18}px)`,
-                clipPath: `inset(0 0 ${(1 - getFinalCtaRevealProgress(2)) * 100}% 0)`,
-                transition: 'opacity 240ms ease-out, transform 240ms ease-out, clip-path 240ms ease-out',
-              }}
-            >
-            <input
-              type="email"
-              name="email"
-              required
-              value={finalFormData.email}
-              onChange={handleFinalEmailChange}
-              onBlur={handleFinalEmailBlur}
-              placeholder="your@email.com"
-              className={`w-full rounded-[14px] border bg-white px-4 py-3 text-sm text-text-main outline-none transition-colors placeholder:text-[#9c9c9c] ${
-                emailTouched && emailError ? 'border-red-400 focus:border-red-400' : 'border-border-soft focus:border-text-main'
-              }`}
-            />
-            </div>
-            {emailTouched && emailError ? <p className="mt-1 text-xs text-red-400">{emailError}</p> : null}
-            <div
-              style={{
-                opacity: getFinalCtaRevealProgress(3),
-                transform: `translateY(${-18 + getFinalCtaRevealProgress(3) * 18}px)`,
-                clipPath: `inset(0 0 ${(1 - getFinalCtaRevealProgress(3)) * 100}% 0)`,
-                transition: 'opacity 240ms ease-out, transform 240ms ease-out, clip-path 240ms ease-out',
-              }}
-            >
-            <button
-              type="submit"
-              disabled={isFinalSubmitting}
-              className="main-btn w-full rounded-[50px] border border-text-main bg-text-main px-6 py-4 text-[13px] uppercase tracking-[0.14em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-text-main/90 disabled:cursor-not-allowed disabled:opacity-50"
-              style={{ fontWeight: 500 }}
-            >
-              {isFinalSubmitting ? t('homePage.finalSubmitting') : t('homePage.finalSubmit')}
-            </button>
-            </div>
-            <div
-              style={{
-                opacity: getFinalCtaRevealProgress(4),
-                transform: `translateY(${-18 + getFinalCtaRevealProgress(4) * 18}px)`,
-                clipPath: `inset(0 0 ${(1 - getFinalCtaRevealProgress(4)) * 100}% 0)`,
-                transition: 'opacity 240ms ease-out, transform 240ms ease-out, clip-path 240ms ease-out',
-              }}
-            >
-            <p className="text-center text-xs leading-6 text-[#8a8a8a]">
-              {t('homePage.finalPrivacyPrefix')}{' '}
-              <span className="underline-offset-4 hover:underline">{t('homePage.finalPrivacyLink')}</span>
-            </p>
-            </div>
+                <input
+                  type="text"
+                  name="name"
+                  required
+                  value={finalFormData.name}
+                  onChange={(e) => setFinalFormData((p) => ({ ...p, name: e.target.value }))}
+                  placeholder={t('italyPage.finalCta.namePlaceholder')}
+                  className="w-full rounded-[14px] border border-border-soft bg-white px-4 py-3 text-sm text-text-main outline-none transition-colors placeholder:text-[#9c9c9c] focus:border-text-main"
+                />
+                <input
+                  type="tel"
+                  name="phone"
+                  required
+                  value={finalFormData.phone}
+                  onChange={handleFinalPhoneChange}
+                  onBlur={handleFinalPhoneBlur}
+                  placeholder="+7 (999) 123-45-67 или +39 123 456 7890"
+                  className={`w-full rounded-[14px] border bg-white px-4 py-3 text-sm text-text-main outline-none transition-colors placeholder:text-[#9c9c9c] ${
+                    phoneTouched && phoneError ? 'border-red-400 focus:border-red-400' : 'border-border-soft focus:border-text-main'
+                  }`}
+                />
+                {phoneTouched && phoneError ? <p className="mt-1 text-xs text-red-400">{phoneError}</p> : null}
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  value={finalFormData.email}
+                  onChange={handleFinalEmailChange}
+                  onBlur={handleFinalEmailBlur}
+                  placeholder="your@email.com"
+                  className={`w-full rounded-[14px] border bg-white px-4 py-3 text-sm text-text-main outline-none transition-colors placeholder:text-[#9c9c9c] ${
+                    emailTouched && emailError ? 'border-red-400 focus:border-red-400' : 'border-border-soft focus:border-text-main'
+                  }`}
+                />
+                {emailTouched && emailError ? <p className="mt-1 text-xs text-red-400">{emailError}</p> : null}
+                <button
+                  type="submit"
+                  disabled={isFinalSubmitting}
+                  className="main-btn w-full rounded-[50px] border border-text-main bg-text-main px-6 py-4 text-[13px] uppercase tracking-[0.14em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-text-main/90 disabled:cursor-not-allowed disabled:opacity-50"
+                  style={{ fontWeight: 500 }}
+                >
+                  {isFinalSubmitting ? t('homePage.finalSubmitting') : t('homePage.finalSubmit')}
+                </button>
+                <p className="text-center text-xs leading-6 text-[#8a8a8a]">
+                  {t('homePage.finalPrivacyPrefix')}{' '}
+                  <span className="underline-offset-4 hover:underline">{t('homePage.finalPrivacyLink')}</span>
+                </p>
               </form>
             </div>
           </div>
         </section>
 
-        {/* BLOG BLOCK TEMPORARILY HIDDEN
-          <section className="mx-auto mt-20 w-full max-w-[1200px] px-4 sm:px-6 md:px-8 lg:px-5">
-          <h2 className="section-title !mb-10 text-center">{t('homePage.blogHeading')}</h2>
-          <ul className="mx-auto max-w-[640px] divide-y divide-border-soft rounded-xl border border-border-soft bg-bg-card/80 px-2 py-1 sm:px-3">
-            {blogFeatured.map((post, idx) => (
-              <li key={`${post.href}-${idx}`}>
-                <a
-                  href={post.href}
-                  className="group flex gap-3 py-3.5 pl-2 pr-2 transition-colors hover:bg-bg-base/60 sm:gap-4 sm:py-4 sm:pl-3 sm:pr-3"
-                >
-                  <div className="relative h-14 w-[5.25rem] flex-shrink-0 overflow-hidden rounded-lg border border-border-soft sm:h-[4.5rem] sm:w-24">
-                    <img
-                      src={post.image}
-                      alt=""
-                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <h3
-                      className="font-serif text-[17px] leading-snug text-text-main transition-colors group-hover:text-text-main sm:text-[18px]"
-                      style={{ fontWeight: 400 }}
-                    >
-                      {post.title}
-                    </h3>
-                    <p className="mt-0.5 line-clamp-2 text-[13px] leading-snug text-text-light">{post.description}</p>
-                  </div>
-                  <span
-                    className="hidden flex-shrink-0 self-center font-sans text-[11px] text-[#bbb] transition-colors group-hover:text-text-main sm:inline"
-                    aria-hidden
-                  >
-                    →
-                  </span>
-                </a>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-10 flex justify-center">
-            <a
-              href="/blog"
-              className="inline-flex rounded-[40px] border border-text-main px-8 py-3 text-[12px] uppercase tracking-[0.12em] text-text-main transition-all duration-300 hover:bg-text-main hover:text-white"
-            >
-              {t('homePage.blogAllArticles')}
-            </a>
-          </div>
-          </section>
-        */}
+        <BlogFeaturedSection
+          heading={t('homePage.blogHeading')}
+          items={blogFeatured}
+          allArticlesLabel={t('homePage.blogAllArticles')}
+        />
       </main>
 
       <Footer />

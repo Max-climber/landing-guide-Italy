@@ -9,6 +9,8 @@ export default defineConfig({
     open: true
   },
   build: {
+    // Иначе vite зависает на копировании большого public/ (видео ~100MB+)
+    copyPublicDir: false,
     rollupOptions: {
       output: {
         manualChunks: {

@@ -4,53 +4,66 @@ import LanguageSwitcher from './LanguageSwitcher'
 
 const PHONE_E164 = '+393520014647'
 const PHONE_DISPLAY = '+39 352 001 4647'
+const CONSULTATION_ICON = '/images/consultation.webp'
 
 const normalizePath = (pathname) => {
   const p = (pathname || '/').replace(/\/+$/, '')
   return p || '/'
 }
 
+const SCROLL_THRESHOLD = 16
+
+/** Один источник позиции скролла (iOS / разные режимы документа) */
+function readDocumentScrollY() {
+  if (typeof window === 'undefined') return 0
+  const { scrollY, pageYOffset } = window
+  const docEl = document.documentElement
+  const body = document.body
+  if (typeof scrollY === 'number' && !Number.isNaN(scrollY)) return scrollY
+  if (typeof pageYOffset === 'number' && !Number.isNaN(pageYOffset)) return pageYOffset
+  if (docEl) return docEl.scrollTop || 0
+  if (body) return body.scrollTop || 0
+  return 0
+}
+
 const Navigation = () => {
   const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
   const [alpsOpen, setAlpsOpen] = useState(false)
+  const [switzerlandOpen, setSwitzerlandOpen] = useState(false)
   const [mobileAlpsOpen, setMobileAlpsOpen] = useState(false)
-  const [isNarrow575, setIsNarrow575] = useState(false)
-  const [isVeryNarrow475, setIsVeryNarrow475] = useState(false)
+  const [mobileSwitzerlandOpen, setMobileSwitzerlandOpen] = useState(false)
+  const [isCompactCta, setIsCompactCta] = useState(() =>
+    typeof window !== 'undefined' ? window.innerWidth < 575 : false,
+  )
   const [headerHeight, setHeaderHeight] = useState(88)
+  const [headerScrolled, setHeaderScrolled] = useState(false)
   const [navStyle, setNavStyle] = useState({
-    bgColor: 'transparent',
-    bgClass: '',
+    bgClass: 'bg-transparent',
     text: 'text-text-main',
-    backdrop: 'backdrop-blur-[5px]',
+    backdrop: '',
   })
   const headerRef = useRef(null)
   const activeNavStyle = isOpen
     ? {
-        bgColor: '#f1eceb',
         bgClass: 'bg-bg-base',
         text: 'text-text-main',
         backdrop: '',
       }
     : navStyle
 
-  const getNavStyle = () => {
-    const scrollY = window.scrollY || window.pageYOffset
-    const threshold = 50
-    if (scrollY > threshold) {
-      return {
-        bgColor: '#f1eceb',
-        bgClass: 'bg-bg-base',
-        text: 'text-text-main',
-        backdrop: '',
-      }
-    }
-    return {
-      bgColor: 'transparent',
-      bgClass: '',
-      text: 'text-text-main',
-      backdrop: 'backdrop-blur-[5px]',
-    }
+  const syncHeaderScroll = () => {
+    const y = readDocumentScrollY()
+    const past = y > SCROLL_THRESHOLD
+    const path = normalizePath(window.location.pathname)
+    const onDarkHero =
+      (path === '/switzerland' || path === '/switzerland/st-moritz') && !past
+    setHeaderScrolled(past)
+    setNavStyle({
+      bgClass: past ? '' : 'bg-transparent',
+      text: onDarkHero ? 'text-white' : 'text-text-main',
+      backdrop: '',
+    })
   }
 
   const syncHeaderHeight = () => {
@@ -60,31 +73,31 @@ const Navigation = () => {
   }
 
   useEffect(() => {
-    const handleScroll = () => setNavStyle(getNavStyle())
     const handleViewport = () => {
       const width = window.innerWidth || 0
-      setIsNarrow575(width < 575)
-      setIsVeryNarrow475(width < 475)
+      setIsCompactCta(width < 575)
     }
     syncHeaderHeight()
     handleViewport()
-    handleScroll()
+    syncHeaderScroll()
     let ticking = false
     const throttled = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          handleScroll()
+          syncHeaderScroll()
           ticking = false
         })
         ticking = true
       }
     }
     window.addEventListener('scroll', throttled, { passive: true })
-    window.addEventListener('resize', handleScroll, { passive: true })
+    window.addEventListener('scrollend', syncHeaderScroll, { passive: true })
+    window.addEventListener('resize', syncHeaderScroll, { passive: true })
     window.addEventListener('resize', handleViewport, { passive: true })
     return () => {
       window.removeEventListener('scroll', throttled)
-      window.removeEventListener('resize', handleScroll)
+      window.removeEventListener('scrollend', syncHeaderScroll)
+      window.removeEventListener('resize', syncHeaderScroll)
       window.removeEventListener('resize', handleViewport)
     }
   }, [])
@@ -149,123 +162,181 @@ const Navigation = () => {
       syncHeaderHeight()
     } else {
       setMobileAlpsOpen(false)
+      setMobileSwitzerlandOpen(false)
     }
   }, [isOpen])
 
-  const linkDesk = `font-sans text-[12px] xl:text-[13px] uppercase tracking-[0.08em] ${activeNavStyle.text} no-underline transition-opacity hover:opacity-70 whitespace-nowrap`
+  const linkDesk = `site-header-link ${activeNavStyle.text}`
 
   return (
     <>
       <header
         ref={headerRef}
-        className={`header flex w-full items-center justify-between gap-3 px-4 py-4 sm:px-6 md:px-8 lg:gap-6 lg:px-[50px] lg:py-[26px] z-[70] transition-all duration-300 ${isVeryNarrow475 ? 'flex-wrap items-start' : ''} ${activeNavStyle.bgClass} ${activeNavStyle.backdrop || ''}`}
-        style={{ backgroundColor: activeNavStyle.bgColor, zIndex: 100 }}
+        className={`header px-4 py-4 sm:px-6 md:px-8 lg:px-10 lg:py-5 xl:px-12 2xl:px-16 z-[70] transition-all duration-300 ${activeNavStyle.bgClass} ${activeNavStyle.backdrop || ''}`}
+        style={{
+          zIndex: 100,
+          ...(!isOpen
+            ? headerScrolled
+              ? {
+                  backgroundColor: 'rgba(255, 255, 255, 0.7)',
+                  backdropFilter: 'blur(10px) saturate(1.06)',
+                  WebkitBackdropFilter: 'blur(10px) saturate(1.06)',
+                }
+              : {
+                  backgroundColor: 'transparent',
+                  backdropFilter: 'none',
+                  WebkitBackdropFilter: 'none',
+                }
+            : {}),
+        }}
       >
-        <div className={`flex min-w-0 flex-1 items-center gap-3 lg:flex-none ${isVeryNarrow475 ? 'w-full' : ''}`}>
-          <button
-            type="button"
-            data-nav-toggle="true"
-            className={`relative z-[72] flex-shrink-0 lg:hidden ${activeNavStyle.text}`}
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label={isOpen ? t('navHub.closeMenu') : 'Toggle menu'}
-          >
-            <div className="flex h-6 w-6 flex-col items-center justify-center gap-1.5">
-              <span
-                className={`block h-0.5 w-6 bg-current transition-all duration-300 ${isOpen ? 'translate-y-2 rotate-45' : ''}`}
-              />
-              <span className={`block h-0.5 w-6 bg-current transition-all duration-300 ${isOpen ? 'opacity-0' : ''}`} />
-              <span
-                className={`block h-0.5 w-6 bg-current transition-all duration-300 ${isOpen ? '-translate-y-2 -rotate-45' : ''}`}
-              />
-            </div>
-          </button>
-
-          <a
-            href="/"
-            className={`logo font-serif text-[20px] tracking-[0.05em] sm:text-[22px] lg:text-[24px] ${activeNavStyle.text} flex-shrink-0 uppercase no-underline transition-opacity hover:opacity-70`}
-            style={{ fontWeight: '300' }}
-          >
-            LA VACANZA BIANCA
-          </a>
-        </div>
-
-        <nav
-          className="hidden flex-1 items-center justify-center gap-5 xl:gap-8 lg:flex"
-          aria-label="Main"
-        >
-          <a href="/italy/" className={linkDesk}>
-            {t('navHub.italy')}
-          </a>
-          <div
-            className="relative"
-            onMouseEnter={() => setAlpsOpen(true)}
-            onMouseLeave={() => setAlpsOpen(false)}
-          >
+        <div className="site-header-shell">
+          <div className="site-header-brand">
             <button
               type="button"
-              className={`${linkDesk} inline-flex cursor-pointer items-center gap-1 border-0 bg-transparent p-0`}
-              style={{ fontWeight: 500 }}
-              aria-expanded={alpsOpen}
-              aria-haspopup="true"
+              data-nav-toggle="true"
+              className={`relative z-[72] flex-shrink-0 lg:hidden ${activeNavStyle.text}`}
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label={isOpen ? t('navHub.closeMenu') : 'Toggle menu'}
             >
-              {t('navHub.alps')}
-              <span className="text-[10px]" aria-hidden>
-                ▾
-              </span>
-            </button>
-            {alpsOpen ? (
-              <div className="absolute left-1/2 top-full z-50 min-w-[240px] -translate-x-1/2 pt-2">
-                <div className="rounded-xl border border-border-soft bg-bg-card py-2 shadow-[0_12px_32px_rgba(0,0,0,0.12)]">
-                  <a
-                    href="/alps/gornolyzhnye-tury"
-                    className="block px-5 py-3 font-sans text-[13px] text-text-main no-underline transition-colors hover:bg-bg-base"
-                  >
-                    {t('navHub.alpsSki')}
-                  </a>
-                </div>
+              <div className="flex h-6 w-6 flex-col items-center justify-center gap-1.5">
+                <span
+                  className={`block h-0.5 w-6 bg-current transition-all duration-300 ${isOpen ? 'translate-y-2 rotate-45' : ''}`}
+                />
+                <span className={`block h-0.5 w-6 bg-current transition-all duration-300 ${isOpen ? 'opacity-0' : ''}`} />
+                <span
+                  className={`block h-0.5 w-6 bg-current transition-all duration-300 ${isOpen ? '-translate-y-2 -rotate-45' : ''}`}
+                />
               </div>
-            ) : null}
-          </div>
-          <a href="/#about-us" className={linkDesk} onClick={(e) => onInPageAnchorClick(e, '#about-us')}>
-            {t('navHub.about')}
-          </a>
-          <a href="/#reviews" className={linkDesk} onClick={(e) => onInPageAnchorClick(e, '#reviews')}>
-            {t('navHub.reviews')}
-          </a>
-        </nav>
+            </button>
 
-        <div
-          className={`flex flex-shrink-0 items-center gap-2 sm:gap-3 md:gap-4 ${
-            isVeryNarrow475 ? 'w-full justify-center pt-1' : ''
-          }`}
-        >
-          <a
-            href={`tel:${PHONE_E164}`}
-            className={`hidden font-sans text-[13px] md:inline ${activeNavStyle.text} no-underline transition-opacity hover:opacity-70`}
-            style={{ fontWeight: 500 }}
-          >
-            {PHONE_DISPLAY}
-          </a>
-          <button
-            type="button"
-            onClick={handleContactClick}
-            className={`header-btn inline-flex min-w-[156px] justify-center rounded-[50px] border border-text-main bg-text-main px-4 py-2.5 font-sans text-[11px] uppercase tracking-[0.08em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-text-main/90 ${isVeryNarrow475 ? 'min-w-[210px] px-6 py-3 text-[12px]' : ''} lg:min-w-0 lg:px-7 lg:py-3 lg:text-[13px]`}
-            style={{ fontWeight: 500 }}
-          >
-            {isVeryNarrow475 ? (
-              <span>{t('navHub.pickTour')}</span>
-            ) : isNarrow575 ? (
-              <span className="text-center leading-[1.2]">
-                {t('navHub.pickTourMobileLine1')}
-                <br />
-                {t('navHub.pickTourMobileLine2')}
-              </span>
-            ) : (
-              <span>{t('navHub.pickTour')}</span>
-            )}
-          </button>
-          <div className="hidden items-center md:ml-2 md:flex" style={{ height: 24 }}>
-            <LanguageSwitcher />
+            <a
+              href="/"
+              className={`logo max-w-[min(52vw,14rem)] truncate font-serif text-[16px] font-semibold tracking-[0.04em] sm:max-w-none sm:text-[18px] sm:overflow-visible sm:whitespace-normal lg:text-[20px] xl:text-[22px] ${activeNavStyle.text} uppercase no-underline transition-opacity hover:opacity-70`}
+            >
+              LA VACANZA BIANCA
+            </a>
+          </div>
+
+          <nav className="site-header-nav" aria-label="Main">
+            <a href="/italy/" className={linkDesk}>
+              {t('navHub.italy')}
+            </a>
+            <div
+              className="relative"
+              onMouseEnter={() => setSwitzerlandOpen(true)}
+              onMouseLeave={() => setSwitzerlandOpen(false)}
+            >
+              <button
+                type="button"
+                className={`${linkDesk} inline-flex cursor-pointer items-center gap-1.5 border-0 bg-transparent p-0`}
+                aria-expanded={switzerlandOpen}
+                aria-haspopup="true"
+              >
+                {t('navHub.switzerland')}
+                <span className="text-[10px] leading-none" aria-hidden>
+                  ▾
+                </span>
+              </button>
+              {switzerlandOpen ? (
+                <div className="absolute left-1/2 top-full z-50 min-w-[240px] -translate-x-1/2 pt-3">
+                  <div className="rounded-xl border border-border-soft bg-bg-card py-2 shadow-[0_12px_32px_rgba(0,0,0,0.12)]">
+                    <a
+                      href="/switzerland/"
+                      className="block px-5 py-3 font-sans text-[13px] text-text-main no-underline transition-colors hover:bg-bg-base"
+                    >
+                      {t('navHub.switzerlandTours')}
+                    </a>
+                    <a
+                      href="/switzerland/st-moritz/"
+                      className="block px-5 py-3 font-sans text-[13px] text-text-main no-underline transition-colors hover:bg-bg-base"
+                    >
+                      {t('navHub.stMoritz')}
+                    </a>
+                  </div>
+                </div>
+              ) : null}
+            </div>
+            <div
+              className="relative"
+              onMouseEnter={() => setAlpsOpen(true)}
+              onMouseLeave={() => setAlpsOpen(false)}
+            >
+              <button
+                type="button"
+                className={`${linkDesk} inline-flex cursor-pointer items-center gap-1.5 border-0 bg-transparent p-0`}
+                aria-expanded={alpsOpen}
+                aria-haspopup="true"
+              >
+                {t('navHub.alps')}
+                <span className="text-[10px] leading-none" aria-hidden>
+                  ▾
+                </span>
+              </button>
+              {alpsOpen ? (
+                <div className="absolute left-1/2 top-full z-50 min-w-[240px] -translate-x-1/2 pt-3">
+                  <div className="rounded-xl border border-border-soft bg-bg-card py-2 shadow-[0_12px_32px_rgba(0,0,0,0.12)]">
+                    <a
+                      href="/alps/gornolyzhnye-tury"
+                      className="block px-5 py-3 font-sans text-[13px] text-text-main no-underline transition-colors hover:bg-bg-base"
+                    >
+                      {t('navHub.alpsSki')}
+                    </a>
+                  </div>
+                </div>
+              ) : null}
+            </div>
+            <a href="/#about" className={linkDesk} onClick={(e) => onInPageAnchorClick(e, '#about')}>
+              {t('navHub.about')}
+            </a>
+            <a href="/#reviews" className={linkDesk} onClick={(e) => onInPageAnchorClick(e, '#reviews')}>
+              {t('navHub.reviews')}
+            </a>
+            <a href="/#faq" className={linkDesk} onClick={(e) => onInPageAnchorClick(e, '#faq')}>
+              {t('navHub.faq')}
+            </a>
+            <a href="/blog/" className={linkDesk}>
+              {t('navHub.blog')}
+            </a>
+          </nav>
+
+          <div className="site-header-actions">
+            <a
+              href={`tel:${PHONE_E164}`}
+              className={`hidden font-sans text-[13px] 2xl:inline ${activeNavStyle.text} no-underline transition-opacity hover:opacity-70`}
+              style={{ fontWeight: 600 }}
+            >
+              {PHONE_DISPLAY}
+            </a>
+            <button
+              type="button"
+              onClick={handleContactClick}
+              aria-label={t('navHub.pickTour')}
+              className={
+                isCompactCta
+                  ? `inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-0 bg-transparent p-0 shadow-none outline-none ring-0 transition-opacity hover:opacity-85 active:opacity-70 focus-visible:ring-2 focus-visible:ring-text-main/35 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent`
+                  : 'site-header-btn'
+              }
+            >
+              {isCompactCta ? (
+                <img
+                  src={CONSULTATION_ICON}
+                  alt=""
+                  width={44}
+                  height={44}
+                  className="h-11 w-11 rounded-full object-contain"
+                  decoding="async"
+                />
+              ) : (
+                <>
+                  <span className="whitespace-nowrap leading-none 2xl:hidden">{t('navHub.pickTourShort')}</span>
+                  <span className="hidden whitespace-nowrap leading-none 2xl:inline">{t('navHub.pickTour')}</span>
+                </>
+              )}
+            </button>
+            <div className="hidden items-center md:flex" style={{ height: 24 }}>
+              <LanguageSwitcher />
+            </div>
           </div>
         </div>
       </header>
@@ -291,6 +362,42 @@ const Navigation = () => {
                 type="button"
                 className="flex w-full items-center justify-between py-3 text-left font-sans text-sm uppercase tracking-[0.06em] text-text-main"
                 style={{ fontWeight: 500 }}
+                aria-expanded={mobileSwitzerlandOpen}
+                onClick={() => setMobileSwitzerlandOpen(!mobileSwitzerlandOpen)}
+              >
+                {t('navHub.switzerland')}
+                <span className="text-lg">{mobileSwitzerlandOpen ? '−' : '+'}</span>
+              </button>
+              {mobileSwitzerlandOpen ? (
+                <>
+                  <a
+                    href="/switzerland/"
+                    className="block py-2 pl-2 font-sans text-[13px] text-text-light no-underline hover:text-text-main"
+                    onClick={() => {
+                      setIsOpen(false)
+                      setMobileSwitzerlandOpen(false)
+                    }}
+                  >
+                    {t('navHub.switzerlandTours')}
+                  </a>
+                  <a
+                    href="/switzerland/st-moritz/"
+                    className="block py-2 pl-2 font-sans text-[13px] text-text-light no-underline hover:text-text-main"
+                    onClick={() => {
+                      setIsOpen(false)
+                      setMobileSwitzerlandOpen(false)
+                    }}
+                  >
+                    {t('navHub.stMoritz')}
+                  </a>
+                </>
+              ) : null}
+            </div>
+            <div className="border-b border-border-soft py-2">
+              <button
+                type="button"
+                className="flex w-full items-center justify-between py-3 text-left font-sans text-sm uppercase tracking-[0.06em] text-text-main"
+                style={{ fontWeight: 500 }}
                 aria-expanded={mobileAlpsOpen}
                 onClick={() => setMobileAlpsOpen(!mobileAlpsOpen)}
               >
@@ -311,11 +418,11 @@ const Navigation = () => {
               ) : null}
             </div>
             <a
-              href="/#about-us"
+              href="/#about"
               className="border-b border-border-soft py-4 text-left font-sans text-sm uppercase tracking-[0.06em] text-text-main no-underline"
               style={{ fontWeight: 500 }}
               onClick={(e) => {
-                onInPageAnchorClick(e, '#about-us')
+                onInPageAnchorClick(e, '#about')
                 setIsOpen(false)
               }}
             >
@@ -331,6 +438,25 @@ const Navigation = () => {
               }}
             >
               {t('navHub.reviews')}
+            </a>
+            <a
+              href="/#faq"
+              className="border-b border-border-soft py-4 text-left font-sans text-sm uppercase tracking-[0.06em] text-text-main no-underline"
+              style={{ fontWeight: 500 }}
+              onClick={(e) => {
+                onInPageAnchorClick(e, '#faq')
+                setIsOpen(false)
+              }}
+            >
+              {t('navHub.faq')}
+            </a>
+            <a
+              href="/blog/"
+              className="border-b border-border-soft py-4 text-left font-sans text-sm uppercase tracking-[0.06em] text-text-main no-underline"
+              style={{ fontWeight: 500 }}
+              onClick={() => setIsOpen(false)}
+            >
+              {t('navHub.blog')}
             </a>
             <a
               href={`tel:${PHONE_E164}`}

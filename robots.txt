@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vacanzabianca.com/sitemap.xml
+Sitemap: https://vacanzabianca.ru/sitemap.xml
 
